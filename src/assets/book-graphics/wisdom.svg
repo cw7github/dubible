@@ -1,0 +1,17 @@
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Oil lamp -->
+  <!-- Lamp base -->
+  <ellipse cx="40" cy="50" rx="12" ry="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Lamp body -->
+  <path d="M 28 50 Q 28 42 32 38 L 48 38 Q 52 42 52 50" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Spout -->
+  <path d="M 52 44 L 58 42 Q 60 42 60 44 Q 60 46 58 46 L 52 44" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Handle -->
+  <path d="M 28 44 Q 24 44 22 46 Q 22 48 24 48 Q 26 48 28 46" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Flame -->
+  <path d="M 40 38 Q 38 34 40 30 Q 42 34 40 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+  <!-- Inner flame -->
+  <path d="M 40 36 Q 39 34 40 32" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+  <!-- Wick opening -->
+  <ellipse cx="40" cy="38" rx="3" ry="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
+</svg>

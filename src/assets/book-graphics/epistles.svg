@@ -1,0 +1,21 @@
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Quill and letter -->
+  <!-- Letter/parchment -->
+  <rect x="28" y="38" width="24" height="16" stroke="currentColor" stroke-width="1.5" fill="none" rx="1"/>
+  <!-- Text lines on letter -->
+  <line x1="31" y1="42" x2="49" y2="42" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <line x1="31" y1="45" x2="49" y2="45" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <line x1="31" y1="48" x2="44" y2="48" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <line x1="31" y1="51" x2="47" y2="51" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <!-- Quill -->
+  <!-- Quill shaft -->
+  <path d="M 48 36 L 54 26" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Quill feather -->
+  <path d="M 54 26 Q 56 26 57 28 Q 56 30 54 30" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Feather barbs -->
+  <path d="M 52 28 L 55 28" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
+  <path d="M 51 30 L 54 30" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
+  <path d="M 50 32 L 53 32" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
+  <!-- Quill nib -->
+  <path d="M 48 36 L 47 37 L 48 37" stroke="currentColor" stroke-width="1" fill="none"/>
+</svg>

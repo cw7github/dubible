@@ -1,0 +1,2780 @@
+{
+  "book": "1thessalonians",
+  "bookId": "1thessalonians",
+  "chapter": 1,
+  "verses": [
+    {
+      "number": 1,
+      "text": "問安保羅、西拉和提摩太，寫信給帖撒羅尼迦、在父　神和主耶穌基督裡的教會。願恩惠平安臨到你們。",
+      "words": [
+        {
+          "chinese": "問安",
+          "pinyin": "wèn'ān",
+          "definition": "send greetings",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "問",
+              "m": "ask; inquire"
+            },
+            {
+              "c": "安",
+              "m": "peace; safety"
+            }
+          ],
+          "freq": "uncommon",
+          "note": "Commonly used in formal greetings."
+        },
+        {
+          "chinese": "保羅",
+          "pinyin": "Bǎoluó",
+          "definition": "Paul",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "、",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "西拉",
+          "pinyin": "Xīlā",
+          "definition": "Silas",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common"
+        },
+        {
+          "chinese": "提摩太",
+          "pinyin": "Tímótài",
+          "definition": "Timothy",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "寫信",
+          "pinyin": "xiěxìn",
+          "definition": "write a letter",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "寫",
+              "m": "write"
+            },
+            {
+              "c": "信",
+              "m": "letter; mail"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "to; for",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "帖撒羅尼迦",
+          "pinyin": "Tiěsāluóníjiā",
+          "definition": "Thessalonica",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical",
+          "note": "Ancient city in Macedonia, target of Paul's letters."
+        },
+        {
+          "chinese": "、",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "in; at",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "父",
+          "pinyin": "fù",
+          "definition": "Father",
+          "pos": "n",
+          "freq": "common",
+          "note": "Here refers to God the Father."
+        },
+        {
+          "chinese": "　神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "breakdown": [
+            {
+              "c": "神",
+              "m": "god; deity"
+            }
+          ],
+          "note": "The blank space before 神 is a common reverence marker in Chinese Bibles."
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common"
+        },
+        {
+          "chinese": "主",
+          "pinyin": "zhǔ",
+          "definition": "Lord; master",
+          "pos": "n",
+          "freq": "common",
+          "note": "Refers to Jesus Christ."
+        },
+        {
+          "chinese": "耶穌基督",
+          "pinyin": "Yēsū Jīdū",
+          "definition": "Jesus Christ",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "裡",
+          "pinyin": "lǐ",
+          "definition": "in; inside",
+          "pos": "n",
+          "freq": "common",
+          "note": "Often used with 在 (zài) to mean 'in'."
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "教會",
+          "pinyin": "jiàohuì",
+          "definition": "church; assembly",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "教",
+              "m": "teach; religion"
+            },
+            {
+              "c": "會",
+              "m": "assembly; meeting"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "願",
+          "pinyin": "yuàn",
+          "definition": "may; wish",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "恩惠",
+          "pinyin": "ēnhuì",
+          "definition": "grace; favor",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "恩",
+              "m": "grace; kindness"
+            },
+            {
+              "c": "惠",
+              "m": "benefit; favor"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "平安",
+          "pinyin": "píng'ān",
+          "definition": "peace; well-being",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "平",
+              "m": "flat; peaceful"
+            },
+            {
+              "c": "安",
+              "m": "safe; quiet"
+            }
+          ],
+          "freq": "common",
+          "note": "A common greeting and biblical concept."
+        },
+        {
+          "chinese": "臨到",
+          "pinyin": "líndào",
+          "definition": "come upon; befall",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "臨",
+              "m": "approach; be close to"
+            },
+            {
+              "c": "到",
+              "m": "arrive; reach"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "text": "帖撒羅尼迦教會的榜樣我們常常為你們眾人感謝　神，禱告的時候提到你們，",
+      "words": [
+        {
+          "chinese": "帖撒羅尼迦",
+          "pinyin": "Tiěsāluóníjiā",
+          "definition": "Thessalonica",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "教會",
+          "pinyin": "jiàohuì",
+          "definition": "church; assembly",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "教",
+              "m": "teach; religion"
+            },
+            {
+              "c": "會",
+              "m": "assembly; meeting"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "榜樣",
+          "pinyin": "bǎngyàng",
+          "definition": "example; model",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榜",
+              "m": "example; model"
+            },
+            {
+              "c": "樣",
+              "m": "kind; sample"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we; us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "常常",
+          "pinyin": "chángcháng",
+          "definition": "often; frequently",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "常",
+              "m": "often; common"
+            },
+            {
+              "c": "常",
+              "m": "often; common"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "為",
+          "pinyin": "wèi",
+          "definition": "for; on behalf of",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "眾人",
+          "pinyin": "zhòngrén",
+          "definition": "everyone; all people",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "眾",
+              "m": "multitude; many"
+            },
+            {
+              "c": "人",
+              "m": "person; people"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "感謝",
+          "pinyin": "gǎnxiè",
+          "definition": "thank; be grateful",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "感",
+              "m": "feel; sense"
+            },
+            {
+              "c": "謝",
+              "m": "thank; apologize"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "　神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "breakdown": [
+            {
+              "c": "神",
+              "m": "god; deity"
+            }
+          ]
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "禱告",
+          "pinyin": "dǎogào",
+          "definition": "pray; prayer",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "禱",
+              "m": "pray"
+            },
+            {
+              "c": "告",
+              "m": "tell; report"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A verb-object compound meaning 'to pray'."
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "subordinative particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Connects a preceding clause/phrase to a noun, forming a descriptive unit."
+        },
+        {
+          "chinese": "時候",
+          "pinyin": "shíhou",
+          "definition": "time; moment",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "時",
+              "m": "time; hour"
+            },
+            {
+              "c": "候",
+              "m": "wait; moment"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "提到",
+          "pinyin": "tídào",
+          "definition": "mention",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "提",
+              "m": "lift; mention"
+            },
+            {
+              "c": "到",
+              "m": "arrive; reach"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "text": "在我們的父　神面前，不住地記念你們信心的工作，愛心的勞苦和因盼望我們主耶穌基督而有的堅忍。",
+      "words": [
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "in; at",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we; us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "父",
+          "pinyin": "fù",
+          "definition": "Father",
+          "pos": "n",
+          "freq": "common"
+        },
+        {
+          "chinese": "　神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "breakdown": [
+            {
+              "c": "神",
+              "m": "god; deity"
+            }
+          ]
+        },
+        {
+          "chinese": "面前",
+          "pinyin": "miànqián",
+          "definition": "before; in front of",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "面",
+              "m": "face; surface"
+            },
+            {
+              "c": "前",
+              "m": "front; before"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "不住地",
+          "pinyin": "búzhùde",
+          "definition": "ceaselessly; constantly",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "不",
+              "m": "not"
+            },
+            {
+              "c": "住",
+              "m": "stop; live"
+            },
+            {
+              "c": "地",
+              "m": "adverbial particle"
+            }
+          ],
+          "freq": "uncommon",
+          "note": "Literally 'not stop-ly'."
+        },
+        {
+          "chinese": "記念",
+          "pinyin": "jìniàn",
+          "definition": "remember; commemorate",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "記",
+              "m": "record; remember"
+            },
+            {
+              "c": "念",
+              "m": "think of; read"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "信心",
+          "pinyin": "xìnxīn",
+          "definition": "faith; confidence",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "信",
+              "m": "trust; believe"
+            },
+            {
+              "c": "心",
+              "m": "heart; mind"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "工作",
+          "pinyin": "gōngzuò",
+          "definition": "work; deed",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "工",
+              "m": "work; labor"
+            },
+            {
+              "c": "作",
+              "m": "make; do"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "愛心",
+          "pinyin": "àixīn",
+          "definition": "love; loving heart",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "愛",
+              "m": "love"
+            },
+            {
+              "c": "心",
+              "m": "heart; mind"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "勞苦",
+          "pinyin": "láokǔ",
+          "definition": "toil; hardship",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "勞",
+              "m": "labor; toil"
+            },
+            {
+              "c": "苦",
+              "m": "bitter; hardship"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common"
+        },
+        {
+          "chinese": "因",
+          "pinyin": "yīn",
+          "definition": "because of; due to",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "盼望",
+          "pinyin": "pànwàng",
+          "definition": "hope; expect",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "盼",
+              "m": "hope for; long for"
+            },
+            {
+              "c": "望",
+              "m": "gaze at; hope"
+            }
+          ],
+          "freq": "common",
+          "note": "Can also be a verb: to hope."
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we; us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "主",
+          "pinyin": "zhǔ",
+          "definition": "Lord",
+          "pos": "n",
+          "freq": "common"
+        },
+        {
+          "chinese": "耶穌基督",
+          "pinyin": "Yēsū Jīdū",
+          "definition": "Jesus Christ",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "而",
+          "pinyin": "ér",
+          "definition": "thereby; and",
+          "pos": "conj",
+          "freq": "common",
+          "note": "Connects cause/manner to effect/result."
+        },
+        {
+          "chinese": "有",
+          "pinyin": "yǒu",
+          "definition": "have; possess",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "subordinative particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "堅忍",
+          "pinyin": "jiānrěn",
+          "definition": "endurance; steadfastness",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "堅",
+              "m": "firm; strong"
+            },
+            {
+              "c": "忍",
+              "m": "endure; bear"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "text": "神所愛的弟兄們，我們知道你們是蒙揀選的，",
+      "words": [
+        {
+          "chinese": "　神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "breakdown": [
+            {
+              "c": "神",
+              "m": "god; deity"
+            }
+          ]
+        },
+        {
+          "chinese": "所",
+          "pinyin": "suǒ",
+          "definition": "particle (passive/nominalization)",
+          "pos": "part",
+          "freq": "common",
+          "note": "Used before verbs to form a passive or nominalized structure."
+        },
+        {
+          "chinese": "愛",
+          "pinyin": "ài",
+          "definition": "love",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "弟兄們",
+          "pinyin": "dìxiōngmen",
+          "definition": "brothers; brethren",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "弟",
+              "m": "younger brother"
+            },
+            {
+              "c": "兄",
+              "m": "elder brother"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A common term for fellow believers in Christian contexts."
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we; us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "知道",
+          "pinyin": "zhīdào",
+          "definition": "know",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "知",
+              "m": "know"
+            },
+            {
+              "c": "道",
+              "m": "way; path"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is; are",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "蒙",
+          "pinyin": "méng",
+          "definition": "receive; suffer",
+          "pos": "v",
+          "freq": "uncommon",
+          "note": "Often used in passive constructions, meaning 'to be favored with' or 'to receive'."
+        },
+        {
+          "chinese": "揀選",
+          "pinyin": "jiǎnxuǎn",
+          "definition": "choose; elect",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "揀",
+              "m": "pick; select"
+            },
+            {
+              "c": "選",
+              "m": "choose; select"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle (nominalization/emphasis)",
+          "pos": "part",
+          "freq": "common",
+          "note": "Here, it nominalizes '蒙揀選', meaning 'the chosen ones'."
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "text": "因為我們的福音傳到你們那裡，不單是藉著言語，也是藉著權能，藉著聖靈和充足的信心。為了你們的緣故，我們在你們中間為人怎樣，這是你們知道的。",
+      "words": [
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "cause; because"
+            },
+            {
+              "c": "為",
+              "m": "for; be"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we; us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "福音",
+          "pinyin": "fúyīn",
+          "definition": "gospel; good news",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "福",
+              "m": "blessing; good fortune"
+            },
+            {
+              "c": "音",
+              "m": "sound; news"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Literally 'blessed sound' or 'news of blessing'."
+        },
+        {
+          "chinese": "傳到",
+          "pinyin": "chuándào",
+          "definition": "spread to; reach",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "傳",
+              "m": "spread; transmit"
+            },
+            {
+              "c": "到",
+              "m": "arrive; reach"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "那裡",
+          "pinyin": "nàlǐ",
+          "definition": "there; that place",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "裡",
+              "m": "inside; in"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "不單",
+          "pinyin": "bùdān",
+          "definition": "not only",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "不",
+              "m": "not"
+            },
+            {
+              "c": "單",
+              "m": "single; only"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is; are",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "藉著",
+          "pinyin": "jièzhe",
+          "definition": "through; by means of",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "藉",
+              "m": "by means of"
+            },
+            {
+              "c": "著",
+              "m": "continuing aspect particle"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "言語",
+          "pinyin": "yányǔ",
+          "definition": "words; speech",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "言",
+              "m": "speech; word"
+            },
+            {
+              "c": "語",
+              "m": "language; talk"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "也",
+          "pinyin": "yě",
+          "definition": "also; too",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is; are",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "藉著",
+          "pinyin": "jièzhe",
+          "definition": "through; by means of",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "藉",
+              "m": "by means of"
+            },
+            {
+              "c": "著",
+              "m": "continuing aspect particle"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "權能",
+          "pinyin": "quánnéng",
+          "definition": "power; might",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "權",
+              "m": "power; authority"
+            },
+            {
+              "c": "能",
+              "m": "ability; capability"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "藉著",
+          "pinyin": "jièzhe",
+          "definition": "through; by means of",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "藉",
+              "m": "by means of"
+            },
+            {
+              "c": "著",
+              "m": "continuing aspect particle"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "聖靈",
+          "pinyin": "Shènglíng",
+          "definition": "Holy Spirit",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "breakdown": [
+            {
+              "c": "聖",
+              "m": "holy; sacred"
+            },
+            {
+              "c": "靈",
+              "m": "spirit; soul"
+            }
+          ]
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common"
+        },
+        {
+          "chinese": "充足",
+          "pinyin": "chōngzú",
+          "definition": "sufficient; abundant",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "充",
+              "m": "fill; sufficient"
+            },
+            {
+              "c": "足",
+              "m": "enough; foot"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "信心",
+          "pinyin": "xìnxīn",
+          "definition": "faith; confidence",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "信",
+              "m": "trust; believe"
+            },
+            {
+              "c": "心",
+              "m": "heart; mind"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "為了",
+          "pinyin": "wèile",
+          "definition": "for the sake of",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "為",
+              "m": "for; on behalf of"
+            },
+            {
+              "c": "了",
+              "m": "completion particle"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "緣故",
+          "pinyin": "yuángù",
+          "definition": "reason; sake",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "緣",
+              "m": "reason; cause"
+            },
+            {
+              "c": "故",
+              "m": "reason; old"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we; us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "in; at",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "中間",
+          "pinyin": "zhōngjiān",
+          "definition": "among; in the middle",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "中",
+              "m": "middle; center"
+            },
+            {
+              "c": "間",
+              "m": "between; space"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "為人",
+          "pinyin": "wéirén",
+          "definition": "to behave; conduct oneself",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "為",
+              "m": "be; act as"
+            },
+            {
+              "c": "人",
+              "m": "person; human"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "怎樣",
+          "pinyin": "zěnyàng",
+          "definition": "how; what kind",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "怎",
+              "m": "how; what"
+            },
+            {
+              "c": "樣",
+              "m": "kind; manner"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        },
+        {
+          "chinese": "這",
+          "pinyin": "zhè",
+          "definition": "this",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is; are",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "知道",
+          "pinyin": "zhīdào",
+          "definition": "know",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "知",
+              "m": "know"
+            },
+            {
+              "c": "道",
+              "m": "way; path"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle (emphasis/nominalization)",
+          "pos": "part",
+          "freq": "common",
+          "note": "Here emphasizes a known fact or creates a nominalized phrase."
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "text": "你們效法了我們，也效法了主，在大患難中，帶著聖靈的喜樂接受了真道。",
+      "words": [
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "效法",
+          "pinyin": "xiàofǎ",
+          "definition": "imitated, followed",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "效",
+              "m": "imitate"
+            },
+            {
+              "c": "法",
+              "m": "method/law"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "aspect particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "也",
+          "pinyin": "yě",
+          "definition": "also",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "效法",
+          "pinyin": "xiàofǎ",
+          "definition": "imitated, followed",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "效",
+              "m": "imitate"
+            },
+            {
+              "c": "法",
+              "m": "method/law"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "aspect particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "主",
+          "pinyin": "Zhǔ",
+          "definition": "Lord",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "in, during",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "大",
+          "pinyin": "dà",
+          "definition": "great, severe",
+          "pos": "adj",
+          "freq": "common"
+        },
+        {
+          "chinese": "患難",
+          "pinyin": "huànnàn",
+          "definition": "tribulation, affliction",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "患",
+              "m": "misfortune"
+            },
+            {
+              "c": "難",
+              "m": "difficulty"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "中",
+          "pinyin": "zhōng",
+          "definition": "amidst",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "帶",
+          "pinyin": "dài",
+          "definition": "carrying, with",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "著",
+          "pinyin": "zhe",
+          "definition": "aspect particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "聖靈",
+          "pinyin": "Shènglíng",
+          "definition": "Holy Spirit",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "breakdown": [
+            {
+              "c": "聖",
+              "m": "holy"
+            },
+            {
+              "c": "靈",
+              "m": "spirit"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "喜樂",
+          "pinyin": "xǐlè",
+          "definition": "joy, gladness",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "喜",
+              "m": "joy"
+            },
+            {
+              "c": "樂",
+              "m": "happiness"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "接受",
+          "pinyin": "jiēshòu",
+          "definition": "received, accepted",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "接",
+              "m": "receive"
+            },
+            {
+              "c": "受",
+              "m": "accept"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "aspect particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "真道",
+          "pinyin": "zhēndào",
+          "definition": "true word/gospel",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "真",
+              "m": "true"
+            },
+            {
+              "c": "道",
+              "m": "way/word"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Refers to the truth or the gospel."
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "text": "這樣，你們就成了馬其頓和亞該亞所有信徒的榜樣。",
+      "words": [
+        {
+          "chinese": "這樣",
+          "pinyin": "zhèyàng",
+          "definition": "thus, in this way",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "這",
+              "m": "this"
+            },
+            {
+              "c": "樣",
+              "m": "manner"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, consequently",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "成",
+          "pinyin": "chéng",
+          "definition": "became",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "perfective particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "馬其頓",
+          "pinyin": "Mǎqídùn",
+          "definition": "Macedonia",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common"
+        },
+        {
+          "chinese": "亞該亞",
+          "pinyin": "Yàgāiyà",
+          "definition": "Achaia",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "所有",
+          "pinyin": "suǒyǒu",
+          "definition": "all, every",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "所",
+              "m": "that which"
+            },
+            {
+              "c": "有",
+              "m": "have"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "信徒",
+          "pinyin": "xìntú",
+          "definition": "believers, disciples",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "信",
+              "m": "believe"
+            },
+            {
+              "c": "徒",
+              "m": "follower"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "榜樣",
+          "pinyin": "bǎngyàng",
+          "definition": "example, model",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榜",
+              "m": "model"
+            },
+            {
+              "c": "樣",
+              "m": "pattern"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "text": "因為不單主的道從你們那裡傳遍了馬其頓和亞該亞，就是你們對　神的信心也傳遍了各處，所以我們不用再說甚麼了。",
+      "words": [
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because, for",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "cause"
+            },
+            {
+              "c": "為",
+              "m": "for"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "不單",
+          "pinyin": "bùdān",
+          "definition": "not only",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "不",
+              "m": "not"
+            },
+            {
+              "c": "單",
+              "m": "single"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "主",
+          "pinyin": "Zhǔ",
+          "definition": "Lord",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "道",
+          "pinyin": "dào",
+          "definition": "word, message",
+          "pos": "n",
+          "freq": "biblical",
+          "note": "Refers to the gospel or message of the Lord."
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "那裡",
+          "pinyin": "nàlǐ",
+          "definition": "from there, from you",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "裡",
+              "m": "place"
+            }
+          ],
+          "freq": "common",
+          "note": "Refers to 'from among you' or 'from your place'."
+        },
+        {
+          "chinese": "傳遍",
+          "pinyin": "chuánbiàn",
+          "definition": "spread throughout",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "傳",
+              "m": "spread"
+            },
+            {
+              "c": "遍",
+              "m": "everywhere"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "perfective particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "馬其頓",
+          "pinyin": "Mǎqídùn",
+          "definition": "Macedonia",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common"
+        },
+        {
+          "chinese": "亞該亞",
+          "pinyin": "Yàgāiyà",
+          "definition": "Achaia",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就是",
+          "pinyin": "jiùshì",
+          "definition": "even, precisely",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "就",
+              "m": "then"
+            },
+            {
+              "c": "是",
+              "m": "is"
+            }
+          ],
+          "freq": "common",
+          "note": "Used for emphasis, meaning 'even your faith'."
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "your (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "對",
+          "pinyin": "duì",
+          "definition": "towards",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "信心",
+          "pinyin": "xìnxīn",
+          "definition": "faith, trust",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "信",
+              "m": "trust"
+            },
+            {
+              "c": "心",
+              "m": "heart"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "也",
+          "pinyin": "yě",
+          "definition": "also",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "傳遍",
+          "pinyin": "chuánbiàn",
+          "definition": "spread throughout",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "傳",
+              "m": "spread"
+            },
+            {
+              "c": "遍",
+              "m": "everywhere"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "perfective particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "各處",
+          "pinyin": "gèchù",
+          "definition": "everywhere, all places",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "各",
+              "m": "each"
+            },
+            {
+              "c": "處",
+              "m": "place"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "所以",
+          "pinyin": "suǒyǐ",
+          "definition": "therefore, so",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "所",
+              "m": "that which"
+            },
+            {
+              "c": "以",
+              "m": "by"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "不用",
+          "pinyin": "bùyòng",
+          "definition": "no need to",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "不",
+              "m": "not"
+            },
+            {
+              "c": "用",
+              "m": "need"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "再",
+          "pinyin": "zài",
+          "definition": "again, any more",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "say",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "甚麼",
+          "pinyin": "shénme",
+          "definition": "anything",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "text": "他們都述說你們是怎樣接待我們，而且怎樣離棄偶像歸向　神，要服事這位又真又活的　神，",
+      "words": [
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "述說",
+          "pinyin": "shùshuō",
+          "definition": "tell, recount",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "述",
+              "m": "narrate"
+            },
+            {
+              "c": "說",
+              "m": "speak"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "were (how)",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "怎樣",
+          "pinyin": "zěnyàng",
+          "definition": "how, in what way",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "怎",
+              "m": "how"
+            },
+            {
+              "c": "樣",
+              "m": "manner"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "接待",
+          "pinyin": "jiēdài",
+          "definition": "received, welcomed",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "接",
+              "m": "receive"
+            },
+            {
+              "c": "待",
+              "m": "treat"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "而且",
+          "pinyin": "érqiě",
+          "definition": "and, moreover",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "而",
+              "m": "and"
+            },
+            {
+              "c": "且",
+              "m": "furthermore"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "怎樣",
+          "pinyin": "zěnyàng",
+          "definition": "how, in what way",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "怎",
+              "m": "how"
+            },
+            {
+              "c": "樣",
+              "m": "manner"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "離棄",
+          "pinyin": "líqì",
+          "definition": "forsake, abandon",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "離",
+              "m": "leave"
+            },
+            {
+              "c": "棄",
+              "m": "abandon"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "偶像",
+          "pinyin": "ǒuxiàng",
+          "definition": "idols",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "偶",
+              "m": "image"
+            },
+            {
+              "c": "像",
+              "m": "likeness"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "歸向",
+          "pinyin": "guīxiàng",
+          "definition": "turned to, returned to",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "歸",
+              "m": "return"
+            },
+            {
+              "c": "向",
+              "m": "towards"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "要",
+          "pinyin": "yào",
+          "definition": "to, in order to",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "服事",
+          "pinyin": "fúshì",
+          "definition": "serve, worship",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "服",
+              "m": "serve"
+            },
+            {
+              "c": "事",
+              "m": "matter"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "這",
+          "pinyin": "zhè",
+          "definition": "this",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "位",
+          "pinyin": "wèi",
+          "definition": "measure word",
+          "pos": "mw",
+          "freq": "common"
+        },
+        {
+          "chinese": "又",
+          "pinyin": "yòu",
+          "definition": "both... and...",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "真",
+          "pinyin": "zhēn",
+          "definition": "true, real",
+          "pos": "adj",
+          "freq": "common"
+        },
+        {
+          "chinese": "又",
+          "pinyin": "yòu",
+          "definition": "both... and...",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "活",
+          "pinyin": "huó",
+          "definition": "living, alive",
+          "pos": "adj",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "text": "並且等候他的兒子從天降臨。這就是　神使他從死人中復活，救我們脫離將來的忿怒的那位耶穌。",
+      "words": [
+        {
+          "chinese": "並且",
+          "pinyin": "bìngqiě",
+          "definition": "and, moreover",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "並",
+              "m": "and"
+            },
+            {
+              "c": "且",
+              "m": "furthermore"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "等候",
+          "pinyin": "děnghòu",
+          "definition": "waiting for, expect",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "等",
+              "m": "wait"
+            },
+            {
+              "c": "候",
+              "m": "wait"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "his",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "兒子",
+          "pinyin": "érzi",
+          "definition": "son",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "兒",
+              "m": "child"
+            },
+            {
+              "c": "子",
+              "m": "son"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "天",
+          "pinyin": "tiān",
+          "definition": "heaven",
+          "pos": "n",
+          "freq": "common",
+          "note": "Refers to the divine realm or sky."
+        },
+        {
+          "chinese": "降臨",
+          "pinyin": "jiànglín",
+          "definition": "descend, come down",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "降",
+              "m": "descend"
+            },
+            {
+              "c": "臨",
+              "m": "approach"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Often used for divine or royal आगमन."
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "這",
+          "pinyin": "zhè",
+          "definition": "this",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "precisely, then",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "使",
+          "pinyin": "shǐ",
+          "definition": "caused, made",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common"
+        },
+        {
+          "chinese": "死人",
+          "pinyin": "sǐrén",
+          "definition": "dead people",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "死",
+              "m": "dead"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "中",
+          "pinyin": "zhōng",
+          "definition": "among",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "復活",
+          "pinyin": "fùhuó",
+          "definition": "resurrected",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "復",
+              "m": "return"
+            },
+            {
+              "c": "活",
+              "m": "live"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "救",
+          "pinyin": "jiù",
+          "definition": "save, rescue",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "us",
+          "pos": "pron",
+          "freq": "common"
+        },
+        {
+          "chinese": "脫離",
+          "pinyin": "tuōlí",
+          "definition": "deliver from, escape",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "脫",
+              "m": "shed/escape"
+            },
+            {
+              "c": "離",
+              "m": "leave"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "將來",
+          "pinyin": "jiānglái",
+          "definition": "coming, future",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "將",
+              "m": "will"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "忿怒",
+          "pinyin": "fènnù",
+          "definition": "wrath, anger",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "忿",
+              "m": "resentment"
+            },
+            {
+              "c": "怒",
+              "m": "anger"
+            }
+          ],
+          "freq": "common",
+          "note": "Often refers to divine wrath in biblical context."
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle",
+          "pos": "part",
+          "freq": "common"
+        },
+        {
+          "chinese": "那位",
+          "pinyin": "nàwèi",
+          "definition": "that one (person)",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "位",
+              "m": "MW for people"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "。",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    }
+  ],
+  "processedAt": "2025-12-15T04:31:22.451Z"
+}

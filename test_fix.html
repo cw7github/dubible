@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Artifact Fix Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FAF8F3;
+            --bg-secondary: #F2EFE6;
+            --text-primary: #2D2A26;
+            --text-tertiary: #8A847A;
+            --border-subtle: #EBE8E0;
+        }
+
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 40px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .word-list {
+            background-color: var(--border-subtle);
+        }
+
+        .word-item {
+            background-color: var(--bg-primary);
+            padding: 20px;
+            margin-bottom: 1px;
+        }
+
+        .word-item:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .font-chinese-serif {
+            font-family: 'Noto Serif TC', 'Source Han Serif TC', 'Songti TC', serif;
+            font-weight: 400;
+        }
+
+        .font-body {
+            font-family: 'Crimson Pro', Georgia, serif;
+        }
+
+        /* BEFORE (with artifact) */
+        .word-header-before {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            border: 2px solid #ff000033;
+            padding: 4px;
+            margin-bottom: 8px;
+        }
+
+        .chinese-before {
+            font-size: 20px;
+            line-height: 1;
+            padding-bottom: 2px; /* This creates the artifact! */
+            letter-spacing: 0.05em;
+        }
+
+        .pinyin-before {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1;
+            color: var(--text-tertiary);
+        }
+
+        /* AFTER (fixed) */
+        .word-header-after {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            border: 2px solid #00ff0033;
+            padding: 4px;
+            margin-bottom: 8px;
+        }
+
+        .chinese-after {
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: 0.05em;
+        }
+
+        .pinyin-after {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1;
+            color: var(--text-tertiary);
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .issue {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .fixed {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .explanation {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+
+        .explanation h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .explanation ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .explanation li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chinese Character Visual Artifact Fix</h1>
+
+        <div class="comparison">
+            <div class="section">
+                <div class="label">❌ Before (with artifact)</div>
+                <div class="word-list">
+                    <div class="word-item">
+                        <div class="word-header-before">
+                            <span class="font-chinese-serif chinese-before">耶</span>
+                            <span class="font-body pinyin-before">yē</span>
+                        </div>
+                        <p style="margin: 0; font-size: 14px; color: #5C574E;">exclamation of surprise</p>
+                    </div>
+                    <div class="word-item">
+                        <div class="word-header-before">
+                            <span class="font-chinese-serif chinese-before">家</span>
+                            <span class="font-body pinyin-before">jiā</span>
+                        </div>
+                        <p style="margin: 0; font-size: 14px; color: #5C574E;">home, family, house</p>
+                    </div>
+                    <div class="word-item">
+                        <div class="word-header-before">
+                            <span class="font-chinese-serif chinese-before">神</span>
+                            <span class="font-body pinyin-before">shén</span>
+                        </div>
+                        <p style="margin: 0; font-size: 14px; color: #5C574E;">God, spirit, divine</p>
+                    </div>
+                </div>
+                <div class="issue">
+                    <strong>Issue:</strong> <code>items-end</code> + <code>pb-0.5</code> creates a gap that looks like a line under the character
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">✅ After (fixed)</div>
+                <div class="word-list">
+                    <div class="word-item">
+                        <div class="word-header-after">
+                            <span class="font-chinese-serif chinese-after">耶</span>
+                            <span class="font-body pinyin-after">yē</span>
+                        </div>
+                        <p style="margin: 0; font-size: 14px; color: #5C574E;">exclamation of surprise</p>
+                    </div>
+                    <div class="word-item">
+                        <div class="word-header-after">
+                            <span class="font-chinese-serif chinese-after">家</span>
+                            <span class="font-body pinyin-after">jiā</span>
+                        </div>
+                        <p style="margin: 0; font-size: 14px; color: #5C574E;">home, family, house</p>
+                    </div>
+                    <div class="word-item">
+                        <div class="word-header-after">
+                            <span class="font-chinese-serif chinese-after">神</span>
+                            <span class="font-body pinyin-after">shén</span>
+                        </div>
+                        <p style="margin: 0; font-size: 14px; color: #5C574E;">God, spirit, divine</p>
+                    </div>
+                </div>
+                <div class="fixed">
+                    <strong>Fixed:</strong> <code>items-baseline</code> (no padding) properly aligns text baselines
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>What Changed?</h2>
+            <ul>
+                <li><strong>Before:</strong> <code>flex items-end gap-3</code> with <code>pb-0.5</code> on Chinese text</li>
+                <li><strong>After:</strong> <code>flex items-baseline gap-3</code> (removed <code>pb-0.5</code>)</li>
+            </ul>
+
+            <h2>Why This Fixes the Artifact</h2>
+            <ul>
+                <li><code>items-end</code> aligns to the bottom edge of the flex container, not the text baseline</li>
+                <li>With <code>leading-none</code> (line-height: 1), the text box tightly wraps the font</li>
+                <li>The <code>pb-0.5</code> padding creates a small gap below the character</li>
+                <li>For characters with bottom strokes (like 耶 and 家), this gap appears as a visual artifact/line</li>
+                <li><code>items-baseline</code> aligns text by their natural baseline, eliminating the gap</li>
+            </ul>
+
+            <h2>File Changed</h2>
+            <p><code>/src/components/vocabulary/VocabularyScreen.tsx</code> line 378-391</p>
+        </div>
+    </div>
+</body>
+</html>

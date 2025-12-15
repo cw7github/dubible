@@ -1,0 +1,15 @@
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Alpha and Omega symbol -->
+  <!-- Alpha (Α) -->
+  <path d="M 26 50 L 30 35 L 34 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="27.5" y1="44" x2="32.5" y2="44" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Omega (Ω) -->
+  <path d="M 46 42 Q 46 36 50 34 Q 54 36 54 42 Q 54 48 52 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 48 48 Q 48 50 46 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 52 48 Q 52 50 54 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Base terminals for Omega -->
+  <line x1="44" y1="50" x2="48" y2="50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="52" y1="50" x2="56" y2="50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Decorative circle around -->
+  <circle cx="40" cy="40" r="18" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+</svg>

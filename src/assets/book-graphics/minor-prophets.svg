@@ -1,0 +1,20 @@
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Small scroll -->
+  <!-- Left roller -->
+  <path d="M 28 32 L 28 48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="28" cy="32" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <circle cx="28" cy="48" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Right roller -->
+  <path d="M 52 32 L 52 48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="52" cy="32" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <circle cx="52" cy="48" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Parchment -->
+  <path d="M 28 33.5 Q 30 33 32 33 L 48 33 Q 50 33 52 33.5 L 52 46.5 Q 50 47 48 47 L 32 47 Q 30 47 28 46.5 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Text lines (fewer/smaller) -->
+  <line x1="33" y1="37" x2="47" y2="37" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <line x1="33" y1="40" x2="47" y2="40" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <line x1="33" y1="43" x2="47" y2="43" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  <!-- Decorative rolled edges -->
+  <path d="M 32 33 Q 30 33.5 28 33.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M 48 33 Q 50 33.5 52 33.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+</svg>

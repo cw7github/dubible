@@ -1,0 +1,14 @@
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple refined cross -->
+  <!-- Vertical beam -->
+  <path d="M 40 28 L 40 52" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Horizontal beam -->
+  <path d="M 30 38 L 50 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Decorative center circle -->
+  <circle cx="40" cy="38" r="2.5" stroke="currentColor" stroke-width="1" fill="none"/>
+  <!-- Subtle beam endings -->
+  <circle cx="40" cy="28" r="1" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+  <circle cx="40" cy="52" r="1" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+  <circle cx="30" cy="38" r="1" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+  <circle cx="50" cy="38" r="1" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+</svg>

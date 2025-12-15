@@ -1,0 +1,574 @@
+@import "tailwindcss";
+
+/* ============================================
+   BILINGUAL BIBLE - REFINED DESIGN SYSTEM
+   Aesthetic: Illuminated Manuscript meets Modern Editorial
+   ============================================ */
+
+/* Light Theme (Default) - Warm Parchment */
+:root,
+[data-theme="light"] {
+  --bg-primary: #FAF8F3;
+  --bg-secondary: #F2EFE6;
+  --bg-tertiary: #E8E4D9;
+  --text-primary: #2D2A26;
+  --text-secondary: #5C574E;
+  --text-tertiary: #8A847A;
+  --text-pinyin: rgba(92, 87, 78, 0.65);
+  --accent: #8B5A2B;
+  --accent-hover: #6B4423;
+  --accent-light: #D4B896;
+  --accent-subtle: rgba(139, 90, 43, 0.08);
+  --border: #E0DCD2;
+  --border-subtle: #EBE8E0;
+  --shadow: rgba(45, 42, 38, 0.06);
+  --shadow-md: rgba(45, 42, 38, 0.09);
+  --shadow-elevated: rgba(45, 42, 38, 0.12);
+  --overlay: rgba(250, 248, 243, 0.92);
+  --overlay-dark: rgba(45, 42, 38, 0.15);
+  --highlight: rgba(139, 90, 43, 0.12);
+  --card-bg: #FFFFFF;
+  --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  --verse-glow: rgba(139, 90, 43, 0.06);
+  --success: #5B7553;
+  --success-bg: #E8F0E6;
+  --error: #C44536;
+  --error-bg: #F8E8E6;
+}
+
+/* Sepia Theme - Aged Manuscript */
+[data-theme="sepia"] {
+  --bg-primary: #F0E6D2;
+  --bg-secondary: #E6DABC;
+  --bg-tertiary: #DACCA6;
+  --text-primary: #3D3225;
+  --text-secondary: #5E5040;
+  --text-tertiary: #7D6E5C;
+  --text-pinyin: rgba(62, 50, 37, 0.6);
+  --accent: #996B2D;
+  --accent-hover: #7A5524;
+  --accent-light: #C9A86C;
+  --accent-subtle: rgba(153, 107, 45, 0.1);
+  --border: #CDBF9E;
+  --border-subtle: #DDD2B8;
+  --shadow: rgba(61, 50, 37, 0.08);
+  --shadow-md: rgba(61, 50, 37, 0.11);
+  --shadow-elevated: rgba(61, 50, 37, 0.15);
+  --overlay: rgba(240, 230, 210, 0.94);
+  --overlay-dark: rgba(61, 50, 37, 0.18);
+  --highlight: rgba(153, 107, 45, 0.15);
+  --card-bg: #F8F0DC;
+  --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  --verse-glow: rgba(153, 107, 45, 0.08);
+  --success: #5B7553;
+  --success-bg: #E3E8DC;
+  --error: #B33D2F;
+  --error-bg: #EFE0DC;
+}
+
+/* Dark Theme - Midnight Gold */
+[data-theme="dark"] {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1E1E1E;
+  --text-primary: #F0EBE0;
+  --text-secondary: #A09888;
+  --text-tertiary: #6B6358;
+  --text-pinyin: rgba(160, 152, 136, 0.7);
+  --accent: #D4A954;
+  --accent-hover: #E4BC6A;
+  --accent-light: #3D3225;
+  --accent-subtle: rgba(212, 169, 84, 0.12);
+  --border: #252525;
+  --border-subtle: #1A1A1A;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-md: rgba(0, 0, 0, 0.4);
+  --shadow-elevated: rgba(0, 0, 0, 0.5);
+  --overlay: rgba(10, 10, 10, 0.92);
+  --overlay-dark: rgba(0, 0, 0, 0.6);
+  --highlight: rgba(212, 169, 84, 0.15);
+  --card-bg: #141414;
+  --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+  --verse-glow: rgba(212, 169, 84, 0.05);
+  --success: #7A9A6D;
+  --success-bg: #1C2219;
+  --error: #D87566;
+  --error-bg: #2A1C1A;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg-primary);
+  background-image: var(--paper-texture);
+  color: var(--text-primary);
+  font-family: 'Crimson Pro', 'Georgia', serif;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ============================================
+   TYPOGRAPHY - REFINED
+   ============================================ */
+
+/* Display headings - Elegant Garamond */
+.font-display {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Body text - Refined Crimson */
+.font-body {
+  font-family: 'Crimson Pro', 'Georgia', serif;
+}
+
+/* Chinese Typography - Beautiful Serif */
+.font-chinese-serif {
+  font-family: 'Noto Serif TC', 'Source Han Serif TC', 'Songti TC', serif;
+  font-weight: 400;
+}
+
+.font-chinese-sans {
+  font-family: 'Noto Sans TC', 'Source Han Sans TC', 'PingFang TC', sans-serif;
+}
+
+/* Chinese text sizing with optimized line height for density */
+.text-chinese {
+  font-size: var(--chinese-size, 1.25rem);
+  line-height: 2;
+  letter-spacing: 0.025em;
+}
+
+.text-chinese-sm {
+  --chinese-size: 1.125rem;
+  line-height: 1.95;
+}
+.text-chinese-md {
+  --chinese-size: 1.25rem;
+  line-height: 2;
+}
+.text-chinese-lg {
+  --chinese-size: 1.375rem;
+  line-height: 2.05;
+}
+.text-chinese-xl {
+  --chinese-size: 1.5rem;
+  line-height: 2.1;
+}
+.text-chinese-2xl {
+  --chinese-size: 1.75rem;
+  line-height: 2.15;
+}
+
+/* ============================================
+   PINYIN TEXT - Flexbox for perfect centering
+   ============================================ */
+
+.pinyin-text {
+  display: block;
+  font-family: 'Crimson Pro', system-ui, sans-serif;
+  font-size: 0.48em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-pinyin);
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 0.25s ease, color 0.25s ease;
+  margin-bottom: -0.1em;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chinese-char {
+  display: block;
+  line-height: 1.45;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   VERSE STYLING - Editorial
+   ============================================ */
+
+.verse {
+  position: relative;
+  padding: 0.25rem 0;
+  transition: background-color 0.3s ease;
+}
+
+.verse:hover {
+  background: linear-gradient(90deg, transparent, var(--verse-glow) 10%, var(--verse-glow) 90%, transparent);
+}
+
+.verse-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.65em;
+  font-weight: 600;
+  color: var(--accent);
+  vertical-align: super;
+  margin-right: 0.35em;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.verse:hover .verse-number {
+  opacity: 1;
+}
+
+.chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2.5rem 0;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Decorative chapter divider */
+.chapter-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ============================================
+   WORD INTERACTION - Elegant
+   ============================================ */
+
+.chinese-word {
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1px;
+  margin: 0;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.chinese-word::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.chinese-word:hover {
+  background-color: var(--accent-subtle);
+}
+
+/* Only show hover underline when there's no HSK indicator */
+.chinese-word:not([data-hsk]):hover::after {
+  width: 100%;
+  opacity: 0.6;
+}
+
+.chinese-word:active,
+.chinese-word.active {
+  background-color: var(--highlight);
+  transform: scale(1.02);
+}
+
+.chinese-word.saved {
+  position: relative;
+}
+
+.chinese-word.saved::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.3;
+}
+
+/* HSK Level indicators - Subtle dots */
+.chinese-word[data-hsk]::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  opacity: 0.7;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  transition: opacity 0.2s ease;
+}
+
+.chinese-word[data-hsk="1"]::after { background-color: #4CAF50; }
+.chinese-word[data-hsk="2"]::after { background-color: #8BC34A; }
+.chinese-word[data-hsk="3"]::after { background-color: #FFC107; }
+.chinese-word[data-hsk="4"]::after { background-color: #FF9800; }
+.chinese-word[data-hsk="5"]::after { background-color: #FF5722; }
+.chinese-word[data-hsk="6"]::after { background-color: #9C27B0; }
+
+[data-show-hsk="false"] .chinese-word[data-hsk]::after {
+  display: none;
+}
+
+/* ============================================
+   AUDIO PLAYBACK - FOCUS MODE
+   ============================================ */
+
+[data-audio-playing="true"] .verse:not(.verse-active) {
+  opacity: 0.4;
+  filter: blur(0.5px);
+  transition: all 0.4s ease;
+}
+
+[data-audio-playing="true"] .verse-active {
+  opacity: 1;
+  filter: none;
+  background: linear-gradient(90deg, transparent, var(--verse-glow) 5%, var(--verse-glow) 95%, transparent);
+}
+
+.word-highlight {
+  background: linear-gradient(135deg, var(--highlight), var(--accent-subtle));
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 3px var(--highlight),
+    0 2px 8px var(--shadow);
+  animation: wordGlow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes wordGlow {
+  0% {
+    background: transparent;
+    box-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 5px var(--accent-subtle);
+  }
+  100% {
+    background: linear-gradient(135deg, var(--highlight), var(--accent-subtle));
+    box-shadow:
+      0 0 0 3px var(--highlight),
+      0 2px 8px var(--shadow);
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   SCROLLBAR - Refined
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ============================================
+   ANIMATIONS - Elegant & Subtle
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-slide-up { animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-slide-down { animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-scale-in { animation: scaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Staggered entrance animations */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Refined touch feedback */
+.touch-feedback {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.touch-feedback:active {
+  transform: scale(0.98);
+  opacity: 0.85;
+}
+
+/* Elegant selection */
+::selection {
+  background-color: var(--highlight);
+  color: var(--text-primary);
+}
+
+/* Glass effect for overlays */
+.glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* Shadow utilities */
+.shadow-sm {
+  box-shadow:
+    0 1px 2px var(--shadow),
+    0 1px 3px -1px var(--shadow);
+}
+
+.shadow-md {
+  box-shadow:
+    0 2px 4px -1px var(--shadow),
+    0 4px 8px -2px var(--shadow-md);
+}
+
+.shadow-elevated {
+  box-shadow:
+    0 4px 6px -1px var(--shadow),
+    0 10px 20px -5px var(--shadow-elevated),
+    0 1px 3px var(--shadow);
+}
+
+.shadow-panel {
+  box-shadow:
+    0 2px 8px -2px var(--shadow),
+    0 8px 16px -4px var(--shadow-md),
+    0 0 0 1px var(--border-subtle);
+}
+
+/* Decorative border gradient */
+.border-gradient {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+    linear-gradient(135deg, var(--border), var(--accent-light), var(--border)) border-box;
+}
