@@ -6,7 +6,8 @@
  * 1. Google Cloud TTS (Primary - Recommended)
  *    - Uses cmn-TW-Wavenet-A voice (Taiwanese Mandarin)
  *    - 1M characters/month free tier (WaveNet voices)
- *    - Requires VITE_GOOGLE_CLOUD_API_KEY
+ *    - Production: uses server-side proxy at /api/tts/google (no client-side key)
+ *    - Development (optional): can use VITE_GOOGLE_CLOUD_API_KEY for direct calls
  *
  * 2. Azure TTS (Alternative - Best quality)
  *    - Uses zh-TW-HsiaoChenNeural voice (natural Taiwanese Mandarin)
@@ -25,6 +26,10 @@
  *
  * Configuration:
  * Add to .env.local:
+ *   # Production (server-side, secure)
+ *   GOOGLE_CLOUD_TTS_API_KEY=your_google_api_key
+ *
+ *   # Development-only (not recommended for production)
  *   VITE_GOOGLE_CLOUD_API_KEY=your_google_api_key
  */
 

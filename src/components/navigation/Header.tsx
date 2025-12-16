@@ -99,18 +99,41 @@ export const Header = memo(function Header({
       }}
     >
       <div className="mx-auto flex max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl items-center justify-between px-4 py-1.5">
-        {/* Left side - Vocabulary/Words button */}
+        {/* Left side - Vocabulary button (icon only) */}
         <div className="flex items-center w-20">
           <button
-            className="touch-feedback rounded-lg px-3 py-1.5 transition-colors hover:bg-[var(--bg-secondary)]"
-            style={{
-              color: 'var(--text-secondary)',
-              backgroundColor: 'transparent',
-            }}
+            className="touch-feedback rounded-lg p-2.5 transition-colors hover:bg-[var(--bg-secondary)]"
+            style={{ color: 'var(--text-tertiary)' }}
             onClick={onVocabClick}
             aria-label="Open vocabulary"
           >
-            <span className="text-sm font-medium">Words</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              className="h-5 w-5"
+            >
+              {/* Card outline */}
+              <rect x="4" y="5" width="16" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+              {/* Bold 文 character */}
+              <text
+                x="12"
+                y="13"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill="currentColor"
+                stroke="none"
+                style={{
+                  fontSize: '11px',
+                  fontFamily: 'Noto Serif TC, serif',
+                  fontWeight: 600,
+                }}
+              >
+                文
+              </text>
+            </svg>
           </button>
         </div>
 
