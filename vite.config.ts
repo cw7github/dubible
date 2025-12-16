@@ -34,9 +34,9 @@ export default defineConfig({
         'pwa-512x512.png'
       ],
       manifest: {
-        name: 'DuBible - Bilingual Bible',
+        name: 'DuBible - Learn Chinese Through the Bible',
         short_name: 'DuBible',
-        description: 'A beautiful bilingual Chinese-English Bible app for language learners',
+        description: 'Read the Bible in Chinese with pinyin pronunciation. Tap any word for instant definitions. Perfect for Mandarin learners.',
         theme_color: '#FDFCFA',
         background_color: '#FDFCFA',
         display: 'standalone',
