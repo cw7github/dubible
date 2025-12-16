@@ -43,7 +43,7 @@ const POS_CONFIG: Record<string, { label: string; color: string; bg: string }> =
 // Frequency display config
 const FREQ_CONFIG: Record<string, { label: string; icon: string }> = {
   common: { label: 'Common', icon: '●●●' },
-  uncommon: { label: 'Uncommon', icon: '●●○' },
+  uncommon: { label: 'Moderate', icon: '●●○' },
   rare: { label: 'Rare', icon: '●○○' },
   biblical: { label: 'Biblical', icon: '○○○' },
 };
