@@ -4,10 +4,41 @@
 - **Site**: https://dubible.com
 - **Vercel Project**: bilingual_bib
 
+## Quick Deploy (Recommended)
+
+The fastest way to deploy to production:
+
+```bash
+vercel --prod
+```
+
+This command:
+- Builds the project locally
+- Uploads to Vercel
+- Deploys to dubible.com immediately
+- Bypasses GitHub entirely
+
 ## Deployment Methods
 
-### Method 1: Git Push (Primary)
-When GitHub is working normally:
+### Method 1: Vercel CLI (Recommended)
+Direct deployment from local files - fastest and most reliable:
+
+```bash
+# Deploy to production (interactive - shows preview)
+vercel --prod
+
+# Deploy to production (automatic - no prompts)
+vercel --prod --yes
+```
+
+**Advantages:**
+- No dependency on GitHub
+- Immediate deployment
+- Works even if git/GitHub has issues
+- Full control over what gets deployed
+
+### Method 2: Git Push (Alternative)
+When you want to track deployments in git history:
 
 ```bash
 git add -A
@@ -17,18 +48,7 @@ git push origin main
 
 Vercel automatically deploys on push to `main` branch.
 
-### Method 2: Vercel CLI (Fallback)
-When GitHub has issues or you need immediate deployment:
-
-```bash
-# Deploy to production
-vercel --prod --yes
-
-# Or with inspection
-vercel --prod
-```
-
-This bypasses GitHub entirely and deploys directly from local files.
+**Note:** This method requires GitHub to be working and may be slower.
 
 ## Post-Deployment
 

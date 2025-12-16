@@ -84,10 +84,7 @@ export const ChineseWord = memo(function ChineseWord({
     movementTolerance: 10,
   });
 
-  // Skip punctuation - render without interaction
-  if (!word.pinyin && !word.definition) {
-    return <span className="select-none">{displayText}</span>;
-  }
+  const isPunctuation = !word.pinyin && !word.definition;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -123,6 +120,12 @@ export const ChineseWord = memo(function ChineseWord({
       transition: 'transform 0.016s linear, opacity 0.016s linear',
     };
   }, [holdProgress]);
+
+  // Skip punctuation - render without interaction
+  // Note: Must be after hooks to preserve consistent hook ordering.
+  if (isPunctuation) {
+    return <span className="select-none">{displayText}</span>;
+  }
 
   // Render character with centered pinyin above using flexbox
   return (

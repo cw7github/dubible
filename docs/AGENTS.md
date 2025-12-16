@@ -425,6 +425,7 @@ npm run lint
 **Generate manifest**: `npm run generate-manifest`
 **Dev server**: `npm run dev`
 **Build**: `npm run build`
+**Deploy to production**: `vercel --prod` (see DEPLOYMENT.md)
 
 **Key files for reading features**:
 - `src/components/reading/ReadingScreen.tsx` - Main UI
@@ -451,8 +452,22 @@ npm run lint
 **Key files for TTS**:
 - `src/services/ttsService.ts` - OpenAI TTS / Web Speech API
 
-**Next Steps for AI Agents**:
+## Deployment
+
+To deploy code updates to dubible.com:
+
+```bash
+vercel --prod
+```
+
+This deploys directly to production. See `docs/DEPLOYMENT.md` for full details.
+
+**Note:** The production URL (https://dubible.com) is linked to the Vercel project. The CLI command handles everything automatically.
+
+## Next Steps for AI Agents
+
 1. Read this file to understand the project
 2. Review `ARCHITECTURE.md` for technical details
-3. Check `DEVELOPMENT.md` for setup and deployment
-4. Browse the codebase starting from `ReadingScreen.tsx`
+3. Check `DEVELOPMENT.md` for setup and local development
+4. See `DEPLOYMENT.md` for production deployment
+5. Browse the codebase starting from `ReadingScreen.tsx`

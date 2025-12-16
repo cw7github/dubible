@@ -10,6 +10,13 @@ import { firestoreSync } from '../lib/firebaseSync';
 import { migrateLocalDataToFirestore, mergeData } from '../lib/dataMigration';
 import type { Unsubscribe } from 'firebase/firestore';
 
+const vocabSignature = (words: Array<{ id: string; updatedAt?: number }>): string =>
+  JSON.stringify(
+    words
+      .map((w) => ({ id: w.id, updatedAt: w.updatedAt ?? 0 }))
+      .sort((a, b) => a.id.localeCompare(b.id))
+  );
+
 // Wait for vocabulary store to be hydrated from localStorage
 // This prevents race conditions where sync runs before local data is loaded
 const waitForVocabularyHydration = (): Promise<void> => {
@@ -63,6 +70,13 @@ export function useSyncManager() {
   const hasInitialSyncedRef = useRef(false);
   const unsubscribersRef = useRef<Unsubscribe[]>([]);
 
+  // Prevent duplicate sync setup (StrictMode double-invocation protection)
+  const setupInProgressRef = useRef(false);
+
+  // Tracks whether we successfully ensured cloud vocabulary is in sync this session.
+  // Used to avoid destructive empty-cloud overwrites before we've ever written/confirmed cloud state.
+  const initialVocabCloudSyncOkRef = useRef(false);
+
   // Track pending syncs to debounce rapid changes
   const syncTimeoutRef = useRef<{
     vocabulary?: ReturnType<typeof setTimeout>;
@@ -91,6 +105,7 @@ export function useSyncManager() {
     unsubscribersRef.current.forEach((unsub) => unsub());
     unsubscribersRef.current = [];
     hasInitialSyncedRef.current = false;
+    initialVocabCloudSyncOkRef.current = false;
 
     // Clear any pending sync timeouts
     Object.values(syncTimeoutRef.current).forEach((timeout) => {
@@ -114,6 +129,13 @@ export function useSyncManager() {
 
     // User is authenticated - set up sync
     const setupSync = async () => {
+      // Prevent duplicate execution in StrictMode (React 18+ double-invocation)
+      if (setupInProgressRef.current) {
+        console.log('[Sync] Setup already in progress, skipping duplicate call');
+        return;
+      }
+      setupInProgressRef.current = true;
+
       try {
         setSyncing(true);
 
@@ -352,8 +374,35 @@ export function useSyncManager() {
         // Clear the flag after initial load
         isProcessingCloudUpdateRef.current = false;
 
+        // Step 4.5: Ensure Firestore reflects the merged vocabulary before listeners can overwrite local state.
+        // This is critical for the "words added while unauthenticated" case where cloud may be empty/stale.
+        try {
+          const cloudSig = vocabSignature(cloudVocab);
+          const mergedSig = vocabSignature(mergedVocab);
+          if (cloudSig !== mergedSig) {
+            console.log(`[Sync] Cloud vocabulary differs from merged; syncing merged vocabulary to cloud (${mergedVocab.length} words)`);
+            await firestoreSync.syncVocabularyToCloud(userId, mergedVocab);
+          }
+          initialVocabCloudSyncOkRef.current = true;
+        } catch (error) {
+          initialVocabCloudSyncOkRef.current = false;
+          console.error('[Sync] Failed to sync merged vocabulary to cloud; preserving local state', error);
+        }
+
         // Step 5: Set up real-time listeners for changes from other devices
         const vocabUnsub = firestoreSync.subscribeToVocabulary(userId, (words) => {
+          // Safety: Never let an empty cloud snapshot wipe non-empty local state before we've ever
+          // successfully reconciled vocabulary to the cloud in this session.
+          if (!initialVocabCloudSyncOkRef.current) {
+            const localWords = useVocabularyStore.getState().words;
+            if (words.length === 0 && localWords.length > 0) {
+              console.warn(
+                `[Sync] Ignoring empty vocabulary cloud update before initial cloud sync (local=${localWords.length})`
+              );
+              return;
+            }
+          }
+
           // Update local store when cloud data changes
           // This is triggered by changes from other devices
           if (hasInitialSyncedRef.current) {
@@ -373,6 +422,11 @@ export function useSyncManager() {
             isProcessingCloudUpdateRef.current = true;
 
             console.log('[Sync] Applying vocabulary update from cloud:', words.length, 'words');
+            const localWords = useVocabularyStore.getState().words;
+            if (vocabSignature(localWords) === vocabSignature(words)) {
+              isProcessingCloudUpdateRef.current = false;
+              return;
+            }
             // Use setWords to preserve all word data including SRS progress
             vocabularyStore.setWords(words);
 
@@ -523,6 +577,9 @@ export function useSyncManager() {
       } catch (error) {
         console.error('Error setting up sync:', error);
         setSyncError(error instanceof Error ? error.message : 'Sync failed');
+      } finally {
+        // Reset flag so sync can be retried if needed
+        setupInProgressRef.current = false;
       }
     };
 
@@ -544,6 +601,11 @@ export function useSyncManager() {
       key: 'vocabulary' | 'bookmarks' | 'history' | 'settings' | 'readingPlans' | 'progress',
       syncFn: () => Promise<void>
     ) => {
+      // Don't schedule syncs until initial sync is complete, and never echo cloud-origin changes.
+      if (!hasInitialSyncedRef.current || isProcessingCloudUpdateRef.current) {
+        return;
+      }
+
       // Record the time of this local modification
       lastLocalModificationRef.current[key] = Date.now();
 
@@ -554,11 +616,6 @@ export function useSyncManager() {
 
       // Schedule new sync after debounce delay
       syncTimeoutRef.current[key] = setTimeout(async () => {
-        // Don't sync if we haven't completed initial sync or are processing cloud updates
-        if (!hasInitialSyncedRef.current || isProcessingCloudUpdateRef.current) {
-          return;
-        }
-
         try {
           console.log(`[Sync] Syncing ${key} to cloud...`);
           await syncFn();
@@ -581,7 +638,20 @@ export function useSyncManager() {
             JSON.stringify(prevWords.map((w) => ({ id: w.id, updatedAt: w.updatedAt })).sort((a, b) => a.id.localeCompare(b.id)));
 
         if (wordsChanged) {
-          debouncedSync('vocabulary', () => firestoreSync.syncVocabularyToCloud(userId, words));
+          // If word was ADDED (length increased), sync IMMEDIATELY without debounce
+          // This prevents data loss if user refreshes before debounce completes
+          if (words.length > prevWords.length) {
+            if (hasInitialSyncedRef.current && !isProcessingCloudUpdateRef.current) {
+              console.log('[Sync] Word added, syncing immediately');
+              lastLocalModificationRef.current.vocabulary = Date.now();
+              firestoreSync.syncVocabularyToCloud(userId, words)
+                .then(() => console.log('[Sync] Immediate vocabulary sync complete'))
+                .catch(err => console.error('[Sync] Immediate vocabulary sync failed:', err));
+            }
+          } else {
+            // For updates/deletions, use debounced sync
+            debouncedSync('vocabulary', () => firestoreSync.syncVocabularyToCloud(userId, words));
+          }
         }
       },
       { equalityFn: (a, b) => a === b }

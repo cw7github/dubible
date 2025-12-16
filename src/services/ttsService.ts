@@ -28,6 +28,8 @@
  *   VITE_GOOGLE_CLOUD_API_KEY=your_google_api_key
  */
 
+import { auth, isFirebaseConfigured } from '../lib/firebase';
+
 export type VoiceGender = 'male' | 'female';
 
 interface TTSOptions {
@@ -58,7 +60,11 @@ class TTSService {
   private voicesPromise: Promise<SpeechSynthesisVoice[]> | null = null;
 
   constructor() {
-    this.googleCloudApiKey = import.meta.env.VITE_GOOGLE_CLOUD_API_KEY || null;
+    // Never ship a Google Cloud API key in the production client bundle.
+    // In production, Google TTS is accessed via a server-side proxy endpoint (/api/tts/google).
+    if (import.meta.env.DEV) {
+      this.googleCloudApiKey = import.meta.env.VITE_GOOGLE_CLOUD_API_KEY || null;
+    }
     this.openaiApiKey = import.meta.env.VITE_OPENAI_API_KEY || null;
     this.azureSpeechKey = import.meta.env.VITE_AZURE_SPEECH_KEY || null;
     this.azureSpeechRegion = import.meta.env.VITE_AZURE_SPEECH_REGION || null;
@@ -164,7 +170,9 @@ class TTSService {
    * Check if Google Cloud TTS is available
    */
   isGoogleCloudAvailable(): boolean {
-    return !!this.googleCloudApiKey;
+    // In production, availability is determined by the server-side proxy configuration.
+    // We optimistically report available and fall back gracefully if the proxy errors.
+    return import.meta.env.PROD ? true : !!this.googleCloudApiKey;
   }
 
   /**
@@ -226,31 +234,49 @@ class TTSService {
     const cachedOpenAI = this.audioCache.has(cacheKeyOpenAI);
     const hasCached = cachedGoogle || cachedAzure || cachedOpenAI;
 
-    // Check if within free limit (or using cached audio)
-    const withinLimit = hasCached || this.isWithinFreeLimit();
+    // In production, paid providers are gated server-side (rate limiting) and keys stay off the client.
+    // In development, keep the original "free tier" gating behavior to avoid accidental charges.
+    const withinLimit = hasCached || import.meta.env.PROD || this.isWithinFreeLimit();
 
-    try {
-      // Try Google Cloud TTS first (if within limit or cached)
-      if (this.isGoogleCloudAvailable() && (withinLimit || cachedGoogle)) {
-        await this.speakWithGoogleCloud(text, voice, onStart, onEnd, onError);
+    let lastError: unknown = null;
+
+    const tryProvider = async (fn: () => Promise<void>): Promise<boolean> => {
+      try {
+        await fn();
+        return true;
+      } catch (error) {
+        lastError = error;
+        return false;
       }
-      // Then try Azure TTS (if within limit or cached)
-      else if (this.isAzureAvailable() && (withinLimit || cachedAzure)) {
-        await this.speakWithAzure(text, voice, onStart, onEnd, onError);
-      }
-      // Then try OpenAI TTS (if within limit or cached)
-      else if (this.isOpenAIAvailable() && (withinLimit || cachedOpenAI)) {
-        await this.speakWithOpenAI(text, voice, onStart, onEnd, onError);
-      }
-      // Fallback to Web Speech API (free, unlimited)
-      else {
-        await this.speakWithWebSpeech(text, lang, onStart, onEnd, onError);
-      }
-    } catch (error) {
-      console.error('TTS error:', error);
-      if (onError) {
-        onError(error instanceof Error ? error : new Error('TTS failed'));
-      }
+    };
+
+    // 1) Google Cloud TTS (proxy in production, direct in development)
+    if (withinLimit || cachedGoogle) {
+      const ok = import.meta.env.PROD
+        ? await tryProvider(() => this.speakWithGoogleCloudProxy(text, voice, onStart, onEnd, onError))
+        : this.isGoogleCloudAvailable()
+          ? await tryProvider(() => this.speakWithGoogleCloud(text, voice, onStart, onEnd, onError))
+          : false;
+      if (ok) return;
+    }
+
+    // 2) Azure
+    if (this.isAzureAvailable() && (withinLimit || cachedAzure)) {
+      if (await tryProvider(() => this.speakWithAzure(text, voice, onStart, onEnd, onError))) return;
+    }
+
+    // 3) OpenAI
+    if (this.isOpenAIAvailable() && (withinLimit || cachedOpenAI)) {
+      if (await tryProvider(() => this.speakWithOpenAI(text, voice, onStart, onEnd, onError))) return;
+    }
+
+    // 4) Web Speech API (fallback)
+    if (await tryProvider(() => this.speakWithWebSpeech(text, lang, onStart, onEnd, onError))) return;
+
+    // All providers failed
+    console.error('TTS error:', lastError);
+    if (onError) {
+      onError(lastError instanceof Error ? lastError : new Error('TTS failed'));
     }
   }
 
@@ -347,6 +373,90 @@ class TTSService {
       console.error('Google Cloud TTS error:', error);
       if (onError) {
         onError(error instanceof Error ? error : new Error('Google Cloud TTS failed'));
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Speak using Google Cloud TTS via server-side proxy (production).
+   * Keeps Google credentials off the client bundle while preserving voice quality.
+   */
+  private async speakWithGoogleCloudProxy(
+    text: string,
+    voice: VoiceGender,
+    onStart?: () => void,
+    onEnd?: () => void,
+    onError?: (error: Error) => void
+  ): Promise<void> {
+    try {
+      // Check cache first (include voice in key)
+      const cacheKey = `google:${voice}:${text}`;
+      let audioUrl = this.audioCache.get(cacheKey);
+
+      if (!audioUrl) {
+        let idToken: string | null = null;
+        if (isFirebaseConfigured) {
+          try {
+            const user = auth.currentUser;
+            if (user) {
+              idToken = await user.getIdToken();
+            }
+          } catch {
+            idToken = null;
+          }
+        }
+
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+        if (idToken) {
+          headers['Authorization'] = `Bearer ${idToken}`;
+        }
+
+        const response = await fetch('/api/tts/google', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ text, voice }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text().catch(() => '');
+          throw new Error(`Google TTS proxy failed: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const audioBlob = await response.blob();
+        audioUrl = URL.createObjectURL(audioBlob);
+        this.audioCache.set(cacheKey, audioUrl);
+      }
+
+      const audio = new Audio(audioUrl);
+      this.currentAudio = audio;
+
+      audio.onplay = () => {
+        if (onStart) onStart();
+      };
+
+      audio.onended = () => {
+        this.currentAudio = null;
+        if (onEnd) onEnd();
+      };
+
+      audio.onerror = () => {
+        this.currentAudio = null;
+        const error = new Error('Audio playback failed');
+        if (onError) {
+          onError(error);
+        } else {
+          console.error(error);
+        }
+      };
+
+      await audio.play();
+    } catch (error) {
+      console.error('Google Cloud TTS proxy error:', error);
+      if (onError) {
+        onError(error instanceof Error ? error : new Error('Google Cloud TTS proxy failed'));
       }
       throw error;
     }

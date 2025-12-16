@@ -146,20 +146,20 @@ export const WordDetailPanel = memo(function WordDetailPanel({
 
   return (
     <motion.div
-      className="px-4 py-3"
+      className="px-4 py-2"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
     >
       {/* Compact header row with badges */}
-      <div className="flex items-center justify-between gap-3 mb-2">
+      <div className="flex items-center justify-between gap-2 mb-1.5">
         {/* Left: Badges (horizontal layout) */}
-        <div className="flex items-center gap-1.5 flex-wrap">
+        <div className="flex items-center gap-1 flex-wrap">
           {/* Biblical Name badge */}
           {isNameEntry && (
             <span
-              className="rounded-full px-2 py-0.5 text-[9px] font-medium tracking-wide"
+              className="rounded-full px-1.5 py-0.5 text-[8px] font-medium tracking-wide"
               style={{
                 backgroundColor: '#F5EBE0',
                 color: '#9B7B5B',
@@ -172,7 +172,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
           {/* Name type badge (Person/Place/Group) */}
           {word.nameType && (
             <span
-              className="rounded-full px-2 py-0.5 text-[9px] font-medium tracking-wide"
+              className="rounded-full px-1.5 py-0.5 text-[8px] font-medium tracking-wide"
               style={{
                 backgroundColor: word.nameType === 'person' ? '#F5EBE0' : word.nameType === 'place' ? '#E8F0E6' : '#EDE8F5',
                 color: word.nameType === 'person' ? '#8B6B53' : word.nameType === 'place' ? '#5B7553' : '#6B5B95',
@@ -185,7 +185,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
           {/* Part of speech badge */}
           {posConfig && !isNameEntry && (
             <span
-              className="rounded-full px-2 py-0.5 text-[9px] font-medium tracking-wide"
+              className="rounded-full px-1.5 py-0.5 text-[8px] font-medium tracking-wide"
               style={{
                 backgroundColor: posConfig.bg,
                 color: posConfig.color,
@@ -198,7 +198,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
           {/* HSK badge */}
           {word.hskLevel && (
             <span
-              className="rounded-full px-2 py-0.5 text-[9px] font-medium tracking-wide"
+              className="rounded-full px-1.5 py-0.5 text-[8px] font-medium tracking-wide"
               style={{
                 backgroundColor: 'var(--accent-subtle)',
                 color: 'var(--accent)',
@@ -221,11 +221,11 @@ export const WordDetailPanel = memo(function WordDetailPanel({
       </div>
 
       {/* Main content row - compact horizontal layout */}
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-2.5">
         {/* Chinese character with pinyin and audio button - compact */}
         <div className="flex flex-col items-center flex-shrink-0">
           {/* Pinyin centered above each character */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <div className="flex">
               {(() => {
                 const chars = [...word.chinese];
@@ -233,8 +233,8 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                 return chars.map((char, idx) => (
                   <div key={idx} className="flex flex-col items-center">
                     <span
-                      className="font-body text-[10px] tracking-wide leading-tight mb-0.5 text-center"
-                      style={{ color: 'var(--text-secondary)', opacity: 0.75, minWidth: '1.5rem', fontStyle: 'normal' }}
+                      className="font-body text-[12px] tracking-wide leading-tight mb-0.5 text-center"
+                      style={{ color: 'var(--text-secondary)', minWidth: '1.6rem', fontStyle: 'normal' }}
                     >
                       {syllables[idx] || ''}
                     </span>
@@ -268,7 +268,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                 }}
                 onHoverStart={() => !isAudioAvailable && setShowComingSoonTooltip(true)}
                 onHoverEnd={() => !isAudioAvailable && setShowComingSoonTooltip(false)}
-                className="rounded-full p-1.5 cursor-pointer relative overflow-hidden"
+                className="rounded-full p-1 cursor-pointer relative overflow-hidden"
                 style={{
                   backgroundColor: isAudioAvailable
                     ? (isPlaying ? 'var(--accent)' : 'var(--accent-subtle)')
@@ -357,7 +357,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                   strokeWidth={2.5}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-3.5 w-3.5 relative z-10"
+                  className="h-3 w-3 relative z-10"
                   style={{
                     filter: !isAudioAvailable ? 'drop-shadow(0 0 2px rgba(150, 140, 130, 0.1))' : 'none'
                   }}
@@ -522,11 +522,11 @@ export const WordDetailPanel = memo(function WordDetailPanel({
         <div className="flex-1 min-w-0">
           {/* Definition - primary content */}
           <p
-            className="font-body leading-snug"
+            className="font-body"
             style={{
               color: 'var(--text-primary)',
-              lineHeight: '1.5',
-              fontSize: 'var(--english-base, 1rem)'
+              lineHeight: '1.4',
+              fontSize: 'calc(var(--english-base, 1rem) * 0.9)'
             }}
           >
             {word.definition || 'No definition available'}
@@ -538,7 +538,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
             const pinyinSyllables = splitPinyinSyllables(word.pinyin, word.breakdown!.length);
 
             return (
-              <div className="mt-2 flex items-center gap-1.5 flex-wrap">
+              <div className="mt-1.5 flex items-center gap-1 flex-wrap">
                 <span
                   className="text-[8px] uppercase tracking-widest font-medium"
                   style={{ color: 'var(--text-tertiary)' }}
@@ -548,7 +548,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                 {word.breakdown!.map((char, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1 rounded px-1.5 py-0.5"
+                    className="inline-flex items-center gap-0.5 rounded px-1 py-0.5"
                     style={{
                       backgroundColor: 'var(--bg-secondary)',
                     }}
@@ -556,8 +556,8 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                     {/* Character with pinyin above it */}
                     <span className="inline-flex flex-col items-center">
                       <span
-                        className="text-[9px] leading-tight mb-0.5"
-                        style={{ color: 'var(--text-secondary)', opacity: 0.75, fontStyle: 'normal' }}
+                        className="text-[10px] leading-tight mb-0.5"
+                        style={{ color: 'var(--text-secondary)', fontStyle: 'normal' }}
                       >
                         {pinyinSyllables[idx] || ''}
                       </span>
@@ -570,7 +570,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                     </span>
                     {/* Meaning to the side */}
                     <span
-                      className="text-[9px]"
+                      className="text-[8px]"
                       style={{ color: 'var(--text-secondary)' }}
                     >
                       {char.m}
@@ -584,15 +584,15 @@ export const WordDetailPanel = memo(function WordDetailPanel({
           {/* Usage note - compact */}
           {word.note && (
             <div
-              className="mt-2 rounded px-2 py-1.5 border-l-2"
+              className="mt-1.5 rounded px-1.5 py-1 border-l-2"
               style={{
                 backgroundColor: 'var(--bg-secondary)',
                 borderLeftColor: 'var(--accent)',
               }}
             >
               <p
-                className="font-body text-[11px] italic leading-snug"
-                style={{ color: 'var(--text-secondary)', lineHeight: '1.4' }}
+                className="font-body text-[10px] italic"
+                style={{ color: 'var(--text-secondary)', lineHeight: '1.35' }}
               >
                 {word.note}
               </p>
@@ -601,9 +601,9 @@ export const WordDetailPanel = memo(function WordDetailPanel({
 
           {/* Frequency indicator - inline at bottom */}
           {freqConfig && (
-            <div className="flex items-center gap-1.5 mt-2">
+            <div className="flex items-center gap-1 mt-1.5">
               <span
-                className="text-[9px] tracking-wide"
+                className="text-[8px] tracking-wide"
                 style={{ color: 'var(--text-tertiary)', letterSpacing: '0.5px' }}
               >
                 {freqConfig.icon}

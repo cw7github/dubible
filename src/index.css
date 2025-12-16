@@ -68,8 +68,8 @@
   --error: #B33D2F;
   --error-bg: #EFE0DC;
   --hover-text: #7A5524;
-  --highlight-text: #92400E;
-  --highlight-text-glow: rgba(146, 64, 14, 0.35);
+  --highlight-text: #C2410C;
+  --highlight-text-glow: rgba(194, 65, 12, 0.4);
 }
 
 /* Dark Theme - Midnight Gold (Warm) */
@@ -849,13 +849,13 @@ body {
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.1s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.1s ease;
   touch-action: manipulation; /* Eliminates 300ms tap delay */
-  will-change: transform;
 }
 
 .touch-feedback:active {
   transform: scale(0.97);
   opacity: 0.8;
   transition-duration: 0.05s;
+  will-change: transform; /* Only use will-change during active interaction */
 }
 
 /* Elegant selection */

@@ -63,6 +63,12 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10MB for bundled Bible data + dictionary
+        // Force new service worker to activate immediately without waiting for tabs to close
+        // This ensures users get the latest code on refresh
+        skipWaiting: true,
+        clientsClaim: true,
+        // Clean up old caches from previous versions
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

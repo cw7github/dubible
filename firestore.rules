@@ -36,6 +36,16 @@ service cloud.firestore {
       match /settings/{settingId} {
         allow read, write: if isOwner(userId);
       }
+
+      // Reading plans
+      match /readingPlans/{planId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Reading progress
+      match /progress/{progressId} {
+        allow read, write: if isOwner(userId);
+      }
     }
   }
 }

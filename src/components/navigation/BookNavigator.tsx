@@ -26,7 +26,10 @@ const ChineseWithPinyin = memo(function ChineseWithPinyin({
   const syllables = splitPinyinSyllables(pinyin, chars.length);
 
   return (
-    <span className="inline-flex">
+    <span className="inline-flex" style={{
+      WebkitFontSmoothing: 'antialiased',
+      MozOsxFontSmoothing: 'grayscale'
+    }}>
       {chars.map((char, idx) => (
         <span key={idx} className="flex flex-col items-center">
           <span
@@ -305,11 +308,9 @@ const CompactBookItem = memo(function CompactBookItem({
     <motion.div
       className={`col-span-${isExpanded ? '2' : '1'}`}
       style={{ gridColumn: isExpanded ? 'span 2' : 'span 1' }}
-      layout="position"
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
-        layout: { duration: 0.15, ease: 'easeOut' },
         opacity: { delay: index * 0.02, duration: 0.25 },
         y: { delay: index * 0.02, duration: 0.3, ease: 'easeOut' }
       }}

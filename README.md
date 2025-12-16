@@ -300,14 +300,14 @@ Full Bible support covering:
 
 ## Firebase Setup
 
-See [AUTHENTICATION_SETUP.md](./AUTHENTICATION_SETUP.md) for detailed instructions.
-
 Quick overview:
 1. Create project at [Firebase Console](https://console.firebase.google.com/)
 2. Enable Google and Facebook authentication
 3. Create Firestore database in production mode
 4. Deploy security rules from `firestore.rules`
 5. Add web app and copy config to `.env.local`
+
+See [DEVELOPMENT.md](./docs/DEVELOPMENT.md) for detailed setup instructions.
 
 ## Development
 
@@ -335,12 +335,11 @@ npm run generate-manifest  # Update preprocessed data manifest
 ## Documentation
 
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - System design and data flow
-- [DEVELOPMENT.md](./docs/DEVELOPMENT.md) - Development workflow and debugging
-- [LAZY_LOADING.md](./docs/LAZY_LOADING.md) - Preprocessed data loading system
+- [DEVELOPMENT.md](./docs/DEVELOPMENT.md) - Development workflow, setup, and debugging
+- [DEPLOYMENT.md](./docs/DEPLOYMENT.md) - Production deployment guide
 - [AGENTS.md](./docs/AGENTS.md) - AI agent guide for contributors
-- [AUTHENTICATION_SETUP.md](./AUTHENTICATION_SETUP.md) - Firebase setup guide
-- [TTS_SETUP.md](./TTS_SETUP.md) - Text-to-speech configuration
-- [TAIWANESE_VOICE_GUIDE.md](./docs/TAIWANESE_VOICE_GUIDE.md) - Taiwan voice selection
+- [LAZY_LOADING.md](./docs/LAZY_LOADING.md) - Preprocessed data loading system
+- [TAIWANESE_VOICE_GUIDE.md](./docs/TAIWANESE_VOICE_GUIDE.md) - Taiwan voice selection for TTS
 
 ## Browser Support
 

@@ -185,12 +185,18 @@ export const useVocabularyStore = create<VocabularyState>()(
               console.error('[VocabularyStore] Hydration error:', error);
             }
 
-            // Use queueMicrotask to avoid TDZ error - the callback runs
-            // during store creation before useVocabularyStore is assigned
-            queueMicrotask(() => {
+            // Try to set hydration state synchronously for faster detection
+            // Fall back to queueMicrotask if TDZ error occurs (during store creation)
+            try {
               useVocabularyStore.setState({ _hasHydrated: true });
               console.log('[VocabularyStore] Rehydration complete, words:', state?.words?.length ?? 0);
-            });
+            } catch {
+              // TDZ error - defer to microtask when store is fully initialized
+              queueMicrotask(() => {
+                useVocabularyStore.setState({ _hasHydrated: true });
+                console.log('[VocabularyStore] Rehydration complete (deferred), words:', state?.words?.length ?? 0);
+              });
+            }
           };
         },
         // Don't persist hydration state itself

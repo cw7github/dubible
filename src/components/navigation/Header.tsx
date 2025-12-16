@@ -102,7 +102,7 @@ export const Header = memo(function Header({
         {/* Left side - Vocabulary/Words button */}
         <div className="flex items-center w-20">
           <button
-            className="touch-feedback flex items-center gap-1.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-[var(--bg-secondary)]"
+            className="touch-feedback rounded-lg px-3 py-1.5 transition-colors hover:bg-[var(--bg-secondary)]"
             style={{
               color: 'var(--text-secondary)',
               backgroundColor: 'transparent',
@@ -110,24 +110,16 @@ export const Header = memo(function Header({
             onClick={onVocabClick}
             aria-label="Open vocabulary"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="h-4.5 w-4.5"
-              style={{ width: '18px', height: '18px' }}
-            >
-              <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
-            </svg>
-            <span className="text-xs font-medium">Words</span>
+            <span className="text-sm font-medium">Words</span>
           </button>
         </div>
 
-        {/* Center - Book and chapter (absolutely centered) */}
+        {/* Center - Book name with icon and chapter on same line */}
         <button
-          className="touch-feedback flex items-center gap-2.5 rounded-lg px-3 py-1.5 transition-colors hover:bg-[var(--bg-secondary)]"
+          className="touch-feedback flex items-center gap-2.5 rounded-lg px-3 py-1.5 transition-all hover:bg-[var(--bg-secondary)] group"
           onClick={onMenuClick}
         >
+          {/* Book Name with Pinyin - book icon and chapter inline */}
           <div className="flex items-end gap-0.5">
             {(() => {
               const chars = convertedBookName.chinese.split('');
@@ -150,12 +142,32 @@ export const Header = memo(function Header({
               ));
             })()}
           </div>
+
+          {/* Chapter Number - same baseline as Chinese characters */}
           <span
-            className="font-display text-sm"
-            style={{ color: 'var(--text-tertiary)', letterSpacing: '0.1em' }}
+            className="font-display text-lg font-medium tracking-wider transition-all group-hover:scale-105"
+            style={{
+              color: 'var(--text-secondary)',
+              letterSpacing: '0.08em',
+            }}
           >
             {chapter}
           </span>
+
+          {/* Dropdown chevron */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-4 h-4 transition-transform group-hover:translate-y-0.5"
+            style={{ color: 'var(--text-tertiary)', opacity: 0.6 }}
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
 
         {/* Right side buttons - same width as left for centering */}

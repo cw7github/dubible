@@ -255,11 +255,18 @@ export async function migrateLocalDataToFirestore(
 }
 
 // Utility to merge cloud and local data (for conflict resolution)
-export function mergeData<T extends { id?: string; createdAt?: number; timestamp?: number }>(
+// Uses updatedAt (most recent modification) for comparison, falling back to createdAt/timestamp
+export function mergeData<T extends { id?: string; updatedAt?: number; createdAt?: number; timestamp?: number }>(
   cloudData: T[],
   localData: T[]
 ): T[] {
   const merged = new Map<string, T>();
+
+  // Helper to get the most relevant timestamp for comparison
+  // Prefer updatedAt (last modification) over createdAt (original creation)
+  const getTimestamp = (item: T): number => {
+    return item.updatedAt || item.createdAt || item.timestamp || 0;
+  };
 
   // Add cloud data first
   cloudData.forEach((item) => {
@@ -268,7 +275,7 @@ export function mergeData<T extends { id?: string; createdAt?: number; timestamp
     merged.set(key, item);
   });
 
-  // Add local data, preferring newer items
+  // Add local data, preferring items with more recent modifications
   localData.forEach((item) => {
     const key =
       item.id || `${item.createdAt || item.timestamp || Date.now()}-${Math.random()}`;
@@ -277,9 +284,10 @@ export function mergeData<T extends { id?: string; createdAt?: number; timestamp
     if (!existing) {
       merged.set(key, item);
     } else {
-      // Prefer the item with the latest timestamp
-      const existingTime = existing.createdAt || existing.timestamp || 0;
-      const itemTime = item.createdAt || item.timestamp || 0;
+      // Prefer the item with the latest modification timestamp
+      // This ensures SRS progress (which updates updatedAt) is preserved
+      const existingTime = getTimestamp(existing);
+      const itemTime = getTimestamp(item);
 
       if (itemTime > existingTime) {
         merged.set(key, item);
