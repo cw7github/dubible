@@ -1,7 +1,7 @@
 // useScrollDismiss - Intelligent scroll-based panel dismissal
 // Auto-dismisses panels when user scrolls, with smooth fade-out and re-appearance
 
-import { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface UseScrollDismissOptions {
   /** Whether the panel is currently visible */
@@ -31,33 +31,25 @@ export function useScrollDismiss({
   scrollContainerRef,
   scrollThreshold = 50,
   dismissDelay = 300,
-  trackClickPosition = true,
+  trackClickPosition: _trackClickPosition = true,
 }: UseScrollDismissOptions): ScrollDismissState {
+  void _trackClickPosition; // Reserved for future use
   const [opacity, setOpacity] = useState<number>(1);
   const [shouldFade, setShouldFade] = useState<boolean>(false);
 
   const scrollStartY = useRef<number>(0);
-  const clickPositionY = useRef<number>(0);
   const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const lastScrollY = useRef<number>(0);
   const rafRef = useRef<number | null>(null);
-
-  // Track where the user clicked to open the panel
-  const recordClickPosition = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (container && trackClickPosition) {
-      clickPositionY.current = container.scrollTop;
-    }
-  }, [scrollContainerRef, trackClickPosition]);
+  const isDismissing = useRef<boolean>(false); // Track if we've committed to dismiss
 
   // Reset state when panel becomes visible
   useEffect(() => {
     if (isVisible) {
       setOpacity(1);
       setShouldFade(false);
-      recordClickPosition();
+      isDismissing.current = false; // Reset dismiss flag
     }
-  }, [isVisible, recordClickPosition]);
+  }, [isVisible]);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -71,7 +63,6 @@ export function useScrollDismiss({
     }
 
     scrollStartY.current = container.scrollTop;
-    lastScrollY.current = container.scrollTop;
 
     const handleScroll = () => {
       // Cancel any pending RAF
@@ -81,49 +72,32 @@ export function useScrollDismiss({
 
       // Use RAF to batch state updates and avoid performance issues
       rafRef.current = requestAnimationFrame(() => {
+        // Once we've committed to dismissing, don't process more scroll events
+        if (isDismissing.current) {
+          return;
+        }
+
         const currentScrollY = container.scrollTop;
         const scrollDelta = Math.abs(currentScrollY - scrollStartY.current);
 
-        lastScrollY.current = currentScrollY;
-
-        // Clear existing timer
-        if (dismissTimerRef.current) {
-          clearTimeout(dismissTimerRef.current);
-          dismissTimerRef.current = null;
-        }
-
-        // If user scrolls past threshold, start fade-out
+        // If user scrolls past threshold, commit to dismiss (no going back)
         if (scrollDelta > scrollThreshold) {
+          isDismissing.current = true; // Lock in the dismiss
           setShouldFade(true);
 
           // Calculate opacity based on scroll distance (fade out quickly)
-          const fadeDistance = 40; // Faster fade over shorter distance
+          const fadeDistance = 40;
           const fadeProgress = Math.min(
             (scrollDelta - scrollThreshold) / fadeDistance,
             1
           );
-          const newOpacity = 1 - fadeProgress; // Fade to 0% opacity
-          setOpacity(newOpacity);
+          setOpacity(1 - fadeProgress);
 
           // Auto-dismiss after delay
-          dismissTimerRef.current = setTimeout(() => {
-            onDismiss();
-            setShouldFade(false);
-            setOpacity(1);
-          }, dismissDelay);
-        } else {
-          // Still near the click position - keep visible
-          setShouldFade(false);
-          setOpacity(1);
-        }
-
-        // If scrolling back to original position, restore full opacity
-        if (trackClickPosition && Math.abs(currentScrollY - clickPositionY.current) < 30) {
-          setShouldFade(false);
-          setOpacity(1);
-          if (dismissTimerRef.current) {
-            clearTimeout(dismissTimerRef.current);
-            dismissTimerRef.current = null;
+          if (!dismissTimerRef.current) {
+            dismissTimerRef.current = setTimeout(() => {
+              onDismiss();
+            }, dismissDelay);
           }
         }
       });
@@ -146,7 +120,6 @@ export function useScrollDismiss({
     scrollContainerRef,
     scrollThreshold,
     dismissDelay,
-    trackClickPosition,
   ]);
 
   return {
