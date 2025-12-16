@@ -1,0 +1,2336 @@
+{
+  "book": "Psalms",
+  "bookId": "psalms",
+  "chapter": 24,
+  "verses": [
+    {
+      "number": 1,
+      "text": "耶和華是榮耀的王 （大衛的詩。）地和地上所充滿的，世界和住在世上的，都是屬於耶和華的。（本節在《馬索拉抄本》包括細字標題）",
+      "words": [
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Jehovah, LORD",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "榮耀",
+          "pinyin": "róngyào",
+          "definition": "glory, glorious",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榮",
+              "m": "glory, honor"
+            },
+            {
+              "c": "耀",
+              "m": "shine, glitter"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Can be a noun (glory) or adjective (glorious).",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive, modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "（",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "大衛",
+          "pinyin": "Dàwèi",
+          "definition": "David",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive, modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "詩",
+          "pinyin": "shī",
+          "definition": "psalm, poem",
+          "pos": "n",
+          "freq": "biblical",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "。）",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "地",
+          "pinyin": "dì",
+          "definition": "earth, ground",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "地上",
+          "pinyin": "dìshàng",
+          "definition": "on the earth, on the ground",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "地",
+              "m": "earth"
+            },
+            {
+              "c": "上",
+              "m": "on, above"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "所",
+          "pinyin": "suǒ",
+          "definition": "particle indicating object of verb",
+          "pos": "part",
+          "freq": "uncommon",
+          "note": "Often indicates 'that which is...' or 'what is...'",
+          "hskLevel": 5,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "充滿",
+          "pinyin": "chōngmǎn",
+          "definition": "to fill, full of",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "充",
+              "m": "fill"
+            },
+            {
+              "c": "滿",
+              "m": "full"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle forming a nominal phrase",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "世界",
+          "pinyin": "shìjiè",
+          "definition": "world",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "世",
+              "m": "generation, world"
+            },
+            {
+              "c": "界",
+              "m": "boundary, realm"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "住",
+          "pinyin": "zhù",
+          "definition": "to live, dwell",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "世上",
+          "pinyin": "shìshàng",
+          "definition": "in the world",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "世",
+              "m": "world"
+            },
+            {
+              "c": "上",
+              "m": "on, above"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle forming a nominal phrase",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, entirely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "屬於",
+          "pinyin": "shǔyú",
+          "definition": "to belong to",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "屬",
+              "m": "belong"
+            },
+            {
+              "c": "於",
+              "m": "at, in, to"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Jehovah, LORD",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "（",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "本節",
+          "pinyin": "běnjié",
+          "definition": "this verse",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "本",
+              "m": "this, current"
+            },
+            {
+              "c": "節",
+              "m": "section, verse"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "《",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "馬索拉抄本",
+          "pinyin": "Mǎsuǒlā Chāoběn",
+          "definition": "Masoretic Text",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "group",
+          "breakdown": [
+            {
+              "c": "抄",
+              "m": "copy"
+            },
+            {
+              "c": "本",
+              "m": "text, book"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Refers to the Hebrew text of the Old Testament maintained by the Masoretes."
+        },
+        {
+          "chinese": "》",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "包括",
+          "pinyin": "bāokuò",
+          "definition": "to include",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "包",
+              "m": "wrap, contain"
+            },
+            {
+              "c": "括",
+              "m": "include"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "細字標題",
+          "pinyin": "xìzì biāotí",
+          "definition": "small print heading",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "細",
+              "m": "fine, detailed"
+            },
+            {
+              "c": "字",
+              "m": "character, word"
+            },
+            {
+              "c": "標",
+              "m": "mark, sign"
+            },
+            {
+              "c": "題",
+              "m": "title, heading"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "）",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "text": "因為他把地奠定在海上，使世界安定在眾水之上。",
+      "words": [
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "cause"
+            },
+            {
+              "c": "為",
+              "m": "for, due to"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "direct object particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Used to bring the object before the verb.",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "地",
+          "pinyin": "dì",
+          "definition": "earth, ground",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "奠定",
+          "pinyin": "diàndìng",
+          "definition": "to establish, lay a foundation",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "奠",
+              "m": "establish, lay foundation"
+            },
+            {
+              "c": "定",
+              "m": "fix, settle"
+            }
+          ],
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "海上",
+          "pinyin": "hǎishàng",
+          "definition": "on the sea",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "海",
+              "m": "sea"
+            },
+            {
+              "c": "上",
+              "m": "on, above"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "使",
+          "pinyin": "shǐ",
+          "definition": "to cause, make, enable",
+          "pos": "v",
+          "freq": "uncommon",
+          "hskLevel": 3,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "世界",
+          "pinyin": "shìjiè",
+          "definition": "world",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "世",
+              "m": "generation, world"
+            },
+            {
+              "c": "界",
+              "m": "boundary, realm"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "安定",
+          "pinyin": "āndìng",
+          "definition": "to stabilize, settle",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "安",
+              "m": "peace, calm"
+            },
+            {
+              "c": "定",
+              "m": "settle, fix"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "眾水",
+          "pinyin": "zhòngshuǐ",
+          "definition": "many waters, great waters",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "眾",
+              "m": "multitude, many"
+            },
+            {
+              "c": "水",
+              "m": "water"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "之上",
+          "pinyin": "zhīshàng",
+          "definition": "above, on top of",
+          "pos": "postposition",
+          "breakdown": [
+            {
+              "c": "之",
+              "m": "possessive particle"
+            },
+            {
+              "c": "上",
+              "m": "above"
+            }
+          ],
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "text": "誰能登上耶和華的山？誰能站在他的聖所中呢？",
+      "words": [
+        {
+          "chinese": "誰",
+          "pinyin": "shéi",
+          "definition": "who",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "能",
+          "pinyin": "néng",
+          "definition": "can, be able to",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "登上",
+          "pinyin": "dēngshàng",
+          "definition": "to ascend, climb up",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "登",
+              "m": "climb, ascend"
+            },
+            {
+              "c": "上",
+              "m": "up, on"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Jehovah, LORD",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive, modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "山",
+          "pinyin": "shān",
+          "definition": "mountain, hill",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "？",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "誰",
+          "pinyin": "shéi",
+          "definition": "who",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "能",
+          "pinyin": "néng",
+          "definition": "can, be able to",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "站",
+          "pinyin": "zhàn",
+          "definition": "to stand",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "his, he",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive, modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "聖所",
+          "pinyin": "shèngsuǒ",
+          "definition": "sanctuary, holy place",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "聖",
+              "m": "holy, sacred"
+            },
+            {
+              "c": "所",
+              "m": "place"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "中",
+          "pinyin": "zhōng",
+          "definition": "in, among",
+          "pos": "postposition",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "呢",
+          "pinyin": "ne",
+          "definition": "interrogative particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "？",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "text": "就是手潔心清的人，他不傾向虛妄，起誓不懷詭詐。",
+      "words": [
+        {
+          "chinese": "就是",
+          "pinyin": "jiùshì",
+          "definition": "exactly, that is",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "就",
+              "m": "just, precisely"
+            },
+            {
+              "c": "是",
+              "m": "is, to be"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "手潔心清",
+          "pinyin": "shǒujiéxīnqīng",
+          "definition": "pure in hand and heart",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "手",
+              "m": "hand"
+            },
+            {
+              "c": "潔",
+              "m": "clean, pure"
+            },
+            {
+              "c": "心",
+              "m": "heart, mind"
+            },
+            {
+              "c": "清",
+              "m": "clear, pure"
+            }
+          ],
+          "freq": "biblical",
+          "note": "An idiom (chengyu) describing moral purity."
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle forming a nominal phrase",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "person, people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "不",
+          "pinyin": "bù",
+          "definition": "not, no",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "傾向",
+          "pinyin": "qīngxiàng",
+          "definition": "to incline to, tend towards",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "傾",
+              "m": "lean, incline"
+            },
+            {
+              "c": "向",
+              "m": "towards"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "虛妄",
+          "pinyin": "xūwàng",
+          "definition": "vanity, falsehood",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "虛",
+              "m": "empty, vain"
+            },
+            {
+              "c": "妄",
+              "m": "absurd, false"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "起誓",
+          "pinyin": "qǐshì",
+          "definition": "to take an oath",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "起",
+              "m": "rise, begin"
+            },
+            {
+              "c": "誓",
+              "m": "oath, vow"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "不",
+          "pinyin": "bù",
+          "definition": "not, no",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "懷",
+          "pinyin": "huái",
+          "definition": "to harbor, cherish (a feeling)",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "詭詐",
+          "pinyin": "guǐzhà",
+          "definition": "deceit, cunning",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "詭",
+              "m": "deceitful, crafty"
+            },
+            {
+              "c": "詐",
+              "m": "trick, cheat"
+            }
+          ],
+          "freq": "biblical"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "text": "他必領受從耶和華來的福分，也必蒙拯救他的 神稱他為義。",
+      "words": [
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "必",
+          "pinyin": "bì",
+          "definition": "surely, certainly",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "領受",
+          "pinyin": "lǐngshòu",
+          "definition": "to receive",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "領",
+              "m": "receive, lead"
+            },
+            {
+              "c": "受",
+              "m": "accept, bear"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 7
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Jehovah, LORD",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "來",
+          "pinyin": "lái",
+          "definition": "to come",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "福分",
+          "pinyin": "fúfen",
+          "definition": "blessing, portion of blessing",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "福",
+              "m": "blessing"
+            },
+            {
+              "c": "分",
+              "m": "share, portion"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "也",
+          "pinyin": "yě",
+          "definition": "also, too",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "必",
+          "pinyin": "bì",
+          "definition": "surely, certainly",
+          "pos": "adv",
+          "freq": "common"
+        },
+        {
+          "chinese": "蒙",
+          "pinyin": "méng",
+          "definition": "to receive (favor/blessing)",
+          "pos": "v",
+          "freq": "biblical",
+          "note": "Often used in passive sense for receiving grace or favor.",
+          "hskLevel": 6,
+          "tocflLevel": 7
+        },
+        {
+          "chinese": "拯救",
+          "pinyin": "zhěngjiù",
+          "definition": "to save, rescue",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "拯",
+              "m": "save, rescue"
+            },
+            {
+              "c": "救",
+              "m": "save, rescue"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "his, he",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive, modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "　神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "note": "The leading space indicates reverence."
+        },
+        {
+          "chinese": "稱",
+          "pinyin": "chēng",
+          "definition": "to call, name, declare",
+          "pos": "v",
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "為",
+          "pinyin": "wéi",
+          "definition": "as, to be",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "義",
+          "pinyin": "yì",
+          "definition": "righteousness, just",
+          "pos": "n",
+          "freq": "biblical"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "text": "這就是求問耶和華的那一類人，就是尋求你面的雅各。（細拉）",
+      "words": [
+        {
+          "chinese": "這",
+          "pinyin": "zhè",
+          "definition": "this",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "exactly, then",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "求問",
+          "pinyin": "qiúwèn",
+          "definition": "to inquire, seek counsel",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "求",
+              "m": "to seek, ask"
+            },
+            {
+              "c": "問",
+              "m": "to ask"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Commonly used in biblical contexts for seeking God's will."
+        },
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Yahweh, the Lord",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "那一類",
+          "pinyin": "nà yīlèi",
+          "definition": "that kind of, those",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "一",
+              "m": "one"
+            },
+            {
+              "c": "類",
+              "m": "kind, type"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "person, people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "exactly, then",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "尋求",
+          "pinyin": "xúnqiú",
+          "definition": "to seek, search for",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "尋",
+              "m": "to search"
+            },
+            {
+              "c": "求",
+              "m": "to seek, ask"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "你",
+          "pinyin": "nǐ",
+          "definition": "you",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "面",
+          "pinyin": "miàn",
+          "definition": "face",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "雅各",
+          "pinyin": "Yǎgè",
+          "definition": "Jacob",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "（",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "細拉",
+          "pinyin": "Xìlā",
+          "definition": "Selah",
+          "pos": "n",
+          "freq": "biblical",
+          "note": "A Hebrew word of uncertain meaning, often understood as a musical or liturgical instruction."
+        },
+        {
+          "chinese": "）",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "text": "眾城門哪！抬起你們的頭來；古老的門戶啊！你們要被舉起，好讓榮耀的王進來。",
+      "words": [
+        {
+          "chinese": "眾",
+          "pinyin": "zhòng",
+          "definition": "all, numerous, many",
+          "pos": "adj",
+          "freq": "common"
+        },
+        {
+          "chinese": "城門",
+          "pinyin": "chéngmén",
+          "definition": "city gate",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "城",
+              "m": "city"
+            },
+            {
+              "c": "門",
+              "m": "gate, door"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "哪",
+          "pinyin": "na",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "抬起",
+          "pinyin": "táiqǐ",
+          "definition": "to lift up, raise",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "抬",
+              "m": "to lift, carry"
+            },
+            {
+              "c": "起",
+              "m": "up, rise (resultative complement)"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "頭",
+          "pinyin": "tóu",
+          "definition": "head",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "來",
+          "pinyin": "lái",
+          "definition": "come; particle indicating direction/purpose",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "古老",
+          "pinyin": "gǔlǎo",
+          "definition": "ancient, old",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "古",
+              "m": "ancient"
+            },
+            {
+              "c": "老",
+              "m": "old"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "門戶",
+          "pinyin": "ménhù",
+          "definition": "gates, doors, entrance",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, door"
+            },
+            {
+              "c": "戶",
+              "m": "door, household"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "啊",
+          "pinyin": "a",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "要",
+          "pinyin": "yào",
+          "definition": "will, must, ought to",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "被",
+          "pinyin": "bèi",
+          "definition": "passive marker",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "舉起",
+          "pinyin": "jǔqǐ",
+          "definition": "to be lifted up, raised",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "舉",
+              "m": "to lift, raise"
+            },
+            {
+              "c": "起",
+              "m": "up, rise (resultative complement)"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "好讓",
+          "pinyin": "hǎoràng",
+          "definition": "so that, in order that",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "好",
+              "m": "good, well"
+            },
+            {
+              "c": "讓",
+              "m": "to allow, let"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "榮耀",
+          "pinyin": "róngyào",
+          "definition": "glory, honor",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榮",
+              "m": "glory, honor"
+            },
+            {
+              "c": "耀",
+              "m": "shine, glorious"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A key concept in Christian theology.",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "進來",
+          "pinyin": "jìnlái",
+          "definition": "to come in, enter",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "進",
+              "m": "to enter"
+            },
+            {
+              "c": "來",
+              "m": "come (directional complement)"
+            }
+          ],
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "text": "那榮耀的王是誰呢？就是強而有力的耶和華，在戰場上大有能力的耶和華。",
+      "words": [
+        {
+          "chinese": "那",
+          "pinyin": "nà",
+          "definition": "that",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "榮耀",
+          "pinyin": "róngyào",
+          "definition": "glory, honor",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榮",
+              "m": "glory, honor"
+            },
+            {
+              "c": "耀",
+              "m": "shine, glorious"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A key concept in Christian theology.",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "誰",
+          "pinyin": "shéi",
+          "definition": "who",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "呢",
+          "pinyin": "ne",
+          "definition": "interrogative particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "？",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "exactly, then",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "強而有力",
+          "pinyin": "qiáng ér yǒulì",
+          "definition": "strong and mighty, powerful",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "強",
+              "m": "strong"
+            },
+            {
+              "c": "而",
+              "m": "and (conjunction)"
+            },
+            {
+              "c": "有",
+              "m": "to have"
+            },
+            {
+              "c": "力",
+              "m": "strength, power"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Yahweh, the Lord",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "in, at, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "戰場",
+          "pinyin": "zhànchǎng",
+          "definition": "battlefield",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "戰",
+              "m": "battle, war"
+            },
+            {
+              "c": "場",
+              "m": "field, place"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above (locative suffix)",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "大有能力",
+          "pinyin": "dà yǒu nénglì",
+          "definition": "greatly powerful, mighty",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "大",
+              "m": "great, large"
+            },
+            {
+              "c": "有",
+              "m": "to have"
+            },
+            {
+              "c": "能力",
+              "m": "ability, power"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "耶和華",
+          "pinyin": "Yēhéhuá",
+          "definition": "Yahweh, the Lord",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "text": "眾城門哪！抬起你們的頭來；古老的門戶啊！你們要被舉起，好讓榮耀的王進來。",
+      "words": [
+        {
+          "chinese": "眾",
+          "pinyin": "zhòng",
+          "definition": "all, numerous, many",
+          "pos": "adj",
+          "freq": "common"
+        },
+        {
+          "chinese": "城門",
+          "pinyin": "chéngmén",
+          "definition": "city gate",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "城",
+              "m": "city"
+            },
+            {
+              "c": "門",
+              "m": "gate, door"
+            }
+          ],
+          "freq": "uncommon"
+        },
+        {
+          "chinese": "哪",
+          "pinyin": "na",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "抬起",
+          "pinyin": "táiqǐ",
+          "definition": "to lift up, raise",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "抬",
+              "m": "to lift, carry"
+            },
+            {
+              "c": "起",
+              "m": "up, rise (resultative complement)"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "頭",
+          "pinyin": "tóu",
+          "definition": "head",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "來",
+          "pinyin": "lái",
+          "definition": "come; particle indicating direction/purpose",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "古老",
+          "pinyin": "gǔlǎo",
+          "definition": "ancient, old",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "古",
+              "m": "ancient"
+            },
+            {
+              "c": "老",
+              "m": "old"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "門戶",
+          "pinyin": "ménhù",
+          "definition": "gates, doors, entrance",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, door"
+            },
+            {
+              "c": "戶",
+              "m": "door, household"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "啊",
+          "pinyin": "a",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "要",
+          "pinyin": "yào",
+          "definition": "will, must, ought to",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "被",
+          "pinyin": "bèi",
+          "definition": "passive marker",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "舉起",
+          "pinyin": "jǔqǐ",
+          "definition": "to be lifted up, raised",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "舉",
+              "m": "to lift, raise"
+            },
+            {
+              "c": "起",
+              "m": "up, rise (resultative complement)"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "好讓",
+          "pinyin": "hǎoràng",
+          "definition": "so that, in order that",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "好",
+              "m": "good, well"
+            },
+            {
+              "c": "讓",
+              "m": "to allow, let"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "榮耀",
+          "pinyin": "róngyào",
+          "definition": "glory, honor",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榮",
+              "m": "glory, honor"
+            },
+            {
+              "c": "耀",
+              "m": "shine, glorious"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A key concept in Christian theology.",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "進來",
+          "pinyin": "jìnlái",
+          "definition": "to come in, enter",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "進",
+              "m": "to enter"
+            },
+            {
+              "c": "來",
+              "m": "come (directional complement)"
+            }
+          ],
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "text": "那榮耀的王是誰呢？萬軍之耶和華，他就是那榮耀的王。（細拉）",
+      "words": [
+        {
+          "chinese": "那",
+          "pinyin": "nà",
+          "definition": "that",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "榮耀",
+          "pinyin": "róngyào",
+          "definition": "glory, honor",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榮",
+              "m": "glory, honor"
+            },
+            {
+              "c": "耀",
+              "m": "shine, glorious"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A key concept in Christian theology.",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "誰",
+          "pinyin": "shéi",
+          "definition": "who",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "呢",
+          "pinyin": "ne",
+          "definition": "interrogative particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "？",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "萬軍之耶和華",
+          "pinyin": "Wànjūn zhī Yēhéhuá",
+          "definition": "Lord of hosts",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "breakdown": [
+            {
+              "c": "萬",
+              "m": "ten thousand, all"
+            },
+            {
+              "c": "軍",
+              "m": "army, troops"
+            },
+            {
+              "c": "之",
+              "m": "possessive particle (classical)"
+            },
+            {
+              "c": "耶和華",
+              "m": "Yahweh, the Lord"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A divine title emphasizing God's sovereignty over all creation."
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "exactly, then",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "那",
+          "pinyin": "nà",
+          "definition": "that",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "榮耀",
+          "pinyin": "róngyào",
+          "definition": "glory, honor",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "榮",
+              "m": "glory, honor"
+            },
+            {
+              "c": "耀",
+              "m": "shine, glorious"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A key concept in Christian theology.",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "（",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "細拉",
+          "pinyin": "Xìlā",
+          "definition": "Selah",
+          "pos": "n",
+          "freq": "biblical",
+          "note": "A Hebrew word of uncertain meaning, often understood as a musical or liturgical instruction."
+        },
+        {
+          "chinese": "）",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    }
+  ],
+  "processedAt": "2025-12-15T06:15:38.237Z"
+}

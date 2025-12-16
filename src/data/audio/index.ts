@@ -1,1 +1,7 @@
-export { getChapterAudio, getPositionAtTime } from './sampleAudioTiming';
+export {
+  getChapterAudio,
+  loadChapterAudio,
+  getPositionAtTime,
+  getAudioUrl,
+  isAudioAvailable,
+} from './sampleAudioTiming';

@@ -1,4 +1,4 @@
-import { memo, useState, useMemo } from 'react';
+import { memo, useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVocabularyStore, useReadingStore } from '../../stores';
 import { getBookById } from '../../data/bible';
@@ -19,6 +19,23 @@ export const VocabularyScreen = memo(function VocabularyScreen({
 
   const { words, getWordsDueForReview, getStats, removeWord } = useVocabularyStore();
   const { setCurrentPosition } = useReadingStore();
+
+  // Prevent body scroll when open (but not when flashcards are showing, they handle their own lock)
+  useEffect(() => {
+    if (isOpen && !showFlashcards) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen, showFlashcards]);
 
   const stats = getStats();
   const wordsDueForReview = getWordsDueForReview();
@@ -95,7 +112,7 @@ export const VocabularyScreen = memo(function VocabularyScreen({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50"
+          className="fixed inset-0 z-47"
           style={{ backgroundColor: 'var(--bg-primary)' }}
           initial={{ opacity: 0, y: '100%' }}
           animate={{ opacity: 1, y: 0 }}

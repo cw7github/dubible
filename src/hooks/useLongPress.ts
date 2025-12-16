@@ -6,6 +6,8 @@ import { useCallback, useRef } from 'react';
 interface UseLongPressOptions {
   onLongPress: () => void;
   onTap?: () => void;
+  onLongPressStart?: () => void; // Called when long press timer starts
+  onLongPressCancel?: () => void; // Called when long press is cancelled
   threshold?: number; // ms to trigger long press (default 400ms)
 }
 
@@ -21,6 +23,8 @@ interface LongPressHandlers {
 export function useLongPress({
   onLongPress,
   onTap,
+  onLongPressStart,
+  onLongPressCancel,
   threshold = 400,
 }: UseLongPressOptions): LongPressHandlers {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -32,16 +36,23 @@ export function useLongPress({
       isLongPressRef.current = false;
       startPosRef.current = { x, y };
 
+      // Notify that long press has started
+      if (onLongPressStart) {
+        onLongPressStart();
+      }
+
       timerRef.current = setTimeout(() => {
         isLongPressRef.current = true;
         onLongPress();
       }, threshold);
     },
-    [onLongPress, threshold]
+    [onLongPress, onLongPressStart, threshold]
   );
 
   const cancel = useCallback(
     (triggerTap: boolean = false) => {
+      const wasLongPressStarted = timerRef.current !== null && !isLongPressRef.current;
+
       if (timerRef.current) {
         clearTimeout(timerRef.current);
         timerRef.current = null;
@@ -51,9 +62,14 @@ export function useLongPress({
         onTap();
       }
 
+      // Notify that long press was cancelled (only if it was started but not completed)
+      if (wasLongPressStarted && onLongPressCancel) {
+        onLongPressCancel();
+      }
+
       startPosRef.current = null;
     },
-    [onTap]
+    [onTap, onLongPressCancel]
   );
 
   const onTouchStart = useCallback(

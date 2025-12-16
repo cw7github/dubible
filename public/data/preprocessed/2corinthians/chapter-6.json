@@ -5,7 +5,7 @@
   "verses": [
     {
       "number": 1,
-      "text": "表明是　神的僕人我們這些與　神同工的，也勸你們不要白受　神的恩典。",
+      "text": "表明是 神的僕人我們這些與 神同工的，也勸你們不要白受 神的恩典。",
       "words": [
         {
           "chinese": "表明",
@@ -22,14 +22,18 @@
               "m": "bright, clear"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "神",
@@ -39,14 +43,17 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "Capitalized in Bible text for reverence."
+          "note": "Capitalized in Bible text for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "僕人",
@@ -63,14 +70,17 @@
               "m": "person"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "我們",
           "pinyin": "wǒmen",
           "definition": "we, us",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "這些",
@@ -94,7 +104,9 @@
           "pinyin": "yǔ",
           "definition": "with, and",
           "pos": "prep",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "神",
@@ -104,7 +116,8 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "Capitalized in Bible text for reverence."
+          "note": "Capitalized in Bible text for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "同工",
@@ -129,7 +142,9 @@
           "pinyin": "de",
           "definition": "nominalizing particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -143,21 +158,26 @@
           "pinyin": "yě",
           "definition": "also, too",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "勸",
           "pinyin": "quàn",
           "definition": "exhort, urge",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
         },
         {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "不要",
@@ -202,14 +222,17 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "Capitalized in Bible text for reverence."
+          "note": "Capitalized in Bible text for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "恩典",
@@ -228,13 +251,6 @@
           ],
           "freq": "biblical",
           "note": "Often refers to God's unmerited favor."
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         }
       ]
     },
@@ -257,28 +273,26 @@
               "m": "for"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "他",
           "pinyin": "tā",
           "definition": "he, him",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "說",
           "pinyin": "shuō",
           "definition": "say",
           "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "「",
@@ -292,7 +306,9 @@
           "pinyin": "zài",
           "definition": "in, at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "悅納",
@@ -317,7 +333,9 @@
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "時候",
@@ -334,7 +352,9 @@
               "m": "wait, season"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -348,7 +368,9 @@
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "應允",
@@ -366,35 +388,34 @@
             }
           ],
           "freq": "biblical",
-          "note": "Often used for God answering prayers or promises."
+          "note": "Often used for God answering prayers or promises.",
+          "tocflLevel": 7
         },
         {
           "chinese": "了",
           "pinyin": "le",
           "definition": "aspect particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1
         },
         {
           "chinese": "你",
           "pinyin": "nǐ",
           "definition": "you",
           "pos": "pron",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "在",
           "pinyin": "zài",
           "definition": "in, at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "拯救",
@@ -412,14 +433,17 @@
             }
           ],
           "freq": "biblical",
-          "note": "Refers to deliverance, especially spiritual salvation."
+          "note": "Refers to deliverance, especially spiritual salvation.",
+          "tocflLevel": 6
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "日子",
@@ -436,7 +460,8 @@
               "m": "suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 3
         },
         {
           "chinese": "，",
@@ -450,7 +475,9 @@
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "幫助",
@@ -467,28 +494,26 @@
               "m": "assist"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 2
         },
         {
           "chinese": "了",
           "pinyin": "le",
           "definition": "aspect particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1
         },
         {
           "chinese": "你",
           "pinyin": "nǐ",
           "definition": "you",
           "pos": "pron",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "」",
@@ -537,7 +562,9 @@
               "m": "at"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "就是",
@@ -579,7 +606,9 @@
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "時候",
@@ -596,7 +625,9 @@
               "m": "wait, season"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -620,7 +651,9 @@
               "m": "at"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "就是",
@@ -655,14 +688,17 @@
             }
           ],
           "freq": "biblical",
-          "note": "Refers to deliverance, especially spiritual salvation."
+          "note": "Refers to deliverance, especially spiritual salvation.",
+          "tocflLevel": 6
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "日子",
@@ -679,14 +715,8 @@
               "m": "suffix"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 3
         }
       ]
     },
@@ -699,7 +729,9 @@
           "pinyin": "wǒmen",
           "definition": "we, us",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "凡事",
@@ -716,14 +748,17 @@
               "m": "matter"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "都",
           "pinyin": "dōu",
           "definition": "all, entirely",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "沒有",
@@ -740,7 +775,8 @@
               "m": "have"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "妨礙",
@@ -757,14 +793,18 @@
               "m": "obstruct"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 5,
+          "tocflLevel": 6
         },
         {
           "chinese": "人",
           "pinyin": "rén",
           "definition": "others, people",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -795,7 +835,9 @@
           "pinyin": "zhè",
           "definition": "this",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "職分",
@@ -830,7 +872,9 @@
               "m": "reach, to"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "毀謗",
@@ -860,7 +904,7 @@
     },
     {
       "number": 4,
-      "text": "反而在各樣的事上，表明自己是　神的僕人，就如持久的忍耐、患難、貧乏、困苦、",
+      "text": "反而在各樣的事上，表明自己是 神的僕人，就如持久的忍耐、患難、貧乏、困苦、",
       "words": [
         {
           "chinese": "反而",
@@ -877,14 +921,18 @@
               "m": "but, and"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "在",
           "pinyin": "zài",
           "definition": "in, at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "各樣",
@@ -908,14 +956,17 @@
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "事",
           "pinyin": "shì",
           "definition": "matter, thing",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "上",
@@ -923,7 +974,9 @@
           "definition": "on, in (scope)",
           "pos": "part",
           "freq": "common",
-          "note": "Used with '在...事' to indicate 'in matters of'."
+          "note": "Used with '在...事' to indicate 'in matters of'.",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -947,7 +1000,9 @@
               "m": "bright, clear"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "自己",
@@ -964,14 +1019,18 @@
               "m": "self"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "神",
@@ -981,14 +1040,17 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "Capitalized in Bible text for reverence."
+          "note": "Capitalized in Bible text for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "僕人",
@@ -1005,7 +1067,8 @@
               "m": "person"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "，",
@@ -1046,14 +1109,18 @@
               "m": "long time"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "忍耐",
@@ -1070,14 +1137,9 @@
               "m": "patient"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "患難",
@@ -1094,14 +1156,8 @@
               "m": "difficulty"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "貧乏",
@@ -1118,14 +1174,9 @@
               "m": "lack"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 6
         },
         {
           "chinese": "困苦",
@@ -1142,14 +1193,8 @@
               "m": "bitter"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "tocflLevel": 6
         }
       ]
     },
@@ -1172,14 +1217,8 @@
               "m": "strike"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "監禁",
@@ -1196,14 +1235,8 @@
               "m": "prohibit"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "擾亂",
@@ -1220,14 +1253,9 @@
               "m": "disorder"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 6
         },
         {
           "chinese": "勞苦",
@@ -1244,14 +1272,8 @@
               "m": "suffering"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "不睡覺",
@@ -1276,13 +1298,6 @@
           "note": "A verb-object compound functioning as a noun here."
         },
         {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "禁食",
           "pinyin": "jìnshí",
           "definition": "fasting",
@@ -1298,13 +1313,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         }
       ]
     },
@@ -1327,13 +1335,9 @@
               "m": "clean"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 6
         },
         {
           "chinese": "知識",
@@ -1350,13 +1354,9 @@
               "m": "recognize"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
         },
         {
           "chinese": "容忍",
@@ -1373,13 +1373,9 @@
               "m": "endure"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
         },
         {
           "chinese": "恩慈",
@@ -1399,12 +1395,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
-        },
-        {
           "chinese": "聖靈",
           "pinyin": "Shènglíng",
           "definition": "Holy Spirit",
@@ -1422,12 +1412,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
         },
         {
           "chinese": "無偽",
@@ -1451,7 +1435,9 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "愛心",
@@ -1468,19 +1454,15 @@
               "m": "heart"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
         }
       ]
     },
     {
       "number": 7,
-      "text": "真理的道、　神的大能等事上；並且是藉著左右兩手中公義的武器，",
+      "text": "真理的道、 神的大能等事上；並且是藉著左右兩手中公義的武器，",
       "words": [
         {
           "chinese": "真理",
@@ -1497,27 +1479,26 @@
               "m": "principle"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "道",
           "pinyin": "dào",
           "definition": "way, truth, word",
           "pos": "n",
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "biblical",
+          "tocflLevel": 2
         },
         {
           "chinese": "神",
@@ -1527,14 +1508,17 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "Often preceded by a space in Chinese Bibles for reverence."
+          "note": "Often preceded by a space in Chinese Bibles for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "大能",
@@ -1558,27 +1542,26 @@
           "pinyin": "děng",
           "definition": "etc., and so on",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
         },
         {
           "chinese": "事",
           "pinyin": "shì",
           "definition": "matters, things",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "上",
           "pinyin": "shàng",
           "definition": "in, on (locative)",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "並且",
@@ -1595,14 +1578,18 @@
               "m": "moreover"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "藉著",
@@ -1636,28 +1623,34 @@
               "m": "right"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 6,
+          "tocflLevel": 3
         },
         {
           "chinese": "兩",
           "pinyin": "liǎng",
           "definition": "two (of a pair)",
           "pos": "num",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "手",
           "pinyin": "shǒu",
           "definition": "hand",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "中",
           "pinyin": "zhōng",
           "definition": "in, among",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "公義",
@@ -1674,14 +1667,17 @@
               "m": "righteousness"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "武器",
@@ -1698,7 +1694,9 @@
               "m": "tool"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "，",
@@ -1744,14 +1742,17 @@
               "m": "shine"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 6
         },
         {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "羞辱",
@@ -1768,20 +1769,17 @@
               "m": "humiliate"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "、",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "biblical",
+          "tocflLevel": 6
         },
         {
           "chinese": "壞",
           "pinyin": "huài",
           "definition": "bad",
           "pos": "adj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "名聲",
@@ -1798,21 +1796,26 @@
               "m": "sound"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "好",
           "pinyin": "hǎo",
           "definition": "good",
           "pos": "adj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "名譽",
@@ -1829,13 +1832,9 @@
               "m": "reputation"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
         },
         {
           "chinese": "我們",
@@ -1852,7 +1851,9 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "好像",
@@ -1869,14 +1870,18 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "騙人",
@@ -1893,14 +1898,17 @@
               "m": "person"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -1940,14 +1948,17 @@
               "m": "sincere"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -1976,28 +1987,36 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "人",
           "pinyin": "rén",
           "definition": "people, others",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "所",
           "pinyin": "suǒ",
           "definition": "that which, particle (passive)",
           "pos": "part",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 2
         },
         {
           "chinese": "不知",
@@ -2021,7 +2040,9 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2051,14 +2072,18 @@
           "pinyin": "rén",
           "definition": "people, others",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "所",
           "pinyin": "suǒ",
           "definition": "that which, particle (passive)",
           "pos": "part",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 2
         },
         {
           "chinese": "共知",
@@ -2082,13 +2107,9 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "好像",
@@ -2105,14 +2126,18 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "必死",
@@ -2136,7 +2161,9 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2182,7 +2209,9 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "卻是",
@@ -2223,13 +2252,9 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "好像",
@@ -2246,21 +2271,26 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "受",
           "pinyin": "shòu",
           "definition": "suffer, receive",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "懲罰",
@@ -2277,14 +2307,18 @@
               "m": "punish"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2297,7 +2331,9 @@
           "pinyin": "què",
           "definition": "but, yet",
           "pos": "conj",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "沒有",
@@ -2314,7 +2350,8 @@
               "m": "have"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "處死",
@@ -2331,13 +2368,8 @@
               "m": "die"
             }
           ],
-          "freq": "uncommon"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "rare",
+          "tocflLevel": 6
         }
       ]
     },
@@ -2360,7 +2392,9 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "憂愁",
@@ -2377,7 +2411,8 @@
               "m": "anxiety"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "，",
@@ -2417,7 +2452,8 @@
               "m": "often"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "喜樂",
@@ -2434,20 +2470,17 @@
               "m": "joy"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 6
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "好像",
@@ -2464,7 +2497,9 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "貧窮",
@@ -2481,7 +2516,8 @@
               "m": "poor"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "，",
@@ -2494,14 +2530,18 @@
           "pinyin": "què",
           "definition": "but, yet",
           "pos": "conj",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "make, cause",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 3,
+          "tocflLevel": 5
         },
         {
           "chinese": "很多",
@@ -2525,7 +2565,9 @@
           "pinyin": "rén",
           "definition": "people",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "富足",
@@ -2542,13 +2584,8 @@
               "m": "sufficient"
             }
           ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "biblical",
+          "tocflLevel": 6
         },
         {
           "chinese": "好像",
@@ -2565,28 +2602,35 @@
               "m": "resemble"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "甚麼",
           "pinyin": "shénme",
           "definition": "what, anything",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "都",
           "pinyin": "dōu",
           "definition": "all, entirely",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "沒有",
@@ -2603,7 +2647,8 @@
               "m": "have"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2650,20 +2695,18 @@
           "pinyin": "dōu",
           "definition": "all, entirely",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "有",
           "pinyin": "yǒu",
           "definition": "have, possess",
           "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         }
       ]
     },
@@ -2685,7 +2728,9 @@
           "pinyin": "na",
           "definition": "exclamatory particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "！",
@@ -2697,21 +2742,26 @@
           "pinyin": "wǒmen",
           "definition": "we, us",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "對",
           "pinyin": "duì",
           "definition": "to, towards",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
         },
         {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2723,14 +2773,18 @@
           "pinyin": "kǒu",
           "definition": "mouth, speech",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 3
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "坦率",
@@ -2747,14 +2801,18 @@
               "m": "frank"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 5,
+          "tocflLevel": 6
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2766,14 +2824,17 @@
           "pinyin": "xīn",
           "definition": "heart, mind",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 2
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "寬宏",
@@ -2797,12 +2858,9 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         }
       ]
     },
@@ -2815,7 +2873,8 @@
           "pinyin": "bìng",
           "definition": "used to emphasize negation",
           "pos": "adv",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "不是",
@@ -2829,21 +2888,26 @@
           "pinyin": "wǒmen",
           "definition": "we, us",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "對",
           "pinyin": "duì",
           "definition": "to, towards",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
         },
         {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "器量",
@@ -2867,7 +2931,9 @@
           "pinyin": "xiǎo",
           "definition": "small, narrow",
           "pos": "adj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2879,21 +2945,26 @@
           "pinyin": "ér",
           "definition": "but, rather",
           "pos": "conj",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 5
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "自己",
@@ -2910,7 +2981,9 @@
               "m": "self"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "心胸",
@@ -2927,7 +3000,8 @@
               "m": "chest"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "狹窄",
@@ -2944,12 +3018,9 @@
               "m": "narrow"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
         }
       ]
     },
@@ -2962,21 +3033,26 @@
           "pinyin": "nǐmen",
           "definition": "you (plural)",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "也",
           "pinyin": "yě",
           "definition": "also, too",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "must, should",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "照樣",
@@ -2993,14 +3069,18 @@
               "m": "manner"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "以",
           "pinyin": "yǐ",
           "definition": "with, by means of",
           "pos": "prep",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 5
         },
         {
           "chinese": "寬宏",
@@ -3024,14 +3104,17 @@
           "pinyin": "de",
           "definition": "adjectival particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "心",
           "pinyin": "xīn",
           "definition": "heart, mind",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 2
         },
         {
           "chinese": "對待",
@@ -3048,14 +3131,18 @@
               "m": "treat"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
         },
         {
           "chinese": "我們",
           "pinyin": "wǒmen",
           "definition": "we, us",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -3067,49 +3154,62 @@
           "pinyin": "zhè",
           "definition": "this",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "話",
           "pinyin": "huà",
           "definition": "word, remark",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "正",
           "pinyin": "zhèng",
           "definition": "just, exactly",
           "pos": "adv",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 3
         },
         {
           "chinese": "像",
           "pinyin": "xiàng",
           "definition": "to be like, resemble",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "對",
           "pinyin": "duì",
           "definition": "to, towards",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
         },
         {
           "chinese": "兒女",
@@ -3126,26 +3226,25 @@
               "m": "daughter"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "說",
           "pinyin": "shuō",
           "definition": "to say, speak",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         }
       ]
     },
@@ -3184,14 +3283,17 @@
           "pinyin": "nǐmen",
           "definition": "you (plural)",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "不信",
@@ -3216,14 +3318,18 @@
           "pinyin": "de",
           "definition": "nominalizer particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "人",
           "pinyin": "rén",
           "definition": "person, people",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "不可",
@@ -3247,21 +3353,25 @@
           "pinyin": "gòng",
           "definition": "together, jointly",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "負",
           "pinyin": "fù",
           "definition": "to bear, carry",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "一",
           "pinyin": "yī",
           "definition": "one",
           "pos": "num",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "軛",
@@ -3289,7 +3399,9 @@
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "不法",
@@ -3307,14 +3419,17 @@
             }
           ],
           "freq": "biblical",
-          "note": "Often refers to breaking divine law or moral principles."
+          "note": "Often refers to breaking divine law or moral principles.",
+          "tocflLevel": 6
         },
         {
           "chinese": "有",
           "pinyin": "yǒu",
           "definition": "to have, there is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "甚麼",
@@ -3331,7 +3446,8 @@
               "m": "suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "相同",
@@ -3348,14 +3464,18 @@
               "m": "same"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 3,
+          "tocflLevel": 4
         },
         {
           "chinese": "呢",
           "pinyin": "ne",
           "definition": "question particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "？",
@@ -3377,14 +3497,18 @@
               "m": "bright"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "黑暗",
@@ -3401,7 +3525,8 @@
               "m": "dark"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "怎能",
@@ -3435,14 +3560,17 @@
               "m": "connect"
             }
           ],
-          "freq": "uncommon"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "呢",
           "pinyin": "ne",
           "definition": "question particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "？",
@@ -3469,7 +3597,9 @@
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "彼列",
@@ -3480,75 +3610,6 @@
           "nameType": "person",
           "freq": "biblical",
           "note": "A name for Satan or a wicked spirit."
-        },
-        {
-          "chinese": "（",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "彼列",
-          "pinyin": "Bǐliè",
-          "definition": "Belial",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "person",
-          "freq": "biblical"
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "是",
-          "pinyin": "shì",
-          "definition": "to be, is",
-          "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "撒但",
-          "pinyin": "Sādàn",
-          "definition": "Satan",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "person",
-          "freq": "biblical"
-        },
-        {
-          "chinese": "的",
-          "pinyin": "de",
-          "definition": "possessive particle",
-          "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "別名",
-          "pinyin": "biémíng",
-          "definition": "alias, pseudonym",
-          "pos": "n",
-          "breakdown": [
-            {
-              "c": "別",
-              "m": "other"
-            },
-            {
-              "c": "名",
-              "m": "name"
-            }
-          ],
-          "freq": "common"
-        },
-        {
-          "chinese": "）",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "怎能",
@@ -3582,14 +3643,18 @@
               "m": "harmonize"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "呢",
           "pinyin": "ne",
           "definition": "question particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "？",
@@ -3601,21 +3666,27 @@
           "pinyin": "xìn",
           "definition": "to believe; believer",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "nominalizer particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "不信",
@@ -3640,14 +3711,18 @@
           "pinyin": "de",
           "definition": "nominalizer particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "有",
           "pinyin": "yǒu",
           "definition": "to have, there is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "甚麼",
@@ -3664,7 +3739,8 @@
               "m": "suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "聯繫",
@@ -3681,14 +3757,18 @@
               "m": "tie"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 5
         },
         {
           "chinese": "呢",
           "pinyin": "ne",
           "definition": "question particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "？",
@@ -3699,7 +3779,7 @@
     },
     {
       "number": 16,
-      "text": "神的殿和偶像怎能協調呢？我們就是永生　神的殿，正如　神說：「我要住在他們中間，在他們中間來往；我要作他們的　神，他們要作我的子民。」",
+      "text": "神的殿和偶像怎能協調呢？我們就是永生 神的殿，正如 神說：「我要住在他們中間，在他們中間來往；我要作他們的 神，他們要作我的子民。」",
       "words": [
         {
           "chinese": "神",
@@ -3708,14 +3788,17 @@
           "pos": "prop",
           "isName": true,
           "nameType": "person",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "殿",
@@ -3729,14 +3812,17 @@
             }
           ],
           "freq": "biblical",
-          "note": "Refers to a sacred dwelling place."
+          "note": "Refers to a sacred dwelling place.",
+          "tocflLevel": 7
         },
         {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "偶像",
@@ -3753,7 +3839,8 @@
               "m": "likeness"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 5
         },
         {
           "chinese": "怎",
@@ -3773,7 +3860,9 @@
           "pinyin": "néng",
           "definition": "can, be able to",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "協調",
@@ -3790,14 +3879,18 @@
               "m": "adjust"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 5,
+          "tocflLevel": 6
         },
         {
           "chinese": "呢",
           "pinyin": "ne",
           "definition": "question particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "？",
@@ -3819,21 +3912,27 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, precisely",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "永生",
@@ -3861,14 +3960,17 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "The preceding space is a typesetting convention for reverence."
+          "note": "The preceding space is a typesetting convention for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "殿",
@@ -3881,7 +3983,8 @@
               "m": "palace, hall"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "，",
@@ -3913,19 +4016,16 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "The preceding space is a typesetting convention for reverence."
+          "note": "The preceding space is a typesetting convention for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "說",
           "pinyin": "shuō",
           "definition": "to say, said",
           "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": ""
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "「",
@@ -3937,28 +4037,36 @@
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to",
           "pos": "aux",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "住",
           "pinyin": "zhù",
           "definition": "to live, dwell",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "在",
           "pinyin": "zài",
           "definition": "in, at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "他們",
@@ -3975,7 +4083,8 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "中間",
@@ -3992,7 +4101,9 @@
               "m": "space"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "，",
@@ -4004,7 +4115,9 @@
           "pinyin": "zài",
           "definition": "in, at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "他們",
@@ -4021,7 +4134,8 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "中間",
@@ -4038,7 +4152,9 @@
               "m": "space"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "來往",
@@ -4055,27 +4171,27 @@
               "m": "go"
             }
           ],
-          "freq": "common",
-          "note": "Biblically implies divine presence and interaction."
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": ""
+          "freq": "rare",
+          "note": "Biblically implies divine presence and interaction.",
+          "tocflLevel": 6
         },
         {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to",
           "pos": "aux",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "作",
@@ -4099,14 +4215,17 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "神",
@@ -4116,7 +4235,8 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical",
-          "note": "The preceding space is a typesetting convention for reverence."
+          "note": "The preceding space is a typesetting convention for reverence.",
+          "tocflLevel": 4
         },
         {
           "chinese": "，",
@@ -4138,14 +4258,17 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to",
           "pos": "aux",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "作",
@@ -4159,14 +4282,18 @@
           "pinyin": "wǒ",
           "definition": "my",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "子民",
@@ -4183,7 +4310,8 @@
               "m": "people"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "。」",
@@ -4211,7 +4339,9 @@
               "m": "by, so"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -4237,12 +4367,8 @@
           "pinyin": "shuō",
           "definition": "to say, said",
           "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": ""
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "你們",
@@ -4259,21 +4385,26 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "must, should",
           "pos": "aux",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "他們",
@@ -4290,7 +4421,8 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "中間",
@@ -4307,7 +4439,9 @@
               "m": "space"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "出來",
@@ -4336,7 +4470,9 @@
           "pinyin": "hé",
           "definition": "with, and",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "他們",
@@ -4353,7 +4489,8 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "分開",
@@ -4370,7 +4507,8 @@
               "m": "open"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "，",
@@ -4409,7 +4547,8 @@
               "m": "feel"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "不潔淨",
@@ -4438,7 +4577,9 @@
           "definition": "particle (modifying)",
           "pos": "part",
           "freq": "common",
-          "note": "Connects adjective to an implied noun (thing)."
+          "note": "Connects adjective to an implied noun (thing).",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "東西",
@@ -4456,7 +4597,9 @@
             }
           ],
           "freq": "common",
-          "note": "Common word for 'thing'."
+          "note": "Common word for 'thing'.",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -4468,14 +4611,18 @@
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, thereupon",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "收納",
@@ -4509,7 +4656,8 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "。」",
@@ -4532,14 +4680,18 @@
           "pinyin": "wǒ",
           "definition": "I, me",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to",
           "pos": "aux",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "作",
@@ -4563,14 +4715,17 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "父親",
@@ -4587,7 +4742,9 @@
               "m": "parent"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
         },
         {
           "chinese": "，",
@@ -4609,14 +4766,17 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to",
           "pos": "aux",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "作",
@@ -4630,14 +4790,18 @@
           "pinyin": "wǒ",
           "definition": "my",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "兒女",
@@ -4654,26 +4818,26 @@
               "m": "daughter, female"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "這",
           "pinyin": "zhè",
           "definition": "this",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "to be, is",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "全能",
@@ -4698,7 +4862,9 @@
           "definition": "particle (emphasizing)",
           "pos": "part",
           "freq": "common",
-          "note": "Emphasizes the preceding phrase, often implying 'it is...who'."
+          "note": "Emphasizes the preceding phrase, often implying 'it is...who'.",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "主",
@@ -4714,7 +4880,8 @@
           "pinyin": "shuō",
           "definition": "to say, said",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
@@ -4722,7 +4889,9 @@
           "definition": "particle (emphasizing)",
           "pos": "part",
           "freq": "common",
-          "note": "Forms a '是...的' structure to emphasize the agent or manner."
+          "note": "Forms a '是...的' structure to emphasize the agent or manner.",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "。」",

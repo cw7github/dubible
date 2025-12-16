@@ -1,6 +1,5 @@
 import { memo } from 'react';
-import { motion } from 'framer-motion';
-import { useSettingsStore } from '../../stores';
+import { useSettingsStore, useAuthStore } from '../../stores';
 
 // Helper to split pinyin string into individual syllables
 function splitPinyinToSyllables(pinyin: string, targetCount: number): string[] {
@@ -78,6 +77,7 @@ interface HeaderProps {
   chapter: number;
   onMenuClick?: () => void;
   onSettingsClick?: () => void;
+  onVocabClick?: () => void;
   /** Hide header for focus mode */
   isHidden?: boolean;
 }
@@ -87,9 +87,11 @@ export const Header = memo(function Header({
   chapter,
   onMenuClick,
   onSettingsClick,
+  onVocabClick,
   isHidden = false,
 }: HeaderProps) {
   const { theme, setTheme } = useSettingsStore();
+  const { isAuthenticated, isSyncing } = useAuthStore();
 
   const cycleTheme = () => {
     const themes: ('light' | 'sepia' | 'dark')[] = ['light', 'sepia', 'dark'];
@@ -99,56 +101,46 @@ export const Header = memo(function Header({
   };
 
   return (
-    <motion.header
+    <header
       className="fixed top-0 left-0 right-0 z-30 safe-area-top"
       style={{
         backgroundColor: 'var(--bg-primary)',
         borderBottom: '1px solid var(--border-subtle)',
-      }}
-      initial={false}
-      animate={{
-        y: isHidden ? -60 : 0,
+        transform: isHidden ? 'translateY(-100%)' : 'translateY(0)',
         opacity: isHidden ? 0 : 1,
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 35,
+        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        willChange: 'transform, opacity',
       }}
     >
-      <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-3">
-        {/* Left side - Menu button */}
+      <div className="mx-auto flex max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl items-center justify-between px-4 py-3">
+        {/* Left side - Vocabulary/Words button */}
         <div className="flex items-center w-20">
-          <motion.button
-            className="touch-feedback rounded-lg p-2.5 transition-colors"
-            style={{ color: 'var(--text-tertiary)' }}
-            onClick={onMenuClick}
-            aria-label="Open menu"
-            whileTap={{ scale: 0.95 }}
+          <button
+            className="touch-feedback flex items-center gap-1.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-[var(--bg-secondary)]"
+            style={{
+              color: 'var(--text-secondary)',
+              backgroundColor: 'transparent',
+            }}
+            onClick={onVocabClick}
+            aria-label="Open vocabulary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.5}
-              className="h-5 w-5"
+              fill="currentColor"
+              className="h-4.5 w-4.5"
+              style={{ width: '18px', height: '18px' }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-              />
+              <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
             </svg>
-          </motion.button>
+            <span className="text-xs font-medium">Words</span>
+          </button>
         </div>
 
         {/* Center - Book and chapter (absolutely centered) */}
-        <motion.button
-          className="touch-feedback flex items-center gap-2.5 rounded-lg px-3 py-1.5 transition-colors"
+        <button
+          className="touch-feedback flex items-center gap-2.5 rounded-lg px-3 py-1.5 transition-colors hover:bg-[var(--bg-secondary)]"
           onClick={onMenuClick}
-          whileTap={{ scale: 0.98 }}
-          whileHover={{ backgroundColor: 'var(--bg-secondary)' }}
         >
           <div className="flex items-end gap-0.5">
             {(() => {
@@ -178,16 +170,38 @@ export const Header = memo(function Header({
           >
             {chapter}
           </span>
-        </motion.button>
+        </button>
 
         {/* Right side buttons - same width as left for centering */}
         <div className="flex items-center justify-end gap-0.5 w-20">
+          {/* Sync status indicator */}
+          {isAuthenticated && isSyncing && (
+            <div className="mr-1">
+              <div className="animate-spin">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  className="h-4 w-4"
+                  style={{ color: 'var(--text-accent)' }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+              </div>
+            </div>
+          )}
+
           {/* Settings button */}
-          <motion.button
+          <button
             className="touch-feedback rounded-lg p-2.5 transition-colors"
             style={{ color: 'var(--text-tertiary)' }}
             onClick={onSettingsClick}
-            whileTap={{ scale: 0.95 }}
             aria-label="Open settings"
           >
             <svg
@@ -209,15 +223,14 @@ export const Header = memo(function Header({
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-          </motion.button>
+          </button>
 
           {/* Theme toggle - elegant */}
-          <motion.button
+          <button
             className="touch-feedback rounded-lg p-2.5 transition-colors"
             style={{ color: 'var(--text-secondary)' }}
             onClick={cycleTheme}
             aria-label={`Current theme: ${theme}. Click to change.`}
-            whileTap={{ scale: 0.95 }}
           >
             {theme === 'light' && (
               <svg
@@ -265,9 +278,9 @@ export const Header = memo(function Header({
                 />
               </svg>
             )}
-          </motion.button>
+          </button>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 });

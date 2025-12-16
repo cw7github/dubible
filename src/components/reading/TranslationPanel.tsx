@@ -3,7 +3,7 @@
 
 import { memo, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { SegmentedWord, VerseReference } from '../../types';
+import type { SegmentedWord, VerseReference, CrossReference } from '../../types';
 import { getBookById } from '../../data/bible';
 import { getEnglishVerse, ENGLISH_TRANSLATION } from '../../data/english';
 import { WordDetailPanel } from './WordDetailPanel';
@@ -14,11 +14,13 @@ interface TranslationPanelProps {
   mode: PanelMode;
   // For verse mode
   verseRef: VerseReference | null;
+  crossReferences?: CrossReference[];
   // For word mode
   word: SegmentedWord | null;
   wordVerseRef: VerseReference | null;
   // Callbacks
   onClose: () => void;
+  onNavigateToCrossRef?: (bookId: string, chapter: number, verse: number) => void;
   // Scroll-based fade control (optional)
   scrollOpacity?: number;
 }
@@ -26,9 +28,11 @@ interface TranslationPanelProps {
 export const TranslationPanel = memo(function TranslationPanel({
   mode,
   verseRef,
+  crossReferences,
   word,
   wordVerseRef,
   onClose,
+  onNavigateToCrossRef,
   scrollOpacity = 1,
 }: TranslationPanelProps) {
   const [englishText, setEnglishText] = useState<string | null>(null);
@@ -70,23 +74,17 @@ export const TranslationPanel = memo(function TranslationPanel({
 
   const book = verseRef ? getBookById(verseRef.bookId) : null;
 
+  // Determine if panel should be visible (not just faded)
+  // Hide completely when scrollOpacity drops below a threshold
+  const isFullyVisible = scrollOpacity > 0.5;
+
   return (
     <AnimatePresence mode="wait">
-      {mode && (
+      {mode && isFullyVisible && (
         <>
-          {/* Tap-away layer */}
+          {/* Panel - no backdrop, scroll dismisses naturally */}
           <motion.div
-            className="fixed inset-0 z-35"
-            onClick={onClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{ backgroundColor: 'transparent' }}
-          />
-
-          {/* Panel */}
-          <motion.div
-            className="fixed left-0 right-0 z-40"
+            className="fixed left-0 right-0 z-31"
             style={{ top: '56px' }}
             initial={{ y: -20, opacity: 0 }}
             animate={{
@@ -100,10 +98,10 @@ export const TranslationPanel = memo(function TranslationPanel({
               stiffness: 400,
               opacity: { duration: 0.2, ease: 'easeOut' }
             }}
+            onClick={(e) => e.stopPropagation()}
           >
             <div
-              className="mx-auto max-w-2xl px-3"
-              onClick={(e) => e.stopPropagation()}
+              className="mx-auto max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl px-3"
             >
               <div
                 className="rounded-b-2xl shadow-panel overflow-hidden"
@@ -173,15 +171,73 @@ export const TranslationPanel = memo(function TranslationPanel({
                             </p>
                           ) : (
                             <p
-                              className="font-body text-[15px] leading-relaxed"
-                              style={{ color: 'var(--text-primary)', lineHeight: '1.75' }}
+                              className="font-body leading-relaxed"
+                              style={{
+                                color: 'var(--text-primary)',
+                                lineHeight: '1.75',
+                                fontSize: 'var(--english-base, 1rem)'
+                              }}
                             >
                               {englishText}
                             </p>
                           )}
 
-                          {/* BSB attribution */}
-                          <div className="flex items-center justify-between mt-3 pt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                          {/* Footer with attribution and cross-references */}
+                          <div className="mt-3 pt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                            {/* Cross-references */}
+                            {crossReferences && crossReferences.length > 0 && onNavigateToCrossRef && (
+                              <div className="mb-2">
+                                <p
+                                  className="font-body text-[9px] uppercase tracking-widest mb-1.5"
+                                  style={{ color: 'var(--text-tertiary)', opacity: 0.6 }}
+                                >
+                                  Cross-references
+                                </p>
+                                <div className="flex flex-wrap gap-1.5">
+                                  {crossReferences.map((ref, index) => {
+                                    const refBook = getBookById(ref.bookId);
+                                    return (
+                                      <motion.button
+                                        key={index}
+                                        onClick={() => onNavigateToCrossRef(ref.bookId, ref.chapter, ref.verseStart)}
+                                        className="touch-feedback inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-body"
+                                        style={{
+                                          backgroundColor: 'var(--bg-secondary)',
+                                          color: 'var(--accent)',
+                                          border: '1px solid var(--border-subtle)',
+                                        }}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 16 16"
+                                          fill="currentColor"
+                                          className="w-3 h-3 opacity-60"
+                                        >
+                                          <path
+                                            fillRule="evenodd"
+                                            d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                                            clipRule="evenodd"
+                                          />
+                                          <path
+                                            fillRule="evenodd"
+                                            d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                                            clipRule="evenodd"
+                                          />
+                                        </svg>
+                                        <span>
+                                          {refBook?.name.english || ref.bookAbbrev} {ref.chapter}:{ref.verseStart}
+                                          {ref.verseEnd && ref.verseEnd !== ref.verseStart ? `–${ref.verseEnd}` : ''}
+                                        </span>
+                                      </motion.button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* BSB attribution */}
                             <p
                               className="font-body text-[9px] uppercase tracking-widest"
                               style={{ color: 'var(--text-tertiary)', opacity: 0.5 }}

@@ -34,6 +34,9 @@
   --success-bg: #E8F0E6;
   --error: #C44536;
   --error-bg: #F8E8E6;
+  --hover-text: #9A5B2D;
+  --highlight-text: #C2410C;
+  --highlight-text-glow: rgba(194, 65, 12, 0.3);
 }
 
 /* Sepia Theme - Aged Manuscript */
@@ -64,37 +67,128 @@
   --success-bg: #E3E8DC;
   --error: #B33D2F;
   --error-bg: #EFE0DC;
+  --hover-text: #7A5524;
+  --highlight-text: #92400E;
+  --highlight-text-glow: rgba(146, 64, 14, 0.35);
 }
 
-/* Dark Theme - Midnight Gold */
+/* Dark Theme - Midnight Gold (Warm) */
 [data-theme="dark"] {
-  --bg-primary: #0A0A0A;
-  --bg-secondary: #141414;
-  --bg-tertiary: #1E1E1E;
-  --text-primary: #F0EBE0;
-  --text-secondary: #A09888;
-  --text-tertiary: #6B6358;
-  --text-pinyin: rgba(160, 152, 136, 0.7);
-  --accent: #D4A954;
-  --accent-hover: #E4BC6A;
+  /* Warm brown-blacks: subtle red/amber undertones for candlelit comfort */
+  --bg-primary: #0F0C0A;
+  --bg-secondary: #1A1512;
+  --bg-tertiary: #24201B;
+  /* Warmer text: ivory/parchment tones instead of cool grays */
+  --text-primary: #F5EFE3;
+  --text-secondary: #B3A895;
+  --text-tertiary: #7A7164;
+  --text-pinyin: rgba(179, 168, 149, 0.7);
+  /* Slightly warmer gold accent */
+  --accent: #D9AF5D;
+  --accent-hover: #E6C170;
   --accent-light: #3D3225;
-  --accent-subtle: rgba(212, 169, 84, 0.12);
-  --border: #252525;
-  --border-subtle: #1A1A1A;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-md: rgba(0, 0, 0, 0.4);
-  --shadow-elevated: rgba(0, 0, 0, 0.5);
-  --overlay: rgba(10, 10, 10, 0.92);
-  --overlay-dark: rgba(0, 0, 0, 0.6);
-  --highlight: rgba(212, 169, 84, 0.15);
-  --card-bg: #141414;
+  --accent-subtle: rgba(217, 175, 93, 0.12);
+  /* Warm borders */
+  --border: #2A2520;
+  --border-subtle: #1F1A16;
+  /* Warmer shadows with slight amber tint */
+  --shadow: rgba(15, 10, 5, 0.35);
+  --shadow-md: rgba(15, 10, 5, 0.45);
+  --shadow-elevated: rgba(15, 10, 5, 0.55);
+  --overlay: rgba(15, 12, 10, 0.92);
+  --overlay-dark: rgba(10, 8, 5, 0.65);
+  --highlight: rgba(217, 175, 93, 0.16);
+  --card-bg: #1A1512;
   --paper-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
-  --verse-glow: rgba(212, 169, 84, 0.05);
+  --verse-glow: rgba(217, 175, 93, 0.06);
   --success: #7A9A6D;
   --success-bg: #1C2219;
   --error: #D87566;
   --error-bg: #2A1C1A;
+  --hover-text: #D9AF5D;
+  --highlight-text: #FCD34D;
+  --highlight-text-glow: rgba(252, 211, 77, 0.4);
 }
+
+/* ============================================
+   TEXT SIZE SYSTEM
+   Dynamic sizing based on user preference
+   ============================================ */
+
+/* Small */
+[data-text-size="sm"] {
+  --chinese-base: 1rem;       /* 16px */
+  --pinyin-base: 0.48em;
+  --english-base: 0.875rem;   /* 14px */
+  --verse-number-base: 0.6em;
+}
+
+/* Medium (Default) */
+[data-text-size="md"] {
+  --chinese-base: 1.25rem;    /* 20px */
+  --pinyin-base: 0.48em;
+  --english-base: 1rem;       /* 16px */
+  --verse-number-base: 0.65em;
+}
+
+/* Large */
+[data-text-size="lg"] {
+  --chinese-base: 1.5rem;     /* 24px */
+  --pinyin-base: 0.48em;
+  --english-base: 1.125rem;   /* 18px */
+  --verse-number-base: 0.65em;
+}
+
+/* Extra Large */
+[data-text-size="xl"] {
+  --chinese-base: 1.75rem;    /* 28px */
+  --pinyin-base: 0.48em;
+  --english-base: 1.25rem;    /* 20px */
+  --verse-number-base: 0.65em;
+}
+
+/* 2X Large */
+[data-text-size="2xl"] {
+  --chinese-base: 2rem;       /* 32px */
+  --pinyin-base: 0.48em;
+  --english-base: 1.5rem;     /* 24px */
+  --verse-number-base: 0.65em;
+}
+
+/* ============================================
+   Z-INDEX SYSTEM
+   Organized by layers to prevent conflicts
+   ============================================ */
+
+/*
+  ARCHITECTURE NOTES:
+
+  Event Flow & Interaction Design:
+  - TranslationPanel overlay: pointer-events-none allows scroll events to pass through
+  - Modal backdrops: Click handling with e.target === e.currentTarget pattern
+  - No scroll locking on body to allow reading while panels are open
+  - Touch handlers (useLongPress) properly cancel on scroll to avoid conflicts
+
+  Focus Management:
+  - useFocusMode skips scroll listener when forceVisible=true (optimization)
+  - Focus mode forced visible when any modal/panel is open
+  - No competing focus traps between components
+
+  Layer 1: Base Content (z-0 to z-10)
+  - z-10: Sticky headers within content
+
+  Layer 2: UI Chrome (z-20 to z-35)
+  - z-20: Focus mode edge hints
+  - z-30: Bottom navigation, Translation panel overlay (pointer-events-none)
+  - z-31: Translation panel content
+
+  Layer 3: Modals & Overlays (z-45 to z-50)
+  - z-45: Modal backdrops (BookNavigator, Settings, etc.)
+  - z-46: Modal panels (BookNavigator, Settings)
+  - z-47: Full-screen overlays (VocabularyScreen)
+  - z-48: Nested full-screen overlays (FlashcardReview - above VocabularyScreen)
+  - z-50: Reserved for temporary loading overlays
+*/
 
 /* ============================================
    BASE STYLES
@@ -158,51 +252,79 @@ body {
 
 /* Chinese text sizing with optimized line height for density */
 .text-chinese {
-  font-size: var(--chinese-size, 1.25rem);
-  line-height: 2;
-  letter-spacing: 0.025em;
+  font-size: var(--chinese-size, var(--chinese-base, 1.25rem));
+  line-height: 1.85;
+  letter-spacing: 0;
 }
 
 .text-chinese-sm {
   --chinese-size: 1.125rem;
-  line-height: 1.95;
+  line-height: 1.8;
 }
 .text-chinese-md {
   --chinese-size: 1.25rem;
-  line-height: 2;
+  line-height: 1.85;
 }
 .text-chinese-lg {
   --chinese-size: 1.375rem;
-  line-height: 2.05;
+  line-height: 1.9;
 }
 .text-chinese-xl {
   --chinese-size: 1.5rem;
-  line-height: 2.1;
+  line-height: 1.95;
 }
 .text-chinese-2xl {
   --chinese-size: 1.75rem;
-  line-height: 2.15;
+  line-height: 2;
+}
+
+/* Responsive Chinese text sizing for larger screens */
+@media (min-width: 1024px) {
+  .text-chinese-sm { --chinese-size: 1.25rem; }   /* lg: 20px */
+  .text-chinese-md { --chinese-size: 1.5rem; }    /* lg: 24px */
+  .text-chinese-lg { --chinese-size: 1.625rem; }  /* lg: 26px */
+  .text-chinese-xl { --chinese-size: 1.875rem; }  /* lg: 30px */
+  .text-chinese-2xl { --chinese-size: 2.125rem; } /* lg: 34px */
+}
+
+@media (min-width: 1280px) {
+  .text-chinese-sm { --chinese-size: 1.375rem; }  /* xl: 22px */
+  .text-chinese-md { --chinese-size: 1.625rem; }  /* xl: 26px */
+  .text-chinese-lg { --chinese-size: 1.75rem; }   /* xl: 28px */
+  .text-chinese-xl { --chinese-size: 2rem; }      /* xl: 32px */
+  .text-chinese-2xl { --chinese-size: 2.25rem; }  /* xl: 36px */
 }
 
 /* ============================================
-   PINYIN TEXT - Flexbox for perfect centering
+   PINYIN TEXT - Refined Serif Typography
    ============================================ */
 
 .pinyin-text {
-  display: block;
-  font-family: 'Crimson Pro', system-ui, sans-serif;
-  font-size: 0.48em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Elegant serif stack optimized for pinyin diacriticals
+     - Crimson Pro: Primary choice, excellent Unicode support for tone marks
+     - Noto Serif: Comprehensive fallback with perfect diacritic rendering
+     - Georgia: Universal serif fallback with good accent handling
+     - Times New Roman: System fallback for Windows
+     All fonts tested for consistent sizing with ā ǎ à á ü ǚ ǜ ǹ etc. */
+  font-family: 'Crimson Pro', 'Noto Serif', 'Georgia', 'Times New Roman', serif;
+  font-size: var(--pinyin-base, 0.48em);
   font-weight: 400;
-  font-style: italic;
+  font-style: normal; /* CRITICAL: No italic - prevents sizing inconsistencies with diacritics */
   color: var(--text-pinyin);
-  letter-spacing: 0;
+  letter-spacing: 0.01em; /* Subtle spacing for serif elegance */
   line-height: 1.3;
-  text-align: center;
   white-space: nowrap;
   transition: opacity 0.25s ease, color 0.25s ease;
   margin-bottom: -0.1em;
   user-select: none;
   -webkit-user-select: none;
+  width: 100%;
+  /* Enhanced font rendering for crisp serifs at small sizes */
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  text-rendering: optimizeLegibility;
 }
 
 .chinese-char {
@@ -211,6 +333,29 @@ body {
   font-feature-settings: 'liga' 1, 'calt' 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Multi-character word alignment - pinyin above each character */
+.char-pinyin-pairs {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.char-pinyin-unit {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.char-pinyin-unit .pinyin-text {
+  width: auto;
+  min-width: 100%;
+}
+
+.char-pinyin-unit .chinese-char {
+  display: block;
 }
 
 /* ============================================
@@ -219,17 +364,19 @@ body {
 
 .verse {
   position: relative;
-  padding: 0.25rem 0;
-  transition: background-color 0.3s ease;
+  padding: 0.15rem 0;
+  transition: background-color 0.3s ease, opacity 0.4s ease, filter 0.4s ease;
+  /* Performance: Use CSS containment for verse blocks */
+  contain: layout style;
 }
 
-.verse:hover {
+.verse:hover:not(.verse-active) {
   background: linear-gradient(90deg, transparent, var(--verse-glow) 10%, var(--verse-glow) 90%, transparent);
 }
 
 .verse-number {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.65em;
+  font-size: var(--verse-number-base, 0.65em);
   font-weight: 600;
   color: var(--accent);
   vertical-align: super;
@@ -242,13 +389,104 @@ body {
   opacity: 1;
 }
 
+/* ============================================
+   PROSE VERSE STYLING (Paragraph Flow)
+   For narrative books like Genesis, Matthew, etc.
+   ============================================ */
+
+.prose-verses {
+  /* Inline flow container - verses wrap like paragraphs */
+  text-indent: 1.5em;
+  line-height: 1.85;
+  /* Eliminate whitespace between inline-flex elements */
+  font-size: 0;
+}
+
+.prose-verses .chinese-word,
+.prose-verses > span {
+  /* Reset font-size for children (verse-number-inline keeps its own smaller size) */
+  font-size: var(--chinese-size, var(--chinese-base, 1.25rem));
+}
+
+/* Paragraph break - creates visual separation between paragraphs in prose mode */
+.paragraph-break {
+  display: block;
+  width: 100%;
+  height: 0.75em;
+  content: '';
+}
+
+.verse-inline {
+  /* Inline display for prose flow */
+  position: relative;
+  transition: background-color 0.3s ease, opacity 0.4s ease, filter 0.4s ease;
+  border-radius: 2px;
+  /* Performance: Lighter containment for inline elements */
+  contain: style;
+}
+
+.verse-inline:hover:not(.verse-active) {
+  background-color: var(--verse-glow);
+}
+
+.verse-number-inline {
+  /* Superscript numerals - prominent reference marks for easy verse scanning
+     Uses elevated baseline positioning with refined typography for clarity */
+  font-family: 'Crimson Pro', 'Georgia', serif;
+  font-size: 0.75rem !important; /* ~12px - significantly more readable */
+  font-weight: 700;
+  font-style: normal;
+  color: var(--accent);
+  vertical-align: super;
+  margin: 0 0.25em; /* Increased margin for better breathing room */
+  padding: 0.1em 0.35em; /* Add padding for subtle background */
+  opacity: 0.95; /* Higher opacity for better visibility */
+  transition: opacity 0.25s ease, color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  letter-spacing: -0.01em;
+  font-feature-settings: 'tnum' 1, 'lnum' 1; /* Tabular & lining numerals for alignment */
+  background-color: var(--accent-subtle); /* Subtle background for distinction */
+  border-radius: 3px; /* Rounded corners for elegance */
+  /* Enhanced text shadow for better separation */
+  text-shadow:
+    0 0.5px 1px rgba(255, 255, 255, 0.4);
+}
+
+/* First verse number shouldn't have left margin (after indent) */
+.prose-verses > .verse-inline:first-child .verse-number-inline {
+  margin-left: 0;
+}
+
+.verse-inline:hover .verse-number-inline {
+  opacity: 1; /* Full opacity on hover for maximum clarity */
+  transform: scale(1.08); /* Slightly larger scale for interactive feedback */
+  color: var(--accent-hover); /* Subtle color shift on interaction */
+}
+
+/* Active verse in prose mode */
+.verse-inline.verse-active {
+  position: relative;
+}
+
+.verse-inline.verse-active::before {
+  content: '';
+  position: absolute;
+  top: -0.8em;  /* Extended to cover pinyin (~0.48em * 1.3 line-height = ~0.62em, plus buffer) */
+  left: -0.25rem;
+  right: -0.25rem;
+  bottom: -0.25rem;
+  background-color: var(--highlight);
+  border-radius: 3px;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .chapter-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.5rem;
   font-weight: 300;
   text-align: center;
   color: var(--text-secondary);
-  padding: 2.5rem 0;
+  padding: 1.5rem 0;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -260,7 +498,7 @@ body {
   width: 60px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
-  margin: 1.5rem auto 0;
+  margin: 0.75rem auto 0;
 }
 
 /* ============================================
@@ -270,43 +508,48 @@ body {
 .chinese-word {
   cursor: pointer;
   border-radius: 3px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 1px;
+  padding: 0;
   margin: 0;
   position: relative;
   vertical-align: bottom;
+  /* Performance: Use CSS containment to isolate rendering */
+  contain: layout style;
+  /* Eliminates 300ms tap delay on mobile */
+  touch-action: manipulation;
 }
 
-.chinese-word::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(-50%);
-  opacity: 0;
+.chinese-word .chinese-char,
+.chinese-word .pinyin-text {
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.chinese-word:hover {
+/* Verse pending state - shows when long press starts on any word in verse */
+.chinese-word.verse-pending {
   background-color: var(--accent-subtle);
 }
 
-/* Only show hover underline when there's no HSK indicator */
-.chinese-word:not([data-hsk]):hover::after {
-  width: 100%;
-  opacity: 0.6;
+/* Hover highlights only the specific word (not verse) - text color change */
+.chinese-word:hover:not(:active):not(.active):not(.verse-pending) .chinese-char,
+.chinese-word:hover:not(:active):not(.active):not(.verse-pending) .pinyin-text {
+  color: var(--hover-text);
+}
+
+.chinese-word:active .chinese-char,
+.chinese-word:active .pinyin-text,
+.chinese-word.active .chinese-char,
+.chinese-word.active .pinyin-text {
+  color: var(--hover-text);
 }
 
 .chinese-word:active,
 .chinese-word.active {
-  background-color: var(--highlight);
   transform: scale(1.02);
+  /* Only use will-change during active interaction */
+  will-change: transform;
 }
 
 .chinese-word.saved {
@@ -357,41 +600,108 @@ body {
 
 [data-audio-playing="true"] .verse:not(.verse-active) {
   opacity: 0.4;
-  filter: blur(0.5px);
-  transition: all 0.4s ease;
+  /* Removed blur filter for better scroll performance on mobile */
+  transition: opacity 0.4s ease;
 }
 
 [data-audio-playing="true"] .verse-active {
   opacity: 1;
   filter: none;
+  position: relative;
+}
+
+[data-audio-playing="true"] .verse-active::before {
+  content: '';
+  position: absolute;
+  top: -0.8em;  /* Extended to cover pinyin (~0.48em * 1.3 line-height = ~0.62em, plus buffer) */
+  left: 0;
+  right: 0;
+  bottom: -0.25rem;
   background: linear-gradient(90deg, transparent, var(--verse-glow) 5%, var(--verse-glow) 95%, transparent);
+  z-index: -1;
+  pointer-events: none;
 }
 
+/* Word Highlight - Elegant Inline Text Color Illumination (No Background) */
 .word-highlight {
-  background: linear-gradient(135deg, var(--highlight), var(--accent-subtle));
-  border-radius: 4px;
-  box-shadow:
-    0 0 0 3px var(--highlight),
-    0 2px 8px var(--shadow);
-  animation: wordGlow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: transparent !important;
+  background: none !important;
 }
 
-@keyframes wordGlow {
+.word-highlight .chinese-char {
+  color: var(--highlight-text);
+  font-weight: 500;
+  text-shadow:
+    0 0 16px var(--highlight-text-glow),
+    0 0 24px var(--highlight-text-glow),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  animation: textIlluminate 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              text-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              font-weight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.word-highlight .pinyin-text {
+  color: var(--highlight-text);
+  opacity: 0.9;
+  font-weight: 500;
+  text-shadow:
+    0 0 10px var(--highlight-text-glow),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  animation: pinyinIlluminate 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              text-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              font-weight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes textIlluminate {
   0% {
-    background: transparent;
-    box-shadow: none;
+    color: var(--text-primary);
+    text-shadow: none;
     transform: scale(1);
+    font-weight: 400;
   }
-  50% {
+  35% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 5px var(--accent-subtle);
+    text-shadow:
+      0 0 20px var(--highlight-text-glow),
+      0 0 32px var(--highlight-text-glow),
+      0 1px 3px rgba(0, 0, 0, 0.12);
   }
   100% {
-    background: linear-gradient(135deg, var(--highlight), var(--accent-subtle));
-    box-shadow:
-      0 0 0 3px var(--highlight),
-      0 2px 8px var(--shadow);
+    color: var(--highlight-text);
+    text-shadow:
+      0 0 16px var(--highlight-text-glow),
+      0 0 24px var(--highlight-text-glow),
+      0 1px 2px rgba(0, 0, 0, 0.1);
     transform: scale(1);
+    font-weight: 500;
+  }
+}
+
+@keyframes pinyinIlluminate {
+  0% {
+    color: var(--text-pinyin);
+    opacity: 0.65;
+    text-shadow: none;
+    transform: translateY(0);
+    font-weight: 400;
+  }
+  35% {
+    transform: translateY(-1px);
+    text-shadow:
+      0 0 14px var(--highlight-text-glow),
+      0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    color: var(--highlight-text);
+    opacity: 0.9;
+    text-shadow:
+      0 0 10px var(--highlight-text-glow),
+      0 1px 2px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    font-weight: 500;
   }
 }
 
@@ -519,6 +829,7 @@ body {
 .touch-feedback {
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease, opacity 0.15s ease;
+  touch-action: manipulation; /* Eliminates 300ms tap delay */
 }
 
 .touch-feedback:active {
@@ -532,10 +843,15 @@ body {
   color: var(--text-primary);
 }
 
-/* Glass effect for overlays */
+/* Glass effect for overlays - Optimized for mobile performance */
 .glass {
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  /* Replaced expensive backdrop-filter with semi-transparent background */
+  background-color: var(--overlay);
+  /* Only use backdrop-filter on desktop where GPU is stronger */
+  @media (min-width: 1024px) {
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+  }
 }
 
 /* Shadow utilities */

@@ -1,0 +1,7853 @@
+{
+  "book": "Matthew",
+  "bookId": "matthew",
+  "chapter": 14,
+  "verses": [
+    {
+      "number": 1,
+      "text": "施洗約翰被殺那時，分封王希律聽見耶穌的名聲，",
+      "words": [
+        {
+          "chinese": "施洗約翰",
+          "pinyin": "Shīxǐ Yuēhàn",
+          "definition": "John the Baptist",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "被殺",
+          "pinyin": "bèishā",
+          "definition": "was killed",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "被",
+              "m": "passive marker"
+            },
+            {
+              "c": "殺",
+              "m": "kill"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "那時",
+          "pinyin": "nàshí",
+          "definition": "at that time",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "時",
+              "m": "time"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "分封王",
+          "pinyin": "fēnfēngwáng",
+          "definition": "tetrarch, client king",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "分",
+              "m": "divide"
+            },
+            {
+              "c": "封",
+              "m": "enfeoff"
+            },
+            {
+              "c": "王",
+              "m": "king"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "希律",
+          "pinyin": "Xīlǜ",
+          "definition": "Herod",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "聽見",
+          "pinyin": "tīngjiàn",
+          "definition": "heard",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "聽",
+              "m": "listen"
+            },
+            {
+              "c": "見",
+              "m": "perceive"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "名聲",
+          "pinyin": "míngshēng",
+          "definition": "fame, reputation",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "名",
+              "m": "name"
+            },
+            {
+              "c": "聲",
+              "m": "sound"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        }
+      ],
+      "crossReferences": [
+        {
+          "bookId": "mark",
+          "bookAbbrev": "可",
+          "chapter": 6,
+          "verseStart": 14,
+          "verseEnd": 29,
+          "displayText": "可6:14~29"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "text": "就對臣僕說：「這人是施洗的約翰，他從死人中復活，所以他身上有行神蹟的能力。」",
+      "words": [
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, so",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "對",
+          "pinyin": "duì",
+          "definition": "to, toward",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "臣僕",
+          "pinyin": "chénpú",
+          "definition": "servants, ministers",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "臣",
+              "m": "minister"
+            },
+            {
+              "c": "僕",
+              "m": "servant"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "said, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "這人",
+          "pinyin": "zhèrén",
+          "definition": "this man",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "這",
+              "m": "this"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "施洗的約翰",
+          "pinyin": "Shīxǐ de Yuēhàn",
+          "definition": "John the Baptist",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "note": "Lit. 'John who baptizes'"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "死人",
+          "pinyin": "sǐrén",
+          "definition": "dead people",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "死",
+              "m": "dead"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "中",
+          "pinyin": "zhōng",
+          "definition": "among, in",
+          "pos": "prep",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "復活",
+          "pinyin": "fùhuó",
+          "definition": "resurrect, revive",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "復",
+              "m": "return, recover"
+            },
+            {
+              "c": "活",
+              "m": "live"
+            }
+          ],
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "所以",
+          "pinyin": "suǒyǐ",
+          "definition": "therefore, so",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "所",
+              "m": "that which"
+            },
+            {
+              "c": "以",
+              "m": "in order to"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "身上",
+          "pinyin": "shēnshang",
+          "definition": "on his body, on him",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "身",
+              "m": "body"
+            },
+            {
+              "c": "上",
+              "m": "on, up"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "有",
+          "pinyin": "yǒu",
+          "definition": "has, there is",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "行神蹟",
+          "pinyin": "xíng shénjì",
+          "definition": "perform miracles",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "行",
+              "m": "perform"
+            },
+            {
+              "c": "神",
+              "m": "divine"
+            },
+            {
+              "c": "蹟",
+              "m": "trace, miracle"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Verb-object compound, 神蹟 (shénjì) is 'miracle'"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive/modifying particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "能力",
+          "pinyin": "nénglì",
+          "definition": "power, ability",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "能",
+              "m": "can, ability"
+            },
+            {
+              "c": "力",
+              "m": "power"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "text": "原來希律為了他弟弟腓力的妻子希羅底的緣故，拘捕了約翰，把他捆綁，關在監裡，",
+      "words": [
+        {
+          "chinese": "原來",
+          "pinyin": "yuánlái",
+          "definition": "it turned out that, originally",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "原",
+              "m": "original"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "希律",
+          "pinyin": "Xīlǜ",
+          "definition": "Herod",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "為了",
+          "pinyin": "wèile",
+          "definition": "for, for the sake of",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "為",
+              "m": "for"
+            },
+            {
+              "c": "了",
+              "m": "particle"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 3
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "his",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "弟弟",
+          "pinyin": "dìdi",
+          "definition": "younger brother",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "弟",
+              "m": "younger brother"
+            },
+            {
+              "c": "弟",
+              "m": "suffix"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "腓力",
+          "pinyin": "Féilì",
+          "definition": "Philip",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "妻子",
+          "pinyin": "qīzi",
+          "definition": "wife",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "妻",
+              "m": "wife"
+            },
+            {
+              "c": "子",
+              "m": "suffix"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "希羅底",
+          "pinyin": "Xīluódǐ",
+          "definition": "Herodias",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "緣故",
+          "pinyin": "yuángù",
+          "definition": "reason, sake",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "緣",
+              "m": "reason"
+            },
+            {
+              "c": "故",
+              "m": "reason"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "拘捕了",
+          "pinyin": "jūbǔ le",
+          "definition": "arrested",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "拘",
+              "m": "detain"
+            },
+            {
+              "c": "捕",
+              "m": "arrest"
+            },
+            {
+              "c": "了",
+              "m": "perfective aspect"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "約翰",
+          "pinyin": "Yuēhàn",
+          "definition": "John",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "preposition (marks object)",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "捆綁",
+          "pinyin": "kǔnbǎng",
+          "definition": "bound, tied up",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "捆",
+              "m": "tie"
+            },
+            {
+              "c": "綁",
+              "m": "tie"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 7
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "關在",
+          "pinyin": "guānzài",
+          "definition": "imprisoned in, locked in",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "關",
+              "m": "close, lock"
+            },
+            {
+              "c": "在",
+              "m": "at, in"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "監裡",
+          "pinyin": "jiānlǐ",
+          "definition": "in prison, jail",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "監",
+              "m": "prison"
+            },
+            {
+              "c": "裡",
+              "m": "inside"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "text": "因為約翰多次告訴他：「你佔有她是不合理的。」",
+      "words": [
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "reason"
+            },
+            {
+              "c": "為",
+              "m": "for"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "約翰",
+          "pinyin": "Yuēhàn",
+          "definition": "John",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "多次",
+          "pinyin": "duōcì",
+          "definition": "many times, repeatedly",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "多",
+              "m": "many"
+            },
+            {
+              "c": "次",
+              "m": "time (mw)"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "告訴",
+          "pinyin": "gàosu",
+          "definition": "told",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "告",
+              "m": "tell"
+            },
+            {
+              "c": "訴",
+              "m": "tell"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "你",
+          "pinyin": "nǐ",
+          "definition": "you",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "佔有",
+          "pinyin": "zhànyǒu",
+          "definition": "possess, occupy",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "佔",
+              "m": "occupy"
+            },
+            {
+              "c": "有",
+              "m": "have"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "她",
+          "pinyin": "tā",
+          "definition": "her",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "不合理",
+          "pinyin": "bùhélǐ",
+          "definition": "unreasonable, unlawful",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "不",
+              "m": "not"
+            },
+            {
+              "c": "合",
+              "m": "fit, accord"
+            },
+            {
+              "c": "理",
+              "m": "reason"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle (nominalizes phrase)",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "text": "他想殺約翰，但又害怕群眾，因為他們都認為約翰是個先知。",
+      "words": [
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "想",
+          "pinyin": "xiǎng",
+          "definition": "wanted to, intended to",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "殺",
+          "pinyin": "shā",
+          "definition": "kill",
+          "pos": "v",
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "約翰",
+          "pinyin": "Yuēhàn",
+          "definition": "John",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "但",
+          "pinyin": "dàn",
+          "definition": "but",
+          "pos": "conj",
+          "freq": "common",
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "又",
+          "pinyin": "yòu",
+          "definition": "also, on the other hand",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "害怕",
+          "pinyin": "hàipà",
+          "definition": "feared, was afraid of",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "害",
+              "m": "harm"
+            },
+            {
+              "c": "怕",
+              "m": "fear"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowds, multitudes",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group"
+            },
+            {
+              "c": "眾",
+              "m": "many, crowd"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "reason"
+            },
+            {
+              "c": "為",
+              "m": "for"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, entirely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "認為",
+          "pinyin": "rènwéi",
+          "definition": "considered, believed",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "認",
+              "m": "recognize"
+            },
+            {
+              "c": "為",
+              "m": "consider, be"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "約翰",
+          "pinyin": "Yuēhàn",
+          "definition": "John",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, to be",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "個",
+          "pinyin": "gè",
+          "definition": "a (measure word)",
+          "pos": "mw",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "先知",
+          "pinyin": "xiānzhī",
+          "definition": "prophet",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "先",
+              "m": "first, before"
+            },
+            {
+              "c": "知",
+              "m": "know"
+            }
+          ],
+          "freq": "biblical"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "text": "到了希律生日的那天，希羅底的女兒在眾人面前跳舞，希律非常高興，",
+      "words": [
+        {
+          "chinese": "到",
+          "pinyin": "dào",
+          "definition": "arrive, reach",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completion particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "希律",
+          "pinyin": "Xīlǜ",
+          "definition": "Herod",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "生日",
+          "pinyin": "shēngrì",
+          "definition": "birthday",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "生",
+              "m": "birth"
+            },
+            {
+              "c": "日",
+              "m": "day"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "那天",
+          "pinyin": "nà tiān",
+          "definition": "that day",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "天",
+              "m": "day"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "希羅底",
+          "pinyin": "Xīluódǐ",
+          "definition": "Herodias",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "女兒",
+          "pinyin": "nǚ'ér",
+          "definition": "daughter",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "女",
+              "m": "female"
+            },
+            {
+              "c": "兒",
+              "m": "child"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "眾人",
+          "pinyin": "zhòngrén",
+          "definition": "crowd, people",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "眾",
+              "m": "numerous"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "面前",
+          "pinyin": "miànqián",
+          "definition": "in front of, before",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "面",
+              "m": "face"
+            },
+            {
+              "c": "前",
+              "m": "front"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "跳舞",
+          "pinyin": "tiàowǔ",
+          "definition": "dance",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "跳",
+              "m": "jump"
+            },
+            {
+              "c": "舞",
+              "m": "dance"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "希律",
+          "pinyin": "Xīlǜ",
+          "definition": "Herod",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "非常",
+          "pinyin": "fēicháng",
+          "definition": "extremely, very",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "非",
+              "m": "not"
+            },
+            {
+              "c": "常",
+              "m": "usual"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "高興",
+          "pinyin": "gāoxìng",
+          "definition": "happy, pleased",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "高",
+              "m": "high"
+            },
+            {
+              "c": "興",
+              "m": "interest"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "text": "就起誓答應她，無論求甚麼都給她。",
+      "words": [
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "起誓",
+          "pinyin": "qǐshì",
+          "definition": "take an oath, swear",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "起",
+              "m": "rise, start"
+            },
+            {
+              "c": "誓",
+              "m": "oath, vow"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "答應",
+          "pinyin": "dāyìng",
+          "definition": "promise, agree",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "答",
+              "m": "answer"
+            },
+            {
+              "c": "應",
+              "m": "respond"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "她",
+          "pinyin": "tā",
+          "definition": "she, her",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "無論",
+          "pinyin": "wúlùn",
+          "definition": "no matter what/how",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "無",
+              "m": "without"
+            },
+            {
+              "c": "論",
+              "m": "discuss"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "求",
+          "pinyin": "qiú",
+          "definition": "ask for, seek",
+          "pos": "v",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "甚麼",
+          "pinyin": "shénme",
+          "definition": "what, anything",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "甚",
+              "m": "what (archaic)"
+            },
+            {
+              "c": "麼",
+              "m": "suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, entirely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "give, grant",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "她",
+          "pinyin": "tā",
+          "definition": "she, her",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "text": "她在母親的慫恿之下，說：「請把施洗的約翰的頭放在盤子上給我。」",
+      "words": [
+        {
+          "chinese": "她",
+          "pinyin": "tā",
+          "definition": "she",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "under (the influence of)",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "母親",
+          "pinyin": "mǔqīn",
+          "definition": "mother",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "母",
+              "m": "mother"
+            },
+            {
+              "c": "親",
+              "m": "parent, close"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "慫恿",
+          "pinyin": "sǒngyǒng",
+          "definition": "instigation, incite",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "慫",
+              "m": "instigate"
+            },
+            {
+              "c": "恿",
+              "m": "incite"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "之下",
+          "pinyin": "zhīxià",
+          "definition": "under, beneath",
+          "pos": "part",
+          "breakdown": [
+            {
+              "c": "之",
+              "m": "literary particle"
+            },
+            {
+              "c": "下",
+              "m": "under"
+            }
+          ],
+          "freq": "common",
+          "note": "Often follows a noun to mean 'under the circumstances of' or 'under the influence of'."
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "say, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "請",
+          "pinyin": "qǐng",
+          "definition": "please",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "transitive particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Indicates the object of the verb is placed before the verb.",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "施洗的約翰",
+          "pinyin": "Shīxǐde Yuēhàn",
+          "definition": "John the Baptist",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "note": "Lit. 'John who baptizes'"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "頭",
+          "pinyin": "tóu",
+          "definition": "head",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "放",
+          "pinyin": "fàng",
+          "definition": "put, place",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "on, at",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "盤子",
+          "pinyin": "pánzi",
+          "definition": "plate, dish",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "盤",
+              "m": "plate"
+            },
+            {
+              "c": "子",
+              "m": "suffix"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, upon",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "give, for",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "我",
+          "pinyin": "wǒ",
+          "definition": "me",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "text": "王就憂愁，但因為誓言和在座的賓客，就下令給她。",
+      "words": [
+        {
+          "chinese": "王",
+          "pinyin": "wáng",
+          "definition": "king",
+          "pos": "n",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "憂愁",
+          "pinyin": "yōuchóu",
+          "definition": "sad, worried",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "憂",
+              "m": "worry"
+            },
+            {
+              "c": "愁",
+              "m": "sorrow"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "但",
+          "pinyin": "dàn",
+          "definition": "but, however",
+          "pos": "conj",
+          "freq": "common",
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "cause"
+            },
+            {
+              "c": "為",
+              "m": "for"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "誓言",
+          "pinyin": "shìyán",
+          "definition": "oath, vow",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "誓",
+              "m": "oath"
+            },
+            {
+              "c": "言",
+              "m": "word"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在座",
+          "pinyin": "zàizuò",
+          "definition": "in attendance, present",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "在",
+              "m": "at, in"
+            },
+            {
+              "c": "座",
+              "m": "seat"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "descriptive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "賓客",
+          "pinyin": "bīnkè",
+          "definition": "guests",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "賓",
+              "m": "guest"
+            },
+            {
+              "c": "客",
+              "m": "visitor"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "下令",
+          "pinyin": "xiàlìng",
+          "definition": "issue an order, command",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "下",
+              "m": "issue, send down"
+            },
+            {
+              "c": "令",
+              "m": "order"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "to, for",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "她",
+          "pinyin": "tā",
+          "definition": "her",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "text": "他派人去，在監裡斬了約翰的頭，",
+      "words": [
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "派人",
+          "pinyin": "pàirén",
+          "definition": "send someone",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "派",
+              "m": "dispatch, send"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "監",
+          "pinyin": "jiān",
+          "definition": "prison, jail",
+          "pos": "n",
+          "freq": "common"
+        },
+        {
+          "chinese": "裡",
+          "pinyin": "lǐ",
+          "definition": "inside",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "斬",
+          "pinyin": "zhǎn",
+          "definition": "chop, behead",
+          "pos": "v",
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completion particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "約翰",
+          "pinyin": "Yuēhàn",
+          "definition": "John",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "頭",
+          "pinyin": "tóu",
+          "definition": "head",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "text": "把頭放在盤子上，拿來給那女孩子，她又帶給母親。",
+      "words": [
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "object marker particle",
+          "pos": "prep",
+          "freq": "common",
+          "note": "Introduces object before verb",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "頭",
+          "pinyin": "tóu",
+          "definition": "head",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "放",
+          "pinyin": "fàng",
+          "definition": "put, place",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, on, in",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "盤子",
+          "pinyin": "pánzi",
+          "definition": "plate, dish",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "盤",
+              "m": "plate"
+            },
+            {
+              "c": "子",
+              "m": "noun suffix"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "note": "Directional complement",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "拿來",
+          "pinyin": "nálái",
+          "definition": "bring (it here)",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "拿",
+              "m": "take, hold"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "give to, for",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "那",
+          "pinyin": "nà",
+          "definition": "that",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "女孩子",
+          "pinyin": "nǚháizi",
+          "definition": "girl",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "女",
+              "m": "female"
+            },
+            {
+              "c": "孩子",
+              "m": "child"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "她",
+          "pinyin": "tā",
+          "definition": "she",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "又",
+          "pinyin": "yòu",
+          "definition": "again, also",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "帶給",
+          "pinyin": "dàigěi",
+          "definition": "bring to",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "帶",
+              "m": "take, bring"
+            },
+            {
+              "c": "給",
+              "m": "give, to"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "母親",
+          "pinyin": "mǔqīn",
+          "definition": "mother",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "母",
+              "m": "mother"
+            },
+            {
+              "c": "親",
+              "m": "parent, intimate"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "text": "約翰的門徒前來，領了屍體，把它埋葬，然後去告訴耶穌。",
+      "words": [
+        {
+          "chinese": "約翰",
+          "pinyin": "Yuēhàn",
+          "definition": "John",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciple, follower",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, school"
+            },
+            {
+              "c": "徒",
+              "m": "apprentice, follower"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "前來",
+          "pinyin": "qiánlái",
+          "definition": "come forward, come",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "前",
+              "m": "front, before"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "領了",
+          "pinyin": "lǐngle",
+          "definition": "took, received",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "領",
+              "m": "lead, receive"
+            },
+            {
+              "c": "了",
+              "m": "aspect particle"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "屍體",
+          "pinyin": "shītǐ",
+          "definition": "corpse, body",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "屍",
+              "m": "corpse"
+            },
+            {
+              "c": "體",
+              "m": "body"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "object marker particle",
+          "pos": "prep",
+          "freq": "common",
+          "note": "Introduces object before verb",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "它",
+          "pinyin": "tā",
+          "definition": "it",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "埋葬",
+          "pinyin": "máizàng",
+          "definition": "bury, inter",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "埋",
+              "m": "bury"
+            },
+            {
+              "c": "葬",
+              "m": "bury, funeral"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "然後",
+          "pinyin": "ránhòu",
+          "definition": "then, afterwards",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "然",
+              "m": "so, thus"
+            },
+            {
+              "c": "後",
+              "m": "after"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "告訴",
+          "pinyin": "gàosù",
+          "definition": "tell, inform",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "告",
+              "m": "tell, announce"
+            },
+            {
+              "c": "訴",
+              "m": "tell, narrate"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "text": "給五千人吃飽的神蹟耶穌聽見了，就離開那裡，獨自坐船到曠野去。群眾聽見了，就從各城步行來跟隨他。",
+      "words": [
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "for, to (give)",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "五千",
+          "pinyin": "wǔqiān",
+          "definition": "five thousand",
+          "pos": "num",
+          "breakdown": [
+            {
+              "c": "五",
+              "m": "five"
+            },
+            {
+              "c": "千",
+              "m": "thousand"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "people, persons",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "吃飽",
+          "pinyin": "chībǎo",
+          "definition": "eat until full",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "吃",
+              "m": "eat"
+            },
+            {
+              "c": "飽",
+              "m": "full"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "神蹟",
+          "pinyin": "shénjì",
+          "definition": "miracle, sign",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "神",
+              "m": "god, divine"
+            },
+            {
+              "c": "蹟",
+              "m": "trace, sign"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Refers to divine signs or wonders"
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "聽見了",
+          "pinyin": "tīngjiànle",
+          "definition": "heard (it)",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "聽",
+              "m": "listen"
+            },
+            {
+              "c": "見",
+              "m": "see, perceive"
+            },
+            {
+              "c": "了",
+              "m": "aspect particle"
+            }
+          ],
+          "freq": "common",
+          "note": "Resultative verb compound"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "離開",
+          "pinyin": "líkāi",
+          "definition": "leave, depart",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "離",
+              "m": "leave"
+            },
+            {
+              "c": "開",
+              "m": "open, start"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "那裡",
+          "pinyin": "nàli",
+          "definition": "there",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "裡",
+              "m": "inside, place"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "獨自",
+          "pinyin": "dúzì",
+          "definition": "alone, by oneself",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "獨",
+              "m": "alone"
+            },
+            {
+              "c": "自",
+              "m": "self"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "坐船",
+          "pinyin": "zuòchuán",
+          "definition": "take a boat, by boat",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "坐",
+              "m": "sit, take"
+            },
+            {
+              "c": "船",
+              "m": "boat"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "到",
+          "pinyin": "dào",
+          "definition": "to, arrive at",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "曠野",
+          "pinyin": "kuàngyě",
+          "definition": "wilderness, desert",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "曠",
+              "m": "vast, empty"
+            },
+            {
+              "c": "野",
+              "m": "field, wild"
+            }
+          ],
+          "freq": "biblical",
+          "tocflLevel": 7
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowds, multitude",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group, crowd"
+            },
+            {
+              "c": "眾",
+              "m": "many, multitude"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "聽見了",
+          "pinyin": "tīngjiànle",
+          "definition": "heard (it)",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "聽",
+              "m": "listen"
+            },
+            {
+              "c": "見",
+              "m": "see, perceive"
+            },
+            {
+              "c": "了",
+              "m": "aspect particle"
+            }
+          ],
+          "freq": "common",
+          "note": "Resultative verb compound"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "各",
+          "pinyin": "gè",
+          "definition": "each, every",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "城",
+          "pinyin": "chéng",
+          "definition": "city",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "步行",
+          "pinyin": "bùxíng",
+          "definition": "walk, go on foot",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "步",
+              "m": "step, walk"
+            },
+            {
+              "c": "行",
+              "m": "walk, go"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "來",
+          "pinyin": "lái",
+          "definition": "come",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "跟隨",
+          "pinyin": "gēnsuí",
+          "definition": "follow",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "跟",
+              "m": "follow"
+            },
+            {
+              "c": "隨",
+              "m": "follow"
+            }
+          ],
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        }
+      ],
+      "crossReferences": [
+        {
+          "bookId": "mark",
+          "bookAbbrev": "可",
+          "chapter": 6,
+          "verseStart": 32,
+          "verseEnd": 44,
+          "displayText": "可6:32~44"
+        },
+        {
+          "bookId": "luke",
+          "bookAbbrev": "路",
+          "chapter": 9,
+          "verseStart": 10,
+          "verseEnd": 17,
+          "displayText": "路9:10~17"
+        },
+        {
+          "bookId": "john",
+          "bookAbbrev": "約",
+          "chapter": 6,
+          "verseStart": 1,
+          "verseEnd": 13,
+          "displayText": "約6:1~13"
+        },
+        {
+          "bookId": "matthew",
+          "bookAbbrev": "太",
+          "chapter": 15,
+          "verseStart": 32,
+          "verseEnd": 38,
+          "displayText": "太15:32~38"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "text": "耶穌上了岸，看見一大群人，就憐憫他們，醫好了他們的病人。",
+      "words": [
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "ascend, go up",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "aspect particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "岸",
+          "pinyin": "àn",
+          "definition": "shore, bank",
+          "pos": "n",
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "看見",
+          "pinyin": "kànjiàn",
+          "definition": "saw, perceive",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "看",
+              "m": "look"
+            },
+            {
+              "c": "見",
+              "m": "see, perceive"
+            }
+          ],
+          "freq": "common",
+          "note": "Resultative verb compound",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "一",
+          "pinyin": "yī",
+          "definition": "a, an",
+          "pos": "num",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "大群",
+          "pinyin": "dàqún",
+          "definition": "a large crowd",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "大",
+              "m": "big, large"
+            },
+            {
+              "c": "群",
+              "m": "group, crowd"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "憐憫",
+          "pinyin": "liánmǐn",
+          "definition": "have compassion, pity",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "憐",
+              "m": "pity"
+            },
+            {
+              "c": "憫",
+              "m": "pity"
+            }
+          ],
+          "freq": "biblical",
+          "note": "A formal term for compassion",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "them",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "醫好",
+          "pinyin": "yīhǎo",
+          "definition": "heal, cure",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "醫",
+              "m": "cure, doctor"
+            },
+            {
+              "c": "好",
+              "m": "good, complete"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Resultative verb compound 'heal to completion'"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "aspect particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "their",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "病人",
+          "pinyin": "bìngrén",
+          "definition": "sick people, patient",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "病",
+              "m": "illness, sick"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 2
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "text": "黃昏的時候，門徒前來對他說：「這是曠野的地方，時間也不早了，請叫群眾散開，好讓他們往村裡去，買自己的食物吧。」",
+      "words": [
+        {
+          "chinese": "黃昏",
+          "pinyin": "huánghūn",
+          "definition": "dusk, twilight",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "黃",
+              "m": "yellow"
+            },
+            {
+              "c": "昏",
+              "m": "dusk, dim"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "時候",
+          "pinyin": "shíhou",
+          "definition": "time, moment",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "時",
+              "m": "time, hour"
+            },
+            {
+              "c": "候",
+              "m": "wait, time"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciples",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, school"
+            },
+            {
+              "c": "徒",
+              "m": "apprentice, follower"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "前來",
+          "pinyin": "qiánlái",
+          "definition": "came forward, came",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "前",
+              "m": "front, before"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "對",
+          "pinyin": "duì",
+          "definition": "to, towards",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "say, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "這",
+          "pinyin": "zhè",
+          "definition": "this",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "to be, is",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "曠野",
+          "pinyin": "kuàngyě",
+          "definition": "wilderness, desert",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "曠",
+              "m": "vast, empty"
+            },
+            {
+              "c": "野",
+              "m": "field, wild"
+            }
+          ],
+          "freq": "biblical",
+          "tocflLevel": 7
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "地方",
+          "pinyin": "dìfang",
+          "definition": "place",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "地",
+              "m": "ground, earth"
+            },
+            {
+              "c": "方",
+              "m": "square, direction"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "時間",
+          "pinyin": "shíjiān",
+          "definition": "time",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "時",
+              "m": "time, hour"
+            },
+            {
+              "c": "間",
+              "m": "space, between"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "也",
+          "pinyin": "yě",
+          "definition": "also, too",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "不",
+          "pinyin": "bù",
+          "definition": "not",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "早",
+          "pinyin": "zǎo",
+          "definition": "early",
+          "pos": "adj",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "modal particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Indicates change of state or new situation",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "請",
+          "pinyin": "qǐng",
+          "definition": "please, request",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "叫",
+          "pinyin": "jiào",
+          "definition": "tell, ask, make",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowds, multitude",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group, crowd"
+            },
+            {
+              "c": "眾",
+              "m": "many, multitude"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "散開",
+          "pinyin": "sànkāi",
+          "definition": "disperse, scatter",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "散",
+              "m": "scatter"
+            },
+            {
+              "c": "開",
+              "m": "open, apart"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "好讓",
+          "pinyin": "hǎoràng",
+          "definition": "so that, in order that",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "好",
+              "m": "good, so"
+            },
+            {
+              "c": "讓",
+              "m": "let, allow"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "往",
+          "pinyin": "wǎng",
+          "definition": "towards, to",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "村裡",
+          "pinyin": "cūnli",
+          "definition": "in the villages",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "村",
+              "m": "village"
+            },
+            {
+              "c": "裡",
+              "m": "inside, in"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "買",
+          "pinyin": "mǎi",
+          "definition": "buy",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "自己",
+          "pinyin": "zìjǐ",
+          "definition": "self, own",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "自",
+              "m": "self"
+            },
+            {
+              "c": "己",
+              "m": "self"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "食物",
+          "pinyin": "shíwù",
+          "definition": "food",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "食",
+              "m": "eat, food"
+            },
+            {
+              "c": "物",
+              "m": "thing, matter"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "吧",
+          "pinyin": "ba",
+          "definition": "modal particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Indicates suggestion or mild command",
+          "hskLevel": 2
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "text": "耶穌回答：「他們用不著離開，你們給他們吃吧！」",
+      "words": [
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "回答",
+          "pinyin": "huídá",
+          "definition": "to answer, reply",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "回",
+              "m": "return, reply"
+            },
+            {
+              "c": "答",
+              "m": "answer"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "用不著",
+          "pinyin": "yòngbùzháo",
+          "definition": "no need to, unnecessary",
+          "pos": "v",
+          "freq": "common",
+          "note": "A common phrase meaning 'there's no need to'"
+        },
+        {
+          "chinese": "離開",
+          "pinyin": "líkāi",
+          "definition": "to leave, depart",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "離",
+              "m": "leave, depart"
+            },
+            {
+              "c": "開",
+              "m": "open, start"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "你們",
+          "pinyin": "nǐmen",
+          "definition": "you (plural)",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "to give, provide",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "吃",
+          "pinyin": "chī",
+          "definition": "to eat",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "吧",
+          "pinyin": "ba",
+          "definition": "modal particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Indicates suggestion or mild command",
+          "hskLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "text": "但門徒說：「我們這裡除了五個餅和兩條魚，甚麼也沒有。」",
+      "words": [
+        {
+          "chinese": "但",
+          "pinyin": "dàn",
+          "definition": "but, however",
+          "pos": "conj",
+          "freq": "common",
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciple, follower",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, sect"
+            },
+            {
+              "c": "徒",
+              "m": "disciple, follower"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "to say, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "我們",
+          "pinyin": "wǒmen",
+          "definition": "we, us",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "這裡",
+          "pinyin": "zhèlǐ",
+          "definition": "here",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "這",
+              "m": "this"
+            },
+            {
+              "c": "裡",
+              "m": "inside, place"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "除了",
+          "pinyin": "chúle",
+          "definition": "except for, besides",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "除",
+              "m": "remove, get rid of"
+            },
+            {
+              "c": "了",
+              "m": "completed action particle"
+            }
+          ],
+          "freq": "common",
+          "note": "Often used in the structure '除了...也/都/甚麼也沒有'",
+          "hskLevel": 3,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "五",
+          "pinyin": "wǔ",
+          "definition": "five",
+          "pos": "num",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "個",
+          "pinyin": "gè",
+          "definition": "general measure word",
+          "pos": "mw",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "餅",
+          "pinyin": "bǐng",
+          "definition": "bread, cake",
+          "pos": "n",
+          "freq": "common"
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and, with",
+          "pos": "conj",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "兩",
+          "pinyin": "liǎng",
+          "definition": "two (of a quantity)",
+          "pos": "num",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "條",
+          "pinyin": "tiáo",
+          "definition": "measure word (for long, thin objects)",
+          "pos": "mw",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "魚",
+          "pinyin": "yú",
+          "definition": "fish",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "甚麼",
+          "pinyin": "shénme",
+          "definition": "what, anything",
+          "pos": "pron",
+          "freq": "common",
+          "note": "In negative sentences, means 'anything'",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "也",
+          "pinyin": "yě",
+          "definition": "also, even",
+          "pos": "adv",
+          "freq": "common",
+          "note": "Used with negatives to emphasize 'not even a single thing'",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "沒有",
+          "pinyin": "méiyǒu",
+          "definition": "not have, there isn't",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "text": "他說：「拿過來給我。」",
+      "words": [
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "to say, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "拿過來",
+          "pinyin": "nágui.lai",
+          "definition": "to bring over",
+          "pos": "v",
+          "freq": "common",
+          "note": "Verb + directional complement"
+        },
+        {
+          "chinese": "給",
+          "pinyin": "gěi",
+          "definition": "to give to, for",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "我",
+          "pinyin": "wǒ",
+          "definition": "I, me",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "text": "於是吩咐群眾坐在草地上，拿起那五個餅兩條魚，望著天，祝謝了；然後把餅擘開，遞給門徒，門徒又分給群眾。",
+      "words": [
+        {
+          "chinese": "於是",
+          "pinyin": "yúshì",
+          "definition": "thus, thereupon",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "於",
+              "m": "in, on, at"
+            },
+            {
+              "c": "是",
+              "m": "is, be"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "吩咐",
+          "pinyin": "fēnfù",
+          "definition": "to instruct, command",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "吩",
+              "m": "instruct, order"
+            },
+            {
+              "c": "咐",
+              "m": "instruct, command"
+            }
+          ],
+          "freq": "rare",
+          "note": "More formal than simply 'tell'",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowd, multitude",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group, crowd"
+            },
+            {
+              "c": "眾",
+              "m": "multitude, many"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "坐",
+          "pinyin": "zuò",
+          "definition": "to sit",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "草地",
+          "pinyin": "cǎodì",
+          "definition": "grassland, lawn",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "草",
+              "m": "grass"
+            },
+            {
+              "c": "地",
+              "m": "ground, land"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "note": "Postposition indicating position",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "拿起",
+          "pinyin": "náqǐ",
+          "definition": "to pick up",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "那",
+          "pinyin": "nà",
+          "definition": "that, those",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "五",
+          "pinyin": "wǔ",
+          "definition": "five",
+          "pos": "num",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "個",
+          "pinyin": "gè",
+          "definition": "general measure word",
+          "pos": "mw",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "餅",
+          "pinyin": "bǐng",
+          "definition": "bread, cake",
+          "pos": "n",
+          "freq": "common"
+        },
+        {
+          "chinese": "兩",
+          "pinyin": "liǎng",
+          "definition": "two (of a quantity)",
+          "pos": "num",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "條",
+          "pinyin": "tiáo",
+          "definition": "measure word (for long, thin objects)",
+          "pos": "mw",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "魚",
+          "pinyin": "yú",
+          "definition": "fish",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "望著",
+          "pinyin": "wàngzhe",
+          "definition": "to look at, gaze at",
+          "pos": "v",
+          "freq": "common",
+          "note": "Verb + aspect particle -zhe indicating continuous action"
+        },
+        {
+          "chinese": "天",
+          "pinyin": "tiān",
+          "definition": "heaven, sky",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "祝謝",
+          "pinyin": "zhùxiè",
+          "definition": "to give thanks, bless",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "祝",
+              "m": "pray, wish"
+            },
+            {
+              "c": "謝",
+              "m": "thank"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Commonly used in Christian contexts for giving thanks (blessing food)"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completed action particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "然後",
+          "pinyin": "ránhòu",
+          "definition": "then, afterwards",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "然",
+              "m": "so, thus"
+            },
+            {
+              "c": "後",
+              "m": "after"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "introduces direct object",
+          "pos": "prep",
+          "freq": "common",
+          "note": "Governs the object of a verb, placing it before the verb",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "餅",
+          "pinyin": "bǐng",
+          "definition": "bread",
+          "pos": "n",
+          "freq": "common"
+        },
+        {
+          "chinese": "擘開",
+          "pinyin": "bòkāi",
+          "definition": "to break open, break apart",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "擘",
+              "m": "break (with hands)"
+            },
+            {
+              "c": "開",
+              "m": "open, apart"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Specifically refers to breaking bread, as done by Jesus"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "遞給",
+          "pinyin": "dìgěi",
+          "definition": "to hand over to",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciple, follower",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, sect"
+            },
+            {
+              "c": "徒",
+              "m": "disciple, follower"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciple, follower",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate, sect"
+            },
+            {
+              "c": "徒",
+              "m": "disciple, follower"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "又",
+          "pinyin": "yòu",
+          "definition": "again, furthermore",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "分給",
+          "pinyin": "fēngěi",
+          "definition": "to distribute to, share with",
+          "pos": "v",
+          "freq": "common"
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowd, multitude",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group, crowd"
+            },
+            {
+              "c": "眾",
+              "m": "multitude, many"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "text": "大家都吃了，並且吃飽了，他們把剩下的零碎拾起來，裝滿了十二個籃子。",
+      "words": [
+        {
+          "chinese": "大家",
+          "pinyin": "dàjiā",
+          "definition": "everyone, all",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "大",
+              "m": "big, great"
+            },
+            {
+              "c": "家",
+              "m": "family, home"
+            }
+          ],
+          "freq": "common",
+          "note": "Literally 'big family', but means 'everyone'",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, entirely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "吃",
+          "pinyin": "chī",
+          "definition": "to eat",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completed action particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "並且",
+          "pinyin": "bìngqiě",
+          "definition": "and, moreover",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "並",
+              "m": "together, concurrently"
+            },
+            {
+              "c": "且",
+              "m": "moreover, furthermore"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "吃飽",
+          "pinyin": "chībǎo",
+          "definition": "to eat one's fill, be full",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "吃",
+              "m": "eat"
+            },
+            {
+              "c": "飽",
+              "m": "full (from eating)"
+            }
+          ],
+          "freq": "common",
+          "note": "Verb + resultative complement"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completed action particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "introduces direct object",
+          "pos": "prep",
+          "freq": "common",
+          "note": "Governs the object of a verb, placing it before the verb",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "剩下",
+          "pinyin": "shèngxià",
+          "definition": "to be left over, remain",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "剩",
+              "m": "remain, leftover"
+            },
+            {
+              "c": "下",
+              "m": "down, below"
+            }
+          ],
+          "freq": "uncommon",
+          "note": "Verb + resultative complement",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "subordinating particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Turns a verb phrase into an adjective or noun phrase",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "零碎",
+          "pinyin": "língsuì",
+          "definition": "fragments, scraps",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "零",
+              "m": "fragment, zero"
+            },
+            {
+              "c": "碎",
+              "m": "broken, fragmentary"
+            }
+          ],
+          "freq": "rare",
+          "note": "Refers to small pieces or remnants of food.",
+          "tocflLevel": 7
+        },
+        {
+          "chinese": "拾起來",
+          "pinyin": "shíqi.lai",
+          "definition": "to pick up",
+          "pos": "v",
+          "freq": "common",
+          "note": "Verb + directional complement"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "裝滿",
+          "pinyin": "zhuāngmǎn",
+          "definition": "to fill full",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "裝",
+              "m": "fill, load"
+            },
+            {
+              "c": "滿",
+              "m": "full"
+            }
+          ],
+          "freq": "common",
+          "note": "Verb + resultative complement"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completed action particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "十二",
+          "pinyin": "shí'èr",
+          "definition": "twelve",
+          "pos": "num",
+          "freq": "common"
+        },
+        {
+          "chinese": "個",
+          "pinyin": "gè",
+          "definition": "general measure word",
+          "pos": "mw",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "籃子",
+          "pinyin": "lánzi",
+          "definition": "basket",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "籃",
+              "m": "basket"
+            },
+            {
+              "c": "子",
+              "m": "noun suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 3
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "text": "吃的人，除了婦女和孩子，約有五千。",
+      "words": [
+        {
+          "chinese": "吃",
+          "pinyin": "chī",
+          "definition": "eat",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "relative clause marker",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "person, people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "除了",
+          "pinyin": "chúle",
+          "definition": "besides, except for",
+          "pos": "prep",
+          "breakdown": [
+            {
+              "c": "除",
+              "m": "remove"
+            },
+            {
+              "c": "了",
+              "m": "completed action marker"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "婦女",
+          "pinyin": "fùnǚ",
+          "definition": "women",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "婦",
+              "m": "woman"
+            },
+            {
+              "c": "女",
+              "m": "female"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "和",
+          "pinyin": "hé",
+          "definition": "and",
+          "pos": "conj",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "孩子",
+          "pinyin": "háizi",
+          "definition": "children",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "孩",
+              "m": "child"
+            },
+            {
+              "c": "子",
+              "m": "child suffix"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "約有",
+          "pinyin": "yuēyǒu",
+          "definition": "approximately be/have",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "約",
+              "m": "approximately"
+            },
+            {
+              "c": "有",
+              "m": "have"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "五千",
+          "pinyin": "wǔqiān",
+          "definition": "five thousand",
+          "pos": "num",
+          "breakdown": [
+            {
+              "c": "五",
+              "m": "five"
+            },
+            {
+              "c": "千",
+              "m": "thousand"
+            }
+          ],
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "text": "耶穌在海面上行走耶穌立刻催門徒上船，叫他們先到對岸去，他卻留下來叫群眾散開。",
+      "words": [
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "海面",
+          "pinyin": "hǎimiàn",
+          "definition": "sea surface",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "海",
+              "m": "sea"
+            },
+            {
+              "c": "面",
+              "m": "surface"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "note": "Used as a postpositional particle indicating location.",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "行走",
+          "pinyin": "xíngzǒu",
+          "definition": "walk, travel",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "行",
+              "m": "walk"
+            },
+            {
+              "c": "走",
+              "m": "walk"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "立刻",
+          "pinyin": "lìkè",
+          "definition": "immediately, at once",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "立",
+              "m": "stand; immediately"
+            },
+            {
+              "c": "刻",
+              "m": "moment"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "催",
+          "pinyin": "cuī",
+          "definition": "urge, hasten",
+          "pos": "v",
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciples",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate; school"
+            },
+            {
+              "c": "徒",
+              "m": "disciple"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "上船",
+          "pinyin": "shàngchuán",
+          "definition": "board a boat",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "上",
+              "m": "go up; board"
+            },
+            {
+              "c": "船",
+              "m": "boat"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "叫",
+          "pinyin": "jiào",
+          "definition": "tell, make, ask",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he/him"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "先",
+          "pinyin": "xiān",
+          "definition": "first, earlier",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "到",
+          "pinyin": "dào",
+          "definition": "arrive, reach",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "對岸",
+          "pinyin": "duì'àn",
+          "definition": "opposite shore",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "對",
+              "m": "opposite"
+            },
+            {
+              "c": "岸",
+              "m": "bank, shore"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "卻",
+          "pinyin": "què",
+          "definition": "but, however, yet",
+          "pos": "adv",
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "留下來",
+          "pinyin": "liúxiàlái",
+          "definition": "stay behind",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "留",
+              "m": "stay"
+            },
+            {
+              "c": "下",
+              "m": "down"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "叫",
+          "pinyin": "jiào",
+          "definition": "tell, make, ask",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowd, multitudes",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group"
+            },
+            {
+              "c": "眾",
+              "m": "crowd, many"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "散開",
+          "pinyin": "sànkāi",
+          "definition": "disperse, scatter",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "散",
+              "m": "disperse"
+            },
+            {
+              "c": "開",
+              "m": "open"
+            }
+          ],
+          "freq": "common"
+        }
+      ],
+      "crossReferences": [
+        {
+          "bookId": "mark",
+          "bookAbbrev": "可",
+          "chapter": 6,
+          "verseStart": 45,
+          "verseEnd": 52,
+          "displayText": "可6:45~52"
+        },
+        {
+          "bookId": "john",
+          "bookAbbrev": "約",
+          "chapter": 6,
+          "verseStart": 15,
+          "verseEnd": 21,
+          "displayText": "約6:15~21"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "text": "他解散了群眾，就獨自上山去禱告。到了晚上，他還是獨自一人在那裡。",
+      "words": [
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "解散",
+          "pinyin": "jiěsàn",
+          "definition": "dismiss, disband",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "解",
+              "m": "untie, dissolve"
+            },
+            {
+              "c": "散",
+              "m": "disperse"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completed action particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "群眾",
+          "pinyin": "qúnzhòng",
+          "definition": "crowd, multitudes",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "群",
+              "m": "group"
+            },
+            {
+              "c": "眾",
+              "m": "crowd, many"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "獨自",
+          "pinyin": "dúzì",
+          "definition": "by oneself, alone",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "獨",
+              "m": "alone"
+            },
+            {
+              "c": "自",
+              "m": "self"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "上山",
+          "pinyin": "shàngshān",
+          "definition": "go up a mountain",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "上",
+              "m": "go up"
+            },
+            {
+              "c": "山",
+              "m": "mountain"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go (to do something)",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "禱告",
+          "pinyin": "dǎogào",
+          "definition": "pray",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "禱",
+              "m": "pray"
+            },
+            {
+              "c": "告",
+              "m": "tell, report"
+            }
+          ],
+          "freq": "biblical",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "到",
+          "pinyin": "dào",
+          "definition": "arrive, until",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "completed action particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "晚上",
+          "pinyin": "wǎnshang",
+          "definition": "evening, night",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "晚",
+              "m": "late, evening"
+            },
+            {
+              "c": "上",
+              "m": "upper; suffix"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "還是",
+          "pinyin": "háishì",
+          "definition": "still, nevertheless",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "還",
+              "m": "still"
+            },
+            {
+              "c": "是",
+              "m": "be"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "獨自",
+          "pinyin": "dúzì",
+          "definition": "by oneself, alone",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "獨",
+              "m": "alone"
+            },
+            {
+              "c": "自",
+              "m": "self"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "一人",
+          "pinyin": "yīrén",
+          "definition": "one person, alone",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "一",
+              "m": "one"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "common",
+          "note": "Often used after 獨自 to emphasize being alone."
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, in",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "那裡",
+          "pinyin": "nàlǐ",
+          "definition": "there",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "裡",
+              "m": "inside, here (suffix)"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "text": "那時門徒的船已經離岸數公里，因為逆風，被波浪沖擊。",
+      "words": [
+        {
+          "chinese": "那時",
+          "pinyin": "nàshí",
+          "definition": "at that time",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "時",
+              "m": "time"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "門徒",
+          "pinyin": "méntú",
+          "definition": "disciples",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "gate; school"
+            },
+            {
+              "c": "徒",
+              "m": "disciple"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "船",
+          "pinyin": "chuán",
+          "definition": "boat, ship",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "已經",
+          "pinyin": "yǐjīng",
+          "definition": "already",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "已",
+              "m": "already"
+            },
+            {
+              "c": "經",
+              "m": "pass through"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "離岸",
+          "pinyin": "lí'àn",
+          "definition": "leave shore",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "離",
+              "m": "leave"
+            },
+            {
+              "c": "岸",
+              "m": "shore"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "數",
+          "pinyin": "shù",
+          "definition": "several, a few",
+          "pos": "num",
+          "freq": "uncommon",
+          "hskLevel": 6,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "公里",
+          "pinyin": "gōnglǐ",
+          "definition": "kilometer",
+          "pos": "mw",
+          "breakdown": [
+            {
+              "c": "公",
+              "m": "public; metric"
+            },
+            {
+              "c": "里",
+              "m": "unit of distance"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "因為",
+          "pinyin": "yīnwèi",
+          "definition": "because",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "因",
+              "m": "cause"
+            },
+            {
+              "c": "為",
+              "m": "for, because"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "逆風",
+          "pinyin": "nìfēng",
+          "definition": "headwind, adverse wind",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "逆",
+              "m": "adverse, against"
+            },
+            {
+              "c": "風",
+              "m": "wind"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "被",
+          "pinyin": "bèi",
+          "definition": "by (passive marker)",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "波浪",
+          "pinyin": "bōlàng",
+          "definition": "waves",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "波",
+              "m": "wave"
+            },
+            {
+              "c": "浪",
+              "m": "wave"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "沖擊",
+          "pinyin": "chōngjī",
+          "definition": "strike, buffet",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "沖",
+              "m": "rush, wash"
+            },
+            {
+              "c": "擊",
+              "m": "strike, hit"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "text": "天快亮的時候（「天快亮的時候」原文作「夜裡四更天」），耶穌在海面上向他們走過去。",
+      "words": [
+        {
+          "chinese": "天快亮",
+          "pinyin": "tiānkuàiliàng",
+          "definition": "dawn is breaking",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "天",
+              "m": "sky, day"
+            },
+            {
+              "c": "快",
+              "m": "fast, almost"
+            },
+            {
+              "c": "亮",
+              "m": "bright, dawn"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "subordinating particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "時候",
+          "pinyin": "shíhou",
+          "definition": "time, moment",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "時",
+              "m": "time"
+            },
+            {
+              "c": "候",
+              "m": "wait; time"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "at, on",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "海面",
+          "pinyin": "hǎimiàn",
+          "definition": "sea surface",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "海",
+              "m": "sea"
+            },
+            {
+              "c": "面",
+              "m": "surface"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "note": "Used as a postpositional particle indicating location.",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "向",
+          "pinyin": "xiàng",
+          "definition": "towards",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he/him"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "走過去",
+          "pinyin": "zǒuguòqù",
+          "definition": "walk over to",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "走",
+              "m": "walk"
+            },
+            {
+              "c": "過",
+              "m": "pass; over"
+            },
+            {
+              "c": "去",
+              "m": "go"
+            }
+          ],
+          "freq": "common"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "text": "門徒見他在海面上行走，就很驚慌，說：「有鬼啊！」並且恐懼得大叫起來。",
+      "words": [
+        {
+          "chinese": "門徒",
+          "pinyin": "mén tú",
+          "definition": "disciples",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "門",
+              "m": "door, gate"
+            },
+            {
+              "c": "徒",
+              "m": "disciple, apprentice"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Lit. 'door follower' or 'gate student'"
+        },
+        {
+          "chinese": "見",
+          "pinyin": "jiàn",
+          "definition": "saw, perceive",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "on, at",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "海面",
+          "pinyin": "hǎi miàn",
+          "definition": "sea surface",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "海",
+              "m": "sea"
+            },
+            {
+              "c": "面",
+              "m": "surface"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "行走",
+          "pinyin": "xíng zǒu",
+          "definition": "walk, move",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "行",
+              "m": "walk, go"
+            },
+            {
+              "c": "走",
+              "m": "walk, leave"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, at once",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "很",
+          "pinyin": "hěn",
+          "definition": "very",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "驚慌",
+          "pinyin": "jīng huāng",
+          "definition": "alarmed, frightened",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "驚",
+              "m": "be startled"
+            },
+            {
+              "c": "慌",
+              "m": "be flustered"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "said, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "有",
+          "pinyin": "yǒu",
+          "definition": "there is",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "鬼",
+          "pinyin": "guǐ",
+          "definition": "ghost, demon",
+          "pos": "n",
+          "freq": "biblical",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "啊",
+          "pinyin": "a",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "並且",
+          "pinyin": "bìng qiě",
+          "definition": "and, moreover",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "並",
+              "m": "and, together"
+            },
+            {
+              "c": "且",
+              "m": "moreover, also"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "恐懼",
+          "pinyin": "kǒng jù",
+          "definition": "fear, dread",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "恐",
+              "m": "fear"
+            },
+            {
+              "c": "懼",
+              "m": "fear"
+            }
+          ],
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "得",
+          "pinyin": "de",
+          "definition": "particle (degree/result)",
+          "pos": "part",
+          "freq": "common",
+          "note": "Indicates the degree or result of an action",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "大叫",
+          "pinyin": "dà jiào",
+          "definition": "shout loudly",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "大",
+              "m": "big, loud"
+            },
+            {
+              "c": "叫",
+              "m": "call, shout"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "起來",
+          "pinyin": "qǐ lái",
+          "definition": "start (an action); up",
+          "pos": "part",
+          "breakdown": [
+            {
+              "c": "起",
+              "m": "rise"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common",
+          "note": "Verb complement indicating initiation of action or direction",
+          "hskLevel": 4,
+          "tocflLevel": 1
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "text": "耶穌立刻對他們說：「放心吧！是我，不要怕。」",
+      "words": [
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "立刻",
+          "pinyin": "lì kè",
+          "definition": "immediately, at once",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "立",
+              "m": "stand"
+            },
+            {
+              "c": "刻",
+              "m": "moment"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "對",
+          "pinyin": "duì",
+          "definition": "to, toward",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tā men",
+          "definition": "them",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he, him"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "said, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "放心",
+          "pinyin": "fàng xīn",
+          "definition": "relax, don't worry",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "放",
+              "m": "put, release"
+            },
+            {
+              "c": "心",
+              "m": "heart, mind"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "吧",
+          "pinyin": "ba",
+          "definition": "particle (suggestion/exhortation)",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "am, is, are",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "我",
+          "pinyin": "wǒ",
+          "definition": "I, me",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "不要",
+          "pinyin": "bù yào",
+          "definition": "don't, must not",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "不",
+              "m": "not"
+            },
+            {
+              "c": "要",
+              "m": "want, should"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "怕",
+          "pinyin": "pà",
+          "definition": "be afraid",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "text": "彼得對他說：「主啊，如果是你，讓我在水面上到你那裡去。」",
+      "words": [
+        {
+          "chinese": "彼得",
+          "pinyin": "Bǐdé",
+          "definition": "Peter",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "對",
+          "pinyin": "duì",
+          "definition": "to, toward",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "said, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "主",
+          "pinyin": "Zhǔ",
+          "definition": "Lord, master",
+          "pos": "n",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "note": "A title for God or Jesus"
+        },
+        {
+          "chinese": "啊",
+          "pinyin": "a",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "如果",
+          "pinyin": "rú guǒ",
+          "definition": "if, in case",
+          "pos": "conj",
+          "breakdown": [
+            {
+              "c": "如",
+              "m": "like, as if"
+            },
+            {
+              "c": "果",
+              "m": "fruit, result"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "is, am, are",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "你",
+          "pinyin": "nǐ",
+          "definition": "you",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "讓",
+          "pinyin": "ràng",
+          "definition": "let, allow",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "我",
+          "pinyin": "wǒ",
+          "definition": "I, me",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "on, at",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "水面",
+          "pinyin": "shuǐ miàn",
+          "definition": "water surface",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "水",
+              "m": "water"
+            },
+            {
+              "c": "面",
+              "m": "surface"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "到",
+          "pinyin": "dào",
+          "definition": "to, arrive",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "你",
+          "pinyin": "nǐ",
+          "definition": "you",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "那裡",
+          "pinyin": "nà lǐ",
+          "definition": "there, your place",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "裡",
+              "m": "inside, place"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "text": "他說：「來吧！」彼得就從船上下來，行在水面上，走向耶穌那裡去。",
+      "words": [
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "said, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "來",
+          "pinyin": "lái",
+          "definition": "come",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "吧",
+          "pinyin": "ba",
+          "definition": "particle (suggestion/exhortation)",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "彼得",
+          "pinyin": "Bǐdé",
+          "definition": "Peter",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, at once",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "從",
+          "pinyin": "cóng",
+          "definition": "from",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "船上",
+          "pinyin": "chuán shàng",
+          "definition": "on the boat",
+          "pos": "loc",
+          "breakdown": [
+            {
+              "c": "船",
+              "m": "boat"
+            },
+            {
+              "c": "上",
+              "m": "on, above"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "下來",
+          "pinyin": "xià lái",
+          "definition": "come down",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "下",
+              "m": "down"
+            },
+            {
+              "c": "來",
+              "m": "come"
+            }
+          ],
+          "freq": "common",
+          "note": "Verb complement indicating downward movement towards speaker/reference"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "行",
+          "pinyin": "xíng",
+          "definition": "walk, go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "在",
+          "pinyin": "zài",
+          "definition": "on, at",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "水面",
+          "pinyin": "shuǐ miàn",
+          "definition": "water surface",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "水",
+              "m": "water"
+            },
+            {
+              "c": "面",
+              "m": "surface"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "on, above",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "走向",
+          "pinyin": "zǒu xiàng",
+          "definition": "walk towards",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "走",
+              "m": "walk"
+            },
+            {
+              "c": "向",
+              "m": "towards"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "那裡",
+          "pinyin": "nà lǐ",
+          "definition": "there, his place",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "裡",
+              "m": "inside, place"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "去",
+          "pinyin": "qù",
+          "definition": "go",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "text": "但他一見風浪就害怕，快要沉下去的時候，就呼叫：「主啊！救我！」",
+      "words": [
+        {
+          "chinese": "但",
+          "pinyin": "dàn",
+          "definition": "but, however",
+          "pos": "conj",
+          "freq": "common",
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "he, him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "一",
+          "pinyin": "yī",
+          "definition": "as soon as (particle)",
+          "pos": "adv",
+          "freq": "common",
+          "note": "Often used with 就 (jiù) to mean 'as soon as...then'",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "見",
+          "pinyin": "jiàn",
+          "definition": "saw, perceive",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "風浪",
+          "pinyin": "fēng làng",
+          "definition": "wind and waves, storm",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "風",
+              "m": "wind"
+            },
+            {
+              "c": "浪",
+              "m": "wave"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, at once",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "害怕",
+          "pinyin": "hài pà",
+          "definition": "be afraid, fear",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "害",
+              "m": "harm, cause"
+            },
+            {
+              "c": "怕",
+              "m": "fear"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "快要",
+          "pinyin": "kuài yào",
+          "definition": "about to, soon",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "快",
+              "m": "fast, quick"
+            },
+            {
+              "c": "要",
+              "m": "will, want"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "沉下去",
+          "pinyin": "chén xià qù",
+          "definition": "sink down",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "沉",
+              "m": "sink"
+            },
+            {
+              "c": "下",
+              "m": "down"
+            },
+            {
+              "c": "去",
+              "m": "go"
+            }
+          ],
+          "freq": "common",
+          "note": "Verb complement indicating downward movement away from speaker"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "particle (temporal clause)",
+          "pos": "part",
+          "freq": "common",
+          "note": "Used with 時候 to form a 'when' clause",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "時候",
+          "pinyin": "shí hou",
+          "definition": "time, moment",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "時",
+              "m": "time"
+            },
+            {
+              "c": "候",
+              "m": "wait, time"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, at once",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "呼叫",
+          "pinyin": "hū jiào",
+          "definition": "call out, shout",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "呼",
+              "m": "call, exhale"
+            },
+            {
+              "c": "叫",
+              "m": "call, shout"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "主",
+          "pinyin": "Zhǔ",
+          "definition": "Lord, master",
+          "pos": "n",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "note": "A title for God or Jesus"
+        },
+        {
+          "chinese": "啊",
+          "pinyin": "a",
+          "definition": "exclamatory particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "救",
+          "pinyin": "jiù",
+          "definition": "save, rescue",
+          "pos": "v",
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "我",
+          "pinyin": "wǒ",
+          "definition": "I, me",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "！",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "text": "耶穌馬上伸手拉住他，對他說：「小信的人哪，為甚麼疑惑？」",
+      "words": [
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "馬上",
+          "pinyin": "mǎshàng",
+          "definition": "immediately, at once",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "馬",
+              "m": "horse, quick"
+            },
+            {
+              "c": "上",
+              "m": "upon, on"
+            }
+          ],
+          "freq": "common",
+          "note": "Lit. 'on a horse' (referring to speed)",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "伸手",
+          "pinyin": "shēnshǒu",
+          "definition": "stretch out hand",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "伸",
+              "m": "stretch, extend"
+            },
+            {
+              "c": "手",
+              "m": "hand"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "拉住",
+          "pinyin": "lāzhù",
+          "definition": "pull, grasp firmly",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "拉",
+              "m": "pull"
+            },
+            {
+              "c": "住",
+              "m": "hold, stop"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "對",
+          "pinyin": "duì",
+          "definition": "to, toward",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 4,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "say, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "小信",
+          "pinyin": "xiǎoxìn",
+          "definition": "of little faith",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "小",
+              "m": "small, little"
+            },
+            {
+              "c": "信",
+              "m": "faith, trust"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "person, people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "哪",
+          "pinyin": "na",
+          "definition": "interrogative particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "為甚麼",
+          "pinyin": "wèishénme",
+          "definition": "why",
+          "pos": "adv",
+          "breakdown": [
+            {
+              "c": "為",
+              "m": "for"
+            },
+            {
+              "c": "甚麼",
+              "m": "what"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "疑惑",
+          "pinyin": "yíhuò",
+          "definition": "doubt, be confused",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "疑",
+              "m": "doubt"
+            },
+            {
+              "c": "惑",
+              "m": "confuse"
+            }
+          ],
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "？",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "text": "他們上了船，風就平靜了。",
+      "words": [
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "上",
+          "pinyin": "shàng",
+          "definition": "board, get on",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "past tense/completion particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "船",
+          "pinyin": "chuán",
+          "definition": "boat, ship",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "風",
+          "pinyin": "fēng",
+          "definition": "wind",
+          "pos": "n",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, thereupon",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "平靜",
+          "pinyin": "píngjìng",
+          "definition": "calm, tranquil",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "平",
+              "m": "flat, level"
+            },
+            {
+              "c": "靜",
+              "m": "quiet, still"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "change of state particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "text": "船上的人都拜他，說：「你真是 神的兒子。」",
+      "words": [
+        {
+          "chinese": "船上",
+          "pinyin": "chuánshàng",
+          "definition": "on the boat",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "船",
+              "m": "boat"
+            },
+            {
+              "c": "上",
+              "m": "on, above"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, entirely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "拜",
+          "pinyin": "bài",
+          "definition": "worship, bow down",
+          "pos": "v",
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "him",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "說",
+          "pinyin": "shuō",
+          "definition": "say, speak",
+          "pos": "v",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "「",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "你",
+          "pinyin": "nǐ",
+          "definition": "you",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "真",
+          "pinyin": "zhēn",
+          "definition": "truly, really",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "be, is",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "神",
+          "pinyin": "Shén",
+          "definition": "God",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "兒子",
+          "pinyin": "érzi",
+          "definition": "son",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "兒",
+              "m": "child, son"
+            },
+            {
+              "c": "子",
+              "m": "child, son (suffix)"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "」",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "text": "治好革尼撒勒的病人他們過到對岸，來到革尼撒勒的地區。",
+      "words": [
+        {
+          "chinese": "治好",
+          "pinyin": "zhìhǎo",
+          "definition": "heal, cure",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "治",
+              "m": "treat, cure"
+            },
+            {
+              "c": "好",
+              "m": "good, well"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "革尼撒勒",
+          "pinyin": "Génísālè",
+          "definition": "Gennesaret",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "病人",
+          "pinyin": "bìngrén",
+          "definition": "sick person",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "病",
+              "m": "illness, disease"
+            },
+            {
+              "c": "人",
+              "m": "person"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "they, them",
+          "pos": "pron",
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "過到",
+          "pinyin": "guòdào",
+          "definition": "cross over to",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "過",
+              "m": "cross, pass"
+            },
+            {
+              "c": "到",
+              "m": "arrive at, reach"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "對岸",
+          "pinyin": "duì'àn",
+          "definition": "opposite shore",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "對",
+              "m": "opposite"
+            },
+            {
+              "c": "岸",
+              "m": "bank, shore"
+            }
+          ],
+          "freq": "rare",
+          "tocflLevel": 6
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "來到",
+          "pinyin": "láidào",
+          "definition": "arrive at, come to",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "來",
+              "m": "come"
+            },
+            {
+              "c": "到",
+              "m": "arrive, reach"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "革尼撒勒",
+          "pinyin": "Génísālè",
+          "definition": "Gennesaret",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "place",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "地區",
+          "pinyin": "dìqū",
+          "definition": "area, region",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "地",
+              "m": "ground, land"
+            },
+            {
+              "c": "區",
+              "m": "area, district"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 4
+        }
+      ],
+      "crossReferences": [
+        {
+          "bookId": "mark",
+          "bookAbbrev": "可",
+          "chapter": 6,
+          "verseStart": 53,
+          "verseEnd": 56,
+          "displayText": "可6:53~56"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "text": "那地的人認出是耶穌，就把消息傳遍了那一帶。眾人把一切有病的人都帶來，",
+      "words": [
+        {
+          "chinese": "那地",
+          "pinyin": "nàdì",
+          "definition": "that place",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "那",
+              "m": "that"
+            },
+            {
+              "c": "地",
+              "m": "place, land"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "認出",
+          "pinyin": "rènchū",
+          "definition": "recognize",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "認",
+              "m": "recognize, acknowledge"
+            },
+            {
+              "c": "出",
+              "m": "out (resultative)"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "是",
+          "pinyin": "shì",
+          "definition": "be, is",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, so",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "object marker",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "消息",
+          "pinyin": "xiāoxi",
+          "definition": "news, message",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "消",
+              "m": "vanish, disappear (also related to news)"
+            },
+            {
+              "c": "息",
+              "m": "breath, news"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "傳遍",
+          "pinyin": "chuánbiàn",
+          "definition": "spread everywhere",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "傳",
+              "m": "transmit, spread"
+            },
+            {
+              "c": "遍",
+              "m": "all over, everywhere"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "past tense/completion particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1
+        },
+        {
+          "chinese": "那",
+          "pinyin": "nà",
+          "definition": "that",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "一帶",
+          "pinyin": "yīdài",
+          "definition": "area, region",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "一",
+              "m": "one, a"
+            },
+            {
+              "c": "帶",
+              "m": "belt, region"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "眾人",
+          "pinyin": "zhòngrén",
+          "definition": "crowd, everyone",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "眾",
+              "m": "many, numerous"
+            },
+            {
+              "c": "人",
+              "m": "people"
+            }
+          ],
+          "freq": "uncommon",
+          "tocflLevel": 5
+        },
+        {
+          "chinese": "把",
+          "pinyin": "bǎ",
+          "definition": "object marker",
+          "pos": "prep",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "一切",
+          "pinyin": "yīqiè",
+          "definition": "all, every",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "一",
+              "m": "one, all"
+            },
+            {
+              "c": "切",
+              "m": "cut, section"
+            }
+          ],
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "有病",
+          "pinyin": "yǒubìng",
+          "definition": "sick, ill",
+          "pos": "adj",
+          "breakdown": [
+            {
+              "c": "有",
+              "m": "have"
+            },
+            {
+              "c": "病",
+              "m": "illness"
+            }
+          ],
+          "freq": "common"
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "attributive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "person, people",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, entirely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "帶來",
+          "pinyin": "dàilái",
+          "definition": "bring",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "帶",
+              "m": "bring, carry"
+            },
+            {
+              "c": "來",
+              "m": "come (directional)"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 3
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": ""
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "text": "求耶穌讓他們只摸一摸他衣服的繸子，摸著的人就都痊愈了。",
+      "words": [
+        {
+          "chinese": "求",
+          "pinyin": "qiú",
+          "definition": "ask, request",
+          "pos": "v",
+          "freq": "uncommon",
+          "tocflLevel": 4
+        },
+        {
+          "chinese": "耶穌",
+          "pinyin": "Yēsū",
+          "definition": "Jesus",
+          "pos": "prop",
+          "isName": true,
+          "nameType": "person",
+          "freq": "biblical"
+        },
+        {
+          "chinese": "讓",
+          "pinyin": "ràng",
+          "definition": "let, allow",
+          "pos": "v",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 2
+        },
+        {
+          "chinese": "他們",
+          "pinyin": "tāmen",
+          "definition": "them",
+          "pos": "pron",
+          "breakdown": [
+            {
+              "c": "他",
+              "m": "he/him"
+            },
+            {
+              "c": "們",
+              "m": "plural suffix"
+            }
+          ],
+          "freq": "common",
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "只",
+          "pinyin": "zhǐ",
+          "definition": "only, merely",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "摸一摸",
+          "pinyin": "mō yī mō",
+          "definition": "touch briefly, just touch",
+          "pos": "v",
+          "freq": "common",
+          "note": "V-一-V structure indicates a brief or tentative action."
+        },
+        {
+          "chinese": "他",
+          "pinyin": "tā",
+          "definition": "his",
+          "pos": "pron",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "衣服",
+          "pinyin": "yīfu",
+          "definition": "clothes, garment",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "衣",
+              "m": "clothing"
+            },
+            {
+              "c": "服",
+              "m": "clothes"
+            }
+          ],
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "possessive particle",
+          "pos": "part",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "繸子",
+          "pinyin": "suìzi",
+          "definition": "fringe, tassel",
+          "pos": "n",
+          "breakdown": [
+            {
+              "c": "繸",
+              "m": "tassel"
+            },
+            {
+              "c": "子",
+              "m": "noun suffix"
+            }
+          ],
+          "freq": "biblical",
+          "note": "Refers to the ritual fringes (tzitzit) on Jewish garments."
+        },
+        {
+          "chinese": "，",
+          "pinyin": "",
+          "definition": "",
+          "pos": "punct",
+          "freq": "common"
+        },
+        {
+          "chinese": "摸著",
+          "pinyin": "mōzhe",
+          "definition": "touched, got hold of",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "摸",
+              "m": "touch"
+            },
+            {
+              "c": "著",
+              "m": "resultative/successful particle"
+            }
+          ],
+          "freq": "common",
+          "note": "Indicates successful completion of the action '摸'."
+        },
+        {
+          "chinese": "的",
+          "pinyin": "de",
+          "definition": "relative particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Forms a noun phrase from a preceding clause, 'those who touched'.",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "人",
+          "pinyin": "rén",
+          "definition": "people, person",
+          "pos": "n",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "就",
+          "pinyin": "jiù",
+          "definition": "then, consequently",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "都",
+          "pinyin": "dōu",
+          "definition": "all, both",
+          "pos": "adv",
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
+        },
+        {
+          "chinese": "痊愈",
+          "pinyin": "quányù",
+          "definition": "completely healed, recovered",
+          "pos": "v",
+          "breakdown": [
+            {
+              "c": "痊",
+              "m": "recover from illness"
+            },
+            {
+              "c": "愈",
+              "m": "heal, recover"
+            }
+          ],
+          "freq": "biblical"
+        },
+        {
+          "chinese": "了",
+          "pinyin": "le",
+          "definition": "perfective particle",
+          "pos": "part",
+          "freq": "common",
+          "note": "Indicates a completed action or change of state.",
+          "hskLevel": 1
+        }
+      ]
+    }
+  ],
+  "processedAt": "2025-12-15T05:38:39.896Z"
+}

@@ -89,3 +89,31 @@ export function getOldTestamentBooks(): Omit<Book, 'chapters'>[] {
 export function getNewTestamentBooks(): Omit<Book, 'chapters'>[] {
   return getBooksByTestament('new');
 }
+
+/**
+ * Get the index of a book in the canonical Bible order
+ * Returns -1 if book not found
+ */
+export function getBookIndex(bookId: string): number {
+  return BIBLE_BOOKS.findIndex((book) => book.id === bookId);
+}
+
+/**
+ * Get the previous book in canonical Bible order
+ * Returns undefined if at the first book (Genesis)
+ */
+export function getPreviousBook(bookId: string): Omit<Book, 'chapters'> | undefined {
+  const index = getBookIndex(bookId);
+  if (index <= 0) return undefined;
+  return BIBLE_BOOKS[index - 1];
+}
+
+/**
+ * Get the next book in canonical Bible order
+ * Returns undefined if at the last book (Revelation)
+ */
+export function getNextBook(bookId: string): Omit<Book, 'chapters'> | undefined {
+  const index = getBookIndex(bookId);
+  if (index < 0 || index >= BIBLE_BOOKS.length - 1) return undefined;
+  return BIBLE_BOOKS[index + 1];
+}

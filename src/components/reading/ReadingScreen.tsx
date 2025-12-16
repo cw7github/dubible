@@ -1,12 +1,12 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { SegmentedWord, VerseReference } from '../../types';
+import type { SegmentedWord, VerseReference, CrossReference } from '../../types';
 import { useReadingStore, useSettingsStore } from '../../stores';
 import { getBookById } from '../../data/bible';
-import { useAudioPlayer, useFocusMode, useScrollDismiss } from '../../hooks';
+import { getCrossReferences } from '../../services/preprocessedLoader';
+import { useFocusMode, useScrollDismiss, usePassageHistory, useTwoFingerSwipe } from '../../hooks';
 import { InfiniteScroll } from './InfiniteScroll';
 import { TranslationPanel, type PanelMode } from './TranslationPanel';
-import { AudioPlayer } from './AudioPlayer';
 import { Header } from '../navigation/Header';
 import { BookNavigator } from '../navigation/BookNavigator';
 import { VocabularyScreen } from '../vocabulary';
@@ -23,6 +23,7 @@ export function ReadingScreen() {
   const [selectedVerseRef, setSelectedVerseRef] = useState<VerseReference | null>(null);
   const [selectedWord, setSelectedWord] = useState<SegmentedWord | null>(null);
   const [selectedWordVerseRef, setSelectedWordVerseRef] = useState<VerseReference | null>(null);
+  const [crossReferences, setCrossReferences] = useState<CrossReference[]>([]);
 
   const {
     currentBookId,
@@ -40,26 +41,23 @@ export function ReadingScreen() {
     forceVisible: panelMode !== null || isNavOpen || isVocabOpen || isSettingsOpen,
   });
 
-  // Audio player hook
-  const audioPlayer = useAudioPlayer({
-    bookId: currentBookId,
-    chapter: currentChapter,
-    onVerseChange: () => {},
-  });
+  // Handle word tap - show word definition
+  const handleWordTap = useCallback((word: SegmentedWord, verseRef: VerseReference) => {
+    setSelectedWord(word);
+    setSelectedWordVerseRef(verseRef);
+    setPanelMode('word');
+  }, []);
 
-  // Handle verse tap - show English translation
-  const handleVerseTap = useCallback((verseRef: VerseReference) => {
+  // Handle verse long-press - show English translation
+  const handleVerseLongPress = useCallback(async (verseRef: VerseReference) => {
     setSelectedVerseRef(verseRef);
     setSelectedWord(null);
     setSelectedWordVerseRef(null);
     setPanelMode('verse');
-  }, []);
 
-  // Handle word long-press - show word definition
-  const handleWordLongPress = useCallback((word: SegmentedWord, verseRef: VerseReference) => {
-    setSelectedWord(word);
-    setSelectedWordVerseRef(verseRef);
-    setPanelMode('word');
+    // Load cross-references for this verse
+    const refs = await getCrossReferences(verseRef.bookId, verseRef.chapter, verseRef.verse);
+    setCrossReferences(refs);
   }, []);
 
   // Close panel
@@ -68,28 +66,84 @@ export function ReadingScreen() {
     setSelectedVerseRef(null);
     setSelectedWord(null);
     setSelectedWordVerseRef(null);
+    setCrossReferences([]);
   }, []);
 
-  // Scroll-based panel dismissal with smooth fade
+  // Scroll-based panel dismissal - instant and responsive
   const { opacity: panelOpacity } = useScrollDismiss({
     isVisible: panelMode !== null,
     onDismiss: handleClosePanel,
     scrollContainerRef: scrollRef,
-    scrollThreshold: 50,
-    dismissDelay: 400,
+    scrollThreshold: 15,  // Start fading after just 15px of scroll
+    dismissDelay: 150,    // Quick dismiss once threshold passed
   });
 
   // Handle chapter change from infinite scroll
-  const handleChapterChange = useCallback(
-    (chapter: number) => {
-      setDisplayChapter(chapter);
-      // Update store position (for persistence)
-      if (chapter !== currentChapter) {
-        setCurrentPosition(currentBookId, chapter);
+  const handlePassageChange = useCallback(
+    (newBookId: string, newChapter: number) => {
+      setDisplayChapter(newChapter);
+      if (newBookId !== currentBookId || newChapter !== currentChapter) {
+        setCurrentPosition(newBookId, newChapter);
       }
     },
     [currentBookId, currentChapter, setCurrentPosition]
   );
+
+  // Navigate to a specific passage (used by history)
+  const handleNavigateToPassage = useCallback(
+    (bookId: string, chapter: number) => {
+      setCurrentPosition(bookId, chapter);
+      setDisplayChapter(chapter);
+    },
+    [setCurrentPosition]
+  );
+
+  // Navigate to a cross-reference
+  const handleNavigateToCrossRef = useCallback(
+    (bookId: string, chapter: number, _verse: number) => {
+      handleClosePanel();
+      handleNavigateToPassage(bookId, chapter);
+      // Optionally scroll to the specific verse later
+    },
+    [handleClosePanel, handleNavigateToPassage]
+  );
+
+  // Passage history hook - track and navigate through viewing history
+  const {
+    goBack: navigateBack,
+    goForward: navigateForward,
+    canGoBack,
+    canGoForward,
+    trackCurrentPassage,
+  } = usePassageHistory({
+    currentBookId,
+    currentChapter: displayChapter || currentChapter,
+    onNavigate: handleNavigateToPassage,
+  });
+
+  // Track current passage in history when chapter changes
+  // This happens when user navigates via infinite scroll or book navigator
+  useEffect(() => {
+    if (displayChapter !== null) {
+      trackCurrentPassage();
+    }
+  }, [displayChapter, trackCurrentPassage]);
+
+  // Two-finger swipe navigation
+  useTwoFingerSwipe({
+    onSwipeLeft: () => {
+      if (canGoBack) {
+        navigateBack();
+      }
+    },
+    onSwipeRight: () => {
+      if (canGoForward) {
+        navigateForward();
+      }
+    },
+    threshold: 80,
+    enabled: true,
+  });
 
   // Font class based on settings
   const fontClass = fontFamily === 'serif' ? 'font-chinese-serif' : 'font-chinese-sans';
@@ -111,6 +165,7 @@ export function ReadingScreen() {
         chapter={displayChapter || currentChapter}
         onMenuClick={() => setIsNavOpen(true)}
         onSettingsClick={() => setIsSettingsOpen(true)}
+        onVocabClick={() => setIsVocabOpen(true)}
         isHidden={isFocusMode}
       />
 
@@ -124,9 +179,11 @@ export function ReadingScreen() {
       <TranslationPanel
         mode={panelMode}
         verseRef={selectedVerseRef}
+        crossReferences={crossReferences}
         word={selectedWord}
         wordVerseRef={selectedWordVerseRef}
         onClose={handleClosePanel}
+        onNavigateToCrossRef={handleNavigateToCrossRef}
         scrollOpacity={panelOpacity}
       />
 
@@ -136,11 +193,12 @@ export function ReadingScreen() {
           flex-1 overflow-hidden
           ${fontClass} ${sizeClass} text-chinese
         `}
-        style={{ color: 'var(--text-primary)' }}
+        style={{
+          color: 'var(--text-primary)',
+        }}
         initial={false}
         animate={{
-          paddingTop: isFocusMode ? '0px' : '56px',
-          paddingBottom: isFocusMode ? '0px' : '60px',
+          paddingTop: isFocusMode ? 'max(env(safe-area-inset-top, 0px), 8px)' : 'calc(56px + env(safe-area-inset-top, 0px))',
         }}
         transition={{
           type: 'spring',
@@ -148,21 +206,19 @@ export function ReadingScreen() {
           damping: 35,
         }}
       >
-        <div className="mx-auto h-full max-w-2xl px-6">
+        <div className="mx-auto h-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl px-4 sm:px-6 lg:px-8">
           <InfiniteScroll
+            ref={scrollRef}
             bookId={currentBookId}
             initialChapter={currentChapter}
-            onChapterChange={handleChapterChange}
-            onVerseTap={handleVerseTap}
-            onWordLongPress={handleWordLongPress}
+            onPassageChange={handlePassageChange}
+            onWordTap={handleWordTap}
+            onVerseLongPress={handleVerseLongPress}
             showHsk={showHskIndicators}
-            activeVerseNumber={
-              audioPlayer.isPlaying ? audioPlayer.currentVerseNumber : null
-            }
-            highlightedWordIndex={
-              audioPlayer.isPlaying ? audioPlayer.currentWordIndex : null
-            }
-            scrollRef={scrollRef}
+            activeBookId={null}
+            activeChapter={null}
+            activeVerseNumber={null}
+            highlightedWordIndex={null}
           />
         </div>
       </motion.main>
@@ -185,38 +241,40 @@ export function ReadingScreen() {
           damping: 35,
         }}
       >
-        <div className="mx-auto flex max-w-2xl items-center justify-between px-6 py-3">
-          {/* Audio player */}
-          <AudioPlayer
-            isPlaying={audioPlayer.isPlaying}
-            isAvailable={audioPlayer.isAvailable}
-            currentTime={audioPlayer.currentTime}
-            duration={audioPlayer.duration}
-            playbackRate={audioPlayer.playbackRate}
-            currentVerseNumber={audioPlayer.currentVerseNumber}
-            onTogglePlay={audioPlayer.toggle}
-            onSeek={audioPlayer.seek}
-            onSetPlaybackRate={audioPlayer.setPlaybackRate}
-          />
-
-          {/* Vocabulary button */}
+        <div className="mx-auto flex max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8 py-3">
+          {/* Book selector button - ergonomic thumb zone placement */}
           <button
             className="touch-feedback flex items-center gap-2 rounded-full px-4 py-2 transition-colors"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               color: 'var(--text-secondary)',
             }}
-            onClick={() => setIsVocabOpen(true)}
+            onClick={() => setIsNavOpen(true)}
+            aria-label="Select book"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              fill="currentColor"
+              fill="none"
               className="h-5 w-5"
             >
-              <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
+              {/* Book spines icon - library shelf aesthetic */}
+              <line
+                x1="3"
+                y1="20"
+                x2="21"
+                y2="20"
+                stroke="currentColor"
+                strokeWidth="0.8"
+                strokeLinecap="round"
+                opacity="0.35"
+              />
+              <rect x="4.2" y="4.5" width="3.2" height="15.5" rx="0.4" fill="currentColor" opacity="0.8" />
+              <rect x="8.7" y="6.5" width="3" height="13.5" rx="0.4" fill="currentColor" opacity="0.7" />
+              <rect x="12.9" y="5.5" width="3.1" height="14.5" rx="0.4" fill="currentColor" opacity="0.75" />
+              <rect x="17.6" y="7.5" width="3" height="12.5" rx="0.4" fill="currentColor" opacity="0.65" />
             </svg>
-            <span className="text-sm font-medium">Words</span>
+            <span className="text-sm font-medium">Books</span>
           </button>
         </div>
       </motion.nav>

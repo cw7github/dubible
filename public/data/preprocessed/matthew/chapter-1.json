@@ -5,7 +5,7 @@
   "verses": [
     {
       "number": 1,
-      "text": "耶穌基督的家譜（路3:23~38。參得4:18~22；代上3:10~17）大衛的子孫，亞伯拉罕的後裔，耶穌基督的家譜：",
+      "text": "耶穌基督的家譜大衛的子孫，亞伯拉罕的後裔，耶穌基督的家譜：",
       "words": [
         {
           "chinese": "耶穌基督",
@@ -21,7 +21,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "家譜",
@@ -42,85 +44,6 @@
           "note": "Lit. 'family register'"
         },
         {
-          "chinese": "（",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "路",
-          "pinyin": "Lù",
-          "definition": "Luke (book of the Bible)",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "place",
-          "freq": "biblical",
-          "note": "Abbreviation for 路加福音 (Lùjiā Fúyīn)"
-        },
-        {
-          "chinese": "3:23~38",
-          "pinyin": "sān èr shí sān zhì sān shí bā",
-          "definition": "chapter 3, verses 23-38",
-          "pos": "num",
-          "freq": "biblical",
-          "note": "Biblical chapter and verse reference. '~' denotes 'to' or 'through'."
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "參",
-          "pinyin": "cān",
-          "definition": "refer to, see also",
-          "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "得",
-          "pinyin": "Dé",
-          "definition": "Ruth (book of the Bible)",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "place",
-          "freq": "biblical",
-          "note": "Abbreviation for 路得記 (Lùdé Jì)"
-        },
-        {
-          "chinese": "4:18~22",
-          "pinyin": "sì yī bā zhì èr shí èr",
-          "definition": "chapter 4, verses 18-22",
-          "pos": "num",
-          "freq": "biblical"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "代上",
-          "pinyin": "Dài Shàng",
-          "definition": "1 Chronicles (book of the Bible)",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "place",
-          "freq": "biblical",
-          "note": "Abbreviation for 歷代志上 (Lìdài Zhì Shàng)"
-        },
-        {
-          "chinese": "3:10~17",
-          "pinyin": "sān yī líng zhì yī qī",
-          "definition": "chapter 3, verses 10-17",
-          "pos": "num",
-          "freq": "biblical"
-        },
-        {
-          "chinese": "）",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "大衛",
           "pinyin": "Dàwèi",
           "definition": "David",
@@ -134,7 +57,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "子孫",
@@ -152,7 +77,8 @@
             }
           ],
           "freq": "biblical",
-          "note": "Implies a lineage, 'sons and grandsons'."
+          "note": "Implies a lineage, 'sons and grandsons'.",
+          "tocflLevel": 5
         },
         {
           "chinese": "，",
@@ -173,7 +99,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "後裔",
@@ -190,7 +118,8 @@
               "m": "descendant"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 7
         },
         {
           "chinese": "，",
@@ -211,7 +140,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "家譜",
@@ -229,11 +160,32 @@
             }
           ],
           "freq": "biblical"
+        }
+      ],
+      "crossReferences": [
+        {
+          "bookId": "luke",
+          "bookAbbrev": "路",
+          "chapter": 3,
+          "verseStart": 23,
+          "verseEnd": 38,
+          "displayText": "路3:23~38"
         },
         {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": ""
+          "bookId": "ruth",
+          "bookAbbrev": "得",
+          "chapter": 4,
+          "verseStart": 18,
+          "verseEnd": 22,
+          "displayText": "得4:18~22"
+        },
+        {
+          "bookId": "1chronicles",
+          "bookAbbrev": "代上",
+          "chapter": 3,
+          "verseStart": 10,
+          "verseEnd": 17,
+          "displayText": "代上3:10~17"
         }
       ]
     },
@@ -255,7 +207,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "以撒",
@@ -285,7 +238,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "雅各",
@@ -315,7 +269,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "猶大",
@@ -331,21 +286,27 @@
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "他",
           "pinyin": "tā",
           "definition": "his",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "兄弟",
@@ -362,7 +323,9 @@
               "m": "younger brother"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 3
         },
         {
           "chinese": "，",
@@ -390,7 +353,9 @@
           "definition": "for, to, by",
           "pos": "prep",
           "freq": "common",
-          "note": "Indicates the beneficiary or agent in this context."
+          "note": "Indicates the beneficiary or agent in this context.",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "猶大",
@@ -433,7 +398,9 @@
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "謝拉",
@@ -463,7 +430,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "希斯崙",
@@ -493,7 +461,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞蘭",
@@ -529,7 +498,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞米拿達",
@@ -559,7 +529,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "拿順",
@@ -589,7 +560,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "撒門",
@@ -626,7 +598,9 @@
           "definition": "for, to, by",
           "pos": "prep",
           "freq": "common",
-          "note": "Indicates the beneficiary or agent in this context."
+          "note": "Indicates the beneficiary or agent in this context.",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "撒門",
@@ -683,7 +657,9 @@
           "definition": "for, to, by",
           "pos": "prep",
           "freq": "common",
-          "note": "Indicates the beneficiary or agent in this context."
+          "note": "Indicates the beneficiary or agent in this context.",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "波阿斯",
@@ -739,7 +715,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "耶西",
@@ -775,7 +752,8 @@
           "pinyin": "shēng",
           "definition": "begot, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "大衛",
@@ -791,12 +769,8 @@
           "pinyin": "wáng",
           "definition": "king",
           "pos": "n",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "烏利亞",
@@ -812,7 +786,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "妻子",
@@ -829,14 +805,18 @@
               "m": "suffix for nouns"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
         },
         {
           "chinese": "給",
           "pinyin": "gěi",
           "definition": "for, to",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "大衛",
@@ -852,14 +832,16 @@
           "pinyin": "shēng",
           "definition": "gave birth to, bore",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "了",
           "pinyin": "le",
           "definition": "perfective aspect particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1
         },
         {
           "chinese": "所羅門",
@@ -895,7 +877,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "羅波安",
@@ -925,7 +908,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞比雅",
@@ -955,7 +939,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞撒",
@@ -991,7 +976,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "約沙法",
@@ -1021,7 +1007,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "約蘭",
@@ -1051,7 +1038,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "烏西雅",
@@ -1087,7 +1075,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "約坦",
@@ -1117,7 +1106,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞哈斯",
@@ -1147,7 +1137,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "希西家",
@@ -1183,7 +1174,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "瑪拿西",
@@ -1213,7 +1205,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞們",
@@ -1243,7 +1236,8 @@
           "pinyin": "shēng",
           "definition": "begot",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "約西亞",
@@ -1308,7 +1302,9 @@
           "pinyin": "dào",
           "definition": "to, arrive at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "巴比倫",
@@ -1324,7 +1320,9 @@
           "pinyin": "de",
           "definition": "modifying particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "時候",
@@ -1341,7 +1339,9 @@
               "m": "time, wait"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -1363,7 +1363,8 @@
           "definition": "begat, gave birth to",
           "pos": "v",
           "freq": "biblical",
-          "note": "In genealogies, '生' means 'begat' or 'fathered'."
+          "note": "In genealogies, '生' means 'begat' or 'fathered'.",
+          "tocflLevel": 4
         },
         {
           "chinese": "耶哥尼雅",
@@ -1379,21 +1380,27 @@
           "pinyin": "hé",
           "definition": "and",
           "pos": "conj",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "他",
           "pinyin": "tā",
           "definition": "his, he",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "兄弟",
@@ -1410,12 +1417,9 @@
               "m": "younger brother"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": ""
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 3
         }
       ]
     },
@@ -1446,7 +1450,9 @@
           "pinyin": "dào",
           "definition": "to",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "巴比倫",
@@ -1472,7 +1478,9 @@
               "m": "after, behind"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -1493,7 +1501,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "撒拉鐵",
@@ -1523,7 +1532,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "所羅巴伯",
@@ -1559,7 +1569,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞比玉",
@@ -1589,7 +1600,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "以利亞敬",
@@ -1619,7 +1631,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞所",
@@ -1655,7 +1668,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "撒督",
@@ -1685,7 +1699,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "亞金",
@@ -1715,7 +1730,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "以律",
@@ -1751,7 +1767,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "以利亞撒",
@@ -1781,7 +1798,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "馬但",
@@ -1811,7 +1829,8 @@
           "pinyin": "shēng",
           "definition": "begat",
           "pos": "v",
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 4
         },
         {
           "chinese": "雅各",
@@ -1847,7 +1866,8 @@
           "pinyin": "shēng",
           "definition": "bore, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "約瑟",
@@ -1870,14 +1890,18 @@
           "pinyin": "jiù",
           "definition": "then, precisely",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "馬利亞",
@@ -1893,7 +1917,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "丈夫",
@@ -1910,35 +1936,36 @@
               "m": "man"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
         },
         {
           "chinese": "那",
           "pinyin": "nà",
           "definition": "that, which",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "稱",
           "pinyin": "chēng",
           "definition": "call, name",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 5
         },
         {
           "chinese": "為",
           "pinyin": "wéi",
           "definition": "as, be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
         },
         {
           "chinese": "基督",
@@ -1955,7 +1982,9 @@
           "pinyin": "de",
           "definition": "subordinating particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "耶穌",
@@ -1978,7 +2007,9 @@
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "馬利亞",
@@ -1994,28 +2025,26 @@
           "pinyin": "suǒ",
           "definition": "particle (passive/agency)",
           "pos": "part",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 2
         },
         {
           "chinese": "生",
           "pinyin": "shēng",
           "definition": "bore, gave birth to",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         }
       ]
     },
@@ -2038,7 +2067,8 @@
               "m": "manner"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 3
         },
         {
           "chinese": "，",
@@ -2052,7 +2082,9 @@
           "pinyin": "cóng",
           "definition": "from",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "亞伯拉罕",
@@ -2068,7 +2100,9 @@
           "pinyin": "dào",
           "definition": "to, until",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "大衛",
@@ -2101,14 +2135,18 @@
               "m": "together"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "十四",
@@ -2132,21 +2170,17 @@
           "pinyin": "dài",
           "definition": "generation",
           "pos": "n",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "大衛",
@@ -2162,7 +2196,9 @@
           "pinyin": "dào",
           "definition": "to, until",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "被擄",
@@ -2186,7 +2222,9 @@
           "pinyin": "dào",
           "definition": "to, arrive",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "巴比倫",
@@ -2202,7 +2240,9 @@
           "pinyin": "de",
           "definition": "particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "時候",
@@ -2219,7 +2259,9 @@
               "m": "wait"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -2233,14 +2275,18 @@
           "pinyin": "yě",
           "definition": "also, too",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "十四",
@@ -2264,21 +2310,17 @@
           "pinyin": "dài",
           "definition": "generation",
           "pos": "n",
-          "freq": "common"
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "被擄",
@@ -2302,7 +2344,9 @@
           "pinyin": "dào",
           "definition": "to, arrive",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "巴比倫",
@@ -2318,7 +2362,9 @@
           "pinyin": "de",
           "definition": "particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "時候",
@@ -2335,14 +2381,18 @@
               "m": "wait"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "到",
           "pinyin": "dào",
           "definition": "to, until",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "基督",
@@ -2366,14 +2416,18 @@
           "pinyin": "yòu",
           "definition": "again, moreover",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "十四",
@@ -2397,20 +2451,14 @@
           "pinyin": "dài",
           "definition": "generation",
           "pos": "n",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         }
       ]
     },
     {
       "number": 18,
-      "text": "耶穌基督的降生（路2:1~7）耶穌基督的降生是這樣的：耶穌的母親馬利亞許配了約瑟，他們還沒有成親，馬利亞就從聖靈懷了孕。",
+      "text": "耶穌基督的降生耶穌基督的降生是這樣的：耶穌的母親馬利亞許配了約瑟，他們還沒有成親，馬利亞就從聖靈懷了孕。",
       "words": [
         {
           "chinese": "耶穌基督",
@@ -2426,7 +2474,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "降生",
@@ -2447,65 +2497,6 @@
           "note": "Refers specifically to the birth of a noble or divine being."
         },
         {
-          "chinese": "（",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
-          "chinese": "路",
-          "pinyin": "Lù",
-          "definition": "Luke",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "group",
-          "freq": "biblical",
-          "note": "Refers to the Gospel of Luke."
-        },
-        {
-          "chinese": "2",
-          "pinyin": "",
-          "definition": "2",
-          "pos": "num",
-          "freq": "common"
-        },
-        {
-          "chinese": ":",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
-          "chinese": "1",
-          "pinyin": "",
-          "definition": "1",
-          "pos": "num",
-          "freq": "common"
-        },
-        {
-          "chinese": "~",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
-          "chinese": "7",
-          "pinyin": "",
-          "definition": "7",
-          "pos": "num",
-          "freq": "common"
-        },
-        {
-          "chinese": "）",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "耶穌基督",
           "pinyin": "Yēsū Jīdū",
           "definition": "Jesus Christ",
@@ -2519,7 +2510,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "降生",
@@ -2544,7 +2537,9 @@
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "這樣",
@@ -2561,21 +2556,17 @@
               "m": "manner"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 3
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "耶穌",
@@ -2591,7 +2582,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "母親",
@@ -2608,7 +2601,9 @@
               "m": "parent, intimate"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
         },
         {
           "chinese": "馬利亞",
@@ -2641,7 +2636,8 @@
           "pinyin": "le",
           "definition": "perfective aspect particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1
         },
         {
           "chinese": "約瑟",
@@ -2674,14 +2670,17 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "還",
           "pinyin": "hái",
           "definition": "still, yet",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "沒有",
@@ -2698,7 +2697,8 @@
               "m": "have"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "成親",
@@ -2715,7 +2715,8 @@
               "m": "marriage"
             }
           ],
-          "freq": "uncommon"
+          "freq": "rare",
+          "tocflLevel": 6
         },
         {
           "chinese": "，",
@@ -2738,14 +2739,18 @@
           "pinyin": "jiù",
           "definition": "then, thereupon",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "聖靈",
@@ -2768,7 +2773,8 @@
           "pinyin": "le",
           "definition": "perfective aspect particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1
         },
         {
           "chinese": "孕",
@@ -2776,13 +2782,16 @@
           "definition": "pregnancy",
           "pos": "n",
           "freq": "common"
-        },
+        }
+      ],
+      "crossReferences": [
         {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "bookId": "luke",
+          "bookAbbrev": "路",
+          "chapter": 2,
+          "verseStart": 1,
+          "verseEnd": 7,
+          "displayText": "路2:1~7"
         }
       ]
     },
@@ -2795,7 +2804,9 @@
           "pinyin": "tā",
           "definition": "her",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "丈夫",
@@ -2812,7 +2823,9 @@
               "m": "man"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
         },
         {
           "chinese": "約瑟",
@@ -2828,14 +2841,18 @@
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "個",
           "pinyin": "gè",
           "definition": "a, one (measure word)",
           "pos": "mw",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "義人",
@@ -2866,14 +2883,17 @@
           "pinyin": "bù",
           "definition": "not",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "願",
           "pinyin": "yuàn",
           "definition": "be willing, wish",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "張揚",
@@ -2890,21 +2910,26 @@
               "m": "raise, display"
             }
           ],
-          "freq": "uncommon"
+          "freq": "rare",
+          "tocflLevel": 7
         },
         {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "make, cause",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 3,
+          "tocflLevel": 5
         },
         {
           "chinese": "她",
           "pinyin": "tā",
           "definition": "her",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "受辱",
@@ -2921,7 +2946,8 @@
               "m": "humiliation"
             }
           ],
-          "freq": "uncommon"
+          "freq": "rare",
+          "tocflLevel": 7
         },
         {
           "chinese": "，",
@@ -2935,7 +2961,9 @@
           "pinyin": "jiù",
           "definition": "then, so",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "打算",
@@ -2952,7 +2980,9 @@
               "m": "calculate"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "暗中",
@@ -2969,21 +2999,26 @@
               "m": "middle"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "與",
           "pinyin": "yǔ",
           "definition": "with",
           "pos": "prep",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "她",
           "pinyin": "tā",
           "definition": "her",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "解除",
@@ -3000,7 +3035,9 @@
               "m": "remove"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "婚約",
@@ -3017,14 +3054,8 @@
               "m": "agreement"
             }
           ],
-          "freq": "uncommon"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "rare",
+          "tocflLevel": 7
         }
       ]
     },
@@ -3037,7 +3068,9 @@
           "pinyin": "tā",
           "definition": "he",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "一直",
@@ -3054,7 +3087,9 @@
               "m": "straight"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "想著",
@@ -3095,7 +3130,8 @@
           "pinyin": "shì",
           "definition": "matters, things",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -3119,7 +3155,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "使者",
@@ -3137,21 +3175,26 @@
             }
           ],
           "freq": "biblical",
-          "note": "Often refers to an angel in biblical context."
+          "note": "Often refers to an angel in biblical context.",
+          "tocflLevel": 6
         },
         {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "在",
           "pinyin": "zài",
           "definition": "in, at",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "夢中",
@@ -3175,14 +3218,18 @@
           "pinyin": "xiàng",
           "definition": "towards, to",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 2
         },
         {
           "chinese": "他",
           "pinyin": "tā",
           "definition": "him",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "顯現",
@@ -3199,7 +3246,8 @@
               "m": "appear"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 5
         },
         {
           "chinese": "，",
@@ -3213,14 +3261,8 @@
           "pinyin": "shuō",
           "definition": "say",
           "pos": "v",
-          "freq": "common"
-        },
-        {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "「",
@@ -3243,7 +3285,9 @@
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "子孫",
@@ -3260,7 +3304,8 @@
               "m": "grandson"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 5
         },
         {
           "chinese": "約瑟",
@@ -3317,21 +3362,27 @@
           "pinyin": "bǎ",
           "definition": "disposal marker",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "你",
           "pinyin": "nǐ",
           "definition": "your",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "妻子",
@@ -3348,7 +3399,9 @@
               "m": "child, suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
         },
         {
           "chinese": "馬利亞",
@@ -3374,7 +3427,8 @@
               "m": "marry (a woman)"
             }
           ],
-          "freq": "uncommon"
+          "freq": "rare",
+          "tocflLevel": 7
         },
         {
           "chinese": "過來",
@@ -3415,14 +3469,18 @@
               "m": "for"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "她",
           "pinyin": "tā",
           "definition": "she",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "懷",
@@ -3436,7 +3494,9 @@
           "pinyin": "de",
           "definition": "particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "孕",
@@ -3450,14 +3510,18 @@
           "pinyin": "shì",
           "definition": "is, to be",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "聖靈",
@@ -3473,21 +3537,18 @@
           "pinyin": "lái",
           "definition": "come",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         }
       ]
     },
@@ -3500,7 +3561,9 @@
           "pinyin": "tā",
           "definition": "she, her",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "必",
@@ -3514,21 +3577,26 @@
           "pinyin": "shēng",
           "definition": "give birth, bear",
           "pos": "v",
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "一",
           "pinyin": "yī",
           "definition": "one, a",
           "pos": "num",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "個",
           "pinyin": "gè",
           "definition": "measure word (general)",
           "pos": "mw",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "兒子",
@@ -3545,7 +3613,9 @@
               "m": "son"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -3558,28 +3628,36 @@
           "pinyin": "nǐ",
           "definition": "you",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to, should",
           "pos": "aux v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "給",
           "pinyin": "gěi",
           "definition": "give, for, to",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "他",
           "pinyin": "tā",
           "definition": "he, him",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "起名",
@@ -3603,7 +3681,9 @@
           "pinyin": "jiào",
           "definition": "call, be called",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "耶穌",
@@ -3635,28 +3715,36 @@
               "m": "for, due to"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "他",
           "pinyin": "tā",
           "definition": "he, him",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to, should",
           "pos": "aux v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "把",
           "pinyin": "bǎ",
           "definition": "marker for direct object",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "自己",
@@ -3673,14 +3761,18 @@
               "m": "self"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "子民",
@@ -3698,14 +3790,17 @@
             }
           ],
           "freq": "biblical",
-          "note": "Refers to a nation or people as children of a ruler/God."
+          "note": "Refers to a nation or people as children of a ruler/God.",
+          "tocflLevel": 7
         },
         {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from, since",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "罪惡",
@@ -3723,7 +3818,8 @@
             }
           ],
           "freq": "biblical",
-          "note": "Common in religious texts for 'sin'."
+          "note": "Common in religious texts for 'sin'.",
+          "tocflLevel": 5
         },
         {
           "chinese": "中",
@@ -3731,7 +3827,8 @@
           "definition": "in, among",
           "pos": "part",
           "freq": "common",
-          "note": "Often suffixed to nouns to indicate 'in' or 'among'."
+          "note": "Often suffixed to nouns to indicate 'in' or 'among'.",
+          "tocflLevel": 1
         },
         {
           "chinese": "拯救",
@@ -3748,7 +3845,8 @@
               "m": "save, rescue"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "tocflLevel": 6
         },
         {
           "chinese": "出來",
@@ -3769,12 +3867,6 @@
           "note": "Verb complement indicating outward direction or completion."
         },
         {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "period",
-          "pos": "punct"
-        },
-        {
           "chinese": "」",
           "pinyin": "",
           "definition": "closing quotation mark",
@@ -3791,35 +3883,43 @@
           "pinyin": "zhè",
           "definition": "this",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "整",
           "pinyin": "zhěng",
           "definition": "whole, entire",
           "pos": "adj",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 3
         },
         {
           "chinese": "件",
           "pinyin": "jiàn",
           "definition": "measure word for matters/things",
           "pos": "mw",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "事",
           "pinyin": "shì",
           "definition": "thing, matter, affair",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "發生",
@@ -3836,7 +3936,9 @@
               "m": "birth, produce"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
         },
         {
           "chinese": "，",
@@ -3849,14 +3951,18 @@
           "pinyin": "shì",
           "definition": "is, yes",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to, should",
           "pos": "aux v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "應驗",
@@ -3874,7 +3980,8 @@
             }
           ],
           "freq": "biblical",
-          "note": "Commonly used in the Bible for prophecies being fulfilled."
+          "note": "Commonly used in the Bible for prophecies being fulfilled.",
+          "tocflLevel": 7
         },
         {
           "chinese": "主",
@@ -3926,34 +4033,33 @@
           "pinyin": "suǒ",
           "definition": "structural particle (nominalizer)",
           "pos": "part",
-          "freq": "common",
-          "note": "Forms a nominal phrase from a verb, e.g., 'what was said'."
+          "freq": "uncommon",
+          "note": "Forms a nominal phrase from a verb, e.g., 'what was said'.",
+          "hskLevel": 5,
+          "tocflLevel": 2
         },
         {
           "chinese": "說",
           "pinyin": "shuō",
           "definition": "say, speak",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
-        },
-        {
-          "chinese": "：",
-          "pinyin": "",
-          "definition": "colon",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         }
       ]
     },
     {
       "number": 23,
-      "text": "「必有童女懷孕生子，他的名要叫以馬內利。」以馬內利就是「　神與我們同在」的意思。",
+      "text": "「必有童女懷孕生子，他的名要叫以馬內利。」以馬內利就是「 神與我們同在」的意思。",
       "words": [
         {
           "chinese": "「",
@@ -3973,7 +4079,9 @@
           "pinyin": "yǒu",
           "definition": "have, there is/are",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "童女",
@@ -4008,7 +4116,9 @@
               "m": "pregnant"
             }
           ],
-          "freq": "common"
+          "freq": "rare",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "生子",
@@ -4039,35 +4149,44 @@
           "pinyin": "tā",
           "definition": "he, his",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "名",
           "pinyin": "míng",
           "definition": "name",
           "pos": "n",
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 2
         },
         {
           "chinese": "要",
           "pinyin": "yào",
           "definition": "will, want to, should",
           "pos": "aux v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "叫",
           "pinyin": "jiào",
           "definition": "call, be called",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "以馬內利",
@@ -4077,12 +4196,6 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "period",
-          "pos": "punct"
         },
         {
           "chinese": "」",
@@ -4104,14 +4217,18 @@
           "pinyin": "jiù",
           "definition": "then, just, exactly",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, yes",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "「",
@@ -4134,7 +4251,9 @@
           "pinyin": "yǔ",
           "definition": "with, and",
           "pos": "prep",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "我們",
@@ -4151,7 +4270,9 @@
               "m": "plural suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "同在",
@@ -4182,7 +4303,9 @@
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "意思",
@@ -4199,13 +4322,9 @@
               "m": "think"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "period",
-          "pos": "punct"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         }
       ]
     },
@@ -4244,7 +4363,8 @@
           "pinyin": "le",
           "definition": "perfective aspect particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1
         },
         {
           "chinese": "，",
@@ -4257,7 +4377,9 @@
           "pinyin": "jiù",
           "definition": "then, thereupon",
           "pos": "adv",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "照著",
@@ -4291,7 +4413,9 @@
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "使者",
@@ -4309,14 +4433,17 @@
             }
           ],
           "freq": "biblical",
-          "note": "Often refers to angels in biblical context."
+          "note": "Often refers to angels in biblical context.",
+          "tocflLevel": 6
         },
         {
           "chinese": "所",
           "pinyin": "suǒ",
           "definition": "structural particle (nominalizer)",
           "pos": "part",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 5,
+          "tocflLevel": 2
         },
         {
           "chinese": "吩咐",
@@ -4333,14 +4460,18 @@
               "m": "command"
             }
           ],
-          "freq": "biblical"
+          "freq": "biblical",
+          "hskLevel": 6,
+          "tocflLevel": 5
         },
         {
           "chinese": "的",
           "pinyin": "de",
           "definition": "possessive/attributive particle",
           "pos": "part",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -4353,7 +4484,9 @@
           "pinyin": "bǎ",
           "definition": "marker for direct object",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 2
         },
         {
           "chinese": "妻子",
@@ -4370,7 +4503,9 @@
               "m": "child, suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 4
         },
         {
           "chinese": "迎娶",
@@ -4387,8 +4522,9 @@
               "m": "marry (a woman)"
             }
           ],
-          "freq": "uncommon",
-          "note": "More formal or traditional than '結婚'."
+          "freq": "rare",
+          "note": "More formal or traditional than '結婚'.",
+          "tocflLevel": 7
         },
         {
           "chinese": "過來",
@@ -4407,12 +4543,6 @@
           ],
           "freq": "common",
           "note": "Verb complement indicating direction towards the speaker or completion of action."
-        },
-        {
-          "chinese": "；",
-          "pinyin": "",
-          "definition": "semicolon",
-          "pos": "punct"
         }
       ]
     },
@@ -4435,14 +4565,17 @@
               "m": "is"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "tocflLevel": 4
         },
         {
           "chinese": "在",
           "pinyin": "zài",
           "definition": "at, in, on",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "孩子",
@@ -4459,7 +4592,9 @@
               "m": "child, suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "出生",
@@ -4476,7 +4611,9 @@
               "m": "be born"
             }
           ],
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 3
         },
         {
           "chinese": "以前",
@@ -4493,7 +4630,9 @@
               "m": "front, before"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 3,
+          "tocflLevel": 1
         },
         {
           "chinese": "，",
@@ -4506,8 +4645,9 @@
           "pinyin": "bìng",
           "definition": "and, furthermore, actually (emphatic negative)",
           "pos": "adv",
-          "freq": "common",
-          "note": "Often used to emphasize a negative statement."
+          "freq": "uncommon",
+          "note": "Often used to emphasize a negative statement.",
+          "tocflLevel": 4
         },
         {
           "chinese": "沒有",
@@ -4524,21 +4664,26 @@
               "m": "have"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "tocflLevel": 1
         },
         {
           "chinese": "與",
           "pinyin": "yǔ",
           "definition": "with, and",
           "pos": "prep",
-          "freq": "common"
+          "freq": "uncommon",
+          "hskLevel": 4,
+          "tocflLevel": 4
         },
         {
           "chinese": "她",
           "pinyin": "tā",
           "definition": "she, her",
           "pos": "pron",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "同房",
@@ -4559,12 +4704,6 @@
           "note": "Euphemism for sexual intimacy, common in older texts."
         },
         {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "period",
-          "pos": "punct"
-        },
-        {
           "chinese": "約瑟",
           "pinyin": "Yuēsè",
           "definition": "Joseph",
@@ -4578,7 +4717,9 @@
           "pinyin": "gěi",
           "definition": "give, for, to",
           "pos": "prep",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "孩子",
@@ -4595,7 +4736,9 @@
               "m": "child, suffix"
             }
           ],
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 2,
+          "tocflLevel": 1
         },
         {
           "chinese": "起名",
@@ -4619,7 +4762,9 @@
           "pinyin": "jiào",
           "definition": "call, be called",
           "pos": "v",
-          "freq": "common"
+          "freq": "common",
+          "hskLevel": 1,
+          "tocflLevel": 1
         },
         {
           "chinese": "耶穌",
@@ -4629,12 +4774,6 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical"
-        },
-        {
-          "chinese": "。",
-          "pinyin": "",
-          "definition": "period",
-          "pos": "punct"
         }
       ]
     }

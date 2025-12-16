@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Verse, SegmentedWord, VerseReference } from '../../types';
 import { useBookmarkStore } from '../../stores';
@@ -8,22 +8,25 @@ interface VerseDisplayProps {
   verse: Verse;
   bookId: string;
   chapter: number;
-  onVerseTap: (verseRef: VerseReference) => void; // Called when verse is tapped (for translation)
-  onWordLongPress: (word: SegmentedWord, verseRef: VerseReference) => void; // Called on word long-press
+  onWordTap: (word: SegmentedWord, verseRef: VerseReference) => void; // Called when word is tapped (for word definition)
+  onVerseLongPress: (verseRef: VerseReference) => void; // Called on long-press (for verse translation)
   isActive?: boolean;
   highlightedWordIndex?: number | null;
   showHsk?: boolean;
+  /** If true, verse displays as block (poetry). If false, displays inline (prose paragraph) */
+  isPoetry?: boolean;
 }
 
 export const VerseDisplay = memo(function VerseDisplay({
   verse,
   bookId,
   chapter,
-  onVerseTap,
-  onWordLongPress,
+  onWordTap,
+  onVerseLongPress,
   isActive = false,
   highlightedWordIndex = null,
   showHsk = false,
+  isPoetry = true,
 }: VerseDisplayProps) {
   const verseRef: VerseReference = {
     bookId,
@@ -37,26 +40,46 @@ export const VerseDisplay = memo(function VerseDisplay({
   // verse.text is already in correct character set from cache (pre-converted)
   const displayText = verse.text || '';
 
-  // Called when any word is tapped (triggers verse translation)
-  const handleVerseTap = useCallback(() => {
-    onVerseTap(verseRef);
-  }, [onVerseTap, verseRef]);
+  // Track if verse is in "pending" state (long press started but not yet triggered)
+  const [isVersePending, setIsVersePending] = useState(false);
 
-  // Called when a word is long-pressed (triggers word definition)
-  const handleWordLongPress = useCallback(
+  // Called when a word is tapped (triggers word definition)
+  const handleWordTap = useCallback(
     (word: SegmentedWord) => {
-      onWordLongPress(word, verseRef);
+      onWordTap(word, verseRef);
     },
-    [onWordLongPress, verseRef]
+    [onWordTap, verseRef]
   );
 
+  // Called when any word is long-pressed (triggers verse translation)
+  const handleVerseLongPress = useCallback(() => {
+    onVerseLongPress(verseRef);
+    setIsVersePending(false); // Clear pending state when long press completes
+  }, [onVerseLongPress, verseRef]);
+
+  // Called when long press starts
+  const handleLongPressStart = useCallback(() => {
+    setIsVersePending(true);
+  }, []);
+
+  // Called when long press is cancelled
+  const handleLongPressCancel = useCallback(() => {
+    setIsVersePending(false);
+  }, []);
+
+  // Prose mode: inline span, Poetry mode: block div
+  const Container = isPoetry ? 'div' : 'span';
+  const containerClass = isPoetry
+    ? `verse relative py-1 ${isActive ? 'verse-active' : ''}`
+    : `verse-inline relative ${isActive ? 'verse-active' : ''}`;
+
   return (
-    <div
-      className={`verse relative py-1 ${isActive ? 'verse-active' : ''}`}
+    <Container
+      className={containerClass}
       data-verse={verse.number}
     >
       {/* Verse number with bookmark indicator */}
-      <span className="verse-number">
+      <span className={isPoetry ? 'verse-number' : 'verse-number-inline'}>
         {verse.number}
         {/* Bookmark indicator - visible if bookmarked */}
         {bookmarked && (
@@ -84,21 +107,41 @@ export const VerseDisplay = memo(function VerseDisplay({
 
       {/* Verse content */}
       {verse.words ? (
-        // Render segmented words with pinyin
-        verse.words.map((word, index) => (
-          <ChineseWord
-            key={`${verse.number}-${index}-${word.chinese}`}
-            word={word}
-            onTap={handleVerseTap}
-            onLongPress={handleWordLongPress}
-            isHighlighted={highlightedWordIndex === index}
-            showHsk={showHsk}
-          />
-        ))
+        <>
+          {/* Render segmented words with pinyin */}
+          {verse.words.map((word, index) => (
+            <ChineseWord
+              key={`${verse.number}-${index}-${word.chinese}`}
+              word={word}
+              onTap={handleWordTap}
+              onLongPress={handleVerseLongPress}
+              onLongPressStart={handleLongPressStart}
+              onLongPressCancel={handleLongPressCancel}
+              isHighlighted={highlightedWordIndex === index}
+              isVersePending={isVersePending}
+              showHsk={showHsk}
+            />
+          ))}
+
+          {/* Append trailing punctuation if missing from words array */}
+          {(() => {
+            const lastChar = displayText.slice(-1);
+            const lastWordText = verse.words[verse.words.length - 1]?.chinese || '';
+            // Chinese fullwidth punctuation marks
+            const isPunctuation = /[。，、！？；：「」『』（）《》〈〉【】〔〕]/.test(lastChar);
+            const lastWordIsPunctuation = /[。，、！？；：「」『』（）《》〈〉【】〔〕]/.test(lastWordText);
+
+            // If text ends with punctuation but last word doesn't, append it
+            if (isPunctuation && !lastWordIsPunctuation) {
+              return <span className="select-none">{lastChar}</span>;
+            }
+            return null;
+          })()}
+        </>
       ) : (
         // Fallback: render plain text if no segmentation
         <span className="font-chinese-serif text-chinese">{displayText}</span>
       )}
-    </div>
+    </Container>
   );
 });

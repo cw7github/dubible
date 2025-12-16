@@ -1,20 +1,61 @@
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- Small scroll -->
-  <!-- Left roller -->
-  <path d="M 28 32 L 28 48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <circle cx="28" cy="32" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <circle cx="28" cy="48" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Right roller -->
-  <path d="M 52 32 L 52 48" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <circle cx="52" cy="32" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <circle cx="52" cy="48" r="1.2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Parchment -->
-  <path d="M 28 33.5 Q 30 33 32 33 L 48 33 Q 50 33 52 33.5 L 52 46.5 Q 50 47 48 47 L 32 47 Q 30 47 28 46.5 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Text lines (fewer/smaller) -->
-  <line x1="33" y1="37" x2="47" y2="37" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <line x1="33" y1="40" x2="47" y2="40" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <line x1="33" y1="43" x2="47" y2="43" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <!-- Decorative rolled edges -->
-  <path d="M 32 33 Q 30 33.5 28 33.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
-  <path d="M 48 33 Q 50 33.5 52 33.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
+  <!-- Minor Prophets: Twelve prophetic scrolls bound together with divine proclamation -->
+
+  <!-- Proclamation resonance aura -->
+  <circle cx="40" cy="26" r="12" stroke="currentColor" stroke-width="0.3" fill="none" opacity="0.1"/>
+  <circle cx="40" cy="26" r="16" stroke="currentColor" stroke-width="0.25" fill="none" opacity="0.08"/>
+
+  <!-- Bundle of twelve small scrolls - representing the twelve minor prophets -->
+  <g opacity="1">
+    <!-- Back row scrolls (4 scrolls) -->
+    <rect x="28" y="36" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.3"/>
+    <rect x="35" y="36" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.3"/>
+    <rect x="42" y="36" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.3"/>
+    <rect x="49" y="36" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+    <!-- Middle row scrolls (4 scrolls) - slightly forward -->
+    <rect x="28" y="38" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+    <rect x="35" y="38" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+    <rect x="42" y="38" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+    <rect x="49" y="38" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+
+    <!-- Front row scrolls (4 scrolls) - prominent -->
+    <rect x="28" y="40" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    <rect x="35" y="40" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    <rect x="42" y="40" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    <rect x="49" y="40" width="5" height="20" rx="0.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  </g>
+
+  <!-- Binding cord wrapping around scrolls (three wraps) -->
+  <ellipse cx="40" cy="44" rx="14" ry="2" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+  <ellipse cx="40" cy="50" rx="14" ry="2" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+  <ellipse cx="40" cy="56" rx="14" ry="2" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+
+  <!-- Vertical binding on sides -->
+  <line x1="26" y1="42" x2="26" y2="58" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+  <line x1="54" y1="42" x2="54" y2="58" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+
+  <!-- Text marks on front scrolls -->
+  <line x1="29" y1="46" x2="32" y2="46" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+  <line x1="36" y1="46" x2="39" y2="46" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+  <line x1="43" y1="46" x2="46" y2="46" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+  <line x1="50" y1="46" x2="53" y2="46" stroke="currentColor" stroke-width="0.4" opacity="0.4"/>
+
+  <!-- Divine voice/trumpet emanating upward - bold proclamation -->
+  <path d="M 34 36 L 30 28 Q 30 26 32 26 L 40 26 L 48 26 Q 50 26 50 28 L 46 36"
+        stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+
+  <!-- Trumpet bell opening -->
+  <ellipse cx="40" cy="26" rx="6" ry="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+
+  <!-- Sound waves emanating from trumpet -->
+  <path d="M 32 22 Q 40 18 48 22" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M 30 18 Q 40 13 50 18" stroke="currentColor" stroke-width="1" fill="none" opacity="0.4" stroke-linecap="round"/>
+  <path d="M 28 14 Q 40 8 52 14" stroke="currentColor" stroke-width="0.9" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M 26 10 Q 40 4 54 10" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.2" stroke-linecap="round"/>
+
+  <!-- Decorative dots representing voices -->
+  <circle cx="36" cy="20" r="0.8" stroke="currentColor" stroke-width="0.5" fill="currentColor" opacity="0.3"/>
+  <circle cx="40" cy="17" r="0.8" stroke="currentColor" stroke-width="0.5" fill="currentColor" opacity="0.3"/>
+  <circle cx="44" cy="20" r="0.8" stroke="currentColor" stroke-width="0.5" fill="currentColor" opacity="0.3"/>
 </svg>

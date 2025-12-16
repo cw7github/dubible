@@ -11,10 +11,13 @@
  *   npx ts-node scripts/preprocess-bible.ts --all
  */
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
+import { config } from 'dotenv';
+
+// Load .env file
+config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,6 +60,18 @@ interface FHLVerseRecord {
   chap: number;
   sec: number;
   chineses: string;
+}
+
+// OpenRouter API interface
+interface OpenRouterResponse {
+  choices: Array<{
+    message: {
+      content: string;
+    };
+  }>;
+  error?: {
+    message: string;
+  };
 }
 
 // Book mappings using Chinese abbreviations (same as app's bibleApi.ts)
@@ -134,22 +149,41 @@ const BOOK_MAPPINGS: Record<string, { abbrev: string; chapters: number }> = {
 
 // Configuration
 const CONFIG = {
-  apiKey: process.env.GEMINI_API_KEY || 'AIzaSyAtMQgqBsPdeNo5ZaoC8sftCze00_Uns5c',
-  model: 'gemini-2.5-flash', // Gemini 2.5 Flash
+  apiKey: process.env.OPENROUTER_API_KEY || '',
+  model: 'google/gemini-2.5-flash', // Gemini 2.5 Flash via OpenRouter
+  apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
   outputDir: path.join(__dirname, '../public/data/preprocessed'),
   batchSize: 5, // Verses per API call
+  smallBatchSize: 2, // Smaller batch for problematic chapters
   delayBetweenBatches: 1000, // ms - respect rate limits
   maxRetries: 3,
 };
 
-// Initialize Gemini
-function initGemini() {
+// Chapters that consistently fail with normal batch size (JSON truncation issues)
+// These need smaller batch sizes to avoid hitting model output limits
+const PROBLEMATIC_CHAPTERS: Record<string, number[]> = {
+  'isaiah': [66],
+  'jeremiah': [49],
+  'ezekiel': [32],
+};
+
+function getEffectiveBatchSize(bookId: string, chapter: number): number {
+  const chapters = PROBLEMATIC_CHAPTERS[bookId];
+  if (chapters && chapters.includes(chapter)) {
+    console.log(`  Using small batch size (${CONFIG.smallBatchSize}) for ${bookId} ${chapter} (known problematic chapter)`);
+    return CONFIG.smallBatchSize;
+  }
+  return CONFIG.batchSize;
+}
+
+// Validate API key
+function validateApiKey() {
   if (!CONFIG.apiKey) {
-    console.error('Error: GEMINI_API_KEY environment variable not set');
-    console.error('Get your API key from: https://makersuite.google.com/app/apikey');
+    console.error('Error: OPENROUTER_API_KEY environment variable not set');
+    console.error('Get your API key from: https://openrouter.ai/keys');
     process.exit(1);
   }
-  return new GoogleGenerativeAI(CONFIG.apiKey);
+  console.log('OpenRouter API key configured');
 }
 
 // Fetch verses from FHL API using Chinese abbreviation
@@ -165,9 +199,27 @@ async function fetchChapter(abbrev: string, chapter: number): Promise<FHLVerseRe
   return data.record || [];
 }
 
-// Strip HTML tags from text
+// Strip HTML tags and cross-references from text
 function stripHtml(text: string): string {
-  return text.replace(/<[^>]*>/g, '').trim();
+  let cleaned = text
+    // MOST ROBUST: Remove section headers entirely (they contain cross-references)
+    // Headers like <h3>Section Title（cross-refs）</h3> should be removed completely
+    .replace(/<h[1-6][^>]*>[\s\S]*?<\/h[1-6]>/gi, '')
+    // Remove any other HTML tags (but keep their content)
+    .replace(/<[^>]*>/g, '')
+    // Fallback: Remove any remaining parenthetical cross-references
+    // Pattern: (書名 chapter:verse) or variations
+    .replace(/[（(][^）)]*[\u4e00-\u9fff]{1,4}\s*\d+[:：]\s*\d+[^）)]*[）)]/g, '')
+    // Remove parenthetical book abbreviation lists like （路得代上） or （參路3:23）
+    // These are cross-references without chapter:verse or with just book names
+    .replace(/[（(][\s參]*[\u4e00-\u9fff上下]{1,6}(?:[\s；、，,;。．.]*[\u4e00-\u9fff上下]{1,6})*[\s。．.]*[）)]/g, '')
+    // Remove isolated cross-references with ranges
+    .replace(/[\u4e00-\u9fff]{1,4}\s*\d+\s*[:：]\s*\d+\s*[~～]\s*\d+/g, '')
+    // Remove isolated cross-references
+    .replace(/[\u4e00-\u9fff]{1,4}\s*\d+\s*[:：]\s*\d+/g, '');
+
+  // Clean up any extra whitespace
+  return cleaned.trim().replace(/\s+/g, ' ');
 }
 
 // Build the prompt for Gemini
@@ -222,21 +274,49 @@ EXAMPLE OUTPUT FORMAT:
 Respond with ONLY valid JSON array, no markdown or explanation.`;
 }
 
-// Process verses with Gemini
+// Process verses with OpenRouter (Gemini via OpenRouter)
 async function processVersesWithGemini(
-  genAI: GoogleGenerativeAI,
   verses: FHLVerseRecord[]
 ): Promise<Map<number, ProcessedWord[]>> {
-  const model = genAI.getGenerativeModel({ model: CONFIG.model });
   const prompt = buildPrompt(verses);
 
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt < CONFIG.maxRetries; attempt++) {
     try {
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const text = response.text();
+      const response = await fetch(CONFIG.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${CONFIG.apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://bilingual-bible.app',
+          'X-Title': 'Bilingual Bible Preprocessor',
+        },
+        body: JSON.stringify({
+          model: CONFIG.model,
+          messages: [
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+          max_tokens: 16000,
+          temperature: 0.3,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`OpenRouter API error ${response.status}: ${errorText}`);
+      }
+
+      const data = (await response.json()) as OpenRouterResponse;
+
+      if (data.error) {
+        throw new Error(`OpenRouter error: ${data.error.message}`);
+      }
+
+      const text = data.choices[0]?.message?.content || '';
 
       // Clean up response (remove markdown code blocks if present)
       let jsonText = text.trim();
@@ -270,7 +350,6 @@ async function processVersesWithGemini(
 
 // Process a single chapter
 async function processChapter(
-  genAI: GoogleGenerativeAI,
   bookId: string,
   bookName: string,
   abbrev: string,
@@ -286,14 +365,17 @@ async function processChapter(
 
   console.log(`  Fetched ${verses.length} verses`);
 
+  // Get effective batch size (smaller for known problematic chapters)
+  const effectiveBatchSize = getEffectiveBatchSize(bookId, chapterNum);
+
   // Process in batches
   const processedVerses: ProcessedVerse[] = [];
 
-  for (let i = 0; i < verses.length; i += CONFIG.batchSize) {
-    const batch = verses.slice(i, i + CONFIG.batchSize);
-    console.log(`  Processing verses ${i + 1}-${Math.min(i + CONFIG.batchSize, verses.length)}...`);
+  for (let i = 0; i < verses.length; i += effectiveBatchSize) {
+    const batch = verses.slice(i, i + effectiveBatchSize);
+    console.log(`  Processing verses ${i + 1}-${Math.min(i + effectiveBatchSize, verses.length)}...`);
 
-    const wordsMap = await processVersesWithGemini(genAI, batch);
+    const wordsMap = await processVersesWithGemini(batch);
 
     for (const verse of batch) {
       const words = wordsMap.get(verse.sec);
@@ -310,7 +392,7 @@ async function processChapter(
     }
 
     // Rate limiting
-    if (i + CONFIG.batchSize < verses.length) {
+    if (i + effectiveBatchSize < verses.length) {
       await sleep(CONFIG.delayBetweenBatches);
     }
   }
@@ -350,6 +432,7 @@ async function main() {
   // Parse arguments
   let bookId: string | null = null;
   let chapterNum: number | null = null;
+  let startChapter: number | null = null;
   let processAll = false;
 
   for (let i = 0; i < args.length; i++) {
@@ -358,6 +441,9 @@ async function main() {
       i++;
     } else if (args[i] === '--chapter' && args[i + 1]) {
       chapterNum = parseInt(args[i + 1], 10);
+      i++;
+    } else if (args[i] === '--start' && args[i + 1]) {
+      startChapter = parseInt(args[i + 1], 10);
       i++;
     } else if (args[i] === '--all') {
       processAll = true;
@@ -368,14 +454,15 @@ async function main() {
     console.log('Usage:');
     console.log('  npx ts-node scripts/preprocess-bible.ts --book matthew');
     console.log('  npx ts-node scripts/preprocess-bible.ts --book matthew --chapter 1');
+    console.log('  npx ts-node scripts/preprocess-bible.ts --book matthew --start 5  (resume from chapter 5)');
     console.log('  npx ts-node scripts/preprocess-bible.ts --all');
     console.log('\nAvailable books:', Object.keys(BOOK_MAPPINGS).join(', '));
     process.exit(1);
   }
 
-  // Initialize Gemini
-  const genAI = initGemini();
-  console.log('Initialized Gemini API');
+  // Validate API key
+  validateApiKey();
+  console.log('Initialized OpenRouter API (Gemini 2.5 Flash)');
 
   // Ensure output directory exists
   if (!fs.existsSync(CONFIG.outputDir)) {
@@ -394,16 +481,23 @@ async function main() {
       continue;
     }
 
-    const chaptersToProcess = chapterNum
-      ? [chapterNum]
-      : Array.from({ length: mapping.chapters }, (_, i) => i + 1);
+    let chaptersToProcess: number[];
+    if (chapterNum) {
+      chaptersToProcess = [chapterNum];
+    } else if (startChapter) {
+      chaptersToProcess = Array.from(
+        { length: mapping.chapters - startChapter + 1 },
+        (_, i) => startChapter + i
+      );
+    } else {
+      chaptersToProcess = Array.from({ length: mapping.chapters }, (_, i) => i + 1);
+    }
 
     console.log(`\nProcessing ${book} (${chaptersToProcess.length} chapters)`);
 
     for (const chapter of chaptersToProcess) {
       try {
         const processed = await processChapter(
-          genAI,
           book,
           book.charAt(0).toUpperCase() + book.slice(1),
           mapping.abbrev,

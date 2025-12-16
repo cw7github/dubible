@@ -1,23 +1,48 @@
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- Scroll with tablets -->
-  <!-- Left scroll roller -->
-  <path d="M 20 25 L 20 55" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <!-- Right scroll roller -->
-  <path d="M 60 25 L 60 55" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <!-- Scroll parchment -->
-  <path d="M 20 28 Q 22 27 25 27 L 55 27 Q 58 27 60 28 L 60 52 Q 58 53 55 53 L 25 53 Q 22 53 20 52 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Tablet outline left -->
-  <rect x="30" y="34" width="8" height="12" stroke="currentColor" stroke-width="1.5" fill="none" rx="0.5"/>
-  <!-- Tablet outline right -->
-  <rect x="42" y="34" width="8" height="12" stroke="currentColor" stroke-width="1.5" fill="none" rx="0.5"/>
-  <!-- Commandment lines on left tablet -->
-  <line x1="31.5" y1="36.5" x2="36.5" y2="36.5" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <line x1="31.5" y1="39" x2="36.5" y2="39" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <line x1="31.5" y1="41.5" x2="36.5" y2="41.5" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <line x1="31.5" y1="44" x2="36.5" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <!-- Commandment lines on right tablet -->
-  <line x1="43.5" y1="36.5" x2="48.5" y2="36.5" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <line x1="43.5" y1="39" x2="48.5" y2="39" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <line x1="43.5" y1="41.5" x2="48.5" y2="41.5" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
-  <line x1="43.5" y1="44" x2="48.5" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.7"/>
+  <!-- Torah: Sacred twin tablets with Hebrew-inspired numerals and divine glory -->
+
+  <!-- Divine glory aureole -->
+  <circle cx="40" cy="38" r="28" stroke="currentColor" stroke-width="0.4" fill="none" opacity="0.15"/>
+  <circle cx="40" cy="38" r="32" stroke="currentColor" stroke-width="0.3" fill="none" opacity="0.1"/>
+
+  <!-- Left tablet with architectural depth -->
+  <path d="M 22 22 Q 22 18 26 18 L 34 18 Q 38 18 38 22 L 38 56 Q 38 58 36 58 L 24 58 Q 22 58 22 56 Z"
+        stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M 23 23 Q 23 20 25.5 20 L 34.5 20 Q 37 20 37 23 L 37 55 Q 37 57 35 57 L 25 57 Q 23 57 23 55 Z"
+        stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+
+  <!-- Right tablet with architectural depth -->
+  <path d="M 42 22 Q 42 18 46 18 L 54 18 Q 58 18 58 22 L 58 56 Q 58 58 56 58 L 44 58 Q 42 58 42 56 Z"
+        stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M 43 23 Q 43 20 45.5 20 L 54.5 20 Q 57 20 57 23 L 57 55 Q 57 57 55 57 L 45 57 Q 43 57 43 55 Z"
+        stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+
+  <!-- Decorative connecting arch -->
+  <path d="M 38 24 Q 40 20 42 24" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.5"/>
+  <circle cx="40" cy="20" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.4"/>
+
+  <!-- Left tablet - Hebrew-style numerals (I-V) -->
+  <text x="30" y="30" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">I</text>
+  <text x="30" y="36" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">II</text>
+  <text x="30" y="42" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">III</text>
+  <text x="30" y="48" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">IV</text>
+  <text x="30" y="54" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">V</text>
+
+  <!-- Right tablet - Hebrew-style numerals (VI-X) -->
+  <text x="50" y="30" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">VI</text>
+  <text x="50" y="36" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">VII</text>
+  <text x="50" y="42" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">VIII</text>
+  <text x="50" y="48" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">IX</text>
+  <text x="50" y="54" font-family="Georgia, serif" font-size="6" fill="currentColor" opacity="0.6" text-anchor="middle">X</text>
+
+  <!-- Divine radiance - more elaborate star pattern -->
+  <line x1="40" y1="14" x2="40" y2="9" stroke="currentColor" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+  <line x1="35" y1="15" x2="32" y2="11" stroke="currentColor" stroke-width="0.9" opacity="0.3" stroke-linecap="round"/>
+  <line x1="45" y1="15" x2="48" y2="11" stroke="currentColor" stroke-width="0.9" opacity="0.3" stroke-linecap="round"/>
+  <line x1="30" y1="17" x2="26" y2="14" stroke="currentColor" stroke-width="0.7" opacity="0.25" stroke-linecap="round"/>
+  <line x1="50" y1="17" x2="54" y2="14" stroke="currentColor" stroke-width="0.7" opacity="0.25" stroke-linecap="round"/>
+
+  <!-- Corner flourishes -->
+  <path d="M 20 60 Q 18 60 18 62 Q 18 64 20 64" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+  <path d="M 60 60 Q 62 60 62 62 Q 62 64 60 64" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
 </svg>

@@ -47,7 +47,7 @@ export const BookNavigator = memo(function BookNavigator({
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 z-40 glass"
+            className="fixed inset-0 z-45 glass"
             style={{ backgroundColor: 'var(--overlay)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -58,7 +58,7 @@ export const BookNavigator = memo(function BookNavigator({
 
           {/* Panel */}
           <motion.div
-            className="fixed top-0 left-0 bottom-0 z-50 w-80 max-w-[85vw] overflow-hidden shadow-elevated safe-area-top safe-area-bottom"
+            className="fixed top-0 left-0 bottom-0 z-46 w-80 max-w-[85vw] overflow-hidden shadow-elevated safe-area-top safe-area-bottom"
             style={{
               backgroundColor: 'var(--bg-primary)',
               borderRight: '1px solid var(--border-subtle)',

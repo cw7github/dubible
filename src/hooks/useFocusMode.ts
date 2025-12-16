@@ -1,11 +1,9 @@
 // useFocusMode - Scroll-triggered focus mode for immersive reading
-// Hides UI chrome when scrolling down, reveals when scrolling up or pausing
+// Hides UI chrome when scrolling down, reveals when scrolling up
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface UseFocusModeOptions {
-  /** Time in ms before showing UI after scroll stops (default: 1500) */
-  idleTimeout?: number;
   /** Minimum scroll delta to trigger hide (default: 15) */
   scrollThreshold?: number;
   /** Force UI visible (e.g., when panel is open) */
@@ -24,20 +22,34 @@ interface UseFocusModeResult {
 }
 
 export function useFocusMode({
-  idleTimeout = 1500,
   scrollThreshold = 15,
   forceVisible = false,
 }: UseFocusModeOptions = {}): UseFocusModeResult {
   const [isHidden, setIsHidden] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const lastScrollTop = useRef(0);
-  const lastScrollTime = useRef(Date.now());
-  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const ticking = useRef(false);
 
   const show = useCallback(() => setIsHidden(false), []);
   const hide = useCallback(() => setIsHidden(true), []);
+
+  // Detect desktop screen size - disable focus mode on larger screens
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    setIsDesktop(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDesktop(e.matches);
+      if (e.matches) {
+        setIsHidden(false); // Show UI when switching to desktop
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // Force visible when prop is true
   useEffect(() => {
@@ -50,6 +62,9 @@ export function useFocusMode({
     const container = scrollRef.current;
     if (!container) return;
 
+    // Skip adding scroll listener on desktop or when forceVisible is true
+    if (isDesktop || forceVisible) return;
+
     const handleScroll = () => {
       if (ticking.current) return;
 
@@ -57,16 +72,10 @@ export function useFocusMode({
       requestAnimationFrame(() => {
         const currentScrollTop = container.scrollTop;
         const delta = currentScrollTop - lastScrollTop.current;
-        const now = Date.now();
-
-        // Clear any existing idle timer
-        if (idleTimerRef.current) {
-          clearTimeout(idleTimerRef.current);
-        }
 
         // Only respond if scroll delta exceeds threshold
         if (Math.abs(delta) > scrollThreshold) {
-          if (delta > 0 && !forceVisible) {
+          if (delta > 0) {
             // Scrolling DOWN - hide UI
             setIsHidden(true);
           } else if (delta < 0) {
@@ -75,15 +84,10 @@ export function useFocusMode({
           }
         }
 
-        // Set idle timer to show UI after pause
-        idleTimerRef.current = setTimeout(() => {
-          if (!forceVisible) {
-            setIsHidden(false);
-          }
-        }, idleTimeout);
+        // Do NOT set idle timer - header should stay hidden until user scrolls up
+        // This prevents the jarring content shift when header reappears
 
         lastScrollTop.current = currentScrollTop;
-        lastScrollTime.current = now;
         ticking.current = false;
       });
     };
@@ -92,14 +96,12 @@ export function useFocusMode({
 
     return () => {
       container.removeEventListener('scroll', handleScroll);
-      if (idleTimerRef.current) {
-        clearTimeout(idleTimerRef.current);
-      }
     };
-  }, [forceVisible, idleTimeout, scrollThreshold]);
+  }, [isDesktop, forceVisible, scrollThreshold]);
 
   return {
-    isHidden: forceVisible ? false : isHidden,
+    // Disable focus mode on desktop (always show UI) or when forceVisible is true
+    isHidden: isDesktop || forceVisible ? false : isHidden,
     scrollRef,
     show,
     hide,

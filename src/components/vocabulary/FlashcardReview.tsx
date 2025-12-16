@@ -1,4 +1,4 @@
-import { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVocabularyStore } from '../../stores';
 import { getBookById } from '../../data/bible';
@@ -20,6 +20,21 @@ export const FlashcardReview = memo(function FlashcardReview({
   const [direction, setDirection] = useState<'left' | 'right' | null>(null);
 
   const { reviewWord } = useVocabularyStore();
+
+  // Prevent body scroll when flashcard review is active
+  useEffect(() => {
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    };
+  }, []);
 
   const currentWord = words[currentIndex];
   const progress = ((currentIndex + 1) / words.length) * 100;
@@ -57,7 +72,7 @@ export const FlashcardReview = memo(function FlashcardReview({
   if (!currentWord) {
     return (
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center"
+        className="fixed inset-0 z-48 flex items-center justify-center"
         style={{ backgroundColor: 'var(--bg-primary)' }}
       >
         <motion.div
@@ -111,7 +126,7 @@ export const FlashcardReview = memo(function FlashcardReview({
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col"
+      className="fixed inset-0 z-48 flex flex-col"
       style={{ backgroundColor: 'var(--bg-primary)' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

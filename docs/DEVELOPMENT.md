@@ -4,7 +4,9 @@
 
 - **Node.js**: 18+ (recommended: 20 LTS)
 - **npm**: 9+
-- **Gemini API Key**: Required for preprocessing (get from https://makersuite.google.com/app/apikey)
+- **OpenRouter API Key**: Required for preprocessing (get from https://openrouter.ai/keys)
+- **Firebase Project**: Optional, for authentication and cloud sync
+- **OpenAI API Key**: Optional, for high-quality TTS
 
 ## Initial Setup
 
@@ -15,10 +17,31 @@ cd bilingual_bib
 # Install dependencies
 npm install
 
-# Set up environment variables (optional, for preprocessing)
-export GEMINI_API_KEY="your-api-key-here"
-# Or create .env file:
-echo "GEMINI_API_KEY=your-api-key-here" > .env
+# Set up environment variables
+cp .env.local.example .env.local
+# Edit .env.local with your API keys
+```
+
+### Environment Variables
+
+**Required for preprocessing:**
+```env
+OPENROUTER_API_KEY=sk-or-your-key-here
+```
+
+**Optional for authentication & sync:**
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+**Optional for high-quality TTS:**
+```env
+VITE_OPENAI_API_KEY=sk-your-openai-key
 ```
 
 ## Development Workflow
@@ -96,19 +119,20 @@ npx tsx scripts/preprocess-bible.ts --all
 
 ### Rate Limits and Costs
 
-**Gemini 2.5 Flash Free Tier**:
-- 15 requests/minute
-- 1 million tokens/minute
-- 1500 requests/day
+**OpenRouter with Gemini 2.5 Flash**:
+- Pay-per-use model (very affordable)
+- See https://openrouter.ai/models for current pricing
+- ~$0.0001 per 1K input tokens, ~$0.0004 per 1K output tokens
 
 **Script Configuration** (`scripts/preprocess-bible.ts`):
 ```typescript
 const CONFIG = {
-  apiKey: process.env.GEMINI_API_KEY,
-  model: 'gemini-2.5-flash',
+  apiKey: process.env.OPENROUTER_API_KEY,
+  model: 'google/gemini-2.5-flash',
+  apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
   batchSize: 5,              // Verses per API call
   delayBetweenBatches: 1000, // 1 second delay
-  maxRetries: 3,             // Retry failed requests
+  maxRetries: 3,             // Retry failed requests (with exponential backoff)
 };
 ```
 
@@ -197,10 +221,27 @@ Opens production build at `http://localhost:4173`
 - [ ] Scroll through chapters (infinite scroll)
 - [ ] Tap verse to see English translation
 - [ ] Long-press word to see definition
+- [ ] Play word pronunciation (audio button)
 - [ ] Save word to vocabulary
 - [ ] Review vocabulary with flashcards
+- [ ] Change pinyin level (6 options)
 - [ ] Change settings (font, size, theme)
 - [ ] Offline mode (disable network, refresh)
+
+**Authentication & Sync**:
+- [ ] Sign in with Google
+- [ ] Sign in with Facebook
+- [ ] Verify profile displays in settings
+- [ ] Add vocabulary word and verify sync
+- [ ] Sign out and back in
+- [ ] Check data persists across sessions
+- [ ] Test on second device (cross-device sync)
+
+**Navigation & Gestures**:
+- [ ] Two-finger swipe left (go back in history)
+- [ ] Two-finger swipe right (go forward in history)
+- [ ] Book navigator opens/closes
+- [ ] Chapter transitions work smoothly
 
 **Edge Cases**:
 - [ ] Load chapter without preprocessed data (fallback)
@@ -209,6 +250,8 @@ Opens production build at `http://localhost:4173`
 - [ ] First/last chapters of books
 - [ ] Mobile Safari (iOS)
 - [ ] Chrome Android
+- [ ] App without Firebase configured (local-only mode)
+- [ ] App without OpenAI key (Web Speech fallback)
 
 ### Browser Testing
 
@@ -296,41 +339,77 @@ server {
 ### Environment Variables
 
 **Build-time only** (not exposed to client):
-- `GEMINI_API_KEY`: For preprocessing script
+- `OPENROUTER_API_KEY`: For preprocessing script (Gemini 2.5 Flash via OpenRouter)
 
-**No runtime environment variables needed** - all data is static.
+**Runtime (VITE_* prefix, available in client)**:
+- `VITE_FIREBASE_*`: Firebase configuration for authentication and sync
+- `VITE_OPENAI_API_KEY`: OpenAI TTS for word pronunciation
+
+**Notes**:
+- Firebase keys are safe to expose (security handled by Firestore rules)
+- OpenAI key in browser is acceptable for personal use
+- OpenRouter key should NEVER be exposed to client
 
 ## Project Structure Reference
 
 ```
 bilingual_bib/
 ├── src/
-│   ├── components/        # React components
+│   ├── components/
+│   │   ├── auth/          # Login, Profile screens
+│   │   ├── navigation/    # Header, BookNavigator
 │   │   ├── reading/       # Main reading UI
-│   │   ├── vocabulary/    # Vocabulary features
-│   │   ├── navigation/    # Book navigation
-│   │   └── settings/      # Settings panel
-│   ├── stores/            # Zustand state management
-│   ├── services/          # API clients, data loaders
+│   │   │   ├── ReadingScreen.tsx
+│   │   │   ├── InfiniteScroll.tsx
+│   │   │   ├── VerseDisplay.tsx
+│   │   │   ├── ChineseWord.tsx
+│   │   │   ├── WordDetailPanel.tsx
+│   │   │   ├── TranslationPanel.tsx
+│   │   │   └── AudioPlayer.tsx
+│   │   ├── settings/      # Settings panel
+│   │   └── vocabulary/    # Vocabulary list, flashcards
+│   ├── stores/
+│   │   ├── authStore.ts        # Authentication state
+│   │   ├── readingStore.ts     # Current reading position
+│   │   ├── vocabularyStore.ts  # Saved words with SRS
+│   │   ├── settingsStore.ts    # User preferences
+│   │   ├── bookmarkStore.ts    # Saved verses
+│   │   └── historyStore.ts     # Reading history navigation
+│   ├── services/
+│   │   ├── bibleApi.ts         # FHL Bible API client
+│   │   ├── preprocessedLoader.ts # Static JSON loader
+│   │   ├── bibleCache.ts       # IndexedDB caching
+│   │   ├── chineseProcessor.ts # Runtime fallback
+│   │   └── ttsService.ts       # Text-to-speech
+│   ├── hooks/
+│   │   ├── useAudioPlayer.ts
+│   │   ├── useTwoFingerSwipe.ts
+│   │   ├── usePassageHistory.ts
+│   │   ├── useSyncManager.ts
+│   │   ├── useFocusMode.ts
+│   │   ├── useLongPress.ts
+│   │   └── useScrollDismiss.ts
+│   ├── lib/
+│   │   ├── firebase.ts         # Firebase initialization
+│   │   ├── firebaseSync.ts     # Firestore sync utilities
+│   │   └── dataMigration.ts    # Local to cloud migration
 │   ├── types/             # TypeScript definitions
 │   ├── data/              # Static data (books, English text)
-│   ├── hooks/             # Custom React hooks
-│   ├── utils/             # Helper functions
 │   ├── App.tsx            # Root component
 │   ├── main.tsx           # Entry point
 │   └── index.css          # Global styles
 ├── public/
-│   ├── data/
-│   │   └── preprocessed/  # Generated by preprocessing script
+│   ├── data/preprocessed/ # Generated by preprocessing script
 │   └── icons/             # PWA icons
 ├── scripts/
-│   ├── preprocess-bible.ts      # Gemini preprocessing
+│   ├── preprocess-bible.ts      # Gemini via OpenRouter preprocessing
 │   └── generate-manifest.cjs    # Manifest generator
-├── dist/                  # Build output (generated)
 ├── docs/                  # Documentation
+├── dist/                  # Build output (generated)
+├── firestore.rules        # Firestore security rules
 ├── vite.config.ts         # Vite configuration
-├── tailwind.config.js     # Tailwind CSS config
 ├── tsconfig.json          # TypeScript config
+├── .env.local.example     # Environment variable template
 └── package.json
 ```
 

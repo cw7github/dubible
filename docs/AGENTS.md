@@ -4,11 +4,20 @@ This document helps AI agents (Claude Code, Cursor, etc.) understand and contrib
 
 ## Project Overview
 
-A Progressive Web App (PWA) for Chinese learners reading the Bible in Chinese with English translations. The app provides word-level Chinese segmentation, pinyin, definitions, and vocabulary building features.
+A Progressive Web App (PWA) for Chinese learners reading the Bible in Chinese with English translations. The app provides word-level Chinese segmentation, pinyin, definitions, vocabulary building with spaced repetition, and cross-device sync.
 
-**Key Innovation**: Uses Gemini 2.5 Flash API at build-time to preprocess all Bible text with high-quality word segmentation, linguistic metadata, and definitions - eliminating the need for runtime dictionary lookups.
+**Key Innovation**: Uses Gemini 2.5 Flash via OpenRouter at build-time to preprocess all Bible text with high-quality word segmentation, linguistic metadata, and definitions - eliminating the need for runtime dictionary lookups.
 
-**Tech Stack**: React 19, TypeScript, Zustand (state), Vite, TailwindCSS, Framer Motion
+**Tech Stack**: React 19, TypeScript, Zustand (state), Vite 7, TailwindCSS 4, Framer Motion, Firebase (auth/sync), Dexie (IndexedDB)
+
+**Recent Features**:
+- User authentication (Google/Facebook OAuth via Firebase)
+- Cloud sync for vocabulary, bookmarks, history, settings
+- Two-finger swipe navigation for passage history
+- 6-level pinyin display system based on HSK proficiency
+- Audio pronunciation in word popups (OpenAI TTS or Web Speech API)
+- Cross-reference filtering from verse text
+- HSK level badges for vocabulary words
 
 ## Directory Structure
 
@@ -16,40 +25,60 @@ A Progressive Web App (PWA) for Chinese learners reading the Bible in Chinese wi
 bilingual_bib/
 ├── src/
 │   ├── components/
+│   │   ├── auth/             # Authentication UI
+│   │   │   ├── LoginScreen.tsx       # Google/Facebook OAuth
+│   │   │   └── ProfileScreen.tsx     # User profile, sign out
 │   │   ├── reading/          # Main reading interface
 │   │   │   ├── ReadingScreen.tsx      # Root component with infinite scroll
 │   │   │   ├── TranslationPanel.tsx   # Shows English verse translation
-│   │   │   ├── WordDetailPanel.tsx    # Enhanced word definitions
+│   │   │   ├── WordDetailPanel.tsx    # Enhanced word definitions + audio
 │   │   │   ├── VerseDisplay.tsx       # Individual verse rendering
-│   │   │   ├── ChineseWord.tsx        # Interactive word component
-│   │   │   └── InfiniteScroll.tsx     # Chapter continuity
+│   │   │   ├── ChineseWord.tsx        # Interactive word component + pinyin
+│   │   │   ├── InfiniteScroll.tsx     # Chapter continuity
+│   │   │   └── AudioPlayer.tsx        # TTS playback controls
 │   │   ├── vocabulary/       # Vocabulary and flashcard review
-│   │   ├── navigation/       # Book navigator, header
-│   │   └── settings/         # App settings
+│   │   ├── navigation/       # Book navigator, header, sync indicator
+│   │   └── settings/         # App settings (6-level pinyin, translations)
 │   ├── stores/               # Zustand state management
+│   │   ├── authStore.ts              # Authentication state
 │   │   ├── readingStore.ts           # Current position, loaded chapters
 │   │   ├── vocabularyStore.ts        # Saved words with SRS
-│   │   ├── settingsStore.ts          # User preferences
-│   │   └── bookmarkStore.ts          # Bookmarks
+│   │   ├── settingsStore.ts          # User preferences (pinyin level, etc.)
+│   │   ├── bookmarkStore.ts          # Bookmarks
+│   │   └── historyStore.ts           # Reading history navigation
 │   ├── services/
 │   │   ├── bibleApi.ts               # FHL Bible API client
 │   │   ├── preprocessedLoader.ts     # Load preprocessed JSON
 │   │   ├── chineseProcessor.ts       # Runtime fallback processor
-│   │   └── bibleCache.ts             # IndexedDB caching
+│   │   ├── bibleCache.ts             # IndexedDB caching
+│   │   └── ttsService.ts             # Text-to-speech (OpenAI/Web Speech)
+│   ├── hooks/
+│   │   ├── useTwoFingerSwipe.ts      # Two-finger swipe navigation
+│   │   ├── usePassageHistory.ts      # Back/forward history navigation
+│   │   ├── useSyncManager.ts         # Firebase sync orchestration
+│   │   ├── useAudioPlayer.ts         # TTS playback hook
+│   │   ├── useFocusMode.ts           # Hide UI when scrolling
+│   │   ├── useLongPress.ts           # Long-press gesture detection
+│   │   └── useScrollDismiss.ts       # Dismiss panels on scroll
+│   ├── lib/
+│   │   ├── firebase.ts               # Firebase initialization
+│   │   ├── firebaseSync.ts           # Firestore sync utilities
+│   │   └── dataMigration.ts          # Local to cloud migration
 │   ├── types/                # TypeScript definitions
 │   │   ├── bible.ts                  # Verse, SegmentedWord, Chapter
 │   │   ├── vocabulary.ts             # SavedWord, SRS data
-│   │   └── settings.ts
-│   ├── data/
-│   │   ├── bible/books.ts            # 66-book Bible metadata
-│   │   └── english/                  # Bundled BSB translation
-│   └── hooks/                # Custom React hooks
+│   │   └── settings.ts               # Settings, PinyinLevel types
+│   └── data/
+│       ├── bible/books.ts            # 66-book Bible metadata
+│       └── english/                  # Bundled BSB translation
 ├── scripts/
-│   ├── preprocess-bible.ts           # Gemini-powered preprocessor
+│   ├── preprocess-bible.ts           # Gemini via OpenRouter preprocessor
 │   └── generate-manifest.cjs         # Manifest generator
 ├── public/data/preprocessed/
 │   ├── manifest.json                 # Available preprocessed data
 │   └── {bookId}/chapter-{n}.json    # Preprocessed chapters
+├── docs/                     # Documentation
+├── firestore.rules           # Firestore security rules
 └── dist/                     # Build output
 ```
 
@@ -58,25 +87,28 @@ bilingual_bib/
 ### 1. Preprocessing Pipeline (Build-time)
 
 ```
-FHL Bible API → Gemini 2.5 Flash → Static JSON → Served to App
+FHL Bible API → Gemini 2.5 Flash (via OpenRouter) → Static JSON → Served to App
 ```
 
-**Script**: `/Users/charleswu/Desktop/+/bilingual_bib/scripts/preprocess-bible.ts`
+**Script**: `scripts/preprocess-bible.ts`
 
 **What it does**:
 - Fetches Chinese text from 信望愛 (FHL) Bible API
-- Sends verses to Gemini with detailed linguistic prompt
+- Strips cross-references and HTML from verse text
+- Sends verses to Gemini 2.5 Flash via OpenRouter API
 - Gemini segments text into words and provides:
   - `chinese`: Word text
-  - `pinyin`: Pronunciation with tones
-  - `definition`: Concise English meaning
+  - `pinyin`: Pronunciation with tones (e.g., Yēsū not Yesu)
+  - `definition`: Concise English meaning (1-5 words, contextual)
   - `pos`: Part of speech (n, v, adj, adv, prep, conj, part, mw, pron, num, prop)
   - `isName`: Boolean for biblical names
   - `nameType`: 'person' | 'place' | 'group'
   - `breakdown`: Character-by-character etymology [{c: '福', m: 'blessing'}]
   - `freq`: 'common' | 'uncommon' | 'rare' | 'biblical'
   - `note`: Optional usage insight (max 15 words)
-- Saves to `/public/data/preprocessed/{bookId}/chapter-{n}.json`
+- Saves to `public/data/preprocessed/{bookId}/chapter-{n}.json`
+
+**Environment**: Requires `OPENROUTER_API_KEY` in `.env` file
 
 **Run preprocessing**:
 ```bash
@@ -85,6 +117,9 @@ npx tsx scripts/preprocess-bible.ts --book matthew --chapter 1
 
 # Entire book
 npx tsx scripts/preprocess-bible.ts --book matthew
+
+# Resume from chapter 5
+npx tsx scripts/preprocess-bible.ts --book matthew --start 5
 
 # All 66 books (expensive!)
 npx tsx scripts/preprocess-bible.ts --all
@@ -189,6 +224,19 @@ Continuous reading experience:
 
 ## State Management (Zustand)
 
+### authStore.ts
+Authentication state (Firebase):
+```typescript
+{
+  user: UserProfile | null;    // {uid, email, displayName, photoURL, provider}
+  isAuthenticated: boolean;
+  isSyncing: boolean;
+  isFirebaseAvailable: boolean;
+}
+```
+
+**Actions**: `signInWithGoogle`, `signInWithFacebook`, `signOut`
+
 ### readingStore.ts
 ```typescript
 {
@@ -201,7 +249,7 @@ Continuous reading experience:
 **Actions**: `setCurrentPosition`, `addLoadedChapter`
 
 ### vocabularyStore.ts
-Persisted to localStorage:
+Persisted to localStorage, synced to Firestore when authenticated:
 ```typescript
 {
   words: SavedWord[];  // User's vocabulary list
@@ -213,14 +261,30 @@ Persisted to localStorage:
 **Actions**: `addWord`, `removeWord`, `reviewWord`, `getWordsDueForReview`
 
 ### settingsStore.ts
+Persisted to localStorage, synced to Firestore:
 ```typescript
 {
-  fontFamily: 'sans' | 'serif';
-  textSize: 'sm' | 'base' | 'lg' | 'xl';
-  showHskIndicators: boolean;
   theme: 'light' | 'sepia' | 'dark';
+  fontFamily: 'serif' | 'sans';
+  textSize: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  pinyinLevel: 'all' | 'hsk2+' | 'hsk4+' | 'hsk5+' | 'hsk6+' | 'none';
+  characterSet: 'traditional' | 'simplified';
+  showHskIndicators: boolean;
+  chineseVersion: string;      // 'cnv'
+  englishVersion: string;      // 'bsb'
 }
 ```
+
+### historyStore.ts
+Reading history for back/forward navigation:
+```typescript
+{
+  entries: HistoryEntry[];     // [{bookId, chapter, timestamp}]
+  currentIndex: number;
+}
+```
+
+**Actions**: `pushEntry`, `goBack`, `goForward`, `canGoBack`, `canGoForward`
 
 ## Bible Data Sources
 
@@ -329,8 +393,10 @@ console.log(verses);
 
 ## Important Constraints
 
-- **Gemini API Key**: Required for preprocessing, set as `GEMINI_API_KEY` env var
-- **Rate Limits**: Gemini Flash has rate limits, use delays between batches
+- **OpenRouter API Key**: Required for preprocessing, set as `OPENROUTER_API_KEY` env var
+- **Firebase Config**: Optional, enables auth and sync (set `VITE_FIREBASE_*` vars)
+- **OpenAI Key**: Optional, enables high-quality TTS (set `VITE_OPENAI_API_KEY`)
+- **Rate Limits**: OpenRouter has rate limits, use delays between batches
 - **File Size**: Keep preprocessed JSONs reasonable (5 verses per batch)
 - **PWA**: Offline support via service worker, cache preprocessed data
 - **Mobile**: Optimized for portrait orientation, touch-first
@@ -360,11 +426,30 @@ npm run lint
 **Dev server**: `npm run dev`
 **Build**: `npm run build`
 
-**Key files**:
-- Preprocessing: `/Users/charleswu/Desktop/+/bilingual_bib/scripts/preprocess-bible.ts`
-- Main component: `/Users/charleswu/Desktop/+/bilingual_bib/src/components/reading/ReadingScreen.tsx`
-- Word display: `/Users/charleswu/Desktop/+/bilingual_bib/src/components/reading/WordDetailPanel.tsx`
-- Types: `/Users/charleswu/Desktop/+/bilingual_bib/src/types/bible.ts`
+**Key files for reading features**:
+- `src/components/reading/ReadingScreen.tsx` - Main UI
+- `src/components/reading/ChineseWord.tsx` - Word rendering with pinyin
+- `src/components/reading/WordDetailPanel.tsx` - Definition popup with audio
+
+**Key files for authentication & sync**:
+- `src/stores/authStore.ts` - Auth state
+- `src/lib/firebase.ts` - Firebase initialization
+- `src/hooks/useSyncManager.ts` - Sync orchestration
+- `src/components/auth/LoginScreen.tsx` - OAuth UI
+
+**Key files for settings**:
+- `src/stores/settingsStore.ts` - Settings state
+- `src/types/settings.ts` - PinyinLevel types
+
+**Key files for navigation gestures**:
+- `src/hooks/useTwoFingerSwipe.ts` - Swipe detection
+- `src/hooks/usePassageHistory.ts` - History navigation
+
+**Key files for preprocessing**:
+- `scripts/preprocess-bible.ts` - Gemini via OpenRouter
+
+**Key files for TTS**:
+- `src/services/ttsService.ts` - OpenAI TTS / Web Speech API
 
 **Next Steps for AI Agents**:
 1. Read this file to understand the project

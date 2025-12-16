@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuBible Favicon Generator</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #FAF8F3;
+      color: #2D2A26;
+    }
+    h1 {
+      color: #8B5A2B;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .icon-preview {
+      border: 1px solid #E0DCD2;
+      padding: 20px;
+      border-radius: 8px;
+      background: white;
+      text-align: center;
+    }
+    .icon-preview canvas {
+      border: 1px solid #EBE8E0;
+      margin: 10px 0;
+    }
+    button {
+      background: #8B5A2B;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #6B4423;
+    }
+    .instructions {
+      background: #F2EFE6;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      border-left: 4px solid #8B5A2B;
+    }
+    .instructions h2 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #8B5A2B;
+    }
+    .instructions ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .instructions li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>DuBible Favicon Generator</h1>
+  <p>Generate PNG icons from the favicon.svg file for different sizes.</p>
+
+  <div class="preview" id="preview"></div>
+
+  <div class="instructions">
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Click the "Download" button under each icon size to save the PNG file</li>
+      <li>Save each file with the exact name shown (e.g., "favicon-16x16.png")</li>
+      <li>Place all downloaded files in the <code>/public</code> folder</li>
+      <li>The icons will automatically be used by the browser and PWA</li>
+    </ol>
+  </div>
+
+  <script>
+    const sizes = [
+      { size: 16, name: 'favicon-16x16.png', label: '16×16 (Browser Tab)' },
+      { size: 32, name: 'favicon-32x32.png', label: '32×32 (Browser Tab)' },
+      { size: 180, name: 'apple-touch-icon.png', label: '180×180 (Apple Touch)' },
+      { size: 192, name: 'pwa-192x192.png', label: '192×192 (PWA)' },
+      { size: 512, name: 'pwa-512x512.png', label: '512×512 (PWA)' }
+    ];
+
+    async function generateIcons() {
+      const previewContainer = document.getElementById('preview');
+
+      // Load the SVG
+      const response = await fetch('favicon.svg');
+      const svgText = await response.text();
+
+      sizes.forEach(({ size, name, label }) => {
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'icon-preview';
+
+        const title = document.createElement('div');
+        title.textContent = label;
+        title.style.fontWeight = 'bold';
+        title.style.marginBottom = '10px';
+        title.style.fontSize = '14px';
+        iconDiv.appendChild(title);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        canvas.style.width = `${Math.min(size, 128)}px`;
+        canvas.style.height = `${Math.min(size, 128)}px`;
+        canvas.style.imageRendering = size <= 32 ? 'pixelated' : 'auto';
+
+        const ctx = canvas.getContext('2d');
+
+        // Create an image from SVG
+        const img = new Image();
+        const blob = new Blob([svgText], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, size, size);
+          URL.revokeObjectURL(url);
+        };
+
+        img.src = url;
+
+        iconDiv.appendChild(canvas);
+
+        const fileName = document.createElement('div');
+        fileName.textContent = name;
+        fileName.style.fontSize = '12px';
+        fileName.style.color = '#5C574E';
+        fileName.style.marginTop = '8px';
+        iconDiv.appendChild(fileName);
+
+        const downloadBtn = document.createElement('button');
+        downloadBtn.textContent = 'Download';
+        downloadBtn.onclick = () => {
+          canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+        };
+        iconDiv.appendChild(downloadBtn);
+
+        previewContainer.appendChild(iconDiv);
+      });
+    }
+
+    generateIcons();
+  </script>
+</body>
+</html>

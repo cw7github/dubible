@@ -35,25 +35,25 @@ export const PINYIN_LEVELS: {
   {
     value: 'hsk2+',
     label: { chinese: '入门', english: 'Elementary', pinyin: 'rùmén' },
-    description: 'Hide pinyin for basic words (HSK 1)',
+    description: 'Hide very basic words (HSK 1, common words)',
     minHskToShow: 2,
   },
   {
     value: 'hsk4+',
     label: { chinese: '中级', english: 'Intermediate', pinyin: 'zhōngjí' },
-    description: 'Hide pinyin for common words (HSK 1-3)',
+    description: 'Show pinyin for less common words (HSK 4+, rare/biblical)',
     minHskToShow: 4,
   },
   {
     value: 'hsk5+',
     label: { chinese: '中高级', english: 'Upper-Intermediate', pinyin: 'zhōnggāojí' },
-    description: 'Hide pinyin for most words (HSK 1-4)',
+    description: 'Show pinyin for advanced vocabulary (HSK 5+, rare/biblical)',
     minHskToShow: 5,
   },
   {
     value: 'hsk6+',
     label: { chinese: '高级', english: 'Advanced', pinyin: 'gāojí' },
-    description: 'Show pinyin only for rare words (HSK 6+)',
+    description: 'Show pinyin only for rare/biblical terms (HSK 6+)',
     minHskToShow: 6,
   },
   {
@@ -104,14 +104,19 @@ export const DEFAULT_SETTINGS: Settings = {
   pinyinDisplay: 'always', // Legacy
   characterSet: 'traditional',
   showHskIndicators: false,
-  chineseVersion: 'cuv',
-  englishVersion: 'kjv',
+  chineseVersion: 'cnv',
+  englishVersion: 'bsb',
   audioSpeed: 1,
   lastReadingPosition: null,
 };
 
 // Helper function to determine if pinyin should be shown for a word
-export function shouldShowPinyin(pinyinLevel: PinyinLevel, hskLevel?: number): boolean {
+export function shouldShowPinyin(
+  pinyinLevel: PinyinLevel,
+  hskLevel?: number | null,
+  freq?: 'common' | 'uncommon' | 'rare' | 'biblical',
+  tocflLevel?: number | null
+): boolean {
   if (pinyinLevel === 'all') return true;
   if (pinyinLevel === 'none') return false;
 
@@ -119,9 +124,51 @@ export function shouldShowPinyin(pinyinLevel: PinyinLevel, hskLevel?: number): b
   const levelConfig = PINYIN_LEVELS.find(l => l.value === pinyinLevel);
   if (!levelConfig || levelConfig.minHskToShow === null) return true;
 
-  // Words without HSK level are considered rare/advanced - always show pinyin unless 'none'
-  if (hskLevel === undefined) return true;
+  // Calculate effective level from HSK and/or TOCFL
+  // HSK 1-6 maps roughly to TOCFL 1-7, so we normalize
+  let effectiveLevel: number | null = null;
 
-  // Show pinyin only if the word's HSK level meets the threshold
-  return hskLevel >= levelConfig.minHskToShow;
+  if (hskLevel !== undefined && hskLevel !== null) {
+    effectiveLevel = hskLevel;
+  }
+
+  if (tocflLevel !== undefined && tocflLevel !== null) {
+    // TOCFL 1-7 → normalize to HSK-like 1-6 scale: (tocfl - 1) * 6/6 + 1
+    const normalizedTocfl = Math.ceil(tocflLevel * (6 / 7));
+    if (effectiveLevel !== null) {
+      // Average HSK and normalized TOCFL
+      effectiveLevel = Math.round((effectiveLevel + normalizedTocfl) / 2);
+    } else {
+      effectiveLevel = normalizedTocfl;
+    }
+  }
+
+  // For words with proficiency level (HSK or TOCFL), use level-based filtering
+  if (effectiveLevel !== null) {
+    return effectiveLevel >= levelConfig.minHskToShow;
+  }
+
+  // For words without proficiency level, use frequency-based filtering
+  // This handles biblical terms and other words not in HSK/TOCFL systems
+  if (freq) {
+    switch (pinyinLevel) {
+      case 'hsk2+':
+        // Elementary: hide only "common" words (like 的, 是, 了)
+        return freq !== 'common';
+      case 'hsk4+':
+        // Intermediate: hide "common" and "uncommon" words
+        return freq === 'rare' || freq === 'biblical';
+      case 'hsk5+':
+        // Upper-Intermediate: show only rare and biblical terms
+        return freq === 'rare' || freq === 'biblical';
+      case 'hsk6+':
+        // Advanced: show only biblical/rare terms
+        return freq === 'biblical' || freq === 'rare';
+      default:
+        return true;
+    }
+  }
+
+  // Words without proficiency level or freq are considered rare - show at higher levels
+  return levelConfig.minHskToShow >= 4;
 }

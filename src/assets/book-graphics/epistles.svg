@@ -1,21 +1,67 @@
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- Quill and letter -->
-  <!-- Letter/parchment -->
-  <rect x="28" y="38" width="24" height="16" stroke="currentColor" stroke-width="1.5" fill="none" rx="1"/>
-  <!-- Text lines on letter -->
-  <line x1="31" y1="42" x2="49" y2="42" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <line x1="31" y1="45" x2="49" y2="45" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <line x1="31" y1="48" x2="44" y2="48" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <line x1="31" y1="51" x2="47" y2="51" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
-  <!-- Quill -->
-  <!-- Quill shaft -->
-  <path d="M 48 36 L 54 26" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <!-- Quill feather -->
-  <path d="M 54 26 Q 56 26 57 28 Q 56 30 54 30" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Feather barbs -->
-  <path d="M 52 28 L 55 28" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
-  <path d="M 51 30 L 54 30" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
-  <path d="M 50 32 L 53 32" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
-  <!-- Quill nib -->
-  <path d="M 48 36 L 47 37 L 48 37" stroke="currentColor" stroke-width="1" fill="none"/>
+  <!-- Epistles: Apostolic letters with wax seal and elegant calligraphy quill -->
+
+  <!-- Scattered letters background (multiple epistles) -->
+  <rect x="26" y="30" width="28" height="20" rx="1.5" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.15" transform="rotate(-3 40 40)"/>
+  <rect x="25" y="32" width="28" height="20" rx="1.5" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2" transform="rotate(2 40 40)"/>
+
+  <!-- Main letter/envelope body with decorative border -->
+  <rect x="22" y="36" width="36" height="24" rx="2" ry="2"
+        stroke="currentColor" stroke-width="2" fill="none"/>
+  <rect x="24" y="38" width="32" height="20" rx="1" ry="1"
+        stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.25"/>
+
+  <!-- Envelope flap (partially open) -->
+  <path d="M 22 38 L 40 50 L 58 38"
+        stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M 22 36 L 40 48 L 58 36"
+        stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.4"/>
+
+  <!-- Flap fold detail -->
+  <line x1="31" y1="42" x2="40" y2="48" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+  <line x1="49" y1="42" x2="40" y2="48" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+
+  <!-- Calligraphic text lines on visible letter -->
+  <line x1="26" y1="43" x2="36" y2="43" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+  <line x1="26" y1="46" x2="33" y2="46" stroke="currentColor" stroke-width="0.7" opacity="0.45"/>
+  <line x1="26" y1="49" x2="35" y2="49" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+  <line x1="26" y1="52" x2="32" y2="52" stroke="currentColor" stroke-width="0.7" opacity="0.45"/>
+  <line x1="26" y1="55" x2="34" y2="55" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Wax seal (prominent) -->
+  <circle cx="46" cy="52" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <circle cx="46" cy="52" r="3.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <path d="M 44 52 L 48 52 M 46 50 L 46 54" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+  <circle cx="46" cy="52" r="1" stroke="currentColor" stroke-width="0.6" fill="currentColor" opacity="0.3"/>
+
+  <!-- Wax drips -->
+  <path d="M 44 56.5 Q 44 58 45 58" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.4"/>
+  <path d="M 48 56.5 Q 48 58 47 58" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+  <!-- Elegant quill pen -->
+  <path d="M 50 30 L 62 14" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+  <!-- Quill feather - elaborate design -->
+  <path d="M 62 14 Q 67 11 70 14 Q 70 18 66 21 Q 63 23 60 21"
+        stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <path d="M 64 16 Q 66 14 68 16 Q 68 18 66 19" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+  <!-- Feather vane lines (barbs) -->
+  <line x1="60" y1="16" x2="65" y2="13" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+  <line x1="59" y1="18" x2="64" y2="15" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+  <line x1="57" y1="20" x2="62" y2="17" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+  <line x1="55" y1="22" x2="60" y2="19" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+  <line x1="53" y1="25" x2="58" y2="22" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+
+  <!-- Opposite side vanes -->
+  <line x1="63" y1="17" x2="67" y2="16" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
+  <line x1="62" y1="19" x2="66" y2="18" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
+  <line x1="60" y1="21" x2="64" y2="20" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
+
+  <!-- Quill nib with split -->
+  <path d="M 50 30 L 48 32 L 50 32 Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+  <line x1="49" y1="30" x2="49" y2="32" stroke="currentColor" stroke-width="0.4" opacity="0.5"/>
+
+  <!-- Ink droplet falling from quill -->
+  <circle cx="49" cy="34" r="0.8" stroke="currentColor" stroke-width="0.5" fill="currentColor" opacity="0.4"/>
 </svg>

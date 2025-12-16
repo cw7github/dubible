@@ -25,10 +25,20 @@ interface PreprocessedWord {
   note?: string;
 }
 
+interface PreprocessedCrossRef {
+  bookId: string;
+  bookAbbrev: string;
+  chapter: number;
+  verseStart: number;
+  verseEnd?: number;
+  displayText: string;
+}
+
 interface PreprocessedVerse {
   number: number;
   text: string;
   words: PreprocessedWord[];
+  crossReferences?: PreprocessedCrossRef[];
 }
 
 interface PreprocessedChapter {
@@ -201,7 +211,44 @@ function convertToVerses(chapter: PreprocessedChapter): Verse[] {
       startIndex: 0,
       endIndex: word.chinese.length,
     })),
+    crossReferences: verse.crossReferences,
   }));
+}
+
+/**
+ * Get cross-references for a specific verse
+ * Returns empty array if no cross-references exist
+ */
+export async function getCrossReferences(
+  bookId: string,
+  chapter: number,
+  verseNumber: number
+): Promise<PreprocessedCrossRef[]> {
+  const key = `${bookId}-${chapter}`;
+
+  // Check cache first
+  if (chapterCache.has(key)) {
+    const verse = chapterCache.get(key)!.verses.find(v => v.number === verseNumber);
+    return verse?.crossReferences || [];
+  }
+
+  // Try to load the chapter
+  const hasData = await hasPreprocessedData(bookId, chapter);
+  if (!hasData) return [];
+
+  try {
+    const url = `/data/preprocessed/${bookId}/chapter-${chapter}.json`;
+    const response = await fetch(url);
+    if (!response.ok) return [];
+
+    const data: PreprocessedChapter = await response.json();
+    chapterCache.set(key, data);
+
+    const verse = data.verses.find(v => v.number === verseNumber);
+    return verse?.crossReferences || [];
+  } catch {
+    return [];
+  }
 }
 
 /**

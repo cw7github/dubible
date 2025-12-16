@@ -1,17 +1,51 @@
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- Oil lamp -->
-  <!-- Lamp base -->
-  <ellipse cx="40" cy="50" rx="12" ry="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Lamp body -->
-  <path d="M 28 50 Q 28 42 32 38 L 48 38 Q 52 42 52 50" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Spout -->
-  <path d="M 52 44 L 58 42 Q 60 42 60 44 Q 60 46 58 46 L 52 44" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Handle -->
-  <path d="M 28 44 Q 24 44 22 46 Q 22 48 24 48 Q 26 48 28 46" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Flame -->
-  <path d="M 40 38 Q 38 34 40 30 Q 42 34 40 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-  <!-- Inner flame -->
-  <path d="M 40 36 Q 39 34 40 32" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6"/>
-  <!-- Wick opening -->
-  <ellipse cx="40" cy="38" rx="3" ry="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
+  <!-- Wisdom: Sacred oil lamp with divine flame and enlightenment rays -->
+
+  <!-- Radiant wisdom aura -->
+  <circle cx="40" cy="32" r="20" stroke="currentColor" stroke-width="0.3" fill="none" opacity="0.12"/>
+  <circle cx="40" cy="32" r="24" stroke="currentColor" stroke-width="0.25" fill="none" opacity="0.08"/>
+
+  <!-- Lamp body - classical vessel with decorative curves -->
+  <path d="M 28 48 Q 24 48 24 52 Q 24 58 32 58 L 48 58 Q 56 58 56 52 Q 56 48 52 48"
+        stroke="currentColor" stroke-width="2" fill="none"/>
+
+  <!-- Lamp base detail -->
+  <ellipse cx="40" cy="58" rx="8" ry="2" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+  <path d="M 30 54 Q 30 56 32 56 L 48 56 Q 50 56 50 54" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+
+  <!-- Lamp top rim with depth -->
+  <ellipse cx="40" cy="48" rx="12" ry="3" stroke="currentColor" stroke-width="2" fill="none"/>
+  <ellipse cx="40" cy="47.5" rx="10" ry="2" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Ornate spout (right) -->
+  <path d="M 52 49 Q 58 48 62 48 Q 65 48 65 50 Q 65 52 62 52 L 56 52"
+        stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="63" cy="50" r="1.5" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.4"/>
+
+  <!-- Ornate handle (left) -->
+  <path d="M 28 49 Q 22 49 18 46 Q 16 44 16 41 Q 16 38 18 36 Q 20 34 24 34 Q 26 34 28 36"
+        stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M 24 38 Q 20 38 19 40 Q 19 42 22 43" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.4"/>
+
+  <!-- Sacred flame - layered for depth -->
+  <path d="M 40 44 Q 35 38 37 30 Q 39 24 40 22 Q 41 24 43 30 Q 45 38 40 44"
+        stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  <path d="M 40 42 Q 38 38 39 32 Q 40 28 41 32 Q 42 38 40 42"
+        stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.5"/>
+  <path d="M 40 40 Q 39.5 36 40 32"
+        stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+  <!-- Flame tip glow -->
+  <circle cx="40" cy="22" r="2" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+  <!-- Elaborate light rays - eight-pointed star pattern -->
+  <line x1="40" y1="18" x2="40" y2="12" stroke="currentColor" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+  <line x1="35" y1="20" x2="31" y2="16" stroke="currentColor" stroke-width="1" opacity="0.35" stroke-linecap="round"/>
+  <line x1="45" y1="20" x2="49" y2="16" stroke="currentColor" stroke-width="1" opacity="0.35" stroke-linecap="round"/>
+  <line x1="32" y1="24" x2="27" y2="21" stroke="currentColor" stroke-width="0.8" opacity="0.3" stroke-linecap="round"/>
+  <line x1="48" y1="24" x2="53" y2="21" stroke="currentColor" stroke-width="0.8" opacity="0.3" stroke-linecap="round"/>
+  <line x1="30" y1="28" x2="24" y2="26" stroke="currentColor" stroke-width="0.7" opacity="0.25" stroke-linecap="round"/>
+  <line x1="50" y1="28" x2="56" y2="26" stroke="currentColor" stroke-width="0.7" opacity="0.25" stroke-linecap="round"/>
+  <line x1="28" y1="32" x2="22" y2="32" stroke="currentColor" stroke-width="0.6" opacity="0.2" stroke-linecap="round"/>
+  <line x1="52" y1="32" x2="58" y2="32" stroke="currentColor" stroke-width="0.6" opacity="0.2" stroke-linecap="round"/>
 </svg>

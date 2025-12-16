@@ -96,13 +96,13 @@ export function useScrollDismiss({
         if (scrollDelta > scrollThreshold) {
           setShouldFade(true);
 
-          // Calculate opacity based on scroll distance (fade out smoothly)
-          const fadeDistance = 100; // Distance over which to fade
+          // Calculate opacity based on scroll distance (fade out quickly)
+          const fadeDistance = 40; // Faster fade over shorter distance
           const fadeProgress = Math.min(
             (scrollDelta - scrollThreshold) / fadeDistance,
             1
           );
-          const newOpacity = 1 - fadeProgress * 0.7; // Fade to 30% opacity
+          const newOpacity = 1 - fadeProgress; // Fade to 0% opacity
           setOpacity(newOpacity);
 
           // Auto-dismiss after delay

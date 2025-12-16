@@ -1,15 +1,60 @@
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- Alpha and Omega symbol -->
-  <!-- Alpha (Α) -->
-  <path d="M 26 50 L 30 35 L 34 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-  <line x1="27.5" y1="44" x2="32.5" y2="44" stroke="currentColor" stroke-width="1.5"/>
-  <!-- Omega (Ω) -->
-  <path d="M 46 42 Q 46 36 50 34 Q 54 36 54 42 Q 54 48 52 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M 48 48 Q 48 50 46 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M 52 48 Q 52 50 54 50" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <!-- Base terminals for Omega -->
-  <line x1="44" y1="50" x2="48" y2="50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="52" y1="50" x2="56" y2="50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Decorative circle around -->
-  <circle cx="40" cy="40" r="18" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+  <!-- Revelation: Alpha & Omega with seven seals, throne room, and apocalyptic glory -->
+
+  <!-- Cosmic rings - seven circles for seven churches/seals -->
+  <circle cx="40" cy="40" r="34" stroke="currentColor" stroke-width="0.3" fill="none" opacity="0.08"/>
+  <circle cx="40" cy="40" r="30" stroke="currentColor" stroke-width="0.4" fill="none" opacity="0.1"/>
+  <circle cx="40" cy="40" r="26" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.12"/>
+  <circle cx="40" cy="40" r="22" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.15"/>
+  <circle cx="40" cy="40" r="18" stroke="currentColor" stroke-width="0.7" fill="none" opacity="0.2"/>
+
+  <!-- Seven stars around outer circle -->
+  <circle cx="40" cy="12" r="1.2" stroke="currentColor" stroke-width="0.8" fill="currentColor" opacity="0.4"/>
+  <circle cx="58" cy="20" r="1" stroke="currentColor" stroke-width="0.7" fill="currentColor" opacity="0.35"/>
+  <circle cx="64" cy="40" r="1" stroke="currentColor" stroke-width="0.7" fill="currentColor" opacity="0.35"/>
+  <circle cx="58" cy="60" r="1" stroke="currentColor" stroke-width="0.7" fill="currentColor" opacity="0.35"/>
+  <circle cx="40" cy="68" r="1.2" stroke="currentColor" stroke-width="0.8" fill="currentColor" opacity="0.4"/>
+  <circle cx="22" cy="60" r="1" stroke="currentColor" stroke-width="0.7" fill="currentColor" opacity="0.35"/>
+  <circle cx="16" cy="40" r="1" stroke="currentColor" stroke-width="0.7" fill="currentColor" opacity="0.35"/>
+  <circle cx="22" cy="20" r="1" stroke="currentColor" stroke-width="0.7" fill="currentColor" opacity="0.35"/>
+
+  <!-- Throne circle -->
+  <circle cx="40" cy="40" r="14" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+  <circle cx="40" cy="40" r="11" stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/>
+
+  <!-- Alpha (Α) - left side with architectural weight -->
+  <path d="M 22 52 L 30 28 L 38 52"
+        stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="25" y1="44" x2="35" y2="44" stroke="currentColor" stroke-width="2"/>
+  <path d="M 23 50 L 29 30 L 35 50"
+        stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.3"/>
+
+  <!-- Omega (Ω) - right side with architectural weight -->
+  <path d="M 42 40 Q 42 30 50 27 Q 58 30 58 40 Q 58 48 54 52"
+        stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 49 48 Q 46 52 42 52" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 51 48 Q 54 52 58 52" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <line x1="40" y1="52" x2="48" y2="52" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <line x1="52" y1="52" x2="60" y2="52" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Inner detail on omega -->
+  <path d="M 44 40 Q 44 32 50 30 Q 56 32 56 40" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.3"/>
+
+  <!-- Seven seals/lampstands around center -->
+  <circle cx="40" cy="32" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="46" cy="34" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="48" cy="40" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="46" cy="46" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="40" cy="48" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="34" cy="46" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="32" cy="40" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+  <circle cx="34" cy="34" r="1.5" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+  <!-- Central throne eye/mystery -->
+  <circle cx="40" cy="40" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <circle cx="40" cy="40" r="1" stroke="currentColor" stroke-width="0.8" fill="currentColor" opacity="0.5"/>
+
+  <!-- Lightning bolts from throne (subtle) -->
+  <path d="M 40 26 L 38 22 L 40 20" stroke="currentColor" stroke-width="0.8" opacity="0.2" stroke-linejoin="round"/>
+  <path d="M 40 54 L 42 58 L 40 60" stroke="currentColor" stroke-width="0.8" opacity="0.2" stroke-linejoin="round"/>
 </svg>

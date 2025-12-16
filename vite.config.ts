@@ -6,6 +6,10 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Remove console.log and debugger statements in production
+  esbuild: {
+    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+  },
   server: {
     proxy: {
       '/api/bible': {
@@ -21,10 +25,17 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      includeAssets: [
+        'favicon.svg',
+        'favicon-16x16.png',
+        'favicon-32x32.png',
+        'apple-touch-icon.png',
+        'pwa-192x192.png',
+        'pwa-512x512.png'
+      ],
       manifest: {
-        name: 'Bilingual Bible',
-        short_name: 'BilingualBible',
+        name: 'DuBible - Bilingual Bible',
+        short_name: 'DuBible',
         description: 'A beautiful bilingual Chinese-English Bible app for language learners',
         theme_color: '#FDFCFA',
         background_color: '#FDFCFA',
@@ -51,7 +62,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6MB for bundled Bible data
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10MB for bundled Bible data + dictionary
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

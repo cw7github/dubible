@@ -8,7 +8,7 @@
 ├─────────────────────────────────────────────────────────────┤
 │                                                               │
 │  FHL Bible API  →  Gemini 2.5 Flash  →  Static JSON         │
-│  (信望愛聖經)      (Word Segmentation)    (public/data/)     │
+│  (信望愛聖經)      (via OpenRouter)      (public/data/)      │
 │                                                               │
 └─────────────────────────────────────────────────────────────┘
                             ↓
@@ -20,7 +20,20 @@
 │  (fallback: runtime)     (state mgmt)       (components)    │
 │                                                               │
 │  ↓                      ↓                    ↓               │
-│  IndexedDB Cache        localStorage         Framer Motion  │
+│  IndexedDB Cache        Firebase Sync        Framer Motion  │
+│  (Dexie)                (Firestore)          (animations)   │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    Cloud Services                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  Firebase Auth  →  Firestore Database  →  Cross-device Sync │
+│  (Google/FB)       (vocabulary/settings)   (real-time)      │
+│                                                               │
+│  OpenAI TTS     →  Audio Pronunciation  →  Word Popups      │
+│  (optional)        (fallback: Web Speech)                    │
 │                                                               │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -29,18 +42,29 @@
 
 ```
 App.tsx
+├── useSyncManager                       # Firebase sync orchestration
 └── ReadingScreen.tsx                    # Root container
-    ├── Header                           # Book/chapter title, nav buttons
+    ├── Header                           # Book/chapter title, nav buttons, sync status
     ├── BookNavigator                    # Sidebar for book selection
+    │   └── OfflineDownload              # Per-book download buttons
     ├── TranslationPanel                 # Floating panel (verse or word)
-    │   ├── Verse mode: English text
+    │   ├── Verse mode: English text (BSB)
     │   └── Word mode: WordDetailPanel   # Enhanced lexicon entry
+    │       └── Audio pronunciation button (TTS)
     ├── InfiniteScroll                   # Main reading content
     │   └── VerseDisplay[]               # Individual verses
     │       └── ChineseWord[]            # Interactive word components
+    │           └── Pinyin (conditional based on level)
     ├── AudioPlayer                      # Bottom bar (TTS playback)
     ├── VocabularyScreen                 # Modal for saved words
-    └── SettingsScreen                   # Modal for preferences
+    │   └── FlashcardReview              # SRS-based review
+    ├── SettingsScreen                   # Modal for preferences
+    │   ├── Account section (auth)
+    │   ├── Pinyin level selector (6 levels)
+    │   ├── Character set (traditional/simplified)
+    │   └── Bible translation selector
+    ├── LoginScreen                      # Google/Facebook OAuth
+    └── ProfileScreen                    # User profile, sign out
 ```
 
 ## Data Flow
@@ -137,6 +161,23 @@ Display with BSB attribution
 ### Zustand Stores Architecture
 
 ```typescript
+// authStore.ts - Authentication state
+{
+  user: UserProfile | null;        // {uid, email, displayName, photoURL, provider}
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  isSyncing: boolean;
+  lastSyncTime: number | null;
+  syncError: string | null;
+  isFirebaseAvailable: boolean;
+
+  // Actions
+  signInWithGoogle: () => Promise<void>;
+  signInWithFacebook: () => Promise<void>;
+  signOut: () => Promise<void>;
+}
+
 // readingStore.ts - Current reading position
 {
   currentBookId: string;           // 'matthew'
@@ -158,7 +199,7 @@ Display with BSB attribution
 
 // vocabularyStore.ts - Saved words with SRS
 {
-  words: SavedWord[];  // Persisted to localStorage
+  words: SavedWord[];  // Persisted to localStorage, synced to Firestore
 
   // SavedWord structure:
   {
@@ -183,27 +224,54 @@ Display with BSB attribution
 
 // settingsStore.ts - User preferences
 {
-  fontFamily: 'sans' | 'serif';
-  textSize: 'sm' | 'base' | 'lg' | 'xl';
-  showHskIndicators: boolean;
   theme: 'light' | 'sepia' | 'dark';
-  showPinyin: boolean;
-  // Persisted to localStorage
+  fontFamily: 'serif' | 'sans';
+  textSize: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  pinyinLevel: 'all' | 'hsk2+' | 'hsk4+' | 'hsk5+' | 'hsk6+' | 'none';
+  characterSet: 'traditional' | 'simplified';
+  showHskIndicators: boolean;
+  chineseVersion: string;          // 'cnv'
+  englishVersion: string;          // 'bsb'
+  audioSpeed: 0.75 | 1 | 1.25;
+  lastReadingPosition: {...} | null;
+  // Persisted to localStorage, synced to Firestore
 }
 
 // bookmarkStore.ts - Saved verses
 {
-  bookmarks: Bookmark[];
-  // Persisted to localStorage
+  bookmarks: Bookmark[];           // With notes, synced to Firestore
+}
+
+// historyStore.ts - Reading history navigation
+{
+  entries: HistoryEntry[];         // [{bookId, chapter, timestamp}]
+  currentIndex: number;            // For back/forward navigation
+
+  // Actions
+  pushEntry: (bookId, chapter) => void;
+  goBack: () => HistoryEntry | null;
+  goForward: () => HistoryEntry | null;
+  canGoBack: () => boolean;
+  canGoForward: () => boolean;
 }
 ```
 
-### Store Persistence
+### Store Persistence & Sync
 
-- **readingStore**: Not persisted (ephemeral)
-- **vocabularyStore**: Persisted via Zustand middleware → localStorage key: `bilingual-bible-vocabulary`
-- **settingsStore**: Persisted → localStorage key: `bilingual-bible-settings`
-- **bookmarkStore**: Persisted → localStorage key: `bilingual-bible-bookmarks`
+| Store | localStorage | Firestore Sync |
+|-------|--------------|----------------|
+| authStore | No | N/A (manages auth state) |
+| readingStore | No (ephemeral) | No |
+| vocabularyStore | Yes | Yes (when authenticated) |
+| settingsStore | Yes | Yes (when authenticated) |
+| bookmarkStore | Yes | Yes (when authenticated) |
+| historyStore | Yes | Yes (when authenticated) |
+
+**Sync Behavior:**
+- When signed out: Data stored locally only
+- On first sign-in: Local data automatically migrates to Firestore
+- When signed in: Changes sync in real-time across devices
+- Offline: Changes cached locally and synced when online
 
 ## Services Layer
 
@@ -344,6 +412,61 @@ interface VerseReference {
 **Params**: `bookId`, `chapter`, `onVerseChange`
 **Returns**: Play controls, timing data, current word index
 
+### useTwoFingerSwipe
+**Purpose**: Detect two-finger horizontal swipe gestures for navigation
+**Params**: `{ onSwipeLeft, onSwipeRight, threshold, enabled }`
+**Usage**: Navigate back/forward through passage history
+**Logic**: Track two-finger touch midpoint, fire callback on horizontal swipe exceeding threshold
+
+### usePassageHistory
+**Purpose**: Manage passage viewing history with back/forward navigation
+**Params**: `{ currentBookId, currentChapter, onNavigate }`
+**Returns**: `{ goBack, goForward, canGoBack, canGoForward, trackCurrentPassage }`
+**Integration**: Works with historyStore for persistence
+
+### useSyncManager
+**Purpose**: Orchestrate Firebase sync between local stores and Firestore
+**Behavior**:
+- Monitors auth state changes
+- On sign-in: Migrates local data to cloud, then syncs
+- On sign-out: Keeps local copy
+- Handles real-time sync for vocabulary, bookmarks, history, settings
+
+## Services Layer (Additional)
+
+### ttsService.ts
+**Purpose**: Text-to-speech for Chinese word pronunciation
+
+**Features**:
+- OpenAI TTS integration (high-quality "nova" voice)
+- Web Speech API fallback (browser built-in)
+- Audio caching to reduce API calls
+- Automatic provider detection
+
+**Usage**:
+```typescript
+import { ttsService } from './services';
+
+// Speak a word
+await ttsService.speak({
+  text: '耶穌',
+  lang: 'zh-CN',
+  onStart: () => setIsPlaying(true),
+  onEnd: () => setIsPlaying(false),
+  onError: (err) => console.error(err),
+});
+
+// Stop playback
+ttsService.stop();
+
+// Check provider info
+const { provider, quality } = ttsService.getProviderInfo();
+// { provider: 'openai', quality: 'high' } or
+// { provider: 'webspeech', quality: 'low' }
+```
+
+**Configuration**: Set `VITE_OPENAI_API_KEY` in `.env.local` for OpenAI TTS
+
 ## Animation System (Framer Motion)
 
 ### Key Patterns
@@ -380,22 +503,23 @@ interface VerseReference {
 ### Script Flow
 
 ```
-1. Parse CLI args (--book, --chapter, --all)
+1. Parse CLI args (--book, --chapter, --start, --all)
     ↓
-2. Initialize Gemini API client
+2. Validate OpenRouter API key (OPENROUTER_API_KEY env var)
     ↓
 3. For each chapter:
-    ├─ Fetch verses from FHL API
+    ├─ Fetch verses from FHL API (using Chinese abbreviation)
+    ├─ Strip cross-references and HTML from verse text
     ├─ Batch into groups of 5 verses
     ├─ For each batch:
     │   ├─ Build prompt with segmentation rules
-    │   ├─ Call Gemini generateContent()
-    │   ├─ Parse JSON response
-    │   ├─ Retry on failure (max 3 times)
-    │   └─ Rate limit delay (1000ms)
+    │   ├─ Call OpenRouter API (google/gemini-2.5-flash)
+    │   ├─ Parse JSON response (clean markdown if present)
+    │   ├─ Retry on failure (max 3 times with exponential backoff)
+    │   └─ Rate limit delay (1000ms between batches)
     └─ Save to public/data/preprocessed/{book}/chapter-{n}.json
     ↓
-4. Update manifest.json
+4. Run `npm run generate-manifest` to update manifest.json
 ```
 
 ### Gemini Prompt Structure

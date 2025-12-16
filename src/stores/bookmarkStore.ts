@@ -17,6 +17,14 @@ function verseRefToKey(ref: VerseReference): string {
   return `${ref.bookId}-${ref.chapter}-${ref.verse}`;
 }
 
+// Security: Sanitize and limit note length to prevent abuse
+const MAX_NOTE_LENGTH = 2000;
+function sanitizeNote(note?: string): string | undefined {
+  if (!note) return undefined;
+  // Trim whitespace and limit length
+  return note.trim().slice(0, MAX_NOTE_LENGTH);
+}
+
 interface BookmarkState {
   bookmarks: Bookmark[];
 
@@ -45,7 +53,7 @@ export const useBookmarkStore = create<BookmarkState>()(
         const newBookmark: Bookmark = {
           id: generateId(),
           verseRef,
-          note,
+          note: sanitizeNote(note),
           createdAt: Date.now(),
         };
 
@@ -83,9 +91,10 @@ export const useBookmarkStore = create<BookmarkState>()(
 
       updateNote: (verseRef, note) => {
         const key = verseRefToKey(verseRef);
+        const sanitizedNote = sanitizeNote(note);
         set((state) => ({
           bookmarks: state.bookmarks.map((b) =>
-            verseRefToKey(b.verseRef) === key ? { ...b, note } : b
+            verseRefToKey(b.verseRef) === key ? { ...b, note: sanitizedNote } : b
           ),
         }));
       },

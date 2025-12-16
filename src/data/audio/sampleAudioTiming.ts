@@ -1,132 +1,117 @@
 import type { ChapterAudio } from '../../types';
 
-// Sample audio timing data for Matthew 5 (Beatitudes)
-// In production, this would be generated from actual audio files with timing metadata
-// For demo purposes, we simulate realistic word timings
+// Cache for loaded audio timing data
+const audioCache = new Map<string, ChapterAudio | null>();
+const loadingPromises = new Map<string, Promise<ChapterAudio | null>>();
 
-function generateWordTimings(
-  _verseNumber: number,
-  wordCount: number,
-  startTime: number,
-  averageWordDuration: number = 400
-): { words: { wordIndex: number; startTime: number; endTime: number }[]; endTime: number } {
-  const words = [];
-  let currentTime = startTime;
-
-  for (let i = 0; i < wordCount; i++) {
-    // Add some variation to word duration (300-600ms)
-    const duration = averageWordDuration + (Math.random() - 0.5) * 200;
-    words.push({
-      wordIndex: i,
-      startTime: Math.round(currentTime),
-      endTime: Math.round(currentTime + duration),
-    });
-    currentTime += duration + 50; // Small gap between words
-  }
-
-  return { words, endTime: Math.round(currentTime) };
+function getCacheKey(bookId: string, chapter: number): string {
+  return `${bookId}-${chapter}`;
 }
 
-// Matthew 5 word counts per verse (from sampleData)
-const matthew5WordCounts: Record<number, number> = {
-  1: 9,  // 耶穌看見這許多的人，就上了山，既已坐下，門徒到他跟前來，
-  2: 2,  // 他就開口教訓他們，說：
-  3: 7,  // 虛心的人有福了！因為天國是他們的。
-  4: 7,  // 哀慟的人有福了！因為他們必得安慰。
-  5: 7,  // 溫柔的人有福了！因為他們必承受地土。
-  6: 9,  // 飢渴慕義的人有福了！因為他們必得飽足。
-  7: 7,  // 憐恤人的人有福了！因為他們必蒙憐恤。
-  8: 7,  // 清心的人有福了！因為他們必得見神。
-  9: 8,  // 使人和睦的人有福了！因為他們必稱為神的兒子。
-  10: 10, // 為義受逼迫的人有福了！因為天國是他們的。
-  11: 12, // 人若因我辱罵你們，逼迫你們，捏造各樣壞話毀謗你們，你們就有福了！
-  12: 13, // 應當歡喜快樂，因為你們在天上的賞賜是大的。在你們以前的先知，人也是這樣逼迫他們。
-};
+/**
+ * Load audio timing data from the generated JSON files
+ * Returns null if audio not available for this chapter
+ */
+export async function loadChapterAudio(
+  bookId: string,
+  chapter: number
+): Promise<ChapterAudio | null> {
+  const cacheKey = getCacheKey(bookId, chapter);
 
-// Generate Matthew 5 audio timing
-function generateMatthew5Audio(): ChapterAudio {
-  const verses: ChapterAudio['verses'] = [];
-  let currentTime = 500; // Start after brief silence
-
-  for (let verseNum = 1; verseNum <= 12; verseNum++) {
-    const wordCount = matthew5WordCounts[verseNum] || 5;
-    const { words, endTime } = generateWordTimings(verseNum, wordCount, currentTime);
-
-    verses.push({
-      verseNumber: verseNum,
-      startTime: currentTime,
-      endTime: endTime,
-      words,
-    });
-
-    currentTime = endTime + 800; // Pause between verses
+  // Return cached data if available
+  if (audioCache.has(cacheKey)) {
+    return audioCache.get(cacheKey) || null;
   }
 
-  return {
-    bookId: 'matthew',
-    chapter: 5,
-    audioUrl: '', // Would be actual audio URL in production
-    duration: currentTime,
-    verses,
-  };
-}
-
-// John 3 word counts
-const john3WordCounts: Record<number, number> = {
-  16: 17, // 神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。
-  17: 13, // 因為神差他的兒子降世，不是要定世人的罪，乃是要叫世人因他得救。
-};
-
-function generateJohn3Audio(): ChapterAudio {
-  const verses: ChapterAudio['verses'] = [];
-  let currentTime = 500;
-
-  for (const verseNum of [16, 17]) {
-    const wordCount = john3WordCounts[verseNum] || 10;
-    const { words, endTime } = generateWordTimings(verseNum, wordCount, currentTime);
-
-    verses.push({
-      verseNumber: verseNum,
-      startTime: currentTime,
-      endTime: endTime,
-      words,
-    });
-
-    currentTime = endTime + 800;
+  // Return existing promise if already loading
+  if (loadingPromises.has(cacheKey)) {
+    return loadingPromises.get(cacheKey)!;
   }
 
-  return {
-    bookId: 'john',
-    chapter: 3,
-    audioUrl: '',
-    duration: currentTime,
-    verses,
-  };
-}
+  // Load from JSON file
+  const loadPromise = (async () => {
+    try {
+      const timingUrl = `/audio/${bookId}/chapter-${chapter}-timing.json`;
+      console.log(`[AudioTiming] Loading timing data from: ${timingUrl}`);
+      const response = await fetch(timingUrl);
 
-// Cache generated timings
-let matthew5Cache: ChapterAudio | null = null;
-let john3Cache: ChapterAudio | null = null;
+      if (!response.ok) {
+        console.log(`[AudioTiming] Timing data not available (${response.status}): ${timingUrl}`);
+        audioCache.set(cacheKey, null);
+        return null;
+      }
 
-export function getChapterAudio(bookId: string, chapter: number): ChapterAudio | null {
-  if (bookId === 'matthew' && chapter === 5) {
-    if (!matthew5Cache) {
-      matthew5Cache = generateMatthew5Audio();
+      const data: ChapterAudio = await response.json();
+      console.log(`[AudioTiming] Successfully loaded timing data for ${bookId} chapter ${chapter}:`, {
+        duration: data.duration,
+        verses: data.verses.length,
+        totalWords: data.verses.reduce((sum, v) => sum + v.words.length, 0),
+      });
+
+      // Convert seconds to milliseconds for timing data
+      const convertedData: ChapterAudio = {
+        ...data,
+        duration: data.duration * 1000,
+        verses: data.verses.map((verse) => ({
+          ...verse,
+          startTime: verse.startTime * 1000,
+          endTime: verse.endTime * 1000,
+          words: verse.words.map((word) => ({
+            ...word,
+            startTime: word.startTime * 1000,
+            endTime: word.endTime * 1000,
+          })),
+        })),
+      };
+
+      console.log(`[AudioTiming] Converted timing data to milliseconds (duration: ${convertedData.duration}ms)`);
+      audioCache.set(cacheKey, convertedData);
+      return convertedData;
+    } catch (error) {
+      console.error(`[AudioTiming] Failed to load timing data for ${bookId} chapter ${chapter}:`, error);
+      audioCache.set(cacheKey, null);
+      return null;
+    } finally {
+      loadingPromises.delete(cacheKey);
     }
-    return matthew5Cache;
+  })();
+
+  loadingPromises.set(cacheKey, loadPromise);
+  return loadPromise;
+}
+
+/**
+ * Synchronous version - returns cached data or null
+ * Use loadChapterAudio for async loading
+ */
+export function getChapterAudio(
+  bookId: string,
+  chapter: number
+): ChapterAudio | null {
+  const cacheKey = getCacheKey(bookId, chapter);
+
+  // Return cached data if available
+  if (audioCache.has(cacheKey)) {
+    return audioCache.get(cacheKey) || null;
   }
 
-  if (bookId === 'john' && chapter === 3) {
-    if (!john3Cache) {
-      john3Cache = generateJohn3Audio();
-    }
-    return john3Cache;
-  }
+  // Trigger async load
+  loadChapterAudio(bookId, chapter);
 
   return null;
 }
 
-// Find the current verse and word based on playback time
+/**
+ * Check if audio is available (sync check of cache)
+ */
+export function isAudioAvailable(bookId: string, chapter: number): boolean {
+  const cacheKey = getCacheKey(bookId, chapter);
+  return audioCache.get(cacheKey) !== null && audioCache.has(cacheKey);
+}
+
+/**
+ * Find the current verse and word based on playback time (in ms)
+ */
 export function getPositionAtTime(
   audioData: ChapterAudio,
   currentTime: number
@@ -151,4 +136,11 @@ export function getPositionAtTime(
   }
 
   return { verseNumber: null, wordIndex: null };
+}
+
+/**
+ * Get the audio file URL for a chapter
+ */
+export function getAudioUrl(bookId: string, chapter: number): string {
+  return `/audio/${bookId}/chapter-${chapter}.mp3`;
 }

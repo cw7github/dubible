@@ -1,3 +1,11 @@
+/**
+ * DefinitionCard - DEPRECATED: Not currently used in the codebase
+ *
+ * NOTE: This component has z-index conflicts (z-35, z-40) with the documented
+ * z-index system. TranslationPanel and WordDetailPanel have replaced this functionality.
+ * Consider removing this file or updating z-indexes to z-30/z-31 if re-enabled.
+ */
+
 import { memo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { SegmentedWord, VerseReference } from '../../types';
@@ -46,7 +54,7 @@ export const DefinitionCard = memo(function DefinitionCard({
         word.definition || '',
         verseRef,
         word.partOfSpeech,
-        word.hskLevel
+        word.hskLevel ?? undefined
       );
     }
   }, [word, verseRef, isSaved, savedWord, addWord, removeWord]);
@@ -57,14 +65,14 @@ export const DefinitionCard = memo(function DefinitionCard({
     <AnimatePresence>
       {word && (
         <>
-          {/* Invisible tap-away layer - doesn't block scrolling */}
+          {/* Invisible tap-away layer - CONFLICT: Uses z-35 instead of standard z-30 */}
           <div
             className="fixed inset-0 z-35"
             onClick={onClose}
             style={{ pointerEvents: 'auto' }}
           />
 
-          {/* Top Definition Bar - fixed position below header */}
+          {/* Top Definition Bar - CONFLICT: Uses z-40 instead of standard z-31 */}
           <motion.div
             className="fixed left-0 right-0 z-40"
             style={{ top: '56px' }} // Below the header

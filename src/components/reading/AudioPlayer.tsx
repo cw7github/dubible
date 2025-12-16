@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface AudioPlayerProps {
   isPlaying: boolean;
   isAvailable: boolean;
+  isLoading?: boolean;
   currentTime: number;
   duration: number;
   playbackRate: number;
@@ -18,6 +19,7 @@ const PLAYBACK_RATES = [0.5, 0.75, 1, 1.25, 1.5];
 export const AudioPlayer = memo(function AudioPlayer({
   isPlaying,
   isAvailable,
+  isLoading = false,
   currentTime,
   duration,
   playbackRate,
@@ -45,6 +47,33 @@ export const AudioPlayer = memo(function AudioPlayer({
     const percentage = x / rect.width;
     onSeek(percentage * duration);
   };
+
+  if (isLoading) {
+    return (
+      <motion.div
+        className="flex items-center gap-2.5 rounded-full px-4 py-2"
+        style={{
+          backgroundColor: 'var(--bg-secondary)',
+          color: 'var(--text-tertiary)',
+        }}
+      >
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className="h-5 w-5"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+        >
+          <circle cx="12" cy="12" r="10" strokeOpacity={0.25} />
+          <path d="M12 2a10 10 0 0 1 10 10" strokeLinecap="round" />
+        </motion.svg>
+        <span className="font-body text-sm tracking-wide">Loading...</span>
+      </motion.div>
+    );
+  }
 
   if (!isAvailable) {
     return (
