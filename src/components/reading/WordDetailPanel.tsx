@@ -204,22 +204,32 @@ export const WordDetailPanel = memo(function WordDetailPanel({
       <div className="flex items-start gap-3">
         {/* Chinese character with pinyin and audio button - compact */}
         <div className="flex flex-col items-center flex-shrink-0">
-          <span
-            className="font-body text-[10px] tracking-wide italic leading-tight mb-0.5"
-            style={{ color: 'var(--text-secondary)', opacity: 0.75 }}
-          >
-            {word.pinyin}
-          </span>
+          {/* Pinyin centered above each character */}
           <div className="flex items-center gap-2">
-            <span
-              className="font-chinese-serif text-2xl leading-none"
-              style={{
-                color: isNameEntry ? '#8B6B53' : 'var(--text-primary)',
-                letterSpacing: '0.02em'
-              }}
-            >
-              {word.chinese}
-            </span>
+            <div className="flex">
+              {(() => {
+                const chars = [...word.chinese];
+                const syllables = splitPinyinSyllables(word.pinyin, chars.length);
+                return chars.map((char, idx) => (
+                  <div key={idx} className="flex flex-col items-center">
+                    <span
+                      className="font-body text-[10px] tracking-wide italic leading-tight mb-0.5 text-center"
+                      style={{ color: 'var(--text-secondary)', opacity: 0.75, minWidth: '1.5rem' }}
+                    >
+                      {syllables[idx] || ''}
+                    </span>
+                    <span
+                      className="font-chinese-serif text-2xl leading-none"
+                      style={{
+                        color: isNameEntry ? '#8B6B53' : 'var(--text-primary)',
+                      }}
+                    >
+                      {char}
+                    </span>
+                  </div>
+                ));
+              })()}
+            </div>
 
             {/* Audio playback button - Coming Soon state */}
             <div className="relative">
