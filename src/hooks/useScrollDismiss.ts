@@ -30,10 +30,11 @@ export function useScrollDismiss({
   onDismiss,
   scrollContainerRef,
   scrollThreshold = 50,
-  dismissDelay = 300,
+  dismissDelay: _dismissDelay = 300,
   trackClickPosition: _trackClickPosition = true,
 }: UseScrollDismissOptions): ScrollDismissState {
   void _trackClickPosition; // Reserved for future use
+  void _dismissDelay; // Reserved for future use
   const [opacity, setOpacity] = useState<number>(1);
   const [shouldFade, setShouldFade] = useState<boolean>(false);
 
@@ -72,33 +73,33 @@ export function useScrollDismiss({
 
       // Use RAF to batch state updates and avoid performance issues
       rafRef.current = requestAnimationFrame(() => {
-        // Once we've committed to dismissing, don't process more scroll events
-        if (isDismissing.current) {
-          return;
-        }
-
         const currentScrollY = container.scrollTop;
         const scrollDelta = Math.abs(currentScrollY - scrollStartY.current);
 
-        // If user scrolls past threshold, commit to dismiss (no going back)
+        // If user scrolls past threshold, start fading
         if (scrollDelta > scrollThreshold) {
-          isDismissing.current = true; // Lock in the dismiss
+          isDismissing.current = true; // Lock in - no restoring opacity
           setShouldFade(true);
 
-          // Calculate opacity based on scroll distance (fade out quickly)
+          // Calculate opacity based on scroll distance (fade out over 40px)
           const fadeDistance = 40;
           const fadeProgress = Math.min(
             (scrollDelta - scrollThreshold) / fadeDistance,
             1
           );
-          setOpacity(1 - fadeProgress);
+          const newOpacity = 1 - fadeProgress;
+          setOpacity(newOpacity);
 
-          // Auto-dismiss after delay
-          if (!dismissTimerRef.current) {
+          // Dismiss immediately once fully faded
+          if (newOpacity <= 0.1 && !dismissTimerRef.current) {
             dismissTimerRef.current = setTimeout(() => {
               onDismiss();
-            }, dismissDelay);
+            }, 50); // Tiny delay to let final fade render
           }
+        } else if (!isDismissing.current) {
+          // Only restore if we haven't started dismissing
+          setOpacity(1);
+          setShouldFade(false);
         }
       });
     };
@@ -119,7 +120,6 @@ export function useScrollDismiss({
     onDismiss,
     scrollContainerRef,
     scrollThreshold,
-    dismissDelay,
   ]);
 
   return {

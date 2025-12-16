@@ -74,13 +74,9 @@ export const TranslationPanel = memo(function TranslationPanel({
 
   const book = verseRef ? getBookById(verseRef.bookId) : null;
 
-  // Determine if panel should be visible (not just faded)
-  // Hide completely when scrollOpacity drops below a threshold
-  const isFullyVisible = scrollOpacity > 0.5;
-
   return (
     <AnimatePresence mode="wait">
-      {mode && isFullyVisible && (
+      {mode && (
         <>
           {/* Panel - no backdrop, scroll dismisses naturally */}
           <motion.div
