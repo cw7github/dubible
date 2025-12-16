@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, subscribeWithSelector } from 'zustand/middleware';
+import { persist, subscribeWithSelector, createJSONStorage } from 'zustand/middleware';
 import type {
   SavedWord,
   SRSData,
@@ -56,6 +56,9 @@ function calculateNextReview(srsData: SRSData, result: ReviewResult): SRSData {
 interface VocabularyState {
   words: SavedWord[];
 
+  // Hydration state - tracks if localStorage has been loaded
+  _hasHydrated: boolean;
+
   // Actions
   addWord: (
     chinese: string,
@@ -74,6 +77,8 @@ interface VocabularyState {
   clearAllWords: () => void;
   // Set words directly (for cloud sync - preserves SRS data)
   setWords: (words: SavedWord[]) => void;
+  // Set hydration state
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const useVocabularyStore = create<VocabularyState>()(
@@ -81,6 +86,9 @@ export const useVocabularyStore = create<VocabularyState>()(
     persist(
       (set, get) => ({
         words: [],
+        _hasHydrated: false,
+
+        setHasHydrated: (state: boolean) => set({ _hasHydrated: state }),
 
       addWord: (chinese, pinyin, definition, sourceVerse, partOfSpeech, hskLevel) => {
         // Don't add duplicates
@@ -166,6 +174,29 @@ export const useVocabularyStore = create<VocabularyState>()(
       }),
       {
         name: 'bilingual-bible-vocabulary',
+        storage: createJSONStorage(() => localStorage),
+        onRehydrateStorage: () => {
+          // This outer function is called when hydration starts
+          console.log('[VocabularyStore] Hydration starting...');
+
+          // Return a function that's called when hydration finishes
+          return (state, error) => {
+            if (error) {
+              console.error('[VocabularyStore] Hydration error:', error);
+            }
+
+            // Use queueMicrotask to avoid TDZ error - the callback runs
+            // during store creation before useVocabularyStore is assigned
+            queueMicrotask(() => {
+              useVocabularyStore.setState({ _hasHydrated: true });
+              console.log('[VocabularyStore] Rehydration complete, words:', state?.words?.length ?? 0);
+            });
+          };
+        },
+        // Don't persist hydration state itself
+        partialize: (state) => ({
+          words: state.words,
+        }),
       }
     )
   )

@@ -10,6 +10,39 @@ import { firestoreSync } from '../lib/firebaseSync';
 import { migrateLocalDataToFirestore, mergeData } from '../lib/dataMigration';
 import type { Unsubscribe } from 'firebase/firestore';
 
+// Wait for vocabulary store to be hydrated from localStorage
+// This prevents race conditions where sync runs before local data is loaded
+const waitForVocabularyHydration = (): Promise<void> => {
+  return new Promise((resolve) => {
+    // Check if already hydrated
+    if (useVocabularyStore.getState()._hasHydrated) {
+      console.log('[Sync] Vocabulary store already hydrated');
+      resolve();
+      return;
+    }
+
+    // Wait for hydration to complete
+    console.log('[Sync] Waiting for vocabulary store hydration...');
+    const unsubscribe = useVocabularyStore.subscribe(
+      (state) => state._hasHydrated,
+      (hasHydrated) => {
+        if (hasHydrated) {
+          console.log('[Sync] Vocabulary store hydration detected');
+          unsubscribe();
+          resolve();
+        }
+      }
+    );
+
+    // Timeout fallback after 3 seconds (in case hydration never fires)
+    setTimeout(() => {
+      console.warn('[Sync] Hydration timeout - proceeding anyway');
+      unsubscribe();
+      resolve();
+    }, 3000);
+  });
+};
+
 /**
  * Hook to manage syncing between local stores and Firestore
  * This hook should be used once at the app level
@@ -84,6 +117,11 @@ export function useSyncManager() {
       try {
         setSyncing(true);
 
+        // CRITICAL: Wait for Zustand stores to rehydrate from localStorage
+        // This prevents the race condition where we sync before local data is loaded
+        await waitForVocabularyHydration();
+        console.log('[Sync] Store hydration complete, proceeding with sync setup');
+
         // Step 1: Migrate local data to Firestore (if first time)
         const migrationResult = await migrateLocalDataToFirestore(userId);
 
@@ -102,13 +140,85 @@ export function useSyncManager() {
         ]);
 
         // Step 3: Merge cloud data with local data (in case of conflicts)
-        const localVocab = vocabularyStore.words;
-        const localBookmarks = bookmarkStore.bookmarks;
-        const localHistory = historyStore.entries;
+        // CRITICAL: At this point, Zustand hydration should be complete
+        // Read current store state - this should now have localStorage data loaded
+        let localVocab = useVocabularyStore.getState().words;
+        let localBookmarks = bookmarkStore.bookmarks;
+        let localHistory = historyStore.entries;
+
+        console.log(`[Sync] Store state after hydration: vocab=${localVocab.length}, bookmarks=${localBookmarks.length}, history=${localHistory.length}`);
+        console.log(`[Sync] Cloud state: vocab=${cloudVocab.length}, bookmarks=${cloudBookmarks.length}, history=${cloudHistory.length}`);
+
+        // DEFENSIVE CHECK: If local store is empty but localStorage has data,
+        // it means Zustand hasn't rehydrated yet (race condition)
+        // Read directly from localStorage as fallback
+        if (localVocab.length === 0) {
+          const vocabStorage = localStorage.getItem('bilingual-bible-vocabulary');
+          if (vocabStorage) {
+            try {
+              const parsed = JSON.parse(vocabStorage);
+              if (parsed.state?.words && Array.isArray(parsed.state.words) && parsed.state.words.length > 0) {
+                console.warn(`[Sync] RACE CONDITION: Store empty but localStorage has ${parsed.state.words.length} words. Using localStorage.`);
+                localVocab = parsed.state.words;
+              }
+            } catch (e) {
+              console.error('[Sync] Error parsing localStorage vocabulary:', e);
+            }
+          }
+        }
+
+        if (localBookmarks.length === 0) {
+          const bookmarkStorage = localStorage.getItem('bilingual-bible-bookmarks');
+          if (bookmarkStorage) {
+            try {
+              const parsed = JSON.parse(bookmarkStorage);
+              if (parsed.state?.bookmarks && Array.isArray(parsed.state.bookmarks) && parsed.state.bookmarks.length > 0) {
+                console.warn(`[Sync] RACE CONDITION: Store empty but localStorage has ${parsed.state.bookmarks.length} bookmarks. Using localStorage.`);
+                localBookmarks = parsed.state.bookmarks;
+              }
+            } catch (e) {
+              console.error('[Sync] Error parsing localStorage bookmarks:', e);
+            }
+          }
+        }
+
+        if (localHistory.length === 0) {
+          const historyStorage = localStorage.getItem('passage-history-storage');
+          if (historyStorage) {
+            try {
+              const parsed = JSON.parse(historyStorage);
+              if (parsed.state?.entries && Array.isArray(parsed.state.entries) && parsed.state.entries.length > 0) {
+                console.warn(`[Sync] RACE CONDITION: Store empty but localStorage has ${parsed.state.entries.length} history entries. Using localStorage.`);
+                localHistory = parsed.state.entries;
+              }
+            } catch (e) {
+              console.error('[Sync] Error parsing localStorage history:', e);
+            }
+          }
+        }
+
+        console.log(`[Sync] After fallback check: vocab=${localVocab.length}, bookmarks=${localBookmarks.length}, history=${localHistory.length}`);
 
         const mergedVocab = mergeData(cloudVocab, localVocab);
         const mergedBookmarks = mergeData(cloudBookmarks, localBookmarks);
         const mergedHistory = mergeData(cloudHistory, localHistory);
+
+        console.log(`[Sync] After merge: vocab=${mergedVocab.length}, bookmarks=${mergedBookmarks.length}, history=${mergedHistory.length}`);
+
+        // ADDITIONAL SAFETY: If merged result is empty but localStorage had data,
+        // something went wrong - don't overwrite with empty data
+        if (mergedVocab.length === 0 && localVocab.length > 0) {
+          console.error('[Sync] ERROR: Merge resulted in empty vocabulary despite local data. Using local data only.');
+          mergedVocab.push(...localVocab);
+        }
+        if (mergedBookmarks.length === 0 && localBookmarks.length > 0) {
+          console.error('[Sync] ERROR: Merge resulted in empty bookmarks despite local data. Using local data only.');
+          mergedBookmarks.push(...localBookmarks);
+        }
+        if (mergedHistory.length === 0 && localHistory.length > 0) {
+          console.error('[Sync] ERROR: Merge resulted in empty history despite local data. Using local data only.');
+          mergedHistory.push(...localHistory);
+        }
 
         // Step 4: Update local stores with merged data
         // Set flag to prevent sync loop during initial load
