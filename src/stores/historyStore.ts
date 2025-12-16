@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, subscribeWithSelector } from 'zustand/middleware';
 
 export interface PassageEntry {
   bookId: string;
@@ -23,10 +23,11 @@ interface HistoryState {
 }
 
 export const useHistoryStore = create<HistoryState>()(
-  persist(
-    (set, get) => ({
-      entries: [],
-      currentIndex: -1,
+  subscribeWithSelector(
+    persist(
+      (set, get) => ({
+        entries: [],
+        currentIndex: -1,
 
       pushEntry: (bookId, chapter) => {
         const { entries, currentIndex } = get();
@@ -98,10 +99,11 @@ export const useHistoryStore = create<HistoryState>()(
           currentIndex: -1,
         });
       },
-    }),
-    {
-      name: 'passage-history-storage',
-      version: 1,
-    }
+      }),
+      {
+        name: 'passage-history-storage',
+        version: 1,
+      }
+    )
   )
 );

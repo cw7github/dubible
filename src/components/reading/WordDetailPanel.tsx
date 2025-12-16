@@ -11,12 +11,12 @@
  * - Audio pronunciation button
  */
 
-import { memo, useCallback, useState, useEffect } from 'react';
+import { memo, useCallback, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { SegmentedWord, VerseReference } from '../../types';
 import { useVocabularyStore } from '../../stores';
 import { getBookById } from '../../data/bible';
-import { ttsService } from '../../services';
+import { ttsService, type VoiceGender } from '../../services';
 import { splitPinyinSyllables } from '../../utils/pinyin';
 
 interface WordDetailPanelProps {
@@ -74,14 +74,34 @@ export const WordDetailPanel = memo(function WordDetailPanel({
   const [showComingSoonTooltip, setShowComingSoonTooltip] = useState(false);
   const [clickedDisabled, setClickedDisabled] = useState(false);
 
-  // Handle audio playback using TTS service
+  // Voice toggle state - alternates between male and female on each tap
+  // Starts with male, then female, then male again...
+  const [currentVoice, setCurrentVoice] = useState<VoiceGender>('male');
+  const previousWordRef = useRef<string>(word.chinese);
+
+  // Reset voice to male when word changes
+  useEffect(() => {
+    if (previousWordRef.current !== word.chinese) {
+      setCurrentVoice('male');
+      previousWordRef.current = word.chinese;
+    }
+  }, [word.chinese]);
+
+  // Handle audio playback using TTS service with voice toggle
   const handlePlayAudio = useCallback(async () => {
     if (!word.chinese) return;
+
+    // Determine which voice to use for this play
+    const voiceToUse = currentVoice;
+
+    // Toggle voice for next tap
+    setCurrentVoice(prev => prev === 'male' ? 'female' : 'male');
 
     try {
       await ttsService.speak({
         text: word.chinese,
         lang: 'zh-TW', // Use Traditional Chinese (Taiwan Mandarin)
+        voice: voiceToUse,
         onStart: () => setIsPlaying(true),
         onEnd: () => setIsPlaying(false),
         onError: () => {
@@ -93,7 +113,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
       console.error('Audio playback failed:', error);
       setIsPlaying(false);
     }
-  }, [word.chinese]);
+  }, [word.chinese, currentVoice]);
 
   // Cleanup: stop audio when component unmounts
   useEffect(() => {
@@ -213,8 +233,8 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                 return chars.map((char, idx) => (
                   <div key={idx} className="flex flex-col items-center">
                     <span
-                      className="font-body text-[10px] tracking-wide italic leading-tight mb-0.5 text-center"
-                      style={{ color: 'var(--text-secondary)', opacity: 0.75, minWidth: '1.5rem' }}
+                      className="font-body text-[10px] tracking-wide leading-tight mb-0.5 text-center"
+                      style={{ color: 'var(--text-secondary)', opacity: 0.75, minWidth: '1.5rem', fontStyle: 'normal' }}
                     >
                       {syllables[idx] || ''}
                     </span>
@@ -536,8 +556,8 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                     {/* Character with pinyin above it */}
                     <span className="inline-flex flex-col items-center">
                       <span
-                        className="text-[9px] italic leading-tight mb-0.5"
-                        style={{ color: 'var(--text-secondary)', opacity: 0.75 }}
+                        className="text-[9px] leading-tight mb-0.5"
+                        style={{ color: 'var(--text-secondary)', opacity: 0.75, fontStyle: 'normal' }}
                       >
                         {pinyinSyllables[idx] || ''}
                       </span>

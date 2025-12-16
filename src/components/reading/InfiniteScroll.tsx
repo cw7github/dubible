@@ -1,13 +1,16 @@
 import { useEffect, useLayoutEffect, useRef, useCallback, useState, forwardRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Chapter, SegmentedWord, VerseReference } from '../../types';
+import type { Chapter, SegmentedWord, VerseReference, PlanPassage } from '../../types';
 import { getBookById, getPreviousBook, getNextBook } from '../../data/bible';
 import { getChapter, prefetchAdjacentChapters } from '../../services/bibleCache';
 import { useSettingsStore } from '../../stores';
 import { VerseDisplay } from './VerseDisplay';
 import { ChapterTransition } from './ChapterTransition';
+import { DailyReadingMarker } from './DailyReadingMarker';
 import { isPoetrySection } from '../../data/poeticBooks';
 import { loadParagraphBreaks, isParagraphStart } from '../../data/paragraphBreaks';
+import { findEndingPassage, getNextPassage } from '../../utils/readingPlanHelpers';
+import { notifyGlobalScrollStart } from '../../hooks/useScrollGestureCoordination';
 
 interface LoadedChapter {
   bookId: string;
@@ -22,40 +25,62 @@ type ScrollAdjustStrategy = 'maintain' | 'showPrependedEnd';
 interface InfiniteScrollProps {
   bookId: string;
   initialChapter: number;
+  initialScrollPosition?: number;
   /** Notify parent when the visible passage changes (book + chapter). */
   onPassageChange: (bookId: string, chapter: number) => void;
-  onWordTap: (word: SegmentedWord, verseRef: VerseReference) => void;
-  onVerseLongPress: (verseRef: VerseReference) => void;
+  /** Notify parent when scroll position changes (for persistence) */
+  onScrollPositionChange?: (scrollPosition: number) => void;
+  onWordTapAndHold: (word: SegmentedWord, verseRef: VerseReference) => void;
+  onVerseDoubleTap: (verseRef: VerseReference) => void;
   showHsk: boolean;
   /** Optional bookId for active highlighting (prevents cross-book collisions). */
   activeBookId?: string | null;
   activeChapter?: number | null;
   activeVerseNumber?: number | null;
   highlightedWordIndex?: number | null;
+  /** Currently selected word for persistent highlighting */
+  selectedWord?: SegmentedWord | null;
+  selectedWordVerseRef?: VerseReference | null;
+  /** Daily reading passages (if following a reading plan) */
+  dailyReadingPassages?: PlanPassage[];
+  /** Callback when user navigates to next passage in plan */
+  onNextPassage?: (passage: PlanPassage) => void;
+  /** Callback when user completes the day's reading */
+  onCompleteDay?: () => void;
 }
 
 interface ChapterBlockProps {
   loadedChapter: LoadedChapter;
   paragraphBreaksLoaded: boolean;
-  onWordTap: (word: SegmentedWord, verseRef: VerseReference) => void;
-  onVerseLongPress: (verseRef: VerseReference) => void;
+  onWordTapAndHold: (word: SegmentedWord, verseRef: VerseReference) => void;
+  onVerseDoubleTap: (verseRef: VerseReference) => void;
   showHsk: boolean;
   activeBookId?: string | null;
   activeChapter?: number | null;
   activeVerseNumber?: number | null;
   highlightedWordIndex?: number | null;
+  selectedWord?: SegmentedWord | null;
+  selectedWordVerseRef?: VerseReference | null;
+  dailyReadingPassages?: PlanPassage[];
+  onNextPassage?: (passage: PlanPassage) => void;
+  onCompleteDay?: () => void;
 }
 
 const ChapterBlock = memo(function ChapterBlock({
   loadedChapter,
   paragraphBreaksLoaded,
-  onWordTap,
-  onVerseLongPress,
+  onWordTapAndHold,
+  onVerseDoubleTap,
   showHsk,
   activeBookId,
   activeChapter,
   activeVerseNumber,
   highlightedWordIndex,
+  selectedWord,
+  selectedWordVerseRef,
+  dailyReadingPassages,
+  onNextPassage,
+  onCompleteDay,
 }: ChapterBlockProps) {
   const chapterBook = getBookById(loadedChapter.bookId);
   if (!chapterBook) return null;
@@ -64,6 +89,8 @@ const ChapterBlock = memo(function ChapterBlock({
   const isChapterActive =
     (activeBookId == null || activeBookId === loadedChapter.bookId) &&
     activeChapter === loadedChapter.chapter;
+
+  const totalVersesInChapter = loadedChapter.data.verses.length;
 
   return (
     <div
@@ -87,6 +114,20 @@ const ChapterBlock = memo(function ChapterBlock({
 
           const isActiveVerse = isChapterActive && activeVerseNumber === verse.number;
 
+          // Check if this verse is the end of a daily reading passage
+          // Check every verse because passages can end at specific verses (e.g., Romans 3:1-20)
+          let endingPassageInfo: { passage: PlanPassage; index: number } | null = null;
+
+          if (dailyReadingPassages) {
+            endingPassageInfo = findEndingPassage(
+              loadedChapter.bookId,
+              loadedChapter.chapter,
+              verse.number,
+              totalVersesInChapter,
+              dailyReadingPassages
+            );
+          }
+
           return (
             <span key={`${loadedChapter.bookId}-${loadedChapter.chapter}-${verse.number}`}>
               {startsParagraph && <span className="paragraph-break" />}
@@ -94,13 +135,55 @@ const ChapterBlock = memo(function ChapterBlock({
                 verse={verse}
                 bookId={loadedChapter.bookId}
                 chapter={loadedChapter.chapter}
-                onWordTap={onWordTap}
-                onVerseLongPress={onVerseLongPress}
+                onWordTapAndHold={onWordTapAndHold}
+                onVerseDoubleTap={onVerseDoubleTap}
                 showHsk={showHsk}
                 isPoetry={isPoetry}
                 isActive={isActiveVerse}
                 highlightedWordIndex={isActiveVerse ? highlightedWordIndex : null}
+                selectedWord={selectedWord}
+                selectedWordVerseRef={selectedWordVerseRef}
               />
+
+              {/* Show daily reading marker at end of passage */}
+              {endingPassageInfo && dailyReadingPassages && (
+                <DailyReadingMarker
+                  isLastPassage={endingPassageInfo.index === dailyReadingPassages.length - 1}
+                  onNextPassage={
+                    onNextPassage && endingPassageInfo.index < dailyReadingPassages.length - 1
+                      ? () => {
+                          const nextPassageData = getNextPassage(
+                            endingPassageInfo.index,
+                            dailyReadingPassages
+                          );
+                          if (nextPassageData) {
+                            onNextPassage(nextPassageData);
+                          }
+                        }
+                      : undefined
+                  }
+                  onComplete={
+                    endingPassageInfo.index === dailyReadingPassages.length - 1
+                      ? onCompleteDay
+                      : undefined
+                  }
+                  passageInfo={{
+                    bookName: chapterBook.name.english,
+                    chapter: loadedChapter.chapter,
+                    passageRange: (() => {
+                      const p = endingPassageInfo.passage;
+                      if (p.endChapter && p.endChapter !== p.startChapter) {
+                        return `${p.startChapter}-${p.endChapter}`;
+                      } else if (p.startVerse !== undefined && p.endVerse !== undefined) {
+                        return `${p.startChapter}:${p.startVerse}-${p.endVerse}`;
+                      } else if (p.startVerse !== undefined) {
+                        return `${p.startChapter}:${p.startVerse}+`;
+                      }
+                      return String(p.startChapter);
+                    })(),
+                  }}
+                />
+              )}
             </span>
           );
         })}
@@ -111,8 +194,13 @@ const ChapterBlock = memo(function ChapterBlock({
   if (prev.loadedChapter !== next.loadedChapter) return false;
   if (prev.paragraphBreaksLoaded !== next.paragraphBreaksLoaded) return false;
   if (prev.showHsk !== next.showHsk) return false;
-  if (prev.onWordTap !== next.onWordTap) return false;
-  if (prev.onVerseLongPress !== next.onVerseLongPress) return false;
+  if (prev.onWordTapAndHold !== next.onWordTapAndHold) return false;
+  if (prev.onVerseDoubleTap !== next.onVerseDoubleTap) return false;
+  if (prev.dailyReadingPassages !== next.dailyReadingPassages) return false;
+  if (prev.onNextPassage !== next.onNextPassage) return false;
+  if (prev.onCompleteDay !== next.onCompleteDay) return false;
+  if (prev.selectedWord !== next.selectedWord) return false;
+  if (prev.selectedWordVerseRef !== next.selectedWordVerseRef) return false;
 
   const prevIsActiveChapter =
     (prev.activeBookId == null || prev.activeBookId === prev.loadedChapter.bookId) &&
@@ -134,14 +222,21 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
   {
     bookId,
     initialChapter,
+    initialScrollPosition = 0,
     onPassageChange,
-    onWordTap,
-    onVerseLongPress,
+    onScrollPositionChange,
+    onWordTapAndHold,
+    onVerseDoubleTap,
     showHsk,
     activeBookId,
     activeChapter,
     activeVerseNumber,
     highlightedWordIndex,
+    selectedWord,
+    selectedWordVerseRef,
+    dailyReadingPassages,
+    onNextPassage,
+    onCompleteDay,
   }: InfiniteScrollProps,
   forwardedRef
 ) {
@@ -187,6 +282,7 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollRafRef = useRef<number | null>(null);
   const maintainChapterBufferRef = useRef<(reason: 'passage' | 'idle') => void>(() => {});
+  const scrollPositionSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Callback ref to handle both external and internal refs
   const setContainerRef = useCallback((node: HTMLDivElement | null) => {
@@ -347,7 +443,7 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
         if (initialChapter === 1) {
           const prevBook = getPreviousBook(bookId);
           if (prevBook && prevBook.chapterCount > 0) {
-            // Prefetch the exact chapter we’ll need when scrolling up past chapter 1.
+            // Prefetch the exact chapter we'll need when scrolling up past chapter 1.
             void getChapter(prevBook.id, prevBook.chapterCount);
             // And its adjacent chapter for smoother continued scrolling.
             prefetchAdjacentChapters(prevBook.id, prevBook.chapterCount, prevBook.chapterCount);
@@ -368,6 +464,37 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
 
     init();
   }, [bookId, initialChapter, loadChapter, reloadNonce, totalChapters]);
+
+  // Restore scroll position after initial load
+  const scrollRestoredRef = useRef(false);
+  useEffect(() => {
+    if (loadedChapters.length === 0 || !internalRef.current) return;
+    if (initialScrollPosition <= 0) return;
+    if (scrollRestoredRef.current) return;
+
+    // Mark as restored to prevent multiple restorations
+    scrollRestoredRef.current = true;
+
+    // Use requestAnimationFrame to ensure DOM is fully rendered
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const container = internalRef.current;
+        if (!container) return;
+
+        // Restore scroll position
+        container.scrollTop = initialScrollPosition;
+
+        if (debugScrollRef.current) {
+          console.log('[InfiniteScroll] Restored scroll position:', initialScrollPosition);
+        }
+      });
+    });
+  }, [loadedChapters.length, initialScrollPosition]);
+
+  // Reset scroll restoration flag when book/chapter changes
+  useEffect(() => {
+    scrollRestoredRef.current = false;
+  }, [bookId, initialChapter]);
 
   // Reload chapters when character set changes (instant from pre-cached data)
   useEffect(() => {
@@ -1025,6 +1152,23 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
         maintainChapterBufferRef.current('idle');
       }, SCROLL_IDLE_MS);
 
+      // Notify gesture hooks that scroll is happening
+      // This allows hold/tap gestures to cancel immediately
+      notifyGlobalScrollStart();
+
+      // Save scroll position with debouncing (500ms after scroll stops)
+      if (onScrollPositionChange) {
+        if (scrollPositionSaveTimerRef.current) {
+          clearTimeout(scrollPositionSaveTimerRef.current);
+        }
+        scrollPositionSaveTimerRef.current = setTimeout(() => {
+          onScrollPositionChange(scrollTop);
+          if (debugScrollRef.current) {
+            console.log('[InfiniteScroll] Saved scroll position:', scrollTop);
+          }
+        }, 500);
+      }
+
       // PERFORMANCE: Only schedule RAF if not already scheduled
       if (scrollRafRef.current != null) return;
       scrollRafRef.current = requestAnimationFrame(updateVisiblePassage);
@@ -1037,6 +1181,10 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
         clearTimeout(scrollIdleTimerRef.current);
         scrollIdleTimerRef.current = null;
       }
+      if (scrollPositionSaveTimerRef.current) {
+        clearTimeout(scrollPositionSaveTimerRef.current);
+        scrollPositionSaveTimerRef.current = null;
+      }
       if (scrollRafRef.current != null) {
         cancelAnimationFrame(scrollRafRef.current);
         scrollRafRef.current = null;
@@ -1047,7 +1195,7 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
       isUserScrollingRef.current = false;
       cachedChapterElements = null;
     };
-  }, [SCROLL_IDLE_MS, onPassageChange, bookId]);
+  }, [SCROLL_IDLE_MS, onPassageChange, onScrollPositionChange, bookId]);
 
   if (!book) {
     return (
@@ -1063,10 +1211,11 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
     <div
       ref={setContainerRef}
       className="relative h-full overflow-y-auto"
+      data-scroll-container="true"
       style={{
         // Removed scroll-smooth to avoid conflicts with manual scroll adjustments
         overscrollBehaviorY: 'contain',
-        paddingBottom: '60px',
+        paddingBottom: '24px', // Small padding for comfortable scrolling to end
         // Performance: Enable GPU acceleration and optimize scrolling
         WebkitOverflowScrolling: 'touch',
         transform: 'translateZ(0)', // Force GPU layer
@@ -1166,13 +1315,18 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
           key={`${loadedChapter.bookId}-${loadedChapter.chapter}`}
           loadedChapter={loadedChapter}
           paragraphBreaksLoaded={paragraphBreaksLoaded}
-          onWordTap={onWordTap}
-          onVerseLongPress={onVerseLongPress}
+          onWordTapAndHold={onWordTapAndHold}
+          onVerseDoubleTap={onVerseDoubleTap}
           showHsk={showHsk}
           activeBookId={activeBookId}
           activeChapter={activeChapter}
           activeVerseNumber={activeVerseNumber}
           highlightedWordIndex={highlightedWordIndex}
+          selectedWord={selectedWord}
+          selectedWordVerseRef={selectedWordVerseRef}
+          dailyReadingPassages={dailyReadingPassages}
+          onNextPassage={onNextPassage}
+          onCompleteDay={onCompleteDay}
         />
       ))}
 

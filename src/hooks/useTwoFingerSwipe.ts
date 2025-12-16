@@ -124,7 +124,7 @@ export function useTwoFingerSwipe({
     if (!enabled) return;
 
     // Use passive: false to allow preventDefault on touchmove
-    const options = { passive: false };
+    const options: AddEventListenerOptions = { passive: false };
 
     document.addEventListener('touchstart', handleTouchStart, options);
     document.addEventListener('touchmove', handleTouchMove, options);
@@ -132,6 +132,7 @@ export function useTwoFingerSwipe({
     document.addEventListener('touchcancel', handleTouchCancel, options);
 
     return () => {
+      // Remove with same options to ensure proper cleanup
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);

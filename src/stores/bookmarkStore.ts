@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, subscribeWithSelector } from 'zustand/middleware';
 import type { VerseReference } from '../types';
 
 export interface Bookmark {
@@ -40,9 +40,10 @@ interface BookmarkState {
 }
 
 export const useBookmarkStore = create<BookmarkState>()(
-  persist(
-    (set, get) => ({
-      bookmarks: [],
+  subscribeWithSelector(
+    persist(
+      (set, get) => ({
+        bookmarks: [],
 
       addBookmark: (verseRef, note) => {
         // Don't add duplicates
@@ -104,9 +105,10 @@ export const useBookmarkStore = create<BookmarkState>()(
       },
 
       clearAllBookmarks: () => set({ bookmarks: [] }),
-    }),
-    {
-      name: 'bilingual-bible-bookmarks',
-    }
+      }),
+      {
+        name: 'bilingual-bible-bookmarks',
+      }
+    )
   )
 );

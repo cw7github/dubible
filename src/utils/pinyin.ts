@@ -14,8 +14,8 @@ export function splitPinyinSyllables(pinyin: string, charCount: number): string[
   }
 
   // Regex pattern to match pinyin syllables
-  // Handles initials, finals, and tone marks
-  const tempRegex = /([bpmfdtnlgkhjqxrzcsyw]?h?[iuüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜaeiou]+(?:ng|n|r)?)/gi;
+  // Handles initials, finals, tone marks (āáǎà) and tone numbers (1-4)
+  const tempRegex = /([bpmfdtnlgkhjqxrzcsyw]?h?[iuüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜaeiou]+(?:ng|n|r)?[1-4]?)/gi;
 
   const matches: string[] = [];
   let match;
@@ -59,6 +59,7 @@ export function splitPinyinSyllables(pinyin: string, charCount: number): string[
 }
 
 // Split Chinese characters into individual characters
+// Filters out whitespace characters (including full-width spaces U+3000)
 export function splitChineseCharacters(text: string): string[] {
-  return [...text];
+  return [...text].filter(char => !/\s/.test(char));
 }

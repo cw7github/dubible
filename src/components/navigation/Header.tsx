@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useSettingsStore, useAuthStore } from '../../stores';
+import { useConvertedBookName } from '../../hooks';
 
 // Helper to split pinyin string into individual syllables
 function splitPinyinToSyllables(pinyin: string, targetCount: number): string[] {
@@ -78,8 +78,6 @@ interface HeaderProps {
   onMenuClick?: () => void;
   onSettingsClick?: () => void;
   onVocabClick?: () => void;
-  /** Hide header for focus mode */
-  isHidden?: boolean;
 }
 
 export const Header = memo(function Header({
@@ -88,17 +86,9 @@ export const Header = memo(function Header({
   onMenuClick,
   onSettingsClick,
   onVocabClick,
-  isHidden = false,
 }: HeaderProps) {
-  const { theme, setTheme } = useSettingsStore();
-  const { isAuthenticated, isSyncing } = useAuthStore();
-
-  const cycleTheme = () => {
-    const themes: ('light' | 'sepia' | 'dark')[] = ['light', 'sepia', 'dark'];
-    const currentIndex = themes.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
-  };
+  // Convert book name to correct character set (Traditional/Simplified)
+  const convertedBookName = useConvertedBookName(bookName);
 
   return (
     <header
@@ -106,13 +96,9 @@ export const Header = memo(function Header({
       style={{
         backgroundColor: 'var(--bg-primary)',
         borderBottom: '1px solid var(--border-subtle)',
-        transform: isHidden ? 'translateY(-100%)' : 'translateY(0)',
-        opacity: isHidden ? 0 : 1,
-        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        willChange: 'transform, opacity',
       }}
     >
-      <div className="mx-auto flex max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl items-center justify-between px-4 py-1.5">
         {/* Left side - Vocabulary/Words button */}
         <div className="flex items-center w-20">
           <button
@@ -144,8 +130,8 @@ export const Header = memo(function Header({
         >
           <div className="flex items-end gap-0.5">
             {(() => {
-              const chars = bookName.chinese.split('');
-              const pinyinSyllables = splitPinyinToSyllables(bookName.pinyin, chars.length);
+              const chars = convertedBookName.chinese.split('');
+              const pinyinSyllables = splitPinyinToSyllables(convertedBookName.pinyin, chars.length);
               return chars.map((char, i) => (
                 <span key={i} className="flex flex-col items-center">
                   <span
@@ -174,29 +160,6 @@ export const Header = memo(function Header({
 
         {/* Right side buttons - same width as left for centering */}
         <div className="flex items-center justify-end gap-0.5 w-20">
-          {/* Sync status indicator */}
-          {isAuthenticated && isSyncing && (
-            <div className="mr-1">
-              <div className="animate-spin">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  className="h-4 w-4"
-                  style={{ color: 'var(--text-accent)' }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                  />
-                </svg>
-              </div>
-            </div>
-          )}
-
           {/* Settings button */}
           <button
             className="touch-feedback rounded-lg p-2.5 transition-colors"
@@ -223,61 +186,6 @@ export const Header = memo(function Header({
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-          </button>
-
-          {/* Theme toggle - elegant */}
-          <button
-            className="touch-feedback rounded-lg p-2.5 transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
-            onClick={cycleTheme}
-            aria-label={`Current theme: ${theme}. Click to change.`}
-          >
-            {theme === 'light' && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                />
-              </svg>
-            )}
-            {theme === 'sepia' && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
-                />
-              </svg>
-            )}
-            {theme === 'dark' && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-5 w-5"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            )}
           </button>
         </div>
       </div>

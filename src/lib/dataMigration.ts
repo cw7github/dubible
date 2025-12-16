@@ -1,4 +1,5 @@
 import { firestoreSync } from './firebaseSync';
+import type { ReadingPlansData, ProgressData } from './firebaseSync';
 import type { SavedWord } from '../types/vocabulary';
 import type { Bookmark } from '../stores/bookmarkStore';
 import type { PassageEntry } from '../stores/historyStore';
@@ -10,6 +11,8 @@ const STORAGE_KEYS = {
   bookmarks: 'bilingual-bible-bookmarks',
   history: 'passage-history-storage',
   settings: 'bilingual-bible-settings',
+  readingPlans: 'reading-plans-storage',
+  progress: 'reading-progress-storage',
   migrationFlag: 'bilingual-bible-migration-complete',
 };
 
@@ -18,6 +21,8 @@ interface LocalStorageData {
   bookmarks: Bookmark[];
   history: PassageEntry[];
   settings: Settings | null;
+  readingPlans: ReadingPlansData | null;
+  progress: ProgressData | null;
 }
 
 // Read data from localStorage
@@ -26,6 +31,8 @@ function readLocalStorageData(): LocalStorageData {
   const bookmarks: Bookmark[] = [];
   const history: PassageEntry[] = [];
   let settings: Settings | null = null;
+  let readingPlans: ReadingPlansData | null = null;
+  let progress: ProgressData | null = null;
 
   try {
     // Vocabulary
@@ -63,11 +70,42 @@ function readLocalStorageData(): LocalStorageData {
         settings = parsed.state as Settings;
       }
     }
+
+    // Reading Plans
+    const readingPlansData = localStorage.getItem(STORAGE_KEYS.readingPlans);
+    if (readingPlansData) {
+      const parsed = JSON.parse(readingPlansData);
+      if (parsed.state) {
+        readingPlans = {
+          activePlan: parsed.state.activePlan || null,
+          completedPlans: parsed.state.completedPlans || [],
+        };
+      }
+    }
+
+    // Progress
+    const progressData = localStorage.getItem(STORAGE_KEYS.progress);
+    if (progressData) {
+      const parsed = JSON.parse(progressData);
+      if (parsed.state) {
+        progress = {
+          chaptersCompleted: parsed.state.chaptersCompleted || [],
+          bookProgress: parsed.state.bookProgress || {},
+          streak: parsed.state.streak || {
+            currentStreak: 0,
+            longestStreak: 0,
+            lastReadDate: null,
+            streakStartDate: null,
+          },
+          dailyHistory: parsed.state.dailyHistory || [],
+        };
+      }
+    }
   } catch (error) {
     console.error('Error reading localStorage data:', error);
   }
 
-  return { vocabulary, bookmarks, history, settings };
+  return { vocabulary, bookmarks, history, settings, readingPlans, progress };
 }
 
 // Check if migration has already been completed for this user
@@ -116,6 +154,8 @@ export async function migrateLocalDataToFirestore(
     bookmarks: number;
     history: number;
     settings: boolean;
+    readingPlans: boolean;
+    progress: boolean;
   };
   error?: string;
 }> {
@@ -128,6 +168,8 @@ export async function migrateLocalDataToFirestore(
         bookmarks: 0,
         history: 0,
         settings: false,
+        readingPlans: false,
+        progress: false,
       },
     };
   }
@@ -136,7 +178,7 @@ export async function migrateLocalDataToFirestore(
     // Read all data from localStorage
     const localData = readLocalStorageData();
 
-    const totalSteps = 4;
+    const totalSteps = 6;
     let currentStep = 0;
 
     // Migrate vocabulary
@@ -167,6 +209,20 @@ export async function migrateLocalDataToFirestore(
       await firestoreSync.syncSettingsToCloud(uid, localData.settings);
     }
 
+    // Migrate reading plans
+    currentStep++;
+    onProgress?.('Migrating reading plans...', currentStep, totalSteps);
+    if (localData.readingPlans) {
+      await firestoreSync.syncReadingPlansToCloud(uid, localData.readingPlans);
+    }
+
+    // Migrate progress
+    currentStep++;
+    onProgress?.('Migrating progress...', currentStep, totalSteps);
+    if (localData.progress) {
+      await firestoreSync.syncProgressToCloud(uid, localData.progress);
+    }
+
     // Mark migration as complete
     markMigrationComplete(uid);
 
@@ -177,6 +233,8 @@ export async function migrateLocalDataToFirestore(
         bookmarks: localData.bookmarks.length,
         history: localData.history.length,
         settings: !!localData.settings,
+        readingPlans: !!localData.readingPlans,
+        progress: !!localData.progress,
       },
     };
   } catch (error) {
@@ -188,6 +246,8 @@ export async function migrateLocalDataToFirestore(
         bookmarks: 0,
         history: 0,
         settings: false,
+        readingPlans: false,
+        progress: false,
       },
       error: error instanceof Error ? error.message : 'Unknown error',
     };

@@ -1,64 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <!-- Gradient for depth and richness -->
-    <linearGradient id="bookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#A67C52;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8B5A2B;stop-opacity:1" />
+    <!-- Rich gradient for depth -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9A6B3D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B4423;stop-opacity:1" />
     </linearGradient>
+
+    <!-- Gold gradient for text -->
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5E6D3;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4B896;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C9A86C;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Shadow for depth -->
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <!-- Book spine structure - representing the Bible -->
-  <!-- Enlarged to fill 85% of the viewBox -->
-  <g>
-    <!-- Left page with curved edge -->
-    <path d="M 40 50 L 230 50 L 230 462 L 40 462 Q 30 256 40 50 Z"
-          fill="url(#bookGradient)"
-          stroke="#6B4423"
-          stroke-width="3"/>
+  <!-- Background with rounded corners for modern look -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
 
-    <!-- Right page with curved edge -->
-    <path d="M 282 50 L 472 50 Q 482 256 472 462 L 282 462 L 282 50 Z"
-          fill="url(#bookGradient)"
-          stroke="#6B4423"
-          stroke-width="3"/>
+  <!-- Subtle border for definition -->
+  <rect width="512" height="512" rx="110" fill="none" stroke="#523A1F" stroke-width="8" opacity="0.4"/>
 
-    <!-- Central spine binding - darker for contrast -->
-    <rect x="230" y="50" width="52" height="412"
-          fill="#6B4423"/>
+  <!-- Central design: 道 (dào) character stylized with cross -->
+  <g filter="url(#shadow)">
+    <!-- 道 character - bold, simplified, elegant strokes -->
+    <!-- Top component - 首 (head) simplified -->
+    <path d="M 220 120 L 292 120 Q 300 120 300 128 L 300 155 Q 300 163 292 163 L 220 163 Q 212 163 212 155 L 212 128 Q 212 120 220 120 Z"
+          fill="url(#gold)"/>
 
-    <!-- Spine highlight for dimension -->
-    <rect x="230" y="50" width="6" height="412"
-          fill="#D4B896"
-          opacity="0.5"/>
+    <!-- Vertical center stroke - represents both 道 and the cross -->
+    <rect x="236" y="155" width="40" height="250" rx="6" fill="url(#gold)"/>
 
-    <!-- Spine shadow for depth -->
-    <rect x="276" y="50" width="6" height="412"
-          fill="#3D2F1F"
-          opacity="0.4"/>
+    <!-- Horizontal cross beam - dual symbolism: Chinese character + Christian cross -->
+    <rect x="170" y="220" width="172" height="36" rx="6" fill="url(#gold)"/>
+
+    <!-- Decorative horizontal strokes - 道 character details -->
+    <rect x="190" y="178" width="132" height="18" rx="4" fill="url(#gold)" opacity="0.9"/>
+
+    <!-- Bottom base stroke - grounds the character -->
+    <rect x="160" y="375" width="192" height="30" rx="5" fill="url(#gold)"/>
+
+    <!-- Diagonal accent stroke - characteristic of 道, adds dynamism -->
+    <path d="M 310 270 L 360 340 Q 364 346 358 350 L 345 360 Q 339 364 335 358 L 285 288 Q 281 282 287 278 L 300 268 Q 306 264 310 270 Z"
+          fill="url(#gold)" opacity="0.95"/>
   </g>
 
-  <!-- 道 (dào - The Word/Way) - Enlarged and simplified -->
-  <!-- Scaled up and repositioned for maximum visibility -->
-  <g fill="#FAF8F3">
-    <!-- Top radical component (首 head) - simplified and bold -->
-    <rect x="246" y="140" width="20" height="16" rx="2"/>
-    <rect x="250" y="150" width="12" height="50" rx="2"/>
-
-    <!-- Middle horizontal strokes - thicker for visibility -->
-    <rect x="244" y="210" width="24" height="7" rx="2"/>
-    <rect x="242" y="230" width="28" height="8" rx="2"/>
-
-    <!-- Vertical stem (representing the path) - bold and prominent -->
-    <rect x="248" y="238" width="16" height="140" rx="3"/>
-
-    <!-- Bottom horizontal base - extended and bold -->
-    <rect x="236" y="378" width="40" height="10" rx="3"/>
-
-    <!-- Diagonal stroke (characteristic of 道) - enlarged -->
-    <path d="M 278 250 L 310 290 L 303 298 L 271 258 Z"/>
-
-    <!-- Small accent strokes for authenticity - thicker -->
-    <rect x="240" y="195" width="5" height="12" rx="1"/>
-    <rect x="267" y="195" width="5" height="12" rx="1"/>
-  </g>
+  <!-- Subtle highlight on left edge for depth -->
+  <rect x="8" y="110" width="3" height="292" rx="1.5" fill="#F5E6D3" opacity="0.15"/>
 </svg>

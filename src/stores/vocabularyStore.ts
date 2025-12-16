@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, subscribeWithSelector } from 'zustand/middleware';
 import type {
   SavedWord,
   SRSData,
@@ -72,12 +72,15 @@ interface VocabularyState {
   getWordsDueForReview: () => SavedWord[];
   getStats: () => VocabularyStats;
   clearAllWords: () => void;
+  // Set words directly (for cloud sync - preserves SRS data)
+  setWords: (words: SavedWord[]) => void;
 }
 
 export const useVocabularyStore = create<VocabularyState>()(
-  persist(
-    (set, get) => ({
-      words: [],
+  subscribeWithSelector(
+    persist(
+      (set, get) => ({
+        words: [],
 
       addWord: (chinese, pinyin, definition, sourceVerse, partOfSpeech, hskLevel) => {
         // Don't add duplicates
@@ -157,9 +160,13 @@ export const useVocabularyStore = create<VocabularyState>()(
       },
 
       clearAllWords: () => set({ words: [] }),
-    }),
-    {
-      name: 'bilingual-bible-vocabulary',
-    }
+
+      // Set words directly (for cloud sync - preserves all data including SRS)
+      setWords: (words) => set({ words }),
+      }),
+      {
+        name: 'bilingual-bible-vocabulary',
+      }
+    )
   )
 );

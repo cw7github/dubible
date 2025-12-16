@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { BookGraphic } from './BookGraphic';
+import { useConvertedBookName } from '../../hooks';
 
 // Helper to split pinyin string into individual syllables
 // e.g., "Mǎtài Fúyīn" -> ["Mǎ", "tài", "Fú", "yīn"]
@@ -111,6 +112,9 @@ export const ChapterTransition = memo(function ChapterTransition({
   chapter,
   isFirstChapter = false,
 }: ChapterTransitionProps) {
+  // Convert book name to correct character set (Traditional/Simplified)
+  const convertedBookName = useConvertedBookName(bookName);
+
   // Subtle inline chapter marker for chapters 2+
   if (!isFirstChapter) {
     return (
@@ -135,7 +139,7 @@ export const ChapterTransition = memo(function ChapterTransition({
 
           {/* Chapter number - refined and compact */}
           <motion.span
-            className="font-display text-sm tracking-[0.2em] uppercase"
+            className="font-display text-3xl tracking-[0.2em] uppercase font-light"
             style={{ color: 'var(--text-tertiary)' }}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
@@ -215,8 +219,8 @@ export const ChapterTransition = memo(function ChapterTransition({
       >
         {(() => {
           // Split pinyin into syllables and match with characters
-          const chars = bookName.chinese.split('');
-          const pinyinSyllables = splitPinyinToSyllables(bookName.pinyin, chars.length);
+          const chars = convertedBookName.chinese.split('');
+          const pinyinSyllables = splitPinyinToSyllables(convertedBookName.pinyin, chars.length);
 
           return chars.map((char, i) => (
             <span key={i} className="flex flex-col items-center">
@@ -256,7 +260,7 @@ export const ChapterTransition = memo(function ChapterTransition({
         transition={{ duration: 0.5, delay: 0.35 }}
       >
         <span
-          className="font-display text-5xl font-light"
+          className="font-display text-7xl font-light"
           style={{
             color: 'var(--accent)',
             opacity: 0.25,

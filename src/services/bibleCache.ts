@@ -29,6 +29,12 @@ function convertVersesToSimplified(verses: Verse[]): Verse[] {
     words: verse.words?.map(word => ({
       ...word,
       chinese: toSimplified(word.chinese),
+      // Convert breakdown characters (shown in WordDetailPanel)
+      breakdown: word.breakdown?.map(char => ({
+        ...char,
+        c: toSimplified(char.c),
+        // Keep meaning (m) unchanged - it's in English
+      })),
       // Keep pinyin and definition unchanged
     })),
   }));

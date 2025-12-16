@@ -95,6 +95,8 @@ export const TranslationPanel = memo(function TranslationPanel({
               opacity: { duration: 0.2, ease: 'easeOut' }
             }}
             onClick={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
           >
             <div
               className="mx-auto max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl px-3"

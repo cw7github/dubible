@@ -28,9 +28,12 @@
  *   VITE_GOOGLE_CLOUD_API_KEY=your_google_api_key
  */
 
+export type VoiceGender = 'male' | 'female';
+
 interface TTSOptions {
   text: string;
   lang?: string;
+  voice?: VoiceGender; // Male or female voice (default: male)
   onStart?: () => void;
   onEnd?: () => void;
   onError?: (error: Error) => void;
@@ -208,15 +211,19 @@ class TTSService {
    * Falls back to Web Speech API if monthly limit reached (to avoid charges)
    */
   async speak(options: TTSOptions): Promise<void> {
-    const { text, lang = 'zh-TW', onStart, onEnd, onError } = options;
+    const { text, lang = 'zh-TW', voice = 'male', onStart, onEnd, onError } = options;
 
     // Stop any ongoing speech
     this.stop();
 
     // Check if we already have this text cached (doesn't count against limit)
-    const cachedGoogle = this.audioCache.has(`google:${text}`);
-    const cachedAzure = this.audioCache.has(`azure:${text}`);
-    const cachedOpenAI = this.audioCache.has(`openai:${text}`);
+    // Include voice in cache key to support male/female variants
+    const cacheKeyGoogle = `google:${voice}:${text}`;
+    const cacheKeyAzure = `azure:${voice}:${text}`;
+    const cacheKeyOpenAI = `openai:${voice}:${text}`;
+    const cachedGoogle = this.audioCache.has(cacheKeyGoogle);
+    const cachedAzure = this.audioCache.has(cacheKeyAzure);
+    const cachedOpenAI = this.audioCache.has(cacheKeyOpenAI);
     const hasCached = cachedGoogle || cachedAzure || cachedOpenAI;
 
     // Check if within free limit (or using cached audio)
@@ -225,15 +232,15 @@ class TTSService {
     try {
       // Try Google Cloud TTS first (if within limit or cached)
       if (this.isGoogleCloudAvailable() && (withinLimit || cachedGoogle)) {
-        await this.speakWithGoogleCloud(text, onStart, onEnd, onError);
+        await this.speakWithGoogleCloud(text, voice, onStart, onEnd, onError);
       }
       // Then try Azure TTS (if within limit or cached)
       else if (this.isAzureAvailable() && (withinLimit || cachedAzure)) {
-        await this.speakWithAzure(text, onStart, onEnd, onError);
+        await this.speakWithAzure(text, voice, onStart, onEnd, onError);
       }
       // Then try OpenAI TTS (if within limit or cached)
       else if (this.isOpenAIAvailable() && (withinLimit || cachedOpenAI)) {
-        await this.speakWithOpenAI(text, onStart, onEnd, onError);
+        await this.speakWithOpenAI(text, voice, onStart, onEnd, onError);
       }
       // Fallback to Web Speech API (free, unlimited)
       else {
@@ -249,18 +256,24 @@ class TTSService {
 
   /**
    * Speak using Google Cloud TTS API
-   * Uses cmn-TW-Wavenet-A voice - Taiwanese Mandarin WaveNet
+   * Uses cmn-TW-Wavenet voices - Taiwanese Mandarin WaveNet
+   * Male: cmn-TW-Wavenet-B, Female: cmn-TW-Wavenet-A
    */
   private async speakWithGoogleCloud(
     text: string,
+    voice: VoiceGender,
     onStart?: () => void,
     onEnd?: () => void,
     onError?: (error: Error) => void
   ): Promise<void> {
     try {
-      // Check cache first
-      const cacheKey = `google:${text}`;
+      // Check cache first (include voice in key)
+      const cacheKey = `google:${voice}:${text}`;
       let audioUrl = this.audioCache.get(cacheKey);
+
+      // Select voice based on gender
+      // cmn-TW-Wavenet-A = Female, cmn-TW-Wavenet-B = Male
+      const voiceName = voice === 'male' ? 'cmn-TW-Wavenet-B' : 'cmn-TW-Wavenet-A';
 
       if (!audioUrl) {
         // Track usage BEFORE making the API call
@@ -278,12 +291,14 @@ class TTSService {
             input: { text },
             voice: {
               languageCode: 'cmn-TW',
-              name: 'cmn-TW-Wavenet-A', // Female Taiwanese Mandarin WaveNet voice
+              name: voiceName,
             },
             audioConfig: {
               audioEncoding: 'MP3',
               speakingRate: 0.9, // Slightly slower for clarity
               pitch: 0,
+              // Boost male voice volume by ~10% (1.5 dB) to match female level
+              volumeGainDb: voice === 'male' ? 1.5 : 0,
             },
           }),
         });
@@ -352,28 +367,33 @@ class TTSService {
 
   /**
    * Speak using Azure TTS API
-   * Uses zh-TW-HsiaoChenNeural voice - natural Taiwanese Mandarin
+   * Uses zh-TW Neural voices - natural Taiwanese Mandarin
+   * Male: zh-TW-YunJheNeural, Female: zh-TW-HsiaoChenNeural
    */
   private async speakWithAzure(
     text: string,
+    voice: VoiceGender,
     onStart?: () => void,
     onEnd?: () => void,
     onError?: (error: Error) => void
   ): Promise<void> {
     try {
-      // Check cache first
-      const cacheKey = `azure:${text}`;
+      // Check cache first (include voice in key)
+      const cacheKey = `azure:${voice}:${text}`;
       let audioUrl = this.audioCache.get(cacheKey);
+
+      // Select voice based on gender
+      // zh-TW-HsiaoChenNeural = Female, zh-TW-YunJheNeural = Male
+      const voiceName = voice === 'male' ? 'zh-TW-YunJheNeural' : 'zh-TW-HsiaoChenNeural';
 
       if (!audioUrl) {
         // Azure TTS REST API endpoint
         const endpoint = `https://${this.azureSpeechRegion}.tts.speech.microsoft.com/cognitiveservices/v1`;
 
         // Build SSML for natural speech
-        // Using zh-TW-HsiaoChenNeural - the best Taiwanese Mandarin voice
         const ssml = `
           <speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='zh-TW'>
-            <voice name='zh-TW-HsiaoChenNeural'>
+            <voice name='${voiceName}'>
               <prosody rate='-10%' pitch='+0%'>
                 ${this.escapeXml(text)}
               </prosody>
@@ -452,18 +472,23 @@ class TTSService {
 
   /**
    * Speak using OpenAI TTS API
-   * Uses the 'nova' voice which is warm and pleasant for Chinese
+   * Male: onyx (deep), Female: nova (warm)
    */
   private async speakWithOpenAI(
     text: string,
+    voice: VoiceGender,
     onStart?: () => void,
     onEnd?: () => void,
     onError?: (error: Error) => void
   ): Promise<void> {
     try {
-      // Check cache first
-      const cacheKey = `openai:${text}`;
+      // Check cache first (include voice in key)
+      const cacheKey = `openai:${voice}:${text}`;
       let audioUrl = this.audioCache.get(cacheKey);
+
+      // Select voice based on gender
+      // onyx = male (deep), nova = female (warm)
+      const voiceName = voice === 'male' ? 'onyx' : 'nova';
 
       if (!audioUrl) {
         // Fetch audio from OpenAI
@@ -476,7 +501,7 @@ class TTSService {
           body: JSON.stringify({
             model: 'tts-1', // Use tts-1 for lower latency (tts-1-hd for higher quality)
             input: text,
-            voice: 'nova', // Nova voice is pleasant and works well with Chinese
+            voice: voiceName,
             speed: 0.9, // Slightly slower for clarity
           }),
         });

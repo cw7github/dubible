@@ -1,10 +1,9 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import type { SegmentedWord, VerseReference, CrossReference } from '../../types';
-import { useReadingStore, useSettingsStore } from '../../stores';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import type { SegmentedWord, VerseReference, CrossReference, PlanPassage } from '../../types';
+import { useReadingStore, useSettingsStore, useProgressStore, useReadingPlansStore } from '../../stores';
 import { getBookById } from '../../data/bible';
 import { getCrossReferences } from '../../services/preprocessedLoader';
-import { useFocusMode, useScrollDismiss, usePassageHistory, useTwoFingerSwipe } from '../../hooks';
+import { useScrollDismiss, usePassageHistory, useTwoFingerSwipe } from '../../hooks';
 import { InfiniteScroll } from './InfiniteScroll';
 import { TranslationPanel, type PanelMode } from './TranslationPanel';
 import { Header } from '../navigation/Header';
@@ -25,40 +24,80 @@ export function ReadingScreen() {
   const [selectedWordVerseRef, setSelectedWordVerseRef] = useState<VerseReference | null>(null);
   const [crossReferences, setCrossReferences] = useState<CrossReference[]>([]);
 
+  // Popup immunity - prevents gestures from triggering immediately after panel dismissal
+  const [gesturesDisabled, setGesturesDisabled] = useState(false);
+  const gestureImmunityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Track when the panel was opened (used to guard against phantom scroll-dismiss events)
+  const panelOpenTimestampRef = useRef<number>(0);
+
   const {
     currentBookId,
     currentChapter,
+    scrollPosition,
     setCurrentPosition,
+    setScrollPosition,
   } = useReadingStore();
 
   const { showHskIndicators, fontFamily, textSize } = useSettingsStore();
+  const { markChapterRead } = useProgressStore();
+  const { getCurrentDayReading, markDayComplete } = useReadingPlansStore();
+
+  // Get current day's reading passages (if following a plan)
+  const currentDayReading = getCurrentDayReading();
+  const dailyReadingPassages = currentDayReading?.passages;
 
   // Get current book info
   const currentBook = useMemo(() => getBookById(currentBookId), [currentBookId]);
 
-  // Focus mode - hide UI when scrolling down for immersive reading
-  const { isHidden: isFocusMode, scrollRef } = useFocusMode({
-    forceVisible: panelMode !== null || isNavOpen || isVocabOpen || isSettingsOpen,
-  });
+  // Scroll ref for panel dismissal and infinite scroll
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Handle word tap - show word definition
-  const handleWordTap = useCallback((word: SegmentedWord, verseRef: VerseReference) => {
+  // Handle word tap-and-hold - show word definition
+  const handleWordTapAndHold = useCallback((word: SegmentedWord, verseRef: VerseReference) => {
+    // Don't trigger if gestures are disabled (immunity period)
+    if (gesturesDisabled) return;
+
+    // iOS PWA Fix: Check if we're already showing this exact word
+    // This prevents duplicate triggers from touch event quirks
+    const isAlreadyShowing =
+      panelMode === 'word' &&
+      selectedWord?.chinese === word.chinese &&
+      selectedWord?.pinyin === word.pinyin &&
+      selectedWordVerseRef?.bookId === verseRef.bookId &&
+      selectedWordVerseRef?.chapter === verseRef.chapter &&
+      selectedWordVerseRef?.verse === verseRef.verse;
+
+    if (isAlreadyShowing) {
+      // Already showing this word's definition, ignore duplicate trigger
+      return;
+    }
+
     setSelectedWord(word);
     setSelectedWordVerseRef(verseRef);
     setPanelMode('word');
-  }, []);
 
-  // Handle verse long-press - show English translation
-  const handleVerseLongPress = useCallback(async (verseRef: VerseReference) => {
+    // Record when panel was opened
+    panelOpenTimestampRef.current = Date.now();
+  }, [gesturesDisabled, panelMode, selectedWord, selectedWordVerseRef]);
+
+  // Handle verse double-tap - show English translation
+  const handleVerseDoubleTap = useCallback(async (verseRef: VerseReference) => {
+    // Don't trigger if gestures are disabled (immunity period)
+    if (gesturesDisabled) return;
+
     setSelectedVerseRef(verseRef);
     setSelectedWord(null);
     setSelectedWordVerseRef(null);
     setPanelMode('verse');
 
+    // Record when panel was opened
+    panelOpenTimestampRef.current = Date.now();
+
     // Load cross-references for this verse
     const refs = await getCrossReferences(verseRef.bookId, verseRef.chapter, verseRef.verse);
     setCrossReferences(refs);
-  }, []);
+  }, [gesturesDisabled]);
 
   // Close panel
   const handleClosePanel = useCallback(() => {
@@ -69,13 +108,46 @@ export function ReadingScreen() {
     setCrossReferences([]);
   }, []);
 
-  // Scroll-based panel dismissal - instant and responsive
+  // Close panel with immunity - prevents immediate re-trigger of gestures
+  const handleClosePanelWithImmunity = useCallback(() => {
+    // Clear any existing immunity timer
+    if (gestureImmunityTimerRef.current) {
+      clearTimeout(gestureImmunityTimerRef.current);
+    }
+
+    // Close the panel
+    handleClosePanel();
+
+    // Enable gesture immunity for a brief period
+    setGesturesDisabled(true);
+
+    // Re-enable gestures after immunity period (400ms - longer than hold threshold)
+    gestureImmunityTimerRef.current = setTimeout(() => {
+      setGesturesDisabled(false);
+      gestureImmunityTimerRef.current = null;
+    }, 400);
+  }, [handleClosePanel]);
+
+  // Scroll-based dismissal with immunity for PWA mode
+  // In iOS PWA, phantom scroll events can fire when the panel first appears
+  const handleScrollDismiss = useCallback(() => {
+    const timeSinceOpen = Date.now() - panelOpenTimestampRef.current;
+    if (timeSinceOpen < 800) {
+      // Block scroll dismissal for 800ms after panel opens
+      // This prevents phantom scroll events in iOS PWA mode from dismissing the card
+      return;
+    }
+    handleClosePanel();
+  }, [handleClosePanel]);
+
+  // Scroll-based panel dismissal - TEMPORARILY DISABLED FOR PWA DEBUGGING
+  // If the card stays visible in PWA mode with this disabled, scroll dismiss is the cause
   const { opacity: panelOpacity } = useScrollDismiss({
-    isVisible: panelMode !== null,
-    onDismiss: handleClosePanel,
+    isVisible: false,  // DISABLED - testing if scroll dismiss causes PWA issue
+    onDismiss: handleScrollDismiss,
     scrollContainerRef: scrollRef,
-    scrollThreshold: 15,  // Start fading after just 15px of scroll
-    dismissDelay: 150,    // Quick dismiss once threshold passed
+    scrollThreshold: 15,
+    dismissDelay: 150,
   });
 
   // Handle chapter change from infinite scroll
@@ -85,8 +157,10 @@ export function ReadingScreen() {
       if (newBookId !== currentBookId || newChapter !== currentChapter) {
         setCurrentPosition(newBookId, newChapter);
       }
+      // Mark chapter as read for progress tracking
+      markChapterRead(newBookId, newChapter);
     },
-    [currentBookId, currentChapter, setCurrentPosition]
+    [currentBookId, currentChapter, setCurrentPosition, markChapterRead]
   );
 
   // Navigate to a specific passage (used by history)
@@ -107,6 +181,22 @@ export function ReadingScreen() {
     },
     [handleClosePanel, handleNavigateToPassage]
   );
+
+  // Handle navigation to next passage in reading plan
+  const handleNextPassage = useCallback(
+    (passage: PlanPassage) => {
+      setCurrentPosition(passage.bookId, passage.startChapter);
+      setDisplayChapter(passage.startChapter);
+    },
+    [setCurrentPosition]
+  );
+
+  // Handle completing the day's reading
+  const handleCompleteDay = useCallback(() => {
+    if (currentDayReading) {
+      markDayComplete(currentDayReading.day);
+    }
+  }, [currentDayReading, markDayComplete]);
 
   // Passage history hook - track and navigate through viewing history
   const {
@@ -145,6 +235,15 @@ export function ReadingScreen() {
     enabled: true,
   });
 
+  // Cleanup immunity timer on unmount
+  useEffect(() => {
+    return () => {
+      if (gestureImmunityTimerRef.current) {
+        clearTimeout(gestureImmunityTimerRef.current);
+      }
+    };
+  }, []);
+
   // Font class based on settings
   const fontClass = fontFamily === 'serif' ? 'font-chinese-serif' : 'font-chinese-sans';
   const sizeClass = `text-chinese-${textSize}`;
@@ -159,14 +258,13 @@ export function ReadingScreen() {
 
   return (
     <div className="flex h-screen flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
-      {/* Header - hides in focus mode */}
+      {/* Header - always visible */}
       <Header
         bookName={currentBook.name}
         chapter={displayChapter || currentChapter}
         onMenuClick={() => setIsNavOpen(true)}
         onSettingsClick={() => setIsSettingsOpen(true)}
         onVocabClick={() => setIsVocabOpen(true)}
-        isHidden={isFocusMode}
       />
 
       {/* Book Navigator */}
@@ -174,6 +272,28 @@ export function ReadingScreen() {
         isOpen={isNavOpen}
         onClose={() => setIsNavOpen(false)}
       />
+
+      {/* Backdrop overlay - dismisses panel when tapping outside */}
+      {panelMode !== null && (
+        <div
+          className="fixed inset-0 z-30"
+          style={{
+            top: '56px', // Below header
+            backgroundColor: 'transparent',
+          }}
+          onPointerDown={(e) => {
+            if (e.button !== 0) return;
+            e.preventDefault();
+            handleClosePanelWithImmunity();
+          }}
+          onTouchStart={(e) => {
+            // Fallback for older iOS versions without Pointer Events.
+            if ('PointerEvent' in window) return;
+            e.preventDefault();
+            handleClosePanelWithImmunity();
+          }}
+        />
+      )}
 
       {/* Translation Panel - appears below header */}
       <TranslationPanel
@@ -188,22 +308,14 @@ export function ReadingScreen() {
       />
 
       {/* Reading content with infinite scroll */}
-      <motion.main
+      <main
         className={`
           flex-1 overflow-hidden
           ${fontClass} ${sizeClass} text-chinese
         `}
         style={{
           color: 'var(--text-primary)',
-        }}
-        initial={false}
-        animate={{
-          paddingTop: isFocusMode ? 'max(env(safe-area-inset-top, 0px), 8px)' : 'calc(56px + env(safe-area-inset-top, 0px))',
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 400,
-          damping: 35,
+          paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))',
         }}
       >
         <div className="mx-auto h-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -211,103 +323,24 @@ export function ReadingScreen() {
             ref={scrollRef}
             bookId={currentBookId}
             initialChapter={currentChapter}
+            initialScrollPosition={scrollPosition}
             onPassageChange={handlePassageChange}
-            onWordTap={handleWordTap}
-            onVerseLongPress={handleVerseLongPress}
+            onScrollPositionChange={setScrollPosition}
+            onWordTapAndHold={handleWordTapAndHold}
+            onVerseDoubleTap={handleVerseDoubleTap}
             showHsk={showHskIndicators}
-            activeBookId={null}
-            activeChapter={null}
-            activeVerseNumber={null}
+            activeBookId={panelMode === 'verse' && selectedVerseRef ? selectedVerseRef.bookId : null}
+            activeChapter={panelMode === 'verse' && selectedVerseRef ? selectedVerseRef.chapter : null}
+            activeVerseNumber={panelMode === 'verse' && selectedVerseRef ? selectedVerseRef.verse : null}
             highlightedWordIndex={null}
+            selectedWord={selectedWord}
+            selectedWordVerseRef={selectedWordVerseRef}
+            dailyReadingPassages={dailyReadingPassages}
+            onNextPassage={handleNextPassage}
+            onCompleteDay={handleCompleteDay}
           />
         </div>
-      </motion.main>
-
-      {/* Bottom navigation bar - hides in focus mode */}
-      <motion.nav
-        className="fixed bottom-0 left-0 right-0 z-30 safe-area-bottom"
-        style={{
-          backgroundColor: 'var(--bg-primary)',
-          borderTop: '1px solid var(--border-subtle)',
-        }}
-        initial={false}
-        animate={{
-          y: isFocusMode ? 80 : 0,
-          opacity: isFocusMode ? 0 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 400,
-          damping: 35,
-        }}
-      >
-        <div className="mx-auto flex max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8 py-3">
-          {/* Book selector button - ergonomic thumb zone placement */}
-          <button
-            className="touch-feedback flex items-center gap-2 rounded-full px-4 py-2 transition-colors"
-            style={{
-              backgroundColor: 'var(--bg-secondary)',
-              color: 'var(--text-secondary)',
-            }}
-            onClick={() => setIsNavOpen(true)}
-            aria-label="Select book"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="h-5 w-5"
-            >
-              {/* Book spines icon - library shelf aesthetic */}
-              <line
-                x1="3"
-                y1="20"
-                x2="21"
-                y2="20"
-                stroke="currentColor"
-                strokeWidth="0.8"
-                strokeLinecap="round"
-                opacity="0.35"
-              />
-              <rect x="4.2" y="4.5" width="3.2" height="15.5" rx="0.4" fill="currentColor" opacity="0.8" />
-              <rect x="8.7" y="6.5" width="3" height="13.5" rx="0.4" fill="currentColor" opacity="0.7" />
-              <rect x="12.9" y="5.5" width="3.1" height="14.5" rx="0.4" fill="currentColor" opacity="0.75" />
-              <rect x="17.6" y="7.5" width="3" height="12.5" rx="0.4" fill="currentColor" opacity="0.65" />
-            </svg>
-            <span className="text-sm font-medium">Books</span>
-          </button>
-        </div>
-      </motion.nav>
-
-      {/* Focus mode edge hints - subtle gradients when UI is hidden */}
-      <AnimatePresence>
-        {isFocusMode && (
-          <>
-            {/* Top edge hint */}
-            <motion.div
-              className="pointer-events-none fixed left-0 right-0 top-0 h-8 z-20"
-              style={{
-                background: 'linear-gradient(to bottom, var(--bg-primary), transparent)',
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-            {/* Bottom edge hint */}
-            <motion.div
-              className="pointer-events-none fixed left-0 right-0 bottom-0 h-8 z-20"
-              style={{
-                background: 'linear-gradient(to top, var(--bg-primary), transparent)',
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </>
-        )}
-      </AnimatePresence>
+      </main>
 
       {/* Vocabulary screen */}
       <VocabularyScreen

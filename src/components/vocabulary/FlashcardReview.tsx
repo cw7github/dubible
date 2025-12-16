@@ -1,7 +1,8 @@
-import { memo, useState, useCallback, useEffect } from 'react';
+import { memo, useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVocabularyStore } from '../../stores';
 import { getBookById } from '../../data/bible';
+import { ttsService, type VoiceGender } from '../../services';
 import type { SavedWord, ReviewResult } from '../../types';
 
 interface FlashcardReviewProps {
@@ -21,6 +22,16 @@ export const FlashcardReview = memo(function FlashcardReview({
 
   const { reviewWord } = useVocabularyStore();
 
+  // Audio playback state
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isAudioAvailable] = useState(() => ttsService.isAvailable());
+  const [showComingSoonTooltip, setShowComingSoonTooltip] = useState(false);
+  const [clickedDisabled, setClickedDisabled] = useState(false);
+
+  // Voice toggle state - alternates between male and female on each tap
+  const [currentVoice, setCurrentVoice] = useState<VoiceGender>('male');
+  const previousWordRef = useRef<string>('');
+
   // Prevent body scroll when flashcard review is active
   useEffect(() => {
     const scrollY = window.scrollY;
@@ -37,12 +48,55 @@ export const FlashcardReview = memo(function FlashcardReview({
   }, []);
 
   const currentWord = words[currentIndex];
+
+  // Reset voice to male when word changes
+  useEffect(() => {
+    if (currentWord && previousWordRef.current !== currentWord.chinese) {
+      setCurrentVoice('male');
+      previousWordRef.current = currentWord.chinese;
+    }
+  }, [currentWord]);
+
+  // Cleanup: stop audio when component unmounts
+  useEffect(() => {
+    return () => {
+      ttsService.stop();
+    };
+  }, []);
   const progress = ((currentIndex + 1) / words.length) * 100;
   const remaining = words.length - currentIndex;
 
   const handleReveal = () => {
     setIsRevealed(true);
   };
+
+  // Handle audio playback using TTS service with voice toggle
+  const handlePlayAudio = useCallback(async () => {
+    if (!currentWord?.chinese) return;
+
+    // Determine which voice to use for this play
+    const voiceToUse = currentVoice;
+
+    // Toggle voice for next tap
+    setCurrentVoice(prev => prev === 'male' ? 'female' : 'male');
+
+    try {
+      await ttsService.speak({
+        text: currentWord.chinese,
+        lang: 'zh-TW', // Use Traditional Chinese (Taiwan Mandarin)
+        voice: voiceToUse,
+        onStart: () => setIsPlaying(true),
+        onEnd: () => setIsPlaying(false),
+        onError: () => {
+          console.error('TTS playback error for:', currentWord.chinese);
+          setIsPlaying(false);
+        },
+      });
+    } catch (error) {
+      console.error('Audio playback failed:', error);
+      setIsPlaying(false);
+    }
+  }, [currentWord?.chinese, currentVoice]);
 
   const handleReview = useCallback(
     (result: ReviewResult) => {
@@ -237,6 +291,220 @@ export const FlashcardReview = memo(function FlashcardReview({
                 >
                   {currentWord.chinese}
                 </motion.h2>
+
+                {/* Audio playback button */}
+                <motion.div
+                  className="relative flex justify-center mt-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent card reveal when clicking audio
+                      if (!isAudioAvailable) {
+                        setClickedDisabled(true);
+                        setShowComingSoonTooltip(true);
+                        setTimeout(() => {
+                          setClickedDisabled(false);
+                          setShowComingSoonTooltip(false);
+                        }, 2800);
+                      } else {
+                        handlePlayAudio();
+                      }
+                    }}
+                    onMouseEnter={() => !isAudioAvailable && setShowComingSoonTooltip(true)}
+                    onMouseLeave={() => !isAudioAvailable && setShowComingSoonTooltip(false)}
+                    className="rounded-full p-3 cursor-pointer relative overflow-hidden"
+                    style={{
+                      backgroundColor: isAudioAvailable
+                        ? (isPlaying ? 'var(--accent)' : 'var(--accent-subtle)')
+                        : 'rgba(150, 140, 130, 0.08)',
+                      color: isAudioAvailable
+                        ? (isPlaying ? 'white' : 'var(--accent)')
+                        : 'rgba(130, 120, 110, 0.35)',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      border: !isAudioAvailable ? '1px solid rgba(150, 140, 130, 0.12)' : 'none',
+                      boxShadow: !isAudioAvailable ? '0 0 12px rgba(150, 140, 130, 0.03)' : 'none',
+                    }}
+                    whileTap={isAudioAvailable ? { scale: 0.9 } : { scale: 0.98 }}
+                    whileHover={isAudioAvailable ? { scale: 1.05 } : {}}
+                    aria-label={isAudioAvailable ? "Play pronunciation" : "Audio coming soon"}
+                    disabled={!isAudioAvailable && isPlaying}
+                    animate={!isAudioAvailable ? {
+                      opacity: [0.6, 0.8, 0.6],
+                    } : {}}
+                    transition={!isAudioAvailable ? {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    } : {}}
+                  >
+                    {/* Subtle shimmer effect for disabled state */}
+                    {!isAudioAvailable && (
+                      <motion.div
+                        className="absolute inset-0 rounded-full"
+                        style={{
+                          background: 'linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%)',
+                          backgroundSize: '200% 200%',
+                        }}
+                        animate={{
+                          backgroundPosition: ['0% 0%', '200% 200%'],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                      />
+                    )}
+
+                    {/* Elegant ripple effect on click */}
+                    <AnimatePresence>
+                      {clickedDisabled && !isAudioAvailable && (
+                        <>
+                          <motion.div
+                            className="absolute inset-0 rounded-full pointer-events-none"
+                            style={{
+                              border: '2px solid rgba(139, 90, 43, 0.25)',
+                              boxShadow: '0 0 12px rgba(139, 90, 43, 0.15)',
+                            }}
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 2.2, opacity: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{
+                              duration: 1.2,
+                              ease: [0.16, 1, 0.3, 1]
+                            }}
+                          />
+                          <motion.div
+                            className="absolute inset-0 rounded-full pointer-events-none"
+                            style={{
+                              backgroundColor: 'rgba(139, 90, 43, 0.12)',
+                            }}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: [0, 0.5, 0], scale: 1 }}
+                            transition={{
+                              duration: 0.8,
+                              ease: "easeOut"
+                            }}
+                          />
+                        </>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Speaker icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-5 w-5 relative z-10"
+                      style={{
+                        filter: !isAudioAvailable ? 'drop-shadow(0 0 2px rgba(150, 140, 130, 0.1))' : 'none'
+                      }}
+                    >
+                      {isPlaying ? (
+                        <>
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                        </>
+                      ) : (
+                        <>
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                          <path
+                            d="M15.54 8.46a5 5 0 0 1 0 7.07"
+                            opacity={isAudioAvailable ? "0.5" : "0.25"}
+                          />
+                        </>
+                      )}
+                    </svg>
+                  </motion.button>
+
+                  {/* Coming Soon Tooltip */}
+                  <AnimatePresence>
+                    {showComingSoonTooltip && !isAudioAvailable && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 5, scale: 0.9 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          scale: clickedDisabled ? [1, 1.05, 1] : 1
+                        }}
+                        exit={{ opacity: 0, y: 5, scale: 0.9 }}
+                        transition={{
+                          type: "spring",
+                          damping: 20,
+                          stiffness: 300,
+                          opacity: { duration: 0.2 },
+                          scale: clickedDisabled ? {
+                            duration: 0.6,
+                            ease: [0.16, 1, 0.3, 1],
+                            times: [0, 0.4, 1]
+                          } : {}
+                        }}
+                        className="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none z-50"
+                      >
+                        <motion.div
+                          className="px-3 py-1.5 rounded-lg shadow-lg relative"
+                          style={{
+                            backgroundColor: clickedDisabled
+                              ? 'rgba(139, 90, 43, 0.96)'
+                              : 'rgba(80, 70, 60, 0.96)',
+                            backdropFilter: 'blur(8px)',
+                            border: clickedDisabled
+                              ? '1px solid rgba(212, 184, 150, 0.3)'
+                              : '1px solid rgba(150, 140, 130, 0.2)',
+                            boxShadow: clickedDisabled
+                              ? '0 6px 20px rgba(139, 90, 43, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 0 20px rgba(139, 90, 43, 0.15)'
+                              : '0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05) inset',
+                            transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                          }}
+                        >
+                          <div
+                            className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+                            style={{
+                              backgroundColor: clickedDisabled
+                                ? 'rgba(139, 90, 43, 0.96)'
+                                : 'rgba(80, 70, 60, 0.96)',
+                              borderTop: clickedDisabled
+                                ? '1px solid rgba(212, 184, 150, 0.3)'
+                                : '1px solid rgba(150, 140, 130, 0.2)',
+                              borderLeft: clickedDisabled
+                                ? '1px solid rgba(212, 184, 150, 0.3)'
+                                : '1px solid rgba(150, 140, 130, 0.2)',
+                              transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                            }}
+                          />
+                          <p
+                            className="relative font-medium tracking-wide"
+                            style={{
+                              color: clickedDisabled
+                                ? 'rgba(255, 250, 240, 0.98)'
+                                : 'rgba(245, 240, 235, 0.95)',
+                              fontFamily: clickedDisabled
+                                ? "'Cormorant Garamond', Georgia, serif"
+                                : "ui-sans-serif, system-ui, -apple-system, sans-serif",
+                              fontSize: clickedDisabled ? '11px' : '10px',
+                              letterSpacing: clickedDisabled ? '0.04em' : '0.03em',
+                              fontStyle: clickedDisabled ? 'italic' : 'normal',
+                              textShadow: clickedDisabled
+                                ? '0 1px 3px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 215, 180, 0.3)'
+                                : '0 1px 2px rgba(0, 0, 0, 0.2)',
+                              transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                            }}
+                          >
+                            {clickedDisabled ? 'Audio arrives soon...' : 'Audio Coming Soon'}
+                          </p>
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
 
                 {/* Revealed content */}
                 <AnimatePresence>

@@ -1,34 +1,35 @@
-import { memo, useCallback, useMemo, useEffect } from 'react';
+import { memo, useCallback, useMemo, useEffect, useState } from 'react';
 import type { SegmentedWord } from '../../types';
 import { shouldShowPinyin } from '../../types';
 import { useVocabularyStore, useSettingsStore } from '../../stores';
-import { useLongPress } from '../../hooks/useLongPress';
+import { useHold } from '../../hooks/useHold';
 import { splitPinyinSyllables, splitChineseCharacters } from '../../utils/pinyin';
 
 interface ChineseWordProps {
   word: SegmentedWord;
-  onTap?: (word: SegmentedWord) => void; // Called on regular tap (for word definition)
-  onLongPress?: () => void; // Called on long press (for verse translation)
-  onLongPressStart?: () => void; // Called when long press starts
-  onLongPressCancel?: () => void; // Called when long press is cancelled
+  onTapAndHold?: (word: SegmentedWord) => void; // Called on hold (for word definition)
+  onHoldStart?: () => void; // Called when hold starts
+  onHoldCancel?: () => void; // Called when hold is cancelled
   isHighlighted?: boolean;
-  isVersePending?: boolean; // True when long press started but not yet triggered
+  isSelected?: boolean; // True when this word is selected and definition card is showing
   showHsk?: boolean;
 }
 
 export const ChineseWord = memo(function ChineseWord({
   word,
-  onTap,
-  onLongPress,
-  onLongPressStart,
-  onLongPressCancel,
+  onTapAndHold,
+  onHoldStart,
+  onHoldCancel,
   isHighlighted = false,
-  isVersePending = false,
+  isSelected = false,
   showHsk = false,
 }: ChineseWordProps) {
   const isWordSaved = useVocabularyStore((state) => state.isWordSaved);
   const pinyinLevel = useSettingsStore((state) => state.pinyinLevel);
   const isSaved = isWordSaved(word.chinese);
+
+  // Track hold progress for visual feedback (0-1)
+  const [holdProgress, setHoldProgress] = useState(0);
 
   // word.chinese is already in correct character set from cache (pre-converted)
   const displayText = word.chinese;
@@ -43,24 +44,44 @@ export const ChineseWord = memo(function ChineseWord({
     }
   }, [isHighlighted, displayText]);
 
-  const handleLongPress = useCallback(() => {
-    if (onLongPress) {
-      onLongPress();
+  const handleHold = useCallback(() => {
+    // iOS PWA Fix: Only trigger hold callback if this word is not already selected
+    // This prevents issues where a touchend from the hold gesture might somehow
+    // reach another word element and cause unexpected behavior
+    if (isSelected) {
+      // This word is already showing its definition, ignore the hold
+      return;
     }
-  }, [onLongPress]);
-
-  const handleTap = useCallback(() => {
-    if (onTap) {
-      onTap(word);
+    if (onTapAndHold) {
+      onTapAndHold(word);
     }
-  }, [onTap, word]);
+  }, [onTapAndHold, word, isSelected]);
 
-  const longPressHandlers = useLongPress({
-    onLongPress: handleLongPress,
-    onTap: handleTap,
-    onLongPressStart,
-    onLongPressCancel,
-    threshold: 400, // 400ms for long press
+  const handleHoldStart = useCallback(() => {
+    setHoldProgress(0);
+    if (onHoldStart) {
+      onHoldStart();
+    }
+  }, [onHoldStart]);
+
+  const handleHoldCancel = useCallback(() => {
+    setHoldProgress(0);
+    if (onHoldCancel) {
+      onHoldCancel();
+    }
+  }, [onHoldCancel]);
+
+  const handleHoldProgress = useCallback((progress: number) => {
+    setHoldProgress(progress);
+  }, []);
+
+  const holdHandlers = useHold({
+    onHold: handleHold,
+    onHoldStart: handleHoldStart,
+    onHoldCancel: handleHoldCancel,
+    onHoldProgress: handleHoldProgress,
+    threshold: 300, // 300ms for quick word lookups
+    movementTolerance: 10,
   });
 
   // Skip punctuation - render without interaction
@@ -71,7 +92,7 @@ export const ChineseWord = memo(function ChineseWord({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      handleTap();
+      handleHold();
     }
   };
 
@@ -88,20 +109,37 @@ export const ChineseWord = memo(function ChineseWord({
     }));
   }, [displayText, word.pinyin]);
 
+  // Calculate visual feedback styles based on hold progress
+  const holdProgressStyle = useMemo(() => {
+    if (holdProgress === 0) return {};
+
+    // Subtle scale and opacity changes during hold
+    const scale = 1 + (holdProgress * 0.05); // Scale up to 1.05x
+    const opacity = 1 - (holdProgress * 0.15); // Fade slightly to 0.85
+
+    return {
+      transform: `scale(${scale})`,
+      opacity,
+      transition: 'transform 0.016s linear, opacity 0.016s linear',
+    };
+  }, [holdProgress]);
+
   // Render character with centered pinyin above using flexbox
   return (
     <span
       className={`
         chinese-word
         ${isHighlighted ? 'word-highlight' : ''}
-        ${isVersePending ? 'verse-pending' : ''}
+        ${isSelected ? 'word-selected' : ''}
         ${isSaved ? 'saved' : ''}
+        ${holdProgress > 0 ? 'word-holding' : ''}
       `}
       data-hsk={showHsk && word.hskLevel ? word.hskLevel : undefined}
       role="button"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      {...longPressHandlers}
+      style={holdProgressStyle}
+      {...holdHandlers}
     >
       {charPinyinPairs ? (
         // Multi-character word: render each char with its pinyin aligned

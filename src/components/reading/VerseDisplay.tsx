@@ -1,17 +1,19 @@
-import { memo, useCallback, useState } from 'react';
-import { motion } from 'framer-motion';
+import { memo, useCallback } from 'react';
 import type { Verse, SegmentedWord, VerseReference } from '../../types';
 import { useBookmarkStore } from '../../stores';
+import { useDoubleTap } from '../../hooks/useDoubleTap';
 import { ChineseWord } from './ChineseWord';
 
 interface VerseDisplayProps {
   verse: Verse;
   bookId: string;
   chapter: number;
-  onWordTap: (word: SegmentedWord, verseRef: VerseReference) => void; // Called when word is tapped (for word definition)
-  onVerseLongPress: (verseRef: VerseReference) => void; // Called on long-press (for verse translation)
+  onWordTapAndHold: (word: SegmentedWord, verseRef: VerseReference) => void; // Called when word is tap-and-held (for word definition)
+  onVerseDoubleTap: (verseRef: VerseReference) => void; // Called on double-tap (for verse translation)
   isActive?: boolean;
   highlightedWordIndex?: number | null;
+  selectedWord?: SegmentedWord | null;
+  selectedWordVerseRef?: VerseReference | null;
   showHsk?: boolean;
   /** If true, verse displays as block (poetry). If false, displays inline (prose paragraph) */
   isPoetry?: boolean;
@@ -21,10 +23,12 @@ export const VerseDisplay = memo(function VerseDisplay({
   verse,
   bookId,
   chapter,
-  onWordTap,
-  onVerseLongPress,
+  onWordTapAndHold,
+  onVerseDoubleTap,
   isActive = false,
   highlightedWordIndex = null,
+  selectedWord = null,
+  selectedWordVerseRef = null,
   showHsk = false,
   isPoetry = true,
 }: VerseDisplayProps) {
@@ -40,32 +44,24 @@ export const VerseDisplay = memo(function VerseDisplay({
   // verse.text is already in correct character set from cache (pre-converted)
   const displayText = verse.text || '';
 
-  // Track if verse is in "pending" state (long press started but not yet triggered)
-  const [isVersePending, setIsVersePending] = useState(false);
-
-  // Called when a word is tapped (triggers word definition)
-  const handleWordTap = useCallback(
+  // Called when a word is tap-and-held (triggers word definition)
+  const handleWordTapAndHold = useCallback(
     (word: SegmentedWord) => {
-      onWordTap(word, verseRef);
+      onWordTapAndHold(word, verseRef);
     },
-    [onWordTap, verseRef]
+    [onWordTapAndHold, verseRef]
   );
 
-  // Called when any word is long-pressed (triggers verse translation)
-  const handleVerseLongPress = useCallback(() => {
-    onVerseLongPress(verseRef);
-    setIsVersePending(false); // Clear pending state when long press completes
-  }, [onVerseLongPress, verseRef]);
+  // Called when verse is double-tapped (triggers verse translation)
+  const handleVerseDoubleTap = useCallback(() => {
+    onVerseDoubleTap(verseRef);
+  }, [onVerseDoubleTap, verseRef]);
 
-  // Called when long press starts
-  const handleLongPressStart = useCallback(() => {
-    setIsVersePending(true);
-  }, []);
-
-  // Called when long press is cancelled
-  const handleLongPressCancel = useCallback(() => {
-    setIsVersePending(false);
-  }, []);
+  // Setup double-tap handlers for the verse container
+  const doubleTapHandlers = useDoubleTap({
+    onDoubleTap: handleVerseDoubleTap,
+    delay: 300, // 300ms between taps
+  });
 
   // Prose mode: inline span, Poetry mode: block div
   const Container = isPoetry ? 'div' : 'span';
@@ -77,17 +73,16 @@ export const VerseDisplay = memo(function VerseDisplay({
     <Container
       className={containerClass}
       data-verse={verse.number}
+      {...doubleTapHandlers}
     >
       {/* Verse number with bookmark indicator */}
       <span className={isPoetry ? 'verse-number' : 'verse-number-inline'}>
         {verse.number}
         {/* Bookmark indicator - visible if bookmarked */}
         {bookmarked && (
-          <motion.span
+          <span
             className="inline-block ml-0.5"
             style={{ color: 'var(--accent)' }}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +96,7 @@ export const VerseDisplay = memo(function VerseDisplay({
                 clipRule="evenodd"
               />
             </svg>
-          </motion.span>
+          </span>
         )}
       </span>
 
@@ -109,19 +104,26 @@ export const VerseDisplay = memo(function VerseDisplay({
       {verse.words ? (
         <>
           {/* Render segmented words with pinyin */}
-          {verse.words.map((word, index) => (
-            <ChineseWord
-              key={`${verse.number}-${index}-${word.chinese}`}
-              word={word}
-              onTap={handleWordTap}
-              onLongPress={handleVerseLongPress}
-              onLongPressStart={handleLongPressStart}
-              onLongPressCancel={handleLongPressCancel}
-              isHighlighted={highlightedWordIndex === index}
-              isVersePending={isVersePending}
-              showHsk={showHsk}
-            />
-          ))}
+          {verse.words.map((word, index) => {
+            // Check if this word is the currently selected word (for persistent highlighting)
+            const isSelected = selectedWord && selectedWordVerseRef &&
+              selectedWordVerseRef.bookId === bookId &&
+              selectedWordVerseRef.chapter === chapter &&
+              selectedWordVerseRef.verse === verse.number &&
+              selectedWord.chinese === word.chinese &&
+              selectedWord.pinyin === word.pinyin;
+
+            return (
+              <ChineseWord
+                key={`${verse.number}-${index}-${word.chinese}`}
+                word={word}
+                onTapAndHold={handleWordTapAndHold}
+                isHighlighted={highlightedWordIndex === index}
+                isSelected={isSelected || false}
+                showHsk={showHsk}
+              />
+            );
+          })}
 
           {/* Append trailing punctuation if missing from words array */}
           {(() => {

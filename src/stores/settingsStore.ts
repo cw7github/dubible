@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, subscribeWithSelector } from 'zustand/middleware';
 import {
   DEFAULT_SETTINGS,
 } from '../types';
@@ -46,9 +46,10 @@ interface SettingsState extends Settings {
 }
 
 export const useSettingsStore = create<SettingsState>()(
-  persist(
-    (set) => ({
-      ...DEFAULT_SETTINGS,
+  subscribeWithSelector(
+    persist(
+      (set) => ({
+        ...DEFAULT_SETTINGS,
 
       setTheme: (theme) => {
         // Update DOM for CSS variable switching
@@ -108,24 +109,25 @@ export const useSettingsStore = create<SettingsState>()(
         updateThemeColor(DEFAULT_SETTINGS.theme);
         set(DEFAULT_SETTINGS);
       },
-    }),
-    {
-      name: 'bilingual-bible-settings',
-      onRehydrateStorage: () => (state) => {
-        // Apply settings to DOM on rehydration
-        if (state) {
-          document.documentElement.setAttribute('data-theme', state.theme);
-          document.documentElement.setAttribute('data-text-size', state.textSize || 'md');
-          document.documentElement.setAttribute('data-pinyin-level', state.pinyinLevel || 'all');
-          document.documentElement.setAttribute('data-pinyin', state.pinyinDisplay);
-          document.documentElement.setAttribute(
-            'data-show-hsk',
-            String(state.showHskIndicators)
-          );
-          // Update PWA status bar color
-          updateThemeColor(state.theme);
-        }
-      },
-    }
+      }),
+      {
+        name: 'bilingual-bible-settings',
+        onRehydrateStorage: () => (state) => {
+          // Apply settings to DOM on rehydration
+          if (state) {
+            document.documentElement.setAttribute('data-theme', state.theme);
+            document.documentElement.setAttribute('data-text-size', state.textSize || 'md');
+            document.documentElement.setAttribute('data-pinyin-level', state.pinyinLevel || 'all');
+            document.documentElement.setAttribute('data-pinyin', state.pinyinDisplay);
+            document.documentElement.setAttribute(
+              'data-show-hsk',
+              String(state.showHskIndicators)
+            );
+            // Update PWA status bar color
+            updateThemeColor(state.theme);
+          }
+        },
+      }
+    )
   )
 );
