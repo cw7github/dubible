@@ -81,18 +81,26 @@ const verifyFirebaseIdToken = async (idToken: string): Promise<string | null> =>
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
     res.status(405).json({ error: 'Method not allowed' });
     return;
   }
 
-  const googleApiKey =
-    process.env.GOOGLE_CLOUD_TTS_API_KEY || process.env.VITE_GOOGLE_CLOUD_API_KEY;
+  const googleApiKey = process.env.GOOGLE_CLOUD_TTS_API_KEY;
   if (!googleApiKey) {
-    res.status(503).json({ error: 'Google TTS not configured' });
+    res.status(503).json({ error: 'Google TTS not configured (missing GOOGLE_CLOUD_TTS_API_KEY)' });
     return;
   }
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+  let body: any = req.body;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      res.status(400).json({ error: 'Invalid JSON body' });
+      return;
+    }
+  }
   const textRaw = body?.text;
   const voiceRaw = body?.voice;
 

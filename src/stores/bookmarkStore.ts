@@ -37,6 +37,7 @@ interface BookmarkState {
   updateNote: (verseRef: VerseReference, note: string) => void;
   getBookmarksByBook: (bookId: string) => Bookmark[];
   clearAllBookmarks: () => void;
+  setBookmarks: (bookmarks: Bookmark[]) => void;
 }
 
 export const useBookmarkStore = create<BookmarkState>()(
@@ -105,6 +106,14 @@ export const useBookmarkStore = create<BookmarkState>()(
       },
 
       clearAllBookmarks: () => set({ bookmarks: [] }),
+
+      setBookmarks: (bookmarks) =>
+        set({
+          bookmarks: bookmarks.map((b) => ({
+            ...b,
+            note: sanitizeNote(b.note),
+          })),
+        }),
       }),
       {
         name: 'bilingual-bible-bookmarks',

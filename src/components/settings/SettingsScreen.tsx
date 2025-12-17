@@ -1,9 +1,15 @@
-import { memo, useState } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSettingsStore, useAuthStore } from '../../stores';
 import { PINYIN_LEVELS } from '../../types';
-import type { PinyinLevel, CharacterSet, TextSize } from '../../types';
+import type { PinyinLevel, CharacterSet, TextSize, FeedbackCategory, Feedback } from '../../types';
 import { LoginScreen, ProfileScreen } from '../auth';
+import {
+  submitFeedback,
+  getUserFeedback,
+  FEEDBACK_CATEGORIES,
+} from '../../services/feedbackService';
+import { isFirebaseConfigured } from '../../lib/firebase';
 
 // Character set options
 const CHARACTER_SETS: { value: CharacterSet; chinese: string; english: string }[] = [
@@ -42,6 +48,25 @@ export const SettingsScreen = memo(function SettingsScreen({
   const { user, isAuthenticated, isFirebaseAvailable } = useAuthStore();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [userFeedback, setUserFeedback] = useState<Feedback[]>([]);
+
+  // Load user's previous feedback to show responses
+  useEffect(() => {
+    if (isAuthenticated && user?.uid) {
+      getUserFeedback(user.uid).then(setUserFeedback).catch(console.error);
+    } else {
+      setUserFeedback([]);
+    }
+  }, [isAuthenticated, user?.uid]);
+
+  // Refresh feedback after submission
+  const handleFeedbackSubmitted = () => {
+    if (user?.uid) {
+      getUserFeedback(user.uid).then(setUserFeedback).catch(console.error);
+    }
+    setIsFeedbackOpen(false);
+  };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -442,6 +467,78 @@ export const SettingsScreen = memo(function SettingsScreen({
                 </p>
               </motion.section>
 
+              {/* Divider */}
+              <div className="h-px" style={{ backgroundColor: 'var(--border-subtle)' }} />
+
+              {/* Feedback Section */}
+              {isFirebaseConfigured && (
+                <motion.section
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <SectionHeader chinese="反饋" english="Feedback" />
+
+                  {/* Send Feedback Button */}
+                  <button
+                    className="touch-feedback mt-3 w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left"
+                    style={{ backgroundColor: 'var(--bg-secondary)' }}
+                    onClick={() => setIsFeedbackOpen(true)}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: 'var(--accent-subtle)' }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" style={{ color: 'var(--accent)' }}>
+                        <path fillRule="evenodd" d="M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902.848.137 1.705.248 2.57.331v3.443a.75.75 0 001.28.53l3.58-3.579a.78.78 0 01.527-.224 41.202 41.202 0 005.183-.5c1.437-.232 2.43-1.49 2.43-2.903V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0010 2zm0 7a1 1 0 100-2 1 1 0 000 2zM8 8a1 1 0 11-2 0 1 1 0 012 0zm5 1a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-body text-base md:text-sm" style={{ color: 'var(--text-primary)' }}>
+                        Send Feedback
+                      </p>
+                      <p className="font-body text-xs md:text-[10px]" style={{ color: 'var(--text-tertiary)' }}>
+                        Report bugs, request features
+                      </p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5" style={{ color: 'var(--text-tertiary)' }}>
+                      <path fillRule="evenodd" d="M6.22 4.22a.75.75 0 011.06 0l3.25 3.25a.75.75 0 010 1.06l-3.25 3.25a.75.75 0 01-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 010-1.06z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+
+                  {/* Show responses to user's previous feedback */}
+                  {userFeedback.filter(f => f.response).length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      <p className="font-body text-xs md:text-[10px] uppercase tracking-wider px-1" style={{ color: 'var(--text-tertiary)' }}>
+                        Responses
+                      </p>
+                      {userFeedback.filter(f => f.response).slice(0, 3).map((feedback) => (
+                        <div
+                          key={feedback.id}
+                          className="rounded-lg px-3 py-2.5"
+                          style={{ backgroundColor: 'var(--bg-secondary)' }}
+                        >
+                          <p className="font-body text-xs" style={{ color: 'var(--text-secondary)' }}>
+                            {feedback.message.slice(0, 50)}{feedback.message.length > 50 ? '...' : ''}
+                          </p>
+                          <div
+                            className="mt-2 pt-2 flex items-start gap-2"
+                            style={{ borderTop: '1px solid var(--border-subtle)' }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: 'var(--accent)' }}>
+                              <path fillRule="evenodd" d="M1 8.74c0 .983.713 1.825 1.69 1.943.904.108 1.817.19 2.737.243.363.02.688.231.85.556l1.052 2.103a.75.75 0 001.342 0l1.052-2.103c.162-.325.487-.535.85-.556.92-.053 1.833-.134 2.738-.243.976-.118 1.689-.96 1.689-1.942V4.259c0-.982-.713-1.824-1.69-1.942a44.45 44.45 0 00-10.62 0C1.712 2.435 1 3.277 1 4.26v4.482z" clipRule="evenodd" />
+                            </svg>
+                            <p className="font-body text-xs" style={{ color: 'var(--accent)' }}>
+                              {feedback.response}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.section>
+              )}
+
               {/* Version info */}
               <motion.div
                 className="pt-4 text-center"
@@ -461,6 +558,12 @@ export const SettingsScreen = memo(function SettingsScreen({
 
           <LoginScreen isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
           <ProfileScreen isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+          <FeedbackForm
+            isOpen={isFeedbackOpen}
+            onClose={() => setIsFeedbackOpen(false)}
+            onSubmitted={handleFeedbackSubmitted}
+            user={user}
+          />
         </>
       )}
     </AnimatePresence>
@@ -615,5 +718,313 @@ const ReadingLevelSlider = memo(function ReadingLevelSlider({
         </p>
       </motion.div>
     </div>
+  );
+});
+
+// Feedback Form Modal
+interface FeedbackFormProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmitted: () => void;
+  user: { uid: string; email: string | null; displayName: string | null; photoURL: string | null } | null;
+}
+
+const FeedbackForm = memo(function FeedbackForm({
+  isOpen,
+  onClose,
+  onSubmitted,
+  user,
+}: FeedbackFormProps) {
+  const [message, setMessage] = useState('');
+  const [category, setCategory] = useState<FeedbackCategory>('other');
+  const [contactEmail, setContactEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const getFriendlyErrorMessage = (error: unknown): string => {
+    const code = typeof (error as any)?.code === 'string' ? (error as any).code : null;
+    if (code === 'resource-exhausted') {
+      return 'Firebase quota exceeded. Please try again in a few minutes (or after the daily reset).';
+    }
+    if (code === 'permission-denied') {
+      return 'Feedback is blocked by Firestore permissions. Please sign in and try again.';
+    }
+    if (code === 'unavailable') {
+      return 'Network error. Please try again.';
+    }
+    const msg = error instanceof Error ? error.message : '';
+    return msg && msg.length < 160 ? msg : 'Something went wrong. Please try again.';
+  };
+
+  const copyFeedbackToClipboard = async (): Promise<void> => {
+    const contact = contactEmail.trim() || user?.email || '';
+    const payload = [
+      `Category: ${category}`,
+      contact ? `Contact: ${contact}` : null,
+      `Page: ${window.location.pathname}`,
+      '',
+      message.trim(),
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    try {
+      await navigator.clipboard.writeText(payload);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  // Reset form when opening
+  useEffect(() => {
+    if (isOpen) {
+      setMessage('');
+      setCategory('other');
+      setContactEmail('');
+      setSubmitStatus('idle');
+      setErrorMessage(null);
+      setCopied(false);
+    }
+  }, [isOpen]);
+
+  const handleSubmit = async () => {
+    if (!message.trim()) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage(null);
+
+    try {
+      await submitFeedback(
+        {
+          message: message.trim(),
+          category,
+          contactEmail: contactEmail.trim() || undefined,
+        },
+        {
+          userId: user?.uid || null,
+          userEmail: user?.email || null,
+          userName: user?.displayName || null,
+          userPhoto: user?.photoURL || null,
+        }
+      );
+      setSubmitStatus('success');
+      // Wait a moment to show success, then close
+      setTimeout(() => {
+        onSubmitted();
+      }, 1500);
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
+      setErrorMessage(getFriendlyErrorMessage(error));
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 z-50"
+            style={{ backgroundColor: 'var(--overlay)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+
+          {/* Modal */}
+          <motion.div
+            className="fixed inset-x-4 top-[15%] z-51 mx-auto max-w-md rounded-2xl shadow-elevated overflow-hidden"
+            style={{ backgroundColor: 'var(--bg-primary)' }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+          >
+            {/* Header */}
+            <div
+              className="flex items-center justify-between px-4 py-3"
+              style={{ borderBottom: '1px solid var(--border-subtle)' }}
+            >
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-1 h-4 rounded-full"
+                  style={{ backgroundColor: 'var(--accent)' }}
+                />
+                <span
+                  className="font-display text-sm tracking-wider"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  Send Feedback
+                </span>
+              </div>
+              <button
+                className="touch-feedback rounded-lg p-1.5 -mr-1"
+                style={{ color: 'var(--text-tertiary)' }}
+                onClick={onClose}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                  <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4 space-y-4">
+              {/* User info display (if authenticated) */}
+              {user && (
+                <div
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs"
+                  style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}
+                >
+                  {user.photoURL && (
+                    <img src={user.photoURL} alt="" className="w-5 h-5 rounded-full" />
+                  )}
+                  <span>Sending as {user.displayName || user.email}</span>
+                </div>
+              )}
+
+              {/* Category selector */}
+              <div>
+                <label
+                  className="block font-body text-xs uppercase tracking-wider mb-2"
+                  style={{ color: 'var(--text-tertiary)' }}
+                >
+                  Category
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {FEEDBACK_CATEGORIES.map((cat) => (
+                    <button
+                      key={cat.value}
+                      className="touch-feedback px-3 py-1.5 rounded-full text-sm font-body transition-all"
+                      style={{
+                        backgroundColor: category === cat.value ? 'var(--accent)' : 'var(--bg-secondary)',
+                        color: category === cat.value ? 'white' : 'var(--text-secondary)',
+                      }}
+                      onClick={() => setCategory(cat.value)}
+                    >
+                      {cat.emoji} {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Message textarea */}
+              <div>
+                <label
+                  className="block font-body text-xs uppercase tracking-wider mb-2"
+                  style={{ color: 'var(--text-tertiary)' }}
+                >
+                  Your Message
+                </label>
+                <textarea
+                  className="w-full rounded-lg px-3 py-2.5 font-body text-sm resize-none"
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-subtle)',
+                    minHeight: '120px',
+                  }}
+                  placeholder="Tell us what's on your mind..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  maxLength={2000}
+                />
+                <p className="mt-1 text-right font-body text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                  {message.length}/2000
+                </p>
+              </div>
+
+              {/* Contact email (for anonymous users) */}
+              {!user && (
+                <div>
+                  <label
+                    className="block font-body text-xs uppercase tracking-wider mb-2"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
+                    Email (optional)
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full rounded-lg px-3 py-2.5 font-body text-sm"
+                    style={{
+                      backgroundColor: 'var(--bg-secondary)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                    placeholder="your@email.com (for follow-up)"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                  />
+                </div>
+              )}
+
+              {/* Submit button */}
+              <motion.button
+                className="touch-feedback w-full py-3 rounded-xl font-body text-sm font-medium"
+                style={{
+                  backgroundColor: submitStatus === 'success' ? 'var(--success, #22c55e)' : 'var(--accent)',
+                  color: 'white',
+                  opacity: !message.trim() || isSubmitting ? 0.5 : 1,
+                }}
+                onClick={handleSubmit}
+                disabled={!message.trim() || isSubmitting}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <motion.div
+                      className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    />
+                    Sending...
+                  </span>
+                ) : submitStatus === 'success' ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                    </svg>
+                    Sent! Thank you
+                  </span>
+                ) : submitStatus === 'error' ? (
+                  'Failed - Try Again'
+                ) : (
+                  'Send Feedback'
+                )}
+              </motion.button>
+
+              {submitStatus === 'error' && (
+                <div className="space-y-2">
+                  <p className="text-center font-body text-xs" style={{ color: 'var(--error, #ef4444)' }}>
+                    {errorMessage || 'Something went wrong. Please try again.'}
+                  </p>
+                  <button
+                    className="touch-feedback w-full rounded-lg py-2 text-xs font-body"
+                    style={{
+                      backgroundColor: 'var(--bg-secondary)',
+                      color: 'var(--text-secondary)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                    onClick={copyFeedbackToClipboard}
+                    type="button"
+                  >
+                    {copied ? 'Copied' : 'Copy Feedback'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 });

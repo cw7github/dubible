@@ -217,7 +217,7 @@ Opens production build at `http://localhost:4173`
 ### Manual Testing Checklist
 
 **Core Features**:
-- [ ] Navigate between books
+- [ ] Navigate between books using OT/NT tabs
 - [ ] Scroll through chapters (infinite scroll)
 - [ ] Tap verse to see English translation
 - [ ] Long-press word to see definition
@@ -227,6 +227,12 @@ Opens production build at `http://localhost:4173`
 - [ ] Change pinyin level (6 options)
 - [ ] Change settings (font, size, theme)
 - [ ] Offline mode (disable network, refresh)
+
+**Verse Search & Navigation**:
+- [ ] Search for specific verse (e.g., "2 Cor 11:6")
+- [ ] Press Enter to navigate to first search result
+- [ ] Verify verse scrolls to top of screen
+- [ ] Header shows correct book and chapter
 
 **Authentication & Sync**:
 - [ ] Sign in with Google
@@ -241,7 +247,13 @@ Opens production build at `http://localhost:4173`
 - [ ] Two-finger swipe left (go back in history)
 - [ ] Two-finger swipe right (go forward in history)
 - [ ] Book navigator opens/closes
+- [ ] Swipe left/right on OT/NT tabs to switch testaments
 - [ ] Chapter transitions work smoothly
+
+**Vocabulary Features**:
+- [ ] Tap word in vocabulary list to open review card
+- [ ] Tap verse reference in flashcard to navigate to verse
+- [ ] SRS review scheduling works correctly
 
 **Edge Cases**:
 - [ ] Load chapter without preprocessed data (fallback)
@@ -386,7 +398,7 @@ bilingual_bib/
 │   │   ├── useTwoFingerSwipe.ts
 │   │   ├── usePassageHistory.ts
 │   │   ├── useSyncManager.ts
-│   │   ├── useFocusMode.ts
+│   │   ├── useHold.ts
 │   │   ├── useLongPress.ts
 │   │   └── useScrollDismiss.ts
 │   ├── lib/

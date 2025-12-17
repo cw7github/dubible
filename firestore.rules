@@ -47,5 +47,20 @@ service cloud.firestore {
         allow read, write: if isOwner(userId);
       }
     }
+
+    // Feedback collection
+    // - Any authenticated user can create feedback
+    // - Users can read their own feedback (to see responses)
+    // - Only admin API can read all feedback and update (via Firebase Admin SDK)
+    match /feedback/{feedbackId} {
+      // Allow creating feedback (authenticated or anonymous with email)
+      allow create: if true;
+
+      // Allow users to read their own feedback
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+
+      // Updates only via Admin SDK (server-side)
+      allow update, delete: if false;
+    }
   }
 }

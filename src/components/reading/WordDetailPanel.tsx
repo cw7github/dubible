@@ -23,6 +23,7 @@ interface WordDetailPanelProps {
   word: SegmentedWord;
   verseRef: VerseReference | null;
   onClose: () => void;
+  onNavigateToVerse?: (bookId: string, chapter: number, verse: number) => void;
 }
 
 // Part of speech display config
@@ -59,6 +60,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
   word,
   verseRef,
   onClose: _onClose,
+  onNavigateToVerse,
 }: WordDetailPanelProps) {
   void _onClose; // Reserved for future use
   const { addWord, removeWord, isWordSaved, getWordByChars } = useVocabularyStore();
@@ -209,14 +211,32 @@ export const WordDetailPanel = memo(function WordDetailPanel({
           )}
         </div>
 
-        {/* Right: Verse reference */}
+        {/* Right: Verse reference - clickable to navigate */}
         {verseRef && book && (
-          <p
-            className="font-body text-[9px] uppercase tracking-wider flex-shrink-0"
-            style={{ color: 'var(--text-tertiary)' }}
+          <button
+            onClick={() => onNavigateToVerse?.(verseRef.bookId, verseRef.chapter, verseRef.verse)}
+            className="font-body text-[9px] uppercase tracking-wider flex-shrink-0 flex items-center gap-1 hover:opacity-80 transition-opacity"
+            style={{ color: 'var(--accent)' }}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-2.5 h-2.5 opacity-60"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                clipRule="evenodd"
+              />
+              <path
+                fillRule="evenodd"
+                d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                clipRule="evenodd"
+              />
+            </svg>
             {book.name.english} {verseRef.chapter}:{verseRef.verse}
-          </p>
+          </button>
         )}
       </div>
 

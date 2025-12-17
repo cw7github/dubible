@@ -3,3 +3,4 @@ export * from './vocabulary';
 export * from './settings';
 export * from './audio';
 export * from './progress';
+export * from './feedback';

@@ -26,10 +26,13 @@ interface InfiniteScrollProps {
   bookId: string;
   initialChapter: number;
   initialScrollPosition?: number;
+  initialVerse?: number | null;
   /** Notify parent when the visible passage changes (book + chapter). */
   onPassageChange: (bookId: string, chapter: number) => void;
   /** Notify parent when scroll position changes (for persistence) */
   onScrollPositionChange?: (scrollPosition: number) => void;
+  /** Notify parent after successfully scrolling to a specific verse (so it can clear the target verse) */
+  onVerseScrolled?: () => void;
   onWordTapAndHold: (word: SegmentedWord, verseRef: VerseReference) => void;
   onVerseDoubleTap: (verseRef: VerseReference) => void;
   showHsk: boolean;
@@ -223,8 +226,10 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
     bookId,
     initialChapter,
     initialScrollPosition = 0,
+    initialVerse = null,
     onPassageChange,
     onScrollPositionChange,
+    onVerseScrolled,
     onWordTapAndHold,
     onVerseDoubleTap,
     showHsk,
@@ -467,10 +472,64 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
 
   // Restore scroll position after initial load
   const scrollRestoredRef = useRef(false);
+  const verseScrolledRef = useRef(false);
+
+  // Scroll to specific verse if provided
+  useEffect(() => {
+    if (loadedChapters.length === 0 || !internalRef.current) return;
+    if (!initialVerse || initialVerse <= 0) return;
+    if (verseScrolledRef.current) return;
+
+    const tryScrollToVerse = (attempt: number) => {
+      const container = internalRef.current;
+      if (!container) return;
+
+      // Find the correct chapter container first, then the verse within it
+      // This prevents finding a verse from a different chapter when multiple chapters are loaded
+      const chapterContainer = container.querySelector(`[data-chapter="${initialChapter}"][data-book-id="${bookId}"]`);
+      const verseElement = chapterContainer?.querySelector(`[data-verse="${initialVerse}"]`) as HTMLElement;
+
+      if (verseElement) {
+        // Mark as scrolled only after successfully finding the verse
+        verseScrolledRef.current = true;
+
+        // Scroll the verse to the top of the viewport
+        verseElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (debugScrollRef.current) {
+          console.log('[InfiniteScroll] Scrolled to verse:', initialVerse, 'in chapter:', initialChapter, 'at top (attempt', attempt, ')');
+        }
+
+        // Notify parent that we've scrolled to the verse
+        if (onVerseScrolled) {
+          // Wait a bit for the smooth scroll to start before clearing
+          setTimeout(() => {
+            onVerseScrolled();
+          }, 100);
+        }
+      } else if (attempt < 10) {
+        // Retry up to 10 times with increasing delays (50ms, 100ms, 150ms, ...)
+        // This handles cases where the DOM hasn't fully rendered yet
+        setTimeout(() => tryScrollToVerse(attempt + 1), 50 * attempt);
+      } else if (debugScrollRef.current) {
+        console.warn('[InfiniteScroll] Could not find verse element after 10 attempts:', initialVerse, 'in chapter:', initialChapter);
+      }
+    };
+
+    // Start trying after a short delay to let the DOM render
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        tryScrollToVerse(1);
+      });
+    });
+  }, [loadedChapters.length, initialVerse, initialChapter, bookId, onVerseScrolled]);
+
   useEffect(() => {
     if (loadedChapters.length === 0 || !internalRef.current) return;
     if (initialScrollPosition <= 0) return;
     if (scrollRestoredRef.current) return;
+    // Don't restore scroll position if we're scrolling to a specific verse
+    if (initialVerse && initialVerse > 0) return;
 
     // Mark as restored to prevent multiple restorations
     scrollRestoredRef.current = true;
@@ -489,12 +548,13 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
         }
       });
     });
-  }, [loadedChapters.length, initialScrollPosition]);
+  }, [loadedChapters.length, initialScrollPosition, initialVerse]);
 
-  // Reset scroll restoration flag when book/chapter changes
+  // Reset scroll restoration flags when book/chapter/verse changes
   useEffect(() => {
     scrollRestoredRef.current = false;
-  }, [bookId, initialChapter]);
+    verseScrolledRef.current = false;
+  }, [bookId, initialChapter, initialVerse]);
 
   // Reload chapters when character set changes (instant from pre-cached data)
   useEffect(() => {

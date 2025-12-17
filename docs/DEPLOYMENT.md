@@ -4,6 +4,17 @@
 - **Site**: https://dubible.com
 - **Vercel Project**: bilingual_bib
 
+## Environment Variables (Vercel)
+
+### Google Cloud TTS (Secure)
+
+Production uses a server-side proxy (`/api/tts/google`) so the Google Cloud TTS key is not shipped to the browser.
+
+- Set `GOOGLE_CLOUD_TTS_API_KEY` in Vercel (Production)
+- Remove `VITE_GOOGLE_CLOUD_API_KEY` from Vercel Production (dev-only; previously exposed client-side)
+- Redeploy after changing env vars (`vercel --prod --yes`)
+- Rotate the Google API key if it was ever exposed in previous deployments
+
 ## Quick Deploy (Recommended)
 
 The fastest way to deploy to production:

@@ -45,19 +45,25 @@ App.tsx
 ├── useSyncManager                       # Firebase sync orchestration
 └── ReadingScreen.tsx                    # Root container
     ├── Header                           # Book/chapter title, nav buttons, sync status
-    ├── BookNavigator                    # Sidebar for book selection
-    │   └── OfflineDownload              # Per-book download buttons
+    ├── BookNavigator                    # Full-screen book/chapter selection
+    │   ├── OT/NT Testament tabs (舊約/新約 with pinyin)
+    │   ├── Search with verse navigation (e.g., "2 Cor 11:6")
+    │   └── Chapter grid with responsive sizing
     ├── TranslationPanel                 # Floating panel (verse or word)
     │   ├── Verse mode: English text (BSB)
     │   └── Word mode: WordDetailPanel   # Enhanced lexicon entry
     │       └── Audio pronunciation button (TTS)
     ├── InfiniteScroll                   # Main reading content
+    │   ├── Scroll-to-verse on search navigation
+    │   ├── Reading plan passage indicators
     │   └── VerseDisplay[]               # Individual verses
     │       └── ChineseWord[]            # Interactive word components
     │           └── Pinyin (conditional based on level)
     ├── AudioPlayer                      # Bottom bar (TTS playback)
     ├── VocabularyScreen                 # Modal for saved words
+    │   ├── Word list (tap to open review card)
     │   └── FlashcardReview              # SRS-based review
+    │       └── Clickable verse reference (navigate to source)
     ├── SettingsScreen                   # Modal for preferences
     │   ├── Account section (auth)
     │   ├── Pinyin level selector (6 levels)
@@ -397,10 +403,11 @@ interface VerseReference {
 **Usage**: Word selection in `ChineseWord.tsx`
 **Params**: `callback`, `delay` (default 500ms)
 
-### useFocusMode
-**Purpose**: Hide UI chrome when scrolling down for immersive reading
-**Returns**: `{ isHidden, scrollRef }`
-**Logic**: Track scroll direction, hide on down-scroll, show on up-scroll
+### useHold
+**Purpose**: Unified hold gesture with visual feedback and progress tracking
+**Params**: `{ onHold, onHoldStart, onHoldCancel, onHoldProgress, threshold, movementTolerance }`
+**Returns**: Touch event handlers for the target element
+**Features**: 60fps progress updates, haptic feedback, 10px movement tolerance
 
 ### useScrollDismiss
 **Purpose**: Dismiss panels when user scrolls

@@ -130,15 +130,23 @@ export const TranslationPanel = memo(function TranslationPanel({
                           transition={{ duration: 0.15 }}
                           className="px-4 py-2.5"
                         >
-                          {/* Verse reference */}
+                          {/* Verse reference with BSB attribution */}
                           {verseRef && book && (
-                            <p
-                              className="font-display text-[10px] tracking-widest uppercase mb-1.5 flex items-center gap-2"
-                              style={{ color: 'var(--accent)' }}
-                            >
-                              <span className="inline-block w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-                              {book.name.english} {verseRef.chapter}:{verseRef.verse}
-                            </p>
+                            <div className="flex items-center justify-between mb-1.5">
+                              <p
+                                className="font-display text-[10px] tracking-widest uppercase flex items-center gap-2"
+                                style={{ color: 'var(--accent)' }}
+                              >
+                                <span className="inline-block w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
+                                {book.name.english} {verseRef.chapter}:{verseRef.verse}
+                              </p>
+                              <span
+                                className="font-body text-[9px] uppercase tracking-widest"
+                                style={{ color: 'var(--text-tertiary)', opacity: 0.5 }}
+                              >
+                                {ENGLISH_TRANSLATION.abbreviation}
+                              </span>
+                            </div>
                           )}
 
                           {/* English translation */}
@@ -180,69 +188,58 @@ export const TranslationPanel = memo(function TranslationPanel({
                             </p>
                           )}
 
-                          {/* Footer with attribution and cross-references */}
-                          <div className="mt-2 pt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                            {/* Cross-references */}
-                            {crossReferences && crossReferences.length > 0 && onNavigateToCrossRef && (
-                              <div className="mb-1.5">
-                                <p
-                                  className="font-body text-[9px] uppercase tracking-widest mb-1"
-                                  style={{ color: 'var(--text-tertiary)', opacity: 0.6 }}
-                                >
-                                  Cross-references
-                                </p>
-                                <div className="flex flex-wrap gap-1">
-                                  {crossReferences.map((ref, index) => {
-                                    const refBook = getBookById(ref.bookId);
-                                    return (
-                                      <motion.button
-                                        key={index}
-                                        onClick={() => onNavigateToCrossRef(ref.bookId, ref.chapter, ref.verseStart)}
-                                        className="touch-feedback inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[11px] font-body"
-                                        style={{
-                                          backgroundColor: 'var(--bg-secondary)',
-                                          color: 'var(--accent)',
-                                          border: '1px solid var(--border-subtle)',
-                                        }}
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
+                          {/* Cross-references footer - only show if there are cross-references */}
+                          {crossReferences && crossReferences.length > 0 && onNavigateToCrossRef && (
+                            <div className="mt-2 pt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                              <p
+                                className="font-body text-[9px] uppercase tracking-widest mb-1"
+                                style={{ color: 'var(--text-tertiary)', opacity: 0.6 }}
+                              >
+                                Cross-references
+                              </p>
+                              <div className="flex flex-wrap gap-1">
+                                {crossReferences.map((ref, index) => {
+                                  const refBook = getBookById(ref.bookId);
+                                  return (
+                                    <motion.button
+                                      key={index}
+                                      onClick={() => onNavigateToCrossRef(ref.bookId, ref.chapter, ref.verseStart)}
+                                      className="touch-feedback inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[11px] font-body"
+                                      style={{
+                                        backgroundColor: 'var(--bg-secondary)',
+                                        color: 'var(--accent)',
+                                        border: '1px solid var(--border-subtle)',
+                                      }}
+                                      whileHover={{ scale: 1.02 }}
+                                      whileTap={{ scale: 0.98 }}
+                                    >
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 16 16"
+                                        fill="currentColor"
+                                        className="w-2.5 h-2.5 opacity-60"
                                       >
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          viewBox="0 0 16 16"
-                                          fill="currentColor"
-                                          className="w-2.5 h-2.5 opacity-60"
-                                        >
-                                          <path
-                                            fillRule="evenodd"
-                                            d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
-                                            clipRule="evenodd"
-                                          />
-                                          <path
-                                            fillRule="evenodd"
-                                            d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
-                                            clipRule="evenodd"
-                                          />
-                                        </svg>
-                                        <span>
-                                          {refBook?.name.english || ref.bookAbbrev} {ref.chapter}:{ref.verseStart}
-                                          {ref.verseEnd && ref.verseEnd !== ref.verseStart ? `–${ref.verseEnd}` : ''}
-                                        </span>
-                                      </motion.button>
-                                    );
-                                  })}
-                                </div>
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                                          clipRule="evenodd"
+                                        />
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                      <span>
+                                        {refBook?.name.english || ref.bookAbbrev} {ref.chapter}:{ref.verseStart}
+                                        {ref.verseEnd && ref.verseEnd !== ref.verseStart ? `–${ref.verseEnd}` : ''}
+                                      </span>
+                                    </motion.button>
+                                  );
+                                })}
                               </div>
-                            )}
-
-                            {/* BSB attribution */}
-                            <p
-                              className="font-body text-[9px] uppercase tracking-widest"
-                              style={{ color: 'var(--text-tertiary)', opacity: 0.5 }}
-                            >
-                              {ENGLISH_TRANSLATION.abbreviation}
-                            </p>
-                          </div>
+                            </div>
+                          )}
                         </motion.div>
                       )}
 
@@ -252,6 +249,7 @@ export const TranslationPanel = memo(function TranslationPanel({
                           word={word}
                           verseRef={wordVerseRef}
                           onClose={onClose}
+                          onNavigateToVerse={onNavigateToCrossRef}
                         />
                       )}
                     </AnimatePresence>

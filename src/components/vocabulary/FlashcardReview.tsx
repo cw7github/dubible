@@ -9,12 +9,14 @@ interface FlashcardReviewProps {
   words: SavedWord[];
   onClose: () => void;
   onComplete: () => void;
+  onNavigateToVerse?: (bookId: string, chapter: number, verse: number) => void;
 }
 
 export const FlashcardReview = memo(function FlashcardReview({
   words,
   onClose,
   onComplete,
+  onNavigateToVerse,
 }: FlashcardReviewProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -558,13 +560,35 @@ export const FlashcardReview = memo(function FlashcardReview({
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <p
-                          className="font-body text-xs italic tracking-wide"
-                          style={{ color: 'var(--text-tertiary)' }}
+                        <button
+                          onClick={() => onNavigateToVerse?.(
+                            currentWord.sourceVerse.bookId,
+                            currentWord.sourceVerse.chapter,
+                            currentWord.sourceVerse.verse
+                          )}
+                          className="font-body text-xs tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                          style={{ color: 'var(--accent)' }}
                         >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            className="w-3 h-3 opacity-60"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                              clipRule="evenodd"
+                            />
+                            <path
+                              fillRule="evenodd"
+                              d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
                           {book?.name.english} {currentWord.sourceVerse.chapter}:
                           {currentWord.sourceVerse.verse}
-                        </p>
+                        </button>
                       </motion.div>
                     </motion.div>
                   )}

@@ -31,9 +31,13 @@ export function ReadingScreen() {
   // Track when the panel was opened (used to guard against phantom scroll-dismiss events)
   const panelOpenTimestampRef = useRef<number>(0);
 
+  // Track when direct navigation happened (to prevent scroll from overriding display chapter)
+  const directNavTimestampRef = useRef<number>(0);
+
   const {
     currentBookId,
     currentChapter,
+    currentVerse,
     scrollPosition,
     setCurrentPosition,
     setScrollPosition,
@@ -153,8 +157,14 @@ export function ReadingScreen() {
   // Handle chapter change from infinite scroll
   const handlePassageChange = useCallback(
     (newBookId: string, newChapter: number) => {
-      setDisplayChapter(newChapter);
+      // Don't let scroll override displayChapter within 500ms of direct navigation
+      // This prevents the header from flickering when navigating via search/book selector
+      const timeSinceDirectNav = Date.now() - directNavTimestampRef.current;
+      if (timeSinceDirectNav > 500) {
+        setDisplayChapter(newChapter);
+      }
       if (newBookId !== currentBookId || newChapter !== currentChapter) {
+        // Clear the verse when changing chapters (we only want to scroll to verse once)
         setCurrentPosition(newBookId, newChapter);
       }
       // Mark chapter as read for progress tracking
@@ -198,6 +208,14 @@ export function ReadingScreen() {
     }
   }, [currentDayReading, markDayComplete]);
 
+  // Clear the target verse after scrolling to it
+  const handleVerseScrolled = useCallback(() => {
+    // Clear the verse so it doesn't keep scrolling to it
+    if (currentVerse !== null) {
+      setCurrentPosition(currentBookId, currentChapter);
+    }
+  }, [currentBookId, currentChapter, currentVerse, setCurrentPosition]);
+
   // Passage history hook - track and navigate through viewing history
   const {
     goBack: navigateBack,
@@ -218,6 +236,13 @@ export function ReadingScreen() {
       trackCurrentPassage();
     }
   }, [displayChapter, trackCurrentPassage]);
+
+  // Sync displayChapter when currentChapter changes externally (e.g., from search or book selector)
+  useEffect(() => {
+    setDisplayChapter(currentChapter);
+    // Mark this as a direct navigation to prevent scroll from overriding
+    directNavTimestampRef.current = Date.now();
+  }, [currentBookId, currentChapter]);
 
   // Two-finger swipe navigation
   useTwoFingerSwipe({
@@ -324,8 +349,10 @@ export function ReadingScreen() {
             bookId={currentBookId}
             initialChapter={currentChapter}
             initialScrollPosition={scrollPosition}
+            initialVerse={currentVerse}
             onPassageChange={handlePassageChange}
             onScrollPositionChange={setScrollPosition}
+            onVerseScrolled={handleVerseScrolled}
             onWordTapAndHold={handleWordTapAndHold}
             onVerseDoubleTap={handleVerseDoubleTap}
             showHsk={showHskIndicators}

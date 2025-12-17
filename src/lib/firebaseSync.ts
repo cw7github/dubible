@@ -17,6 +17,8 @@ import type { PassageEntry } from '../stores/historyStore';
 import type { Settings } from '../types';
 import type { UserPlanProgress, ReadingStreak, DailyReading, BookProgress } from '../types/progress';
 
+const MAX_BATCH_OPS = 450;
+
 // Reading plans state for Firestore
 export interface ReadingPlansData {
   activePlan: UserPlanProgress | null;
@@ -50,6 +52,17 @@ export class FirestoreSync {
     this.unsubscribers = [];
   }
 
+  private static sanitizeFirestoreData<T extends object>(value: T): T {
+    // Firestore rejects `undefined` values; remove them (shallow) before writes.
+    const sanitized = { ...(value as Record<string, unknown>) } as Record<string, unknown>;
+    Object.keys(sanitized).forEach((key) => {
+      if (sanitized[key] === undefined) {
+        delete sanitized[key];
+      }
+    });
+    return sanitized as T;
+  }
+
   // Vocabulary sync
   async syncVocabularyToCloud(uid: string, words: SavedWord[]): Promise<void> {
     if (!db) throw new Error('Firestore not initialized');
@@ -79,6 +92,48 @@ export class FirestoreSync {
     await batch.commit();
   }
 
+  async applyVocabularyMutations(
+    uid: string,
+    mutations: { upserts?: SavedWord[]; deletes?: string[] }
+  ): Promise<void> {
+    if (!db) throw new Error('Firestore not initialized');
+
+    const vocabPath = getVocabularyPath(uid);
+    const upserts = mutations.upserts ?? [];
+    const deletes = mutations.deletes ?? [];
+    if (upserts.length === 0 && deletes.length === 0) return;
+
+    let batch = writeBatch(db);
+    let opCount = 0;
+
+    const commit = async () => {
+      if (opCount === 0) return;
+      await batch.commit();
+      batch = writeBatch(db);
+      opCount = 0;
+    };
+
+    for (const word of upserts) {
+      const wordRef = doc(db, vocabPath, word.id);
+      batch.set(wordRef, FirestoreSync.sanitizeFirestoreData(word));
+      opCount += 1;
+      if (opCount >= MAX_BATCH_OPS) {
+        await commit();
+      }
+    }
+
+    for (const wordId of deletes) {
+      const wordRef = doc(db, vocabPath, wordId);
+      batch.delete(wordRef);
+      opCount += 1;
+      if (opCount >= MAX_BATCH_OPS) {
+        await commit();
+      }
+    }
+
+    await commit();
+  }
+
   async loadVocabularyFromCloud(uid: string): Promise<SavedWord[]> {
     if (!db) throw new Error('Firestore not initialized');
 
@@ -86,7 +141,10 @@ export class FirestoreSync {
     const vocabCollection = collection(db, vocabPath);
     const snapshot = await getDocs(vocabCollection);
 
-    return snapshot.docs.map((doc) => doc.data() as SavedWord);
+    return snapshot.docs.map((docSnapshot) => ({
+      ...(docSnapshot.data() as SavedWord),
+      id: docSnapshot.id,
+    }));
   }
 
   async addVocabularyWord(uid: string, word: SavedWord): Promise<void> {
@@ -120,7 +178,10 @@ export class FirestoreSync {
     const q = query(vocabCollection);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const words = snapshot.docs.map((doc) => doc.data() as SavedWord);
+      const words = snapshot.docs.map((docSnapshot) => ({
+        ...(docSnapshot.data() as SavedWord),
+        id: docSnapshot.id,
+      }));
       callback(words);
     });
 
@@ -157,13 +218,58 @@ export class FirestoreSync {
     await batch.commit();
   }
 
+  async applyBookmarkMutations(
+    uid: string,
+    mutations: { upserts?: Bookmark[]; deletes?: string[] }
+  ): Promise<void> {
+    if (!db) throw new Error('Firestore not initialized');
+
+    const bookmarksPath = getBookmarksPath(uid);
+    const upserts = mutations.upserts ?? [];
+    const deletes = mutations.deletes ?? [];
+    if (upserts.length === 0 && deletes.length === 0) return;
+
+    let batch = writeBatch(db);
+    let opCount = 0;
+
+    const commit = async () => {
+      if (opCount === 0) return;
+      await batch.commit();
+      batch = writeBatch(db);
+      opCount = 0;
+    };
+
+    for (const bookmark of upserts) {
+      const bookmarkRef = doc(db, bookmarksPath, bookmark.id);
+      batch.set(bookmarkRef, FirestoreSync.sanitizeFirestoreData(bookmark));
+      opCount += 1;
+      if (opCount >= MAX_BATCH_OPS) {
+        await commit();
+      }
+    }
+
+    for (const bookmarkId of deletes) {
+      const bookmarkRef = doc(db, bookmarksPath, bookmarkId);
+      batch.delete(bookmarkRef);
+      opCount += 1;
+      if (opCount >= MAX_BATCH_OPS) {
+        await commit();
+      }
+    }
+
+    await commit();
+  }
+
   async loadBookmarksFromCloud(uid: string): Promise<Bookmark[]> {
     if (!db) throw new Error('Firestore not initialized');
 
     const bookmarksCollection = collection(db, getBookmarksPath(uid));
     const snapshot = await getDocs(bookmarksCollection);
 
-    return snapshot.docs.map((doc) => doc.data() as Bookmark);
+    return snapshot.docs.map((docSnapshot) => ({
+      ...(docSnapshot.data() as Bookmark),
+      id: docSnapshot.id,
+    }));
   }
 
   async addBookmark(uid: string, bookmark: Bookmark): Promise<void> {
@@ -190,7 +296,10 @@ export class FirestoreSync {
     const q = query(bookmarksCollection);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const bookmarks = snapshot.docs.map((doc) => doc.data() as Bookmark);
+      const bookmarks = snapshot.docs.map((docSnapshot) => ({
+        ...(docSnapshot.data() as Bookmark),
+        id: docSnapshot.id,
+      }));
       callback(bookmarks);
     });
 

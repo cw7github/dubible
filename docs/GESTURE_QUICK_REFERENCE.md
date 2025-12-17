@@ -43,18 +43,7 @@
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
-│ 4. FOCUS MODE SCROLL                                            │
-│                                                                 │
-│    📜 ↓ Scroll down 80px  : Hide UI chrome                      │
-│    📜 ↑ Scroll up 30px    : Show UI chrome                      │
-│                                                                 │
-│    Ignores: Movements < 5px (momentum/rubber-band)             │
-│    Decay: 50% when direction changes, 75% after 500ms idle     │
-│    Hook: useFocusMode                                           │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────┐
-│ 5. SCROLL DISMISS (15px start, 55px complete)                   │
+│ 4. SCROLL DISMISS (15px start, 55px complete)                   │
 │                                                                 │
 │    📜 Panel open + scroll                                       │
 │    ├─ 0-15px  : No change (dead zone)                          │
@@ -146,7 +135,6 @@ Word Hold State Machine:
 | Word Hold | Touch | Yes | Yes | 16ms (60fps) |
 | Double-Tap | Touch | Yes | No | Event-based |
 | Two-Finger | Touch | No* | No | Event-based |
-| Focus Mode | Scroll | Yes | Yes | RAF-batched |
 | Scroll Dismiss | Scroll | Yes | Yes | RAF-batched |
 
 \* Two-finger swipe uses `passive: false` to prevent default when horizontal movement detected
@@ -189,11 +177,6 @@ Status:   [  OK  ][    FADING     ][DISMISSED]
 - Verify all listeners are passive
 - Check RAF batching is working
 - Monitor for excessive re-renders
-
-### "Focus mode not hiding UI"
-- Verify scroll distance >= 80px down
-- Check forceVisible prop is false
-- Ensure accumulation not being reset
 
 ---
 
@@ -267,5 +250,5 @@ All gestures have keyboard equivalents for accessibility:
 
 ---
 
-**Last Updated**: 2025-12-15
-**See Also**: `/docs/GESTURE_SYSTEM.md` for comprehensive documentation
+**Last Updated**: 2025-12-16
+**See Also**: `GESTURE_SYSTEM.md` for comprehensive documentation

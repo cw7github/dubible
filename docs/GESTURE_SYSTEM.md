@@ -102,33 +102,7 @@ useTwoFingerSwipe({
 
 ---
 
-### 4. Focus Mode Scroll
-**Purpose**: Auto-hide UI chrome for immersive reading
-
-- **Trigger**: Scroll direction with accumulation
-- **Hook**: `useFocusMode`
-- **Component**: `ReadingScreen.tsx`
-- **Thresholds**:
-  - **Hide UI**: 80px accumulated downward scroll
-  - **Show UI**: 30px accumulated upward scroll (easier to show than hide)
-- **Behavior**:
-  - Ignores movements < 5px (filters momentum/rubber-banding)
-  - Direction changes apply 50% decay to opposite accumulator
-  - Gradual decay after 500ms of idle scrolling (75% reduction)
-- **Visual feedback**: Smooth spring animation (stiffness: 400, damping: 35)
-- **Rationale**: Predictable threshold-based hiding prevents flicker, easier to reveal UI when needed
-
-**Implementation details**:
-```typescript
-const { isHidden, scrollRef } = useFocusMode({
-  forceVisible: panelMode !== null || isNavOpen,
-  scrollThreshold: 15,
-});
-```
-
----
-
-### 5. Scroll Dismiss (15px threshold)
+### 4. Scroll Dismiss (15px threshold)
 **Purpose**: Auto-dismiss translation panel when scrolling
 
 - **Trigger**: Scroll 15px while panel is visible
@@ -186,13 +160,6 @@ const { opacity } = useScrollDismiss({
 - Two-finger swipe only triggers on horizontal movement
 - Vertical two-finger movement is normal scroll
 
-### Focus Mode vs. Panel Dismiss
-**Conflict**: Both respond to scrolling
-**Resolution**:
-- Focus mode: `forceVisible` when panel is open
-- Panel dismiss: Only active when panel is visible
-- They work together: dismiss panel first, then hide chrome
-
 ---
 
 ## Visual Feedback Summary
@@ -202,7 +169,6 @@ const { opacity } = useScrollDismiss({
 | **Word Hold** | Scale 1.0→1.05x, Opacity 1.0→0.85 at 60fps | 10ms pulse on completion |
 | **Verse Double-Tap** | None (panel appears immediately) | 5ms pulse on completion |
 | **Two-Finger Swipe** | None (page transition handles animation) | None |
-| **Focus Mode** | Spring animation (400/35) for UI hide/show | None |
 | **Scroll Dismiss** | Linear opacity fade over 40px | None |
 
 ---
@@ -405,6 +371,6 @@ return <div {...doubleTapHandlers}>{verseText}</div>;
 
 ---
 
-**Last Updated**: 2025-12-15
-**Version**: 1.0
-**Author**: Claude Code (Sonnet 4.5)
+**Last Updated**: 2025-12-16
+**Version**: 1.1
+**Author**: Claude Code

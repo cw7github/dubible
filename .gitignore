@@ -28,3 +28,18 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Debug/analysis files
+/debug_*.js
+/*_report.json
+/*_analysis*.json
+/screenshot*.png
+/verification-screenshot.png
+/fix_comparison.png
+/*.cjs
+/test-*.js
+
+# Temp files
+*.tmp
+*.temp
+.archive/

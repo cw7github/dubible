@@ -18,6 +18,10 @@ A Progressive Web App (PWA) for Chinese learners reading the Bible in Chinese wi
 - Audio pronunciation in word popups (OpenAI TTS or Web Speech API)
 - Cross-reference filtering from verse text
 - HSK level badges for vocabulary words
+- Verse search with direct navigation (e.g., "2 Cor 11:6")
+- Book navigator with OT/NT tabs including pinyin
+- Flashcard review with clickable verse references
+- Single-word review from vocabulary list
 
 ## Directory Structure
 
@@ -37,7 +41,11 @@ bilingual_bib/
 │   │   │   ├── InfiniteScroll.tsx     # Chapter continuity
 │   │   │   └── AudioPlayer.tsx        # TTS playback controls
 │   │   ├── vocabulary/       # Vocabulary and flashcard review
+│   │   │   ├── VocabularyScreen.tsx  # Saved words list
+│   │   │   └── FlashcardReview.tsx   # SRS review with clickable verse refs
 │   │   ├── navigation/       # Book navigator, header, sync indicator
+│   │   │   ├── BookNavigator.tsx     # OT/NT tabs, search, chapter grid
+│   │   │   └── Header.tsx            # Book/chapter title, nav buttons
 │   │   └── settings/         # App settings (6-level pinyin, translations)
 │   ├── stores/               # Zustand state management
 │   │   ├── authStore.ts              # Authentication state
@@ -57,7 +65,7 @@ bilingual_bib/
 │   │   ├── usePassageHistory.ts      # Back/forward history navigation
 │   │   ├── useSyncManager.ts         # Firebase sync orchestration
 │   │   ├── useAudioPlayer.ts         # TTS playback hook
-│   │   ├── useFocusMode.ts           # Hide UI when scrolling
+│   │   ├── useHold.ts                # Unified hold gesture with progress
 │   │   ├── useLongPress.ts           # Long-press gesture detection
 │   │   └── useScrollDismiss.ts       # Dismiss panels on scroll
 │   ├── lib/
@@ -221,6 +229,16 @@ Continuous reading experience:
 - Virtual scrolling with chapter transitions
 - Syncs `displayChapter` with scroll position
 - Smooth animations via Framer Motion
+- Scroll-to-verse functionality with retry mechanism for DOM timing
+- Reading plan passage navigation
+
+### BookNavigator.tsx
+Book and chapter selection:
+- OT/NT testament tabs with pinyin (舊約 Jiù Yuē / 新約 Xīn Yuē)
+- Swipe gesture to switch between testaments
+- Search functionality with verse-level navigation (e.g., "2 Cor 11:6")
+- Enter key support for quick search navigation
+- Chapter grid with responsive sizing
 
 ## State Management (Zustand)
 
@@ -428,9 +446,12 @@ npm run lint
 **Deploy to production**: `vercel --prod` (see DEPLOYMENT.md)
 
 **Key files for reading features**:
-- `src/components/reading/ReadingScreen.tsx` - Main UI
+- `src/components/reading/ReadingScreen.tsx` - Main UI orchestration
+- `src/components/reading/InfiniteScroll.tsx` - Chapter loading and verse scrolling
 - `src/components/reading/ChineseWord.tsx` - Word rendering with pinyin
 - `src/components/reading/WordDetailPanel.tsx` - Definition popup with audio
+- `src/components/navigation/BookNavigator.tsx` - Book/chapter selection with search
+- `src/components/vocabulary/FlashcardReview.tsx` - SRS vocabulary review
 
 **Key files for authentication & sync**:
 - `src/stores/authStore.ts` - Auth state

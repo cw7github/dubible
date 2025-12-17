@@ -25,8 +25,9 @@ A beautiful Progressive Web App for reading the Bible in Chinese with English tr
 
 - **Save Words** - Build your personal vocabulary list from scripture
 - **Spaced Repetition (SRS)** - Smart review scheduling (1, 3, 7, 14, 30, 60 days)
-- **Flashcard Review** - Interactive vocabulary practice
+- **Flashcard Review** - Interactive vocabulary practice with clickable verse references
 - **Verse Context** - Each word links back to where you found it
+- **Quick Word Review** - Tap any saved word to instantly open its flashcard
 
 ### Pinyin Display Levels
 
@@ -51,7 +52,8 @@ Customize pinyin visibility based on your reading level:
 
 ### Navigation & Gestures
 
-- **Book Navigator** - Browse all 66 books of the Bible
+- **Book Navigator** - Browse all 66 books with OT/NT tabs (includes pinyin)
+- **Verse Search** - Search specific verses (e.g., "2 Cor 11:6") and navigate directly
 - **Two-Finger Swipe** - Navigate back/forward through passage history
 - **Reading History** - Track and navigate your reading journey
 - **Bookmarks** - Save and annotate favorite verses
@@ -338,8 +340,7 @@ npm run generate-manifest  # Update preprocessed data manifest
 - [DEVELOPMENT.md](./docs/DEVELOPMENT.md) - Development workflow, setup, and debugging
 - [DEPLOYMENT.md](./docs/DEPLOYMENT.md) - Production deployment guide
 - [AGENTS.md](./docs/AGENTS.md) - AI agent guide for contributors
-- [LAZY_LOADING.md](./docs/LAZY_LOADING.md) - Preprocessed data loading system
-- [TAIWANESE_VOICE_GUIDE.md](./docs/TAIWANESE_VOICE_GUIDE.md) - Taiwan voice selection for TTS
+- [GESTURE_SYSTEM.md](./docs/GESTURE_SYSTEM.md) - Touch gesture documentation
 
 ## Browser Support
 

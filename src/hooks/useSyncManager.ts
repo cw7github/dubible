@@ -9,6 +9,8 @@ import { useProgressStore } from '../stores/progressStore';
 import { firestoreSync } from '../lib/firebaseSync';
 import { migrateLocalDataToFirestore, mergeData } from '../lib/dataMigration';
 import type { Unsubscribe } from 'firebase/firestore';
+import type { SavedWord } from '../types/vocabulary';
+import type { Bookmark } from '../stores/bookmarkStore';
 
 const vocabSignature = (words: Array<{ id: string; updatedAt?: number }>): string =>
   JSON.stringify(
@@ -16,6 +18,79 @@ const vocabSignature = (words: Array<{ id: string; updatedAt?: number }>): strin
       .map((w) => ({ id: w.id, updatedAt: w.updatedAt ?? 0 }))
       .sort((a, b) => a.id.localeCompare(b.id))
   );
+
+const buildUpdatedAtIndex = (items: Array<{ id: string; updatedAt?: number }>): Map<string, number> => {
+  const index = new Map<string, number>();
+  items.forEach((item) => {
+    index.set(item.id, item.updatedAt ?? 0);
+  });
+  return index;
+};
+
+const bookmarkSignature = (bookmark: Bookmark): string => {
+  const note = bookmark.note ?? '';
+  const verseRef = bookmark.verseRef;
+  return `${bookmark.createdAt}|${verseRef.bookId}:${verseRef.chapter}:${verseRef.verse}|${note}`;
+};
+
+const buildBookmarkIndex = (bookmarks: Bookmark[]): Map<string, string> => {
+  const index = new Map<string, string>();
+  bookmarks.forEach((bookmark) => {
+    index.set(bookmark.id, bookmarkSignature(bookmark));
+  });
+  return index;
+};
+
+const computeVocabularyMutations = (
+  words: SavedWord[],
+  lastSyncedIndex: Map<string, number>
+): { upserts: SavedWord[]; deletes: string[] } => {
+  const upserts: SavedWord[] = [];
+  const currentIds = new Set<string>();
+
+  for (const word of words) {
+    currentIds.add(word.id);
+    const lastSyncedUpdatedAt = lastSyncedIndex.get(word.id);
+    if (lastSyncedUpdatedAt === undefined || lastSyncedUpdatedAt !== word.updatedAt) {
+      upserts.push(word);
+    }
+  }
+
+  const deletes: string[] = [];
+  for (const previousId of lastSyncedIndex.keys()) {
+    if (!currentIds.has(previousId)) {
+      deletes.push(previousId);
+    }
+  }
+
+  return { upserts, deletes };
+};
+
+const computeBookmarkMutations = (
+  bookmarks: Bookmark[],
+  lastSyncedIndex: Map<string, string>
+): { upserts: Bookmark[]; deletes: string[] } => {
+  const upserts: Bookmark[] = [];
+  const currentIds = new Set<string>();
+
+  for (const bookmark of bookmarks) {
+    currentIds.add(bookmark.id);
+    const lastSig = lastSyncedIndex.get(bookmark.id);
+    const nextSig = bookmarkSignature(bookmark);
+    if (lastSig === undefined || lastSig !== nextSig) {
+      upserts.push(bookmark);
+    }
+  }
+
+  const deletes: string[] = [];
+  for (const previousId of lastSyncedIndex.keys()) {
+    if (!currentIds.has(previousId)) {
+      deletes.push(previousId);
+    }
+  }
+
+  return { upserts, deletes };
+};
 
 // Wait for vocabulary store to be hydrated from localStorage
 // This prevents race conditions where sync runs before local data is loaded
@@ -100,12 +175,24 @@ export function useSyncManager() {
     progress?: number;
   }>({});
 
+  // Tracks what we believe is currently persisted in Firestore for diff-based syncing.
+  // This avoids full collection rewrites and prevents dropping changes when debouncing.
+  const lastSyncedVocabIndexRef = useRef<Map<string, number>>(new Map());
+  const pendingVocabWordsRef = useRef<SavedWord[]>([]);
+
+  const lastSyncedBookmarksIndexRef = useRef<Map<string, string>>(new Map());
+  const pendingBookmarksRef = useRef<Bookmark[]>([]);
+
   // Cleanup function
   const cleanup = () => {
     unsubscribersRef.current.forEach((unsub) => unsub());
     unsubscribersRef.current = [];
     hasInitialSyncedRef.current = false;
     initialVocabCloudSyncOkRef.current = false;
+    lastSyncedVocabIndexRef.current = new Map();
+    pendingVocabWordsRef.current = [];
+    lastSyncedBookmarksIndexRef.current = new Map();
+    pendingBookmarksRef.current = [];
 
     // Clear any pending sync timeouts
     Object.values(syncTimeoutRef.current).forEach((timeout) => {
@@ -249,10 +336,7 @@ export function useSyncManager() {
         // Use setWords to preserve all word data including SRS progress
         vocabularyStore.setWords(mergedVocab);
 
-        bookmarkStore.clearAllBookmarks();
-        mergedBookmarks.forEach((bookmark) => {
-          bookmarkStore.addBookmark(bookmark.verseRef, bookmark.note);
-        });
+        bookmarkStore.setBookmarks(mergedBookmarks);
 
         historyStore.clearHistory();
         mergedHistory.forEach((entry) => {
@@ -381,13 +465,25 @@ export function useSyncManager() {
           const mergedSig = vocabSignature(mergedVocab);
           if (cloudSig !== mergedSig) {
             console.log(`[Sync] Cloud vocabulary differs from merged; syncing merged vocabulary to cloud (${mergedVocab.length} words)`);
-            await firestoreSync.syncVocabularyToCloud(userId, mergedVocab);
+            const cloudIndex = buildUpdatedAtIndex(cloudVocab);
+            const { upserts, deletes } = computeVocabularyMutations(mergedVocab, cloudIndex);
+            await firestoreSync.applyVocabularyMutations(userId, { upserts, deletes });
           }
           initialVocabCloudSyncOkRef.current = true;
         } catch (error) {
           initialVocabCloudSyncOkRef.current = false;
           console.error('[Sync] Failed to sync merged vocabulary to cloud; preserving local state', error);
         }
+
+        // Prime diff-based sync baselines after initial reconciliation.
+        // If cloud sync failed, keep the baseline as the last known cloud state so we can retry later.
+        pendingVocabWordsRef.current = mergedVocab;
+        lastSyncedVocabIndexRef.current = initialVocabCloudSyncOkRef.current
+          ? buildUpdatedAtIndex(mergedVocab)
+          : buildUpdatedAtIndex(cloudVocab);
+
+        pendingBookmarksRef.current = mergedBookmarks;
+        lastSyncedBookmarksIndexRef.current = buildBookmarkIndex(cloudBookmarks);
 
         // Step 5: Set up real-time listeners for changes from other devices
         const vocabUnsub = firestoreSync.subscribeToVocabulary(userId, (words) => {
@@ -429,6 +525,8 @@ export function useSyncManager() {
             }
             // Use setWords to preserve all word data including SRS progress
             vocabularyStore.setWords(words);
+            pendingVocabWordsRef.current = words;
+            lastSyncedVocabIndexRef.current = buildUpdatedAtIndex(words);
 
             // Clear flag after a short delay to allow state to settle
             setTimeout(() => {
@@ -453,10 +551,9 @@ export function useSyncManager() {
             isProcessingCloudUpdateRef.current = true;
 
             console.log('[Sync] Applying bookmarks update from cloud:', bookmarks.length, 'bookmarks');
-            bookmarkStore.clearAllBookmarks();
-            bookmarks.forEach((bookmark) => {
-              bookmarkStore.addBookmark(bookmark.verseRef, bookmark.note);
-            });
+            bookmarkStore.setBookmarks(bookmarks);
+            pendingBookmarksRef.current = bookmarks;
+            lastSyncedBookmarksIndexRef.current = buildBookmarkIndex(bookmarks);
 
             setTimeout(() => {
               isProcessingCloudUpdateRef.current = false;
@@ -596,6 +693,34 @@ export function useSyncManager() {
 
     const userId = user.uid;
 
+    const syncVocabularyToCloudDiff = async (): Promise<void> => {
+      const words = pendingVocabWordsRef.current;
+      const lastSyncedIndex = lastSyncedVocabIndexRef.current;
+
+      // Safety: Never let an unexpected local wipe delete the entire cloud collection.
+      // If local state becomes empty unexpectedly, keep cloud intact and allow the cloud listener to restore local state.
+      if (words.length === 0 && lastSyncedIndex.size > 0) {
+        console.warn('[Sync] Detected empty local vocabulary; skipping cloud deletions to protect data');
+        return;
+      }
+
+      const { upserts, deletes } = computeVocabularyMutations(words, lastSyncedIndex);
+      if (upserts.length === 0 && deletes.length === 0) return;
+
+      await firestoreSync.applyVocabularyMutations(userId, { upserts, deletes });
+      lastSyncedVocabIndexRef.current = buildUpdatedAtIndex(words);
+    };
+
+    const syncBookmarksToCloudDiff = async (): Promise<void> => {
+      const bookmarks = pendingBookmarksRef.current;
+      const lastSyncedIndex = lastSyncedBookmarksIndexRef.current;
+      const { upserts, deletes } = computeBookmarkMutations(bookmarks, lastSyncedIndex);
+      if (upserts.length === 0 && deletes.length === 0) return;
+
+      await firestoreSync.applyBookmarkMutations(userId, { upserts, deletes });
+      lastSyncedBookmarksIndexRef.current = buildBookmarkIndex(bookmarks);
+    };
+
     // Debounced sync function to avoid rapid-fire updates
     const debouncedSync = (
       key: 'vocabulary' | 'bookmarks' | 'history' | 'settings' | 'readingPlans' | 'progress',
@@ -638,19 +763,20 @@ export function useSyncManager() {
             JSON.stringify(prevWords.map((w) => ({ id: w.id, updatedAt: w.updatedAt })).sort((a, b) => a.id.localeCompare(b.id)));
 
         if (wordsChanged) {
+          pendingVocabWordsRef.current = words;
           // If word was ADDED (length increased), sync IMMEDIATELY without debounce
           // This prevents data loss if user refreshes before debounce completes
           if (words.length > prevWords.length) {
             if (hasInitialSyncedRef.current && !isProcessingCloudUpdateRef.current) {
               console.log('[Sync] Word added, syncing immediately');
               lastLocalModificationRef.current.vocabulary = Date.now();
-              firestoreSync.syncVocabularyToCloud(userId, words)
+              syncVocabularyToCloudDiff()
                 .then(() => console.log('[Sync] Immediate vocabulary sync complete'))
                 .catch(err => console.error('[Sync] Immediate vocabulary sync failed:', err));
             }
           } else {
             // For updates/deletions, use debounced sync
-            debouncedSync('vocabulary', () => firestoreSync.syncVocabularyToCloud(userId, words));
+            debouncedSync('vocabulary', syncVocabularyToCloudDiff);
           }
         }
       },
@@ -661,14 +787,22 @@ export function useSyncManager() {
     const unsubBookmarks = useBookmarkStore.subscribe(
       (state) => state.bookmarks,
       (bookmarks, prevBookmarks) => {
-        if (
-          bookmarks.length !== prevBookmarks.length ||
-          JSON.stringify(bookmarks.map((b) => b.id).sort()) !==
-            JSON.stringify(prevBookmarks.map((b) => b.id).sort())
-        ) {
-          debouncedSync('bookmarks', () =>
-            firestoreSync.syncBookmarksToCloud(userId, bookmarks)
-          );
+        // Track the latest state so the debounced sync always applies the newest snapshot.
+        pendingBookmarksRef.current = bookmarks;
+
+        const signature = JSON.stringify(
+          bookmarks
+            .map((b) => ({ id: b.id, note: b.note ?? '', createdAt: b.createdAt }))
+            .sort((a, b) => a.id.localeCompare(b.id))
+        );
+        const prevSignature = JSON.stringify(
+          prevBookmarks
+            .map((b) => ({ id: b.id, note: b.note ?? '', createdAt: b.createdAt }))
+            .sort((a, b) => a.id.localeCompare(b.id))
+        );
+
+        if (signature !== prevSignature) {
+          debouncedSync('bookmarks', syncBookmarksToCloudDiff);
         }
       },
       { equalityFn: (a, b) => a === b }
