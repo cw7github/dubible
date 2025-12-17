@@ -539,20 +539,6 @@ export const SettingsScreen = memo(function SettingsScreen({
                 </motion.section>
               )}
 
-              {/* Version info */}
-              <motion.div
-                className="pt-4 text-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                <p
-                  className="font-body text-[10px] md:text-[9px] tracking-wider uppercase"
-                  style={{ color: 'var(--text-tertiary)', opacity: 0.5 }}
-                >
-                  DuBible v1.0
-                </p>
-              </motion.div>
             </div>
           </motion.div>
 
