@@ -446,7 +446,7 @@ bilingual_bib/
 
 ### Modify Preprocessing Prompt
 
-Edit `/Users/charleswu/Desktop/+/bilingual_bib/scripts/preprocess-bible.ts`:
+Edit `scripts/preprocess-bible.ts`:
 
 **Location**: `buildPrompt()` function
 
@@ -594,6 +594,6 @@ netlify deploy --prod                # Deploy to Netlify
 
 For issues or questions:
 1. Check this documentation
-2. Review `/Users/charleswu/Desktop/+/bilingual_bib/docs/AGENTS.md` for architecture overview
+2. Review `docs/AGENTS.md` for architecture overview
 3. Inspect existing code for patterns
 4. Debug with browser DevTools

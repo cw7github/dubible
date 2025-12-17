@@ -146,7 +146,7 @@ App → preprocessedLoader → Static JSON (preferred)
     chineseProcessor → Runtime segmentation
 ```
 
-**Service**: `/Users/charleswu/Desktop/+/bilingual_bib/src/services/preprocessedLoader.ts`
+**Service**: `src/services/preprocessedLoader.ts`
 
 - Checks `manifest.json` for available preprocessed data
 - Fetches from `/data/preprocessed/{bookId}/chapter-{n}.json`
@@ -309,15 +309,15 @@ Reading history for back/forward navigation:
 ### Chinese Text (CNV - 新譯本)
 **API**: 信望愛 Bible (FHL) - https://bible.fhl.net/json/
 - Book abbreviation system (太=Matthew, 約=John, etc.)
-- See `BOOK_ABBREVIATIONS` in `/Users/charleswu/Desktop/+/bilingual_bib/src/services/bibleApi.ts`
+- See `BOOK_ABBREVIATIONS` in `src/services/bibleApi.ts`
 
 ### English Text (BSB)
 **Bundled**: Berean Study Bible (public domain)
-- Located in `/Users/charleswu/Desktop/+/bilingual_bib/src/data/english/`
+- Located in `src/data/english/`
 
 ### 66 Books
 Full Bible support (39 OT + 27 NT)
-- Metadata in `/Users/charleswu/Desktop/+/bilingual_bib/src/data/bible/books.ts`
+- Metadata in `src/data/bible/books.ts`
 
 ## Common Workflows
 
@@ -345,7 +345,7 @@ Full Bible support (39 OT + 27 NT)
 
 ### Improving Preprocessing Quality
 
-Edit the Gemini prompt in `/Users/charleswu/Desktop/+/bilingual_bib/scripts/preprocess-bible.ts`:
+Edit the Gemini prompt in `scripts/preprocess-bible.ts`:
 
 **Key prompt sections**:
 - **SEGMENTATION RULES**: How to break text
