@@ -17,6 +17,8 @@ export interface Verse {
   words?: SegmentedWord[];
   // Cross-references to other passages
   crossReferences?: CrossReference[];
+  // Section heading (from NET Bible) - displayed before this verse
+  heading?: string;
 }
 
 export interface CharacterBreakdown {

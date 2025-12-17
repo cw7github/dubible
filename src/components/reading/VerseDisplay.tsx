@@ -75,6 +75,16 @@ export const VerseDisplay = memo(function VerseDisplay({
       data-verse={verse.number}
       {...doubleTapHandlers}
     >
+      {/* Section heading (from NET Bible) */}
+      {verse.heading && (
+        <div
+          className="section-heading font-body text-sm md:text-xs tracking-wide mt-5 mb-2 first:mt-0"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {verse.heading}
+        </div>
+      )}
+
       {/* Verse number with bookmark indicator */}
       <span className={isPoetry ? 'verse-number' : 'verse-number-inline'}>
         {verse.number}

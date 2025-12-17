@@ -39,6 +39,7 @@ interface PreprocessedVerse {
   text: string;
   words: PreprocessedWord[];
   crossReferences?: PreprocessedCrossRef[];
+  heading?: string;  // Section heading from NET Bible
 }
 
 interface PreprocessedChapter {
@@ -212,6 +213,7 @@ function convertToVerses(chapter: PreprocessedChapter): Verse[] {
       endIndex: word.chinese.length,
     })),
     crossReferences: verse.crossReferences,
+    heading: verse.heading,
   }));
 }
 
