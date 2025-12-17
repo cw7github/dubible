@@ -1,6 +1,55 @@
 import { memo } from 'react';
 import { useConvertedBookName } from '../../hooks';
 
+// Chinese numerals with pinyin
+const CHINESE_DIGITS: Record<number, { char: string; pinyin: string }> = {
+  0: { char: '〇', pinyin: 'líng' },
+  1: { char: '一', pinyin: 'yī' },
+  2: { char: '二', pinyin: 'èr' },
+  3: { char: '三', pinyin: 'sān' },
+  4: { char: '四', pinyin: 'sì' },
+  5: { char: '五', pinyin: 'wǔ' },
+  6: { char: '六', pinyin: 'liù' },
+  7: { char: '七', pinyin: 'qī' },
+  8: { char: '八', pinyin: 'bā' },
+  9: { char: '九', pinyin: 'jiǔ' },
+  10: { char: '十', pinyin: 'shí' },
+  100: { char: '百', pinyin: 'bǎi' },
+};
+
+// Convert number to Chinese characters with pinyin
+function numberToChinese(num: number): Array<{ char: string; pinyin: string }> {
+  if (num <= 0 || num > 150) return [{ char: String(num), pinyin: '' }];
+
+  const result: Array<{ char: string; pinyin: string }> = [];
+
+  if (num >= 100) {
+    const hundreds = Math.floor(num / 100);
+    result.push(CHINESE_DIGITS[hundreds]);
+    result.push(CHINESE_DIGITS[100]);
+    num = num % 100;
+    if (num > 0 && num < 10) {
+      result.push(CHINESE_DIGITS[0]); // Need 零 for numbers like 101
+    }
+  }
+
+  if (num >= 10) {
+    const tens = Math.floor(num / 10);
+    // Only show tens digit if >= 20 or if we had hundreds
+    if (tens > 1 || result.length > 0) {
+      result.push(CHINESE_DIGITS[tens]);
+    }
+    result.push(CHINESE_DIGITS[10]);
+    num = num % 10;
+  }
+
+  if (num > 0) {
+    result.push(CHINESE_DIGITS[num]);
+  }
+
+  return result;
+}
+
 // Helper to split pinyin string into individual syllables
 function splitPinyinToSyllables(pinyin: string, targetCount: number): string[] {
   const cleaned = pinyin.replace(/\s+/g, '');
@@ -142,40 +191,55 @@ export const Header = memo(function Header({
           className="touch-feedback flex items-center gap-2.5 rounded-lg px-3 py-1.5 transition-all hover:bg-[var(--bg-secondary)] group"
           onClick={onMenuClick}
         >
-          {/* Book Name with Pinyin - book icon and chapter inline */}
+          {/* Book Name and Chapter with Pinyin - cohesive inline display */}
           <div className="flex items-end gap-0.5">
             {(() => {
               const chars = convertedBookName.chinese.split('');
               const pinyinSyllables = splitPinyinToSyllables(convertedBookName.pinyin, chars.length);
-              return chars.map((char, i) => (
-                <span key={i} className="flex flex-col items-center">
-                  <span
-                    className="font-body text-[8px] italic leading-tight mb-0.5"
-                    style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}
-                  >
-                    {pinyinSyllables[i] || ''}
-                  </span>
-                  <span
-                    className="font-chinese-serif text-[17px] leading-tight"
-                    style={{ color: 'var(--text-primary)', letterSpacing: '0.02em' }}
-                  >
-                    {char}
-                  </span>
-                </span>
-              ));
+              const chapterChars = numberToChinese(chapter);
+
+              return (
+                <>
+                  {/* Book name characters */}
+                  {chars.map((char, i) => (
+                    <span key={`book-${i}`} className="flex flex-col items-center">
+                      <span
+                        className="font-body text-[8px] italic leading-tight mb-0.5"
+                        style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}
+                      >
+                        {pinyinSyllables[i] || ''}
+                      </span>
+                      <span
+                        className="font-chinese-serif text-[17px] leading-tight"
+                        style={{ color: 'var(--text-primary)', letterSpacing: '0.02em' }}
+                      >
+                        {char}
+                      </span>
+                    </span>
+                  ))}
+                  {/* Small gap between book name and chapter */}
+                  <span className="w-1" />
+                  {/* Chapter number in Chinese characters */}
+                  {chapterChars.map((item, i) => (
+                    <span key={`chapter-${i}`} className="flex flex-col items-center">
+                      <span
+                        className="font-body text-[8px] italic leading-tight mb-0.5"
+                        style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}
+                      >
+                        {item.pinyin}
+                      </span>
+                      <span
+                        className="font-chinese-serif text-[17px] leading-tight"
+                        style={{ color: 'var(--text-secondary)', letterSpacing: '0.02em' }}
+                      >
+                        {item.char}
+                      </span>
+                    </span>
+                  ))}
+                </>
+              );
             })()}
           </div>
-
-          {/* Chapter Number - same baseline as Chinese characters */}
-          <span
-            className="font-display text-lg font-medium tracking-wider transition-all group-hover:scale-105"
-            style={{
-              color: 'var(--text-secondary)',
-              letterSpacing: '0.08em',
-            }}
-          >
-            {chapter}
-          </span>
 
           {/* Dropdown chevron */}
           <svg
