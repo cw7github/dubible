@@ -15,6 +15,7 @@ export const VocabularyScreen = memo(function VocabularyScreen({
   onClose,
 }: VocabularyScreenProps) {
   const [showFlashcards, setShowFlashcards] = useState(false);
+  const [singleReviewWord, setSingleReviewWord] = useState<SavedWord | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const { words, getWordsDueForReview, getStats, removeWord } = useVocabularyStore();
@@ -89,115 +90,142 @@ export const VocabularyScreen = memo(function VocabularyScreen({
   }, [filteredWords]);
 
   const handleWordClick = (word: SavedWord) => {
-    // Navigate to the verse where this word was found
-    setCurrentPosition(
-      word.sourceVerse.bookId,
-      word.sourceVerse.chapter,
-      word.sourceVerse.verse
-    );
+    // Open flashcard review for this specific word
+    setSingleReviewWord(word);
+    setShowFlashcards(true);
+  };
+
+  const handleFlashcardNavigateToVerse = (bookId: string, chapter: number, verse: number) => {
+    // Close flashcard review and vocabulary screen, then navigate
+    setShowFlashcards(false);
+    setSingleReviewWord(null);
+    setCurrentPosition(bookId, chapter, verse);
     onClose();
   };
 
+  const handleCloseFlashcards = () => {
+    setShowFlashcards(false);
+    setSingleReviewWord(null);
+  };
+
   if (showFlashcards) {
+    // If reviewing a single word, show just that word; otherwise show due words or first 10
+    const reviewWords = singleReviewWord
+      ? [singleReviewWord]
+      : (wordsDueForReview.length > 0 ? wordsDueForReview : words.slice(0, 10));
+
     return (
       <FlashcardReview
-        words={wordsDueForReview.length > 0 ? wordsDueForReview : words.slice(0, 10)}
-        onClose={() => setShowFlashcards(false)}
-        onComplete={() => setShowFlashcards(false)}
+        words={reviewWords}
+        onClose={handleCloseFlashcards}
+        onComplete={handleCloseFlashcards}
+        onNavigateToVerse={handleFlashcardNavigateToVerse}
       />
     );
   }
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          className="fixed inset-0 z-47"
-          style={{ backgroundColor: 'var(--bg-primary)' }}
-          initial={{ opacity: 0, y: '100%' }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: '100%' }}
-          transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-        >
-          {/* Header */}
-          <header
-            className="sticky top-0 z-10 safe-area-top"
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 z-45"
+            style={{ backgroundColor: 'var(--overlay)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            onClick={handleBackdropClick}
+          />
+
+          {/* Panel - Slides from left */}
+          <motion.div
+            className="fixed top-0 left-0 bottom-0 z-46 w-80 max-w-[85vw] overflow-hidden shadow-elevated safe-area-top safe-area-bottom"
             style={{
               backgroundColor: 'var(--bg-primary)',
-              borderBottom: '1px solid var(--border-subtle)',
+              borderRight: '1px solid var(--border-subtle)',
             }}
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 500 }}
           >
-            <div className="flex items-center justify-between px-4 py-3">
-              <motion.button
-                className="touch-feedback flex items-center gap-2 rounded-lg p-2"
-                style={{ color: 'var(--text-tertiary)' }}
-                onClick={onClose}
-                whileTap={{ scale: 0.95 }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  className="h-5 w-5"
+            {/* Compact Header */}
+            <div
+              className="flex items-center justify-between px-4 py-3"
+              style={{ borderBottom: '1px solid var(--border-subtle)' }}
+            >
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-1 h-4 rounded-full"
+                  style={{ backgroundColor: 'var(--accent)' }}
+                />
+                <span
+                  className="font-display text-sm md:text-xs tracking-[0.2em] uppercase"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                  />
-                </svg>
-              </motion.button>
-
-              <h1
-                className="font-display text-base tracking-wide"
-                style={{ color: 'var(--text-primary)', letterSpacing: '0.1em' }}
-              >
-                VOCABULARY
-              </h1>
-
-              <motion.button
-                className="touch-feedback rounded-full px-4 py-1.5 font-body text-sm tracking-wide"
-                style={{
-                  backgroundColor: words.length > 0 ? 'var(--accent)' : 'var(--bg-secondary)',
-                  color: words.length > 0 ? 'white' : 'var(--text-tertiary)',
-                }}
-                onClick={() => setShowFlashcards(true)}
-                disabled={words.length === 0}
-                whileTap={words.length > 0 ? { scale: 0.95 } : {}}
-              >
-                Review
-              </motion.button>
+                  Vocabulary
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <motion.button
+                  className="touch-feedback rounded-full px-3 py-1 font-body text-xs tracking-wide"
+                  style={{
+                    backgroundColor: words.length > 0 ? 'var(--accent)' : 'var(--bg-secondary)',
+                    color: words.length > 0 ? 'white' : 'var(--text-tertiary)',
+                  }}
+                  onClick={() => setShowFlashcards(true)}
+                  disabled={words.length === 0}
+                  whileTap={words.length > 0 ? { scale: 0.95 } : {}}
+                >
+                  Review
+                </motion.button>
+                <motion.button
+                  className="touch-feedback rounded-lg p-1.5 -mr-1"
+                  style={{ color: 'var(--text-tertiary)' }}
+                  onClick={onClose}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                    <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                  </svg>
+                </motion.button>
+              </div>
             </div>
-          </header>
 
-          {/* Stats */}
+          {/* Stats - Compact */}
           <motion.div
-            className="border-b px-6 py-5"
+            className="border-b px-4 py-3"
             style={{ borderColor: 'var(--border)' }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <span
-                  className="font-display text-3xl"
+                  className="font-display text-2xl"
                   style={{ color: 'var(--text-primary)', letterSpacing: '0.02em' }}
                 >
                   {stats.totalWords}
                 </span>
                 <span
-                  className="font-body text-sm italic"
+                  className="font-body text-xs italic"
                   style={{ color: 'var(--text-tertiary)' }}
                 >
-                  words saved
+                  saved
                 </span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span
-                  className="font-display text-xl"
+                  className="font-display text-lg"
                   style={{ color: 'var(--accent)', opacity: 0.9 }}
                 >
                   {stats.masteredWords}
@@ -213,7 +241,7 @@ export const VocabularyScreen = memo(function VocabularyScreen({
 
             {wordsDueForReview.length > 0 && (
               <motion.div
-                className="mt-3 rounded-xl px-4 py-3"
+                className="mt-2 rounded-lg px-3 py-2"
                 style={{ backgroundColor: 'var(--accent-subtle)' }}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -226,7 +254,7 @@ export const VocabularyScreen = memo(function VocabularyScreen({
                     fill="none"
                     stroke="var(--accent)"
                     strokeWidth={1.5}
-                    className="h-4 w-4"
+                    className="h-3.5 w-3.5"
                   >
                     <path
                       strokeLinecap="round"
@@ -235,10 +263,10 @@ export const VocabularyScreen = memo(function VocabularyScreen({
                     />
                   </svg>
                   <span
-                    className="font-body text-sm"
+                    className="font-body text-xs"
                     style={{ color: 'var(--accent)' }}
                   >
-                    {wordsDueForReview.length} words due for review
+                    {wordsDueForReview.length} due for review
                   </span>
                 </div>
               </motion.div>
@@ -283,51 +311,51 @@ export const VocabularyScreen = memo(function VocabularyScreen({
           </motion.div>
 
           {/* Word list */}
-          <div className="h-full overflow-y-auto pb-20">
+          <div className="flex-1 overflow-y-auto pb-16">
             {words.length === 0 ? (
               <motion.div
-                className="px-6 py-16 text-center"
+                className="px-4 py-10 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
                 {/* Decorative flourish */}
-                <div className="mx-auto mb-6 flex items-center justify-center gap-3">
+                <div className="mx-auto mb-4 flex items-center justify-center gap-2">
                   <div
-                    className="h-px w-10"
+                    className="h-px w-8"
                     style={{ background: 'linear-gradient(90deg, transparent, var(--border))' }}
                   />
                   <div
-                    className="h-1.5 w-1.5 rotate-45"
+                    className="h-1 w-1 rotate-45"
                     style={{ backgroundColor: 'var(--accent-light)', opacity: 0.5 }}
                   />
                   <div
-                    className="h-px w-10"
+                    className="h-px w-8"
                     style={{ background: 'linear-gradient(90deg, var(--border), transparent)' }}
                   />
                 </div>
 
                 <p
-                  className="font-display text-lg"
+                  className="font-display text-base"
                   style={{ color: 'var(--text-secondary)', letterSpacing: '0.05em' }}
                 >
                   No saved words yet
                 </p>
                 <p
-                  className="mt-3 font-body text-sm italic leading-relaxed"
+                  className="mt-2 font-body text-xs italic leading-relaxed"
                   style={{ color: 'var(--text-tertiary)' }}
                 >
-                  Tap on any Chinese word while reading to save it
+                  Tap any Chinese word while reading to save it
                 </p>
               </motion.div>
             ) : filteredWords.length === 0 ? (
               <motion.div
-                className="px-6 py-16 text-center"
+                className="px-4 py-10 text-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
                 <p
-                  className="font-body text-sm italic"
+                  className="font-body text-xs italic"
                   style={{ color: 'var(--text-tertiary)' }}
                 >
                   No words match "{searchQuery}"
@@ -342,7 +370,7 @@ export const VocabularyScreen = memo(function VocabularyScreen({
                   transition={{ delay: 0.1 + groupIndex * 0.05 }}
                 >
                   <h3
-                    className="px-5 py-2.5 font-display text-xs tracking-widest uppercase"
+                    className="px-4 py-2 font-display text-[10px] tracking-widest uppercase"
                     style={{
                       backgroundColor: 'var(--bg-secondary)',
                       color: 'var(--text-tertiary)',
@@ -365,7 +393,8 @@ export const VocabularyScreen = memo(function VocabularyScreen({
               ))
             )}
           </div>
-        </motion.div>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
@@ -383,24 +412,24 @@ const WordItem = memo(function WordItem({ word, onClick, onDelete }: WordItemPro
 
   return (
     <motion.div
-      className="flex items-center justify-between px-5 py-4"
+      className="flex items-center justify-between px-4 py-3"
       style={{ backgroundColor: 'var(--bg-primary)' }}
       whileHover={{ backgroundColor: 'var(--bg-secondary)' }}
       transition={{ duration: 0.15 }}
     >
       <button
-        className="touch-feedback flex-1 text-left"
+        className="touch-feedback flex-1 text-left min-w-0"
         onClick={onClick}
       >
-        <div className="flex items-baseline gap-3">
+        <div className="flex items-baseline gap-2">
           <span
-            className="font-chinese-serif text-[22px] leading-none"
+            className="font-chinese-serif text-lg leading-none"
             style={{ color: 'var(--text-primary)', letterSpacing: '0.05em' }}
           >
             {word.chinese}
           </span>
           <span
-            className="font-body text-sm italic leading-none"
+            className="font-body text-xs italic leading-none truncate"
             style={{ color: 'var(--text-tertiary)', opacity: 0.8 }}
           >
             {word.pinyin}
@@ -408,22 +437,22 @@ const WordItem = memo(function WordItem({ word, onClick, onDelete }: WordItemPro
         </div>
         {word.definition && (
           <p
-            className="mt-2 font-body text-[15px] leading-relaxed"
-            style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}
+            className="mt-1 font-body text-sm leading-snug line-clamp-2"
+            style={{ color: 'var(--text-secondary)' }}
           >
             {word.definition}
           </p>
         )}
-        <div className="mt-2 flex items-center gap-3">
+        <div className="mt-1.5 flex items-center gap-2 flex-wrap">
           <span
-            className="font-body text-xs italic"
+            className="font-body text-[10px] italic"
             style={{ color: 'var(--text-tertiary)' }}
           >
             {book?.name.english} {word.sourceVerse.chapter}:{word.sourceVerse.verse}
           </span>
           {word.srsData.status === 'mastered' && (
             <span
-              className="rounded-full px-2 py-0.5 font-body text-xs tracking-wide"
+              className="rounded-full px-1.5 py-0.5 font-body text-[10px] tracking-wide"
               style={{
                 backgroundColor: 'var(--accent-subtle)',
                 color: 'var(--accent)',
@@ -436,7 +465,7 @@ const WordItem = memo(function WordItem({ word, onClick, onDelete }: WordItemPro
       </button>
 
       <motion.button
-        className="touch-feedback ml-3 rounded-lg p-2.5"
+        className="touch-feedback ml-2 rounded-lg p-2 flex-shrink-0"
         style={{ color: 'var(--text-tertiary)' }}
         onClick={(e) => {
           e.stopPropagation();
@@ -452,7 +481,7 @@ const WordItem = memo(function WordItem({ word, onClick, onDelete }: WordItemPro
           fill="none"
           stroke="currentColor"
           strokeWidth={1.5}
-          className="h-5 w-5"
+          className="h-4 w-4"
         >
           <path
             strokeLinecap="round"
