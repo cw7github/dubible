@@ -86,6 +86,7 @@ export interface Settings {
 
   // Audio
   audioSpeed: AudioSpeed;
+  ambientMusicEnabled: boolean;
 
   // Reading
   lastReadingPosition: {
@@ -107,6 +108,7 @@ export const DEFAULT_SETTINGS: Settings = {
   chineseVersion: 'cnv',
   englishVersion: 'bsb',
   audioSpeed: 1,
+  ambientMusicEnabled: false,
   lastReadingPosition: null,
 };
 

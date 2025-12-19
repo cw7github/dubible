@@ -4,3 +4,4 @@ export * from './bibleCache';
 export * from './ttsService';
 export * from './searchService';
 export * from './feedbackService';
+export * from './audioMixer';

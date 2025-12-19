@@ -1,4 +1,5 @@
 export { useAudioPlayer } from './useAudioPlayer';
+export { useAmbientMusic } from './useAmbientMusic';
 export { useHold } from './useHold';
 export { useLongPress } from './useLongPress';
 export { useTapAndHold } from './useTapAndHold';
