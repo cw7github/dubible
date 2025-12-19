@@ -297,12 +297,45 @@ export const BookNavigator = memo(function BookNavigator({
     }
   }, [searchResults, handleSearchResultClick]);
 
-  // Scroll expanded book into view
+  // Scroll expanded book into view with enough space to show chapters
   useEffect(() => {
-    if (expandedBookRef.current && scrollContainerRef.current) {
+    if (expandedBookRef.current && scrollContainerRef.current && expandedBookId) {
+      // Wait for the chapter expansion animation to complete, then scroll
       setTimeout(() => {
-        expandedBookRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
+        const bookElement = expandedBookRef.current;
+        const containerElement = scrollContainerRef.current;
+
+        if (!bookElement || !containerElement) return;
+
+        // Get the book element's position relative to the container
+        const bookRect = bookElement.getBoundingClientRect();
+        const containerRect = containerElement.getBoundingClientRect();
+
+        // Calculate positions relative to the scroll container
+        const bookTop = bookRect.top - containerRect.top;
+        const bookBottom = bookRect.bottom - containerRect.top;
+        const containerHeight = containerRect.height;
+
+        // Check if the expanded book (including chapters) extends below visible area
+        // Use 85% threshold to ensure chapters are comfortably visible
+        const needsScroll = bookBottom > containerHeight * 0.85;
+
+        if (needsScroll) {
+          // Scroll the book to the top of the container to reveal all chapters
+          bookElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          });
+        } else if (bookTop < 0) {
+          // If the book is above the visible area, scroll it into view
+          bookElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          });
+        }
+      }, 250); // Wait for the 200ms expansion animation to mostly complete
     }
   }, [expandedBookId]);
 

@@ -17,27 +17,28 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(__dirname, '..', 'public');
 const svgPath = join(publicDir, 'favicon.svg');
+const maskableSvgPath = join(publicDir, 'favicon-maskable.svg');
 
 const sizes = [
-  { size: 16, name: 'favicon-16x16.png' },
-  { size: 32, name: 'favicon-32x32.png' },
-  { size: 180, name: 'apple-touch-icon.png' },
-  { size: 192, name: 'pwa-192x192.png' },
-  { size: 512, name: 'pwa-512x512.png' },
+  { size: 16, name: 'favicon-16x16.png', svg: svgPath },
+  { size: 32, name: 'favicon-32x32.png', svg: svgPath },
+  { size: 180, name: 'apple-touch-icon.png', svg: svgPath },
+  { size: 192, name: 'pwa-192x192.png', svg: svgPath },
+  { size: 512, name: 'pwa-512x512.png', svg: svgPath },
+  { size: 512, name: 'pwa-512x512-maskable.png', svg: maskableSvgPath },
 ];
 
 async function generateFavicons() {
   console.log('🎨 Generating DuBible favicons...\n');
 
   try {
-    const svgBuffer = readFileSync(svgPath);
-
-    for (const { size, name } of sizes) {
+    for (const { size, name, svg } of sizes) {
+      const svgBuffer = readFileSync(svg);
       const outputPath = join(publicDir, name);
 
       await sharp(svgBuffer)
         .resize(size, size)
-        .png()
+        .png({ background: { r: 0, g: 0, b: 0, alpha: 0 } })
         .toFile(outputPath);
 
       console.log(`✓ Generated ${name} (${size}×${size})`);

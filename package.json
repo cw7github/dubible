@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-manifest": "node scripts/generate-manifest.cjs",
-    "generate-favicons": "node scripts/generate-favicons.js"
+    "generate-favicons": "node scripts/generate-favicons.js",
+    "convert-hybrid-timing": "tsx scripts/convert-hybrid-timing.ts"
   },
   "dependencies": {
     "@pinyin-pro/data": "^1.2.0",

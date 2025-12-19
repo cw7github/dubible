@@ -10,6 +10,7 @@ import {
   FEEDBACK_CATEGORIES,
 } from '../../services/feedbackService';
 import { isFirebaseConfigured } from '../../lib/firebase';
+import { AVAILABLE_TRANSLATIONS } from '../../data/english';
 
 // Character set options
 const CHARACTER_SETS: { value: CharacterSet; chinese: string; english: string }[] = [
@@ -44,6 +45,10 @@ export const SettingsScreen = memo(function SettingsScreen({
     setCharacterSet,
     theme,
     setTheme,
+    englishVersion,
+    setEnglishVersion,
+    ambientMusicEnabled,
+    setAmbientMusicEnabled,
   } = useSettingsStore();
   const { user, isAuthenticated, isFirebaseAvailable } = useAuthStore();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -408,7 +413,7 @@ export const SettingsScreen = memo(function SettingsScreen({
                 </div>
               </motion.section>
 
-              {/* Bible Translations - Condensed info */}
+              {/* Bible Translations */}
               <motion.section
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -416,55 +421,114 @@ export const SettingsScreen = memo(function SettingsScreen({
               >
                 <SectionHeader chinese="譯本" english="Translations" />
 
-                <div
-                  className="mt-3 rounded-lg overflow-hidden"
-                  style={{ backgroundColor: 'var(--bg-secondary)' }}
-                >
-                  {/* Chinese */}
-                  <div className="px-3 py-2.5 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-body text-xs md:text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
-                        中文
-                      </span>
+                {/* Chinese - Read-only */}
+                <div className="mt-3">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="font-body text-xs md:text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
+                      中文
+                    </span>
+                  </div>
+                  <div
+                    className="rounded-lg px-3 py-2.5"
+                    style={{ backgroundColor: 'var(--bg-secondary)' }}
+                  >
+                    <div className="flex items-center justify-between">
                       <span className="font-chinese-serif text-base md:text-sm" style={{ color: 'var(--text-primary)' }}>
                         新譯本
                       </span>
-                    </div>
-                    <span
-                      className="font-display text-xs md:text-[10px] tracking-wider px-1.5 py-0.5 rounded"
-                      style={{ backgroundColor: 'var(--accent-subtle)', color: 'var(--accent)' }}
-                    >
-                      CNV
-                    </span>
-                  </div>
-
-                  <div className="h-px mx-3" style={{ backgroundColor: 'var(--border-subtle)' }} />
-
-                  {/* English */}
-                  <div className="px-3 py-2.5 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-body text-xs md:text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
-                        ENG
-                      </span>
-                      <span className="font-body text-base md:text-sm" style={{ color: 'var(--text-primary)' }}>
-                        Berean Standard
+                      <span
+                        className="font-display text-xs md:text-[10px] tracking-wider px-1.5 py-0.5 rounded"
+                        style={{ backgroundColor: 'var(--accent-subtle)', color: 'var(--accent)' }}
+                      >
+                        CNV
                       </span>
                     </div>
-                    <span
-                      className="font-display text-xs md:text-[10px] tracking-wider px-1.5 py-0.5 rounded"
-                      style={{ backgroundColor: 'var(--accent-subtle)', color: 'var(--accent)' }}
-                    >
-                      BSB
-                    </span>
                   </div>
                 </div>
 
-<p
-                  className="mt-2 font-body text-xs md:text-[10px] px-1"
-                  style={{ color: 'var(--text-tertiary)', opacity: 0.6 }}
+                {/* English - Selector */}
+                <div className="mt-4">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="font-body text-xs md:text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
+                      English
+                    </span>
+                  </div>
+                  <div
+                    className="flex rounded-lg p-0.5"
+                    style={{ backgroundColor: 'var(--bg-secondary)' }}
+                  >
+                    {AVAILABLE_TRANSLATIONS.map((translation) => (
+                      <button
+                        key={translation.id}
+                        className="touch-feedback flex-1 rounded-md py-2 px-3 transition-all duration-150"
+                        style={{
+                          backgroundColor: englishVersion === translation.id ? 'var(--bg-primary)' : 'transparent',
+                          boxShadow: englishVersion === translation.id ? '0 1px 3px var(--shadow)' : 'none',
+                        }}
+                        onClick={() => setEnglishVersion(translation.id)}
+                      >
+                        <div className="flex flex-col items-center gap-0.5">
+                          <span
+                            className="font-display text-xs md:text-[10px] tracking-wider"
+                            style={{ color: englishVersion === translation.id ? 'var(--accent)' : 'var(--text-tertiary)' }}
+                          >
+                            {translation.abbreviation}
+                          </span>
+                          <span
+                            className="font-body text-[10px] md:text-[9px]"
+                            style={{ color: englishVersion === translation.id ? 'var(--text-secondary)' : 'var(--text-tertiary)' }}
+                          >
+                            {translation.name.replace(' Bible', '').replace(' Version', '')}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </motion.section>
+
+              {/* Divider */}
+              <div className="h-px" style={{ backgroundColor: 'var(--border-subtle)' }} />
+
+              {/* Audio Section */}
+              <motion.section
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <SectionHeader chinese="音頻" english="Audio" />
+
+                {/* Ambient Music Toggle */}
+                <button
+                  className="touch-feedback mt-3 w-full flex items-center justify-between rounded-xl px-3 py-2.5"
+                  style={{ backgroundColor: 'var(--bg-secondary)' }}
+                  onClick={() => setAmbientMusicEnabled(!ambientMusicEnabled)}
                 >
-                  Only supported translations
-                </p>
+                  <div className="flex-1">
+                    <p className="font-body text-base md:text-sm text-left" style={{ color: 'var(--text-primary)' }}>
+                      Ambient Music
+                    </p>
+                    <p className="font-body text-xs md:text-[10px] text-left" style={{ color: 'var(--text-tertiary)' }}>
+                      Play subtle background music during audio narration
+                    </p>
+                  </div>
+                  <div
+                    className="relative flex items-center justify-center flex-shrink-0 ml-3 rounded-full transition-all duration-200"
+                    style={{
+                      width: '44px',
+                      height: '26px',
+                      backgroundColor: ambientMusicEnabled ? 'var(--accent)' : 'var(--border)',
+                    }}
+                  >
+                    <motion.div
+                      className="absolute w-5 h-5 rounded-full"
+                      style={{ backgroundColor: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }}
+                      initial={false}
+                      animate={{ x: ambientMusicEnabled ? 9 : -9 }}
+                      transition={{ type: 'spring', damping: 20, stiffness: 500 }}
+                    />
+                  </div>
+                </button>
               </motion.section>
 
               {/* Divider */}

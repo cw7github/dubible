@@ -31,7 +31,8 @@ export default defineConfig({
         'favicon-32x32.png',
         'apple-touch-icon.png',
         'pwa-192x192.png',
-        'pwa-512x512.png'
+        'pwa-512x512.png',
+        'pwa-512x512-maskable.png'
       ],
       manifest: {
         name: 'DuBible - Learn Chinese Through the Bible',
@@ -45,18 +46,20 @@ export default defineConfig({
           {
             src: 'pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any'
           },
           {
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable'
+            purpose: 'any'
+          },
+          {
+            src: 'pwa-512x512-maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable'
           }
         ]
       },

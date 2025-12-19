@@ -44,6 +44,10 @@ export const VerseDisplay = memo(function VerseDisplay({
   // verse.text is already in correct character set from cache (pre-converted)
   const displayText = verse.text || '';
 
+  // Detect manuscript variant notes (textual criticism notes, not actual scripture)
+  // These typically say "Some manuscripts have..." in Chinese
+  const isManuscriptNote = /有些抄本|有古卷/.test(displayText);
+
   // Called when a word is tap-and-held (triggers word definition)
   const handleWordTapAndHold = useCallback(
     (word: SegmentedWord) => {
@@ -72,15 +76,14 @@ export const VerseDisplay = memo(function VerseDisplay({
   return (
     <Container
       className={containerClass}
+      data-book={bookId}
+      data-chapter={chapter}
       data-verse={verse.number}
       {...doubleTapHandlers}
     >
       {/* Section heading (from NET Bible) */}
       {verse.heading && (
-        <div
-          className="section-heading font-body text-sm md:text-xs tracking-wide mt-5 mb-2 first:mt-0"
-          style={{ color: 'var(--text-secondary)' }}
-        >
+        <div className="section-heading font-body">
           {verse.heading}
         </div>
       )}
@@ -111,7 +114,7 @@ export const VerseDisplay = memo(function VerseDisplay({
       </span>
 
       {/* Verse content */}
-      {verse.words ? (
+      {verse.words && verse.words.length > 0 ? (
         <>
           {/* Render segmented words with pinyin */}
           {verse.words.map((word, index) => {
@@ -150,10 +153,13 @@ export const VerseDisplay = memo(function VerseDisplay({
             return null;
           })()}
         </>
-      ) : (
-        // Fallback: render plain text if no segmentation
+      ) : isManuscriptNote ? (
+        // Hide manuscript variant notes - they're textual criticism, not scripture
+        null
+      ) : displayText ? (
+        // Fallback: render plain text for verses without word segmentation
         <span className="font-chinese-serif text-chinese">{displayText}</span>
-      )}
+      ) : null}
     </Container>
   );
 });

@@ -7,11 +7,23 @@ export function splitPinyinSyllables(pinyin: string, charCount: number): string[
 
   const cleanPinyin = pinyin.trim();
 
-  // Try to split by spaces first (some pinyin might be space-separated)
+  // First, check if apostrophes are present - they explicitly mark syllable boundaries
+  // Apostrophes are used in pinyin to separate syllables (e.g., "cí'ài" for 慈愛)
+  if (cleanPinyin.includes("'")) {
+    const apostropheSplit = cleanPinyin.split("'");
+    if (apostropheSplit.length === charCount) {
+      return apostropheSplit;
+    }
+  }
+
+  // Try to split by spaces (some pinyin might be space-separated)
   const spaceSplit = cleanPinyin.split(/\s+/);
   if (spaceSplit.length === charCount) {
     return spaceSplit;
   }
+
+  // Remove apostrophes for regex matching (they are syllable separators, not part of syllables)
+  const pinyinWithoutApostrophes = cleanPinyin.replace(/'/g, ' ');
 
   // Regex pattern to match pinyin syllables
   // Handles initials, finals, tone marks (āáǎà) and tone numbers (1-4)
@@ -19,7 +31,7 @@ export function splitPinyinSyllables(pinyin: string, charCount: number): string[
 
   const matches: string[] = [];
   let match;
-  while ((match = tempRegex.exec(cleanPinyin)) !== null) {
+  while ((match = tempRegex.exec(pinyinWithoutApostrophes)) !== null) {
     matches.push(match[1]);
   }
 

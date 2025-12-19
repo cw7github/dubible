@@ -19,6 +19,13 @@ npx tsx scripts/preprocess-bible.ts --book matthew
 
 # Update manifest after preprocessing
 npm run generate-manifest
+
+# Generate audio (requires ELEVENLABS_API_KEY)
+npx tsx scripts/generate-hybrid-audio.ts --book matthew --chapter 5
+npx tsx scripts/convert-hybrid-timing.ts --book matthew --chapter 5
+
+# For long chapters (>6 min or >1500 chars)
+npx tsx scripts/convert-long-chapters-chunked.ts --book luke --chapter 1
 ```
 
 ## Key Files
@@ -37,6 +44,7 @@ npm run generate-manifest
 - **[docs/AGENTS.md](docs/AGENTS.md)** - Detailed AI agent guide (project structure, data flow, workflows)
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - System design, component hierarchy, state management
 - **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)** - Setup, testing, deployment, contribution guidelines
+- **[docs/AUDIO_GENERATION.md](docs/AUDIO_GENERATION.md)** - Audio generation pipeline: ElevenLabs TTS, forced alignment, chunked processing
 
 ## Tech Stack
 

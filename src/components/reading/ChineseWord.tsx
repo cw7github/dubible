@@ -5,6 +5,20 @@ import { useVocabularyStore, useSettingsStore } from '../../stores';
 import { useHold } from '../../hooks/useHold';
 import { splitPinyinSyllables, splitChineseCharacters } from '../../utils/pinyin';
 
+/**
+ * Check if a string contains only punctuation marks.
+ * Includes Chinese fullwidth punctuation and common ASCII punctuation.
+ */
+function isPunctuationOnly(text: string): boolean {
+  if (!text || text.trim() === '') return true;
+
+  // Chinese fullwidth punctuation and common ASCII punctuation
+  // Chinese: 。，、；：？！「」『』（）《》〈〉【】〔〕—…
+  // ASCII: . , ; : ? ! ( ) [ ] { } - " ' / \ |
+  const punctuationRegex = /^[。，、；：？！「」『』（）《》〈〉【】〔〕—…\s.,;:?!()\[\]{}\-"'/\\|]+$/;
+  return punctuationRegex.test(text);
+}
+
 interface ChineseWordProps {
   word: SegmentedWord;
   onTapAndHold?: (word: SegmentedWord) => void; // Called on hold (for word definition)
@@ -84,7 +98,9 @@ export const ChineseWord = memo(function ChineseWord({
     movementTolerance: 10,
   });
 
-  const isPunctuation = !word.pinyin && !word.definition;
+  // Check if this is punctuation by examining the text itself
+  // More robust than just checking for empty pinyin/definition
+  const isPunctuation = isPunctuationOnly(displayText);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {

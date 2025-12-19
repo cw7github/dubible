@@ -24,6 +24,8 @@ interface WordDetailPanelProps {
   verseRef: VerseReference | null;
   onClose: () => void;
   onNavigateToVerse?: (bookId: string, chapter: number, verse: number) => void;
+  onPlayFromWord?: (verseRef: VerseReference, wordIndex: number) => void;
+  isAudioAvailable?: boolean;
 }
 
 // Part of speech display config
@@ -61,6 +63,8 @@ export const WordDetailPanel = memo(function WordDetailPanel({
   verseRef,
   onClose: _onClose,
   onNavigateToVerse,
+  onPlayFromWord,
+  isAudioAvailable = false,
 }: WordDetailPanelProps) {
   void _onClose; // Reserved for future use
   const { addWord, removeWord, isWordSaved, getWordByChars } = useVocabularyStore();
@@ -69,10 +73,10 @@ export const WordDetailPanel = memo(function WordDetailPanel({
   const savedWord = getWordByChars(word.chinese);
   const book = verseRef ? getBookById(verseRef.bookId) : null;
 
-  // Audio playback state
+  // Audio playback state (TTS for pronunciation)
   const [isPlaying, setIsPlaying] = useState(false);
-  // Enable audio when TTS service is available (Azure/OpenAI configured)
-  const [isAudioAvailable] = useState(() => ttsService.isAvailable());
+  // Enable TTS audio when service is available (Azure/OpenAI configured)
+  const [isTTSAvailable] = useState(() => ttsService.isAvailable());
   const [showComingSoonTooltip, setShowComingSoonTooltip] = useState(false);
   const [clickedDisabled, setClickedDisabled] = useState(false);
 
@@ -154,10 +158,10 @@ export const WordDetailPanel = memo(function WordDetailPanel({
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
     >
-      {/* Compact header row with badges */}
+      {/* Compact header row with badges and play button */}
       <div className="flex items-center justify-between gap-2 mb-1.5">
         {/* Left: Badges (horizontal layout) */}
-        <div className="flex items-center gap-1 flex-wrap">
+        <div className="flex items-center gap-1 flex-wrap flex-1 min-w-0">
           {/* Biblical Name badge */}
           {isNameEntry && (
             <span
@@ -211,33 +215,63 @@ export const WordDetailPanel = memo(function WordDetailPanel({
           )}
         </div>
 
-        {/* Right: Verse reference - clickable to navigate */}
-        {verseRef && book && (
-          <button
-            onClick={() => onNavigateToVerse?.(verseRef.bookId, verseRef.chapter, verseRef.verse)}
-            className="font-body text-[9px] uppercase tracking-wider flex-shrink-0 flex items-center gap-1 hover:opacity-80 transition-opacity"
-            style={{ color: 'var(--accent)' }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="w-2.5 h-2.5 opacity-60"
+        {/* Right: Verse reference and play button */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {/* Play from here button */}
+          {isAudioAvailable && onPlayFromWord && verseRef && word.startIndex !== undefined && (
+            <motion.button
+              onClick={() => onPlayFromWord(verseRef, word.startIndex)}
+              className="touch-feedback flex items-center gap-0.5 px-1.5 py-0.5 rounded-md"
+              style={{
+                backgroundColor: 'var(--accent-subtle)',
+                color: 'var(--accent)',
+              }}
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ backgroundColor: 'var(--accent)', color: 'white' }}
+              aria-label="Play from this word"
             >
-              <path
-                fillRule="evenodd"
-                d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
-                clipRule="evenodd"
-              />
-              <path
-                fillRule="evenodd"
-                d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            {book.name.english} {verseRef.chapter}:{verseRef.verse}
-          </button>
-        )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-2.5 h-2.5"
+              >
+                <path
+                  d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
+                />
+              </svg>
+              <span className="font-body text-[9px] tracking-wide uppercase">Play</span>
+            </motion.button>
+          )}
+
+          {/* Verse reference */}
+          {verseRef && book && (
+            <button
+              onClick={() => onNavigateToVerse?.(verseRef.bookId, verseRef.chapter, verseRef.verse)}
+              className="font-body text-[9px] uppercase tracking-wider flex items-center gap-1 hover:opacity-80 transition-opacity"
+              style={{ color: 'var(--accent)' }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="w-2.5 h-2.5 opacity-60"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                  clipRule="evenodd"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {book.name.english} {verseRef.chapter}:{verseRef.verse}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Main content row - compact horizontal layout */}
@@ -275,7 +309,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
             <div className="relative">
               <motion.button
                 onClick={() => {
-                  if (!isAudioAvailable) {
+                  if (!isTTSAvailable) {
                     setClickedDisabled(true);
                     setShowComingSoonTooltip(true);
                     setTimeout(() => {
@@ -286,35 +320,35 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                     handlePlayAudio();
                   }
                 }}
-                onHoverStart={() => !isAudioAvailable && setShowComingSoonTooltip(true)}
-                onHoverEnd={() => !isAudioAvailable && setShowComingSoonTooltip(false)}
+                onHoverStart={() => !isTTSAvailable && setShowComingSoonTooltip(true)}
+                onHoverEnd={() => !isTTSAvailable && setShowComingSoonTooltip(false)}
                 className="rounded-full p-1 cursor-pointer relative overflow-hidden"
                 style={{
-                  backgroundColor: isAudioAvailable
+                  backgroundColor: isTTSAvailable
                     ? (isPlaying ? 'var(--accent)' : 'var(--accent-subtle)')
                     : 'rgba(150, 140, 130, 0.08)',
-                  color: isAudioAvailable
+                  color: isTTSAvailable
                     ? (isPlaying ? 'white' : 'var(--accent)')
                     : 'rgba(130, 120, 110, 0.35)',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  border: !isAudioAvailable ? '1px solid rgba(150, 140, 130, 0.12)' : 'none',
-                  boxShadow: !isAudioAvailable ? '0 0 12px rgba(150, 140, 130, 0.03)' : 'none',
+                  border: !isTTSAvailable ? '1px solid rgba(150, 140, 130, 0.12)' : 'none',
+                  boxShadow: !isTTSAvailable ? '0 0 12px rgba(150, 140, 130, 0.03)' : 'none',
                 }}
-                whileTap={isAudioAvailable ? { scale: 0.9 } : { scale: 0.98 }}
-                whileHover={isAudioAvailable ? { scale: 1.05 } : {}}
-                aria-label={isAudioAvailable ? "Play pronunciation" : "Audio coming soon"}
-                disabled={!isAudioAvailable && isPlaying}
-                animate={!isAudioAvailable ? {
+                whileTap={isTTSAvailable ? { scale: 0.9 } : { scale: 0.98 }}
+                whileHover={isTTSAvailable ? { scale: 1.05 } : {}}
+                aria-label={isTTSAvailable ? "Play pronunciation" : "Audio coming soon"}
+                disabled={!isTTSAvailable && isPlaying}
+                animate={!isTTSAvailable ? {
                   opacity: [0.6, 0.8, 0.6],
                 } : {}}
-                transition={!isAudioAvailable ? {
+                transition={!isTTSAvailable ? {
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut"
                 } : {}}
               >
                 {/* Subtle shimmer effect for disabled state */}
-                {!isAudioAvailable && (
+                {!isTTSAvailable && (
                   <motion.div
                     className="absolute inset-0 rounded-full"
                     style={{
@@ -334,7 +368,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
 
                 {/* Elegant ripple effect on click - manuscript-inspired */}
                 <AnimatePresence>
-                  {clickedDisabled && !isAudioAvailable && (
+                  {clickedDisabled && !isTTSAvailable && (
                     <>
                       {/* Subtle expanding ring */}
                       <motion.div
@@ -395,7 +429,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
                       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
                       <path
                         d="M15.54 8.46a5 5 0 0 1 0 7.07"
-                        opacity={isAudioAvailable ? "0.5" : "0.25"}
+                        opacity={isTTSAvailable ? "0.5" : "0.25"}
                       />
                     </>
                   )}
@@ -404,7 +438,7 @@ export const WordDetailPanel = memo(function WordDetailPanel({
 
               {/* Coming Soon Tooltip - Elegant appearance with click enhancement */}
               <AnimatePresence>
-                {showComingSoonTooltip && !isAudioAvailable && (
+                {showComingSoonTooltip && !isTTSAvailable && (
                   <motion.div
                     initial={{ opacity: 0, y: 5, scale: 0.9 }}
                     animate={{

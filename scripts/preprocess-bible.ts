@@ -44,6 +44,19 @@ interface ProcessedVerse {
   number: number;
   text: string;
   words: ProcessedWord[];
+  heading?: string;  // Section heading from NET Bible
+}
+
+// Section headings from NET Bible
+interface SectionHeading {
+  verse: number;
+  heading: string;
+}
+
+interface SectionHeadingsData {
+  [book: string]: {
+    [chapter: string]: SectionHeading[];
+  };
 }
 
 interface ProcessedChapter {
@@ -167,6 +180,38 @@ const PROBLEMATIC_CHAPTERS: Record<string, number[]> = {
   'ezekiel': [32],
 };
 
+// Load section headings from NET Bible data
+function loadSectionHeadings(): SectionHeadingsData {
+  const headingsPath = path.join(__dirname, '../public/data/section-headings.json');
+  if (fs.existsSync(headingsPath)) {
+    const data = JSON.parse(fs.readFileSync(headingsPath, 'utf-8'));
+    console.log('Loaded section headings from NET Bible');
+    return data;
+  }
+  console.log('Warning: Section headings file not found');
+  return {};
+}
+
+// Get heading for a specific verse
+function getHeadingForVerse(
+  sectionHeadings: SectionHeadingsData,
+  bookId: string,
+  chapter: number,
+  verseNum: number
+): string | undefined {
+  const bookHeadings = sectionHeadings[bookId];
+  if (!bookHeadings) return undefined;
+
+  const chapterHeadings = bookHeadings[String(chapter)];
+  if (!chapterHeadings) return undefined;
+
+  const heading = chapterHeadings.find(h => h.verse === verseNum);
+  return heading?.heading;
+}
+
+// Global section headings data
+let SECTION_HEADINGS: SectionHeadingsData = {};
+
 function getEffectiveBatchSize(bookId: string, chapter: number): number {
   const chapters = PROBLEMATIC_CHAPTERS[bookId];
   if (chapters && chapters.includes(chapter)) {
@@ -218,8 +263,35 @@ function stripHtml(text: string): string {
     // Remove isolated cross-references
     .replace(/[\u4e00-\u9fff]{1,4}\s*\d+\s*[:：]\s*\d+/g, '');
 
+  // Remove duplicated section header text
+  // The NCV translation duplicates headers like "耶穌基督的降生耶穌基督的降生是這樣的"
+  // We detect phrases 3-15 chars that repeat immediately and remove the first occurrence
+  cleaned = removeDuplicatedHeaders(cleaned);
+
   // Clean up any extra whitespace
   return cleaned.trim().replace(/\s+/g, ' ');
+}
+
+// Remove duplicated section header text from verse content
+// Example: "耶穌基督的降生耶穌基督的降生是這樣的" -> "耶穌基督的降生是這樣的"
+function removeDuplicatedHeaders(text: string): string {
+  // Pattern: 3-15 Chinese characters that repeat immediately at the start
+  // The header from <h3> gets prepended, then the verse text starts with the same phrase
+  const match = text.match(/^([\u4e00-\u9fff]{3,15})\1/);
+  if (match) {
+    // Remove the first (duplicated) occurrence
+    return text.slice(match[1].length);
+  }
+
+  // Also check for near-duplicates where the second occurrence has slight variation
+  // e.g., "問安問安為基督" -> second "問安" is part of actual verse
+  // We look for 2-8 char phrases that repeat
+  const shortMatch = text.match(/^([\u4e00-\u9fff]{2,8})\1/);
+  if (shortMatch) {
+    return text.slice(shortMatch[1].length);
+  }
+
+  return text;
 }
 
 // Build the prompt for Gemini
@@ -384,11 +456,20 @@ async function processChapter(
         continue;
       }
 
-      processedVerses.push({
+      // Check for section heading at this verse
+      const heading = getHeadingForVerse(SECTION_HEADINGS, bookId, chapterNum, verse.sec);
+
+      const processedVerse: ProcessedVerse = {
         number: verse.sec,
         text: stripHtml((verse as any).bible_text || verse.chineses),
         words,
-      });
+      };
+
+      if (heading) {
+        processedVerse.heading = heading;
+      }
+
+      processedVerses.push(processedVerse);
     }
 
     // Rate limiting
@@ -463,6 +544,9 @@ async function main() {
   // Validate API key
   validateApiKey();
   console.log('Initialized OpenRouter API (Gemini 2.5 Flash)');
+
+  // Load section headings
+  SECTION_HEADINGS = loadSectionHeadings();
 
   // Ensure output directory exists
   if (!fs.existsSync(CONFIG.outputDir)) {

@@ -50,6 +50,8 @@ interface InfiniteScrollProps {
   onNextPassage?: (passage: PlanPassage) => void;
   /** Callback when user completes the day's reading */
   onCompleteDay?: () => void;
+  /** Whether the audio bar is currently visible (affects scroll padding) */
+  isAudioBarVisible?: boolean;
 }
 
 interface ChapterBlockProps {
@@ -215,10 +217,13 @@ const ChapterBlock = memo(function ChapterBlock({
   if (prevIsActiveChapter !== nextIsActiveChapter) return false;
   if (!prevIsActiveChapter && !nextIsActiveChapter) return true;
 
-  return (
-    prev.activeVerseNumber === next.activeVerseNumber &&
-    prev.highlightedWordIndex === next.highlightedWordIndex
-  );
+  // CRITICAL FIX: Always re-render when highlightedWordIndex changes during audio playback
+  // This ensures word highlighting stays in sync with narration
+  // The previous comparison was causing delayed updates due to React's batching
+  if (prev.highlightedWordIndex !== next.highlightedWordIndex) return false;
+  if (prev.activeVerseNumber !== next.activeVerseNumber) return false;
+
+  return true;
 });
 
 export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(function InfiniteScroll(
@@ -242,6 +247,7 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
     dailyReadingPassages,
     onNextPassage,
     onCompleteDay,
+    isAudioBarVisible = false,
   }: InfiniteScrollProps,
   forwardedRef
 ) {
@@ -1281,6 +1287,13 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
         transform: 'translateZ(0)', // Force GPU layer
         // Performance: Isolate repaints within scroll container
         contain: 'layout style paint',
+        // Scroll padding: Offset scrollIntoView to account for fixed header + audio bar
+        // This ensures auto-scrolled verses appear BELOW the fixed overlays, not behind them
+        scrollPaddingTop: isAudioBarVisible
+          ? 'calc(56px + 88px + env(safe-area-inset-top, 0px))'
+          : 'calc(56px + env(safe-area-inset-top, 0px))',
+        // Smooth transition when audio bar appears/disappears
+        transition: 'scroll-padding-top 0.3s ease',
       }}
     >
       {/* Preprocessed data loading indicator - subtle overlay */}

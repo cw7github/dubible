@@ -15,7 +15,8 @@ A Progressive Web App (PWA) for Chinese learners reading the Bible in Chinese wi
 - Cloud sync for vocabulary, bookmarks, history, settings
 - Two-finger swipe navigation for passage history
 - 6-level pinyin display system based on HSK proficiency
-- Audio pronunciation in word popups (OpenAI TTS or Web Speech API)
+- Chapter audio narration with word-synchronized highlighting (ElevenLabs TTS)
+- Word pronunciation in popups (Google Cloud TTS or Web Speech API)
 - Cross-reference filtering from verse text
 - HSK level badges for vocabulary words
 - Verse search with direct navigation (e.g., "2 Cor 11:6")
@@ -81,10 +82,17 @@ bilingual_bib/
 │       └── english/                  # Bundled BSB translation
 ├── scripts/
 │   ├── preprocess-bible.ts           # Gemini via OpenRouter preprocessor
+│   ├── generate-hybrid-audio.ts      # Generate audio with emotion analysis (ElevenLabs)
+│   ├── convert-hybrid-timing.ts      # Convert timing using forced alignment API
+│   ├── convert-long-chapters-chunked.ts # Handle long chapters (>6 min)
 │   └── generate-manifest.cjs         # Manifest generator
-├── public/data/preprocessed/
-│   ├── manifest.json                 # Available preprocessed data
-│   └── {bookId}/chapter-{n}.json    # Preprocessed chapters
+├── public/
+│   ├── data/preprocessed/
+│   │   ├── manifest.json             # Available preprocessed data
+│   │   └── {bookId}/chapter-{n}.json # Preprocessed chapters
+│   └── audio/{bookId}/
+│       ├── chapter-{n}-hybrid.mp3    # Generated audio files
+│       └── chapter-{n}-hybrid-metadata.json # Emotion sections + timing
 ├── docs/                     # Documentation
 ├── firestore.rules           # Firestore security rules
 └── dist/                     # Build output
@@ -343,6 +351,40 @@ Full Bible support (39 OT + 27 NT)
    npm run preview
    ```
 
+### Generating Audio for a Chapter
+
+Uses ElevenLabs TTS with hybrid emotion approach and forced alignment for accurate timing.
+
+**1. Generate audio**:
+```bash
+npx tsx scripts/generate-hybrid-audio.ts --book matthew --chapter 5
+```
+- Gemini analyzes chapter for emotional tone shifts (calm, dramatic, gentle, joyful, etc.)
+- Text tagged with emotion markers: `[calm] 看見這許多人... [majestic] 他就開口...`
+- ElevenLabs generates continuous audio with smooth emotion transitions
+- Saves: `chapter-X-hybrid.mp3` + `chapter-X-hybrid-metadata.json`
+
+**2. Convert timing data**:
+```bash
+npx tsx scripts/convert-hybrid-timing.ts --book matthew --chapter 5
+```
+- Uses forced alignment API for accurate character-level timing
+- Maps character timing to word boundaries from preprocessed data
+- Saves: `chapter-X.mp3` + `chapter-X.json` (app-ready format)
+
+**3. For long chapters** (>6 min or >1500 chars):
+```bash
+npx tsx scripts/convert-long-chapters-chunked.ts --book luke --chapter 1
+```
+- 7 affected chapters: Luke 1, 9, 22 | John 6, 8, 11 | Mark 14
+- Splits text into chunks, extracts audio segments (FFmpeg required)
+- Calls forced alignment on each chunk separately
+- Combines results with timestamp offsets
+
+**Environment**: Requires `ELEVENLABS_API_KEY` in `.env.local`
+
+**See**: `docs/AUDIO_GENERATION.md` for complete pipeline documentation, troubleshooting, and cost estimates.
+
 ### Improving Preprocessing Quality
 
 Edit the Gemini prompt in `scripts/preprocess-bible.ts`:
@@ -412,12 +454,14 @@ console.log(verses);
 ## Important Constraints
 
 - **OpenRouter API Key**: Required for preprocessing, set as `OPENROUTER_API_KEY` env var
+- **ElevenLabs API Key**: Required for audio generation, set as `ELEVENLABS_API_KEY` env var
 - **Firebase Config**: Optional, enables auth and sync (set `VITE_FIREBASE_*` vars)
-- **OpenAI Key**: Optional, enables high-quality TTS (set `VITE_OPENAI_API_KEY`)
+- **Google Cloud TTS Key**: Optional, enables high-quality word pronunciation (set `GOOGLE_CLOUD_TTS_API_KEY` or `VITE_GOOGLE_CLOUD_API_KEY`)
 - **Rate Limits**: OpenRouter has rate limits, use delays between batches
 - **File Size**: Keep preprocessed JSONs reasonable (5 verses per batch)
 - **PWA**: Offline support via service worker, cache preprocessed data
 - **Mobile**: Optimized for portrait orientation, touch-first
+- **FFmpeg**: Required for long chapter audio processing (install via brew/apt)
 
 ## Testing
 
@@ -441,6 +485,9 @@ npm run lint
 
 **Preprocess a book**: `npx tsx scripts/preprocess-bible.ts --book {bookId}`
 **Generate manifest**: `npm run generate-manifest`
+**Generate audio**: `npx tsx scripts/generate-hybrid-audio.ts --book {bookId} --chapter {n}`
+**Convert timing**: `npx tsx scripts/convert-hybrid-timing.ts --book {bookId} --chapter {n}`
+**Long chapters**: `npx tsx scripts/convert-long-chapters-chunked.ts --book {bookId} --chapter {n}`
 **Dev server**: `npm run dev`
 **Build**: `npm run build`
 **Deploy to production**: `vercel --prod` (see DEPLOYMENT.md)
@@ -470,8 +517,11 @@ npm run lint
 **Key files for preprocessing**:
 - `scripts/preprocess-bible.ts` - Gemini via OpenRouter
 
-**Key files for TTS**:
-- `src/services/ttsService.ts` - OpenAI TTS / Web Speech API
+**Key files for audio generation**:
+- `scripts/generate-hybrid-audio.ts` - ElevenLabs TTS with emotion analysis
+- `scripts/convert-hybrid-timing.ts` - Forced alignment for timing data
+- `scripts/convert-long-chapters-chunked.ts` - Chunked processing for long chapters
+- `src/services/ttsService.ts` - Word pronunciation (Google Cloud TTS / Web Speech API)
 
 ## Deployment
 

@@ -5,8 +5,9 @@ import { memo, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { SegmentedWord, VerseReference, CrossReference } from '../../types';
 import { getBookById } from '../../data/bible';
-import { getEnglishVerse, ENGLISH_TRANSLATION } from '../../data/english';
+import { getEnglishVerseAsync, getTranslationInfo, loadTranslation } from '../../data/english';
 import { WordDetailPanel } from './WordDetailPanel';
+import { useSettingsStore } from '../../stores';
 
 export type PanelMode = 'verse' | 'word' | null;
 
@@ -21,6 +22,10 @@ interface TranslationPanelProps {
   // Callbacks
   onClose: () => void;
   onNavigateToCrossRef?: (bookId: string, chapter: number, verse: number) => void;
+  // Audio controls (optional)
+  onPlayFromVerse?: (verseRef: VerseReference) => void;
+  onPlayFromWord?: (verseRef: VerseReference, wordIndex: number) => void;
+  isAudioAvailable?: boolean;
   // Scroll-based fade control (optional)
   scrollOpacity?: number;
 }
@@ -33,13 +38,21 @@ export const TranslationPanel = memo(function TranslationPanel({
   wordVerseRef,
   onClose,
   onNavigateToCrossRef,
+  onPlayFromVerse,
+  onPlayFromWord,
+  isAudioAvailable = false,
   scrollOpacity = 1,
 }: TranslationPanelProps) {
+  const { englishVersion } = useSettingsStore();
   const [englishText, setEnglishText] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Get English translation when verse mode is active (instant - bundled data)
+  // Get translation info for the selected version
+  const translationInfo = getTranslationInfo(englishVersion);
+  const translationCode = translationInfo?.abbreviation || 'BSB';
+
+  // Get English translation when verse mode is active (loads translation on-demand)
   useEffect(() => {
     if (mode !== 'verse' || !verseRef) {
       setEnglishText(null);
@@ -47,16 +60,30 @@ export const TranslationPanel = memo(function TranslationPanel({
       return;
     }
 
-    const text = getEnglishVerse(verseRef.bookId, verseRef.chapter, verseRef.verse);
-    if (text) {
-      setEnglishText(text);
-      setError(null);
-    } else {
-      setEnglishText(null);
-      setError('Translation not available');
-    }
-    setIsLoading(false);
-  }, [mode, verseRef]);
+    // Load the translation and get the verse
+    setIsLoading(true);
+    (async () => {
+      try {
+        // Load the translation (will be cached after first load)
+        await loadTranslation(englishVersion);
+
+        // Get the verse using async version
+        const text = await getEnglishVerseAsync(verseRef.bookId, verseRef.chapter, verseRef.verse, englishVersion);
+        if (text) {
+          setEnglishText(text);
+          setError(null);
+        } else {
+          setEnglishText(null);
+          setError('Translation not available');
+        }
+      } catch (err) {
+        setEnglishText(null);
+        setError('Failed to load translation');
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [mode, verseRef, englishVersion]);
 
   // Close on escape key
   useEffect(() => {
@@ -130,22 +157,50 @@ export const TranslationPanel = memo(function TranslationPanel({
                           transition={{ duration: 0.15 }}
                           className="px-4 py-2.5"
                         >
-                          {/* Verse reference with BSB attribution */}
+                          {/* Verse reference with translation attribution and play button */}
                           {verseRef && book && (
-                            <div className="flex items-center justify-between mb-1.5">
+                            <div className="flex items-center justify-between mb-1.5 gap-2">
                               <p
-                                className="font-display text-[10px] tracking-widest uppercase flex items-center gap-2"
+                                className="font-display text-[10px] tracking-widest uppercase flex items-center gap-2 flex-1 min-w-0"
                                 style={{ color: 'var(--accent)' }}
                               >
-                                <span className="inline-block w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-                                {book.name.english} {verseRef.chapter}:{verseRef.verse}
+                                <span className="inline-block w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--accent)' }} />
+                                <span className="truncate">{book.name.english} {verseRef.chapter}:{verseRef.verse}</span>
                               </p>
-                              <span
-                                className="font-body text-[9px] uppercase tracking-widest"
-                                style={{ color: 'var(--text-tertiary)', opacity: 0.5 }}
-                              >
-                                {ENGLISH_TRANSLATION.abbreviation}
-                              </span>
+                              <div className="flex items-center gap-2 flex-shrink-0">
+                                {/* Play from here button */}
+                                {isAudioAvailable && onPlayFromVerse && (
+                                  <motion.button
+                                    onClick={() => onPlayFromVerse(verseRef)}
+                                    className="touch-feedback flex items-center gap-1 px-2 py-1 rounded-md"
+                                    style={{
+                                      backgroundColor: 'var(--accent-subtle)',
+                                      color: 'var(--accent)',
+                                    }}
+                                    whileTap={{ scale: 0.95 }}
+                                    whileHover={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                                    aria-label="Play from this verse"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      className="w-3 h-3"
+                                    >
+                                      <path
+                                        d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
+                                      />
+                                    </svg>
+                                    <span className="font-body text-[10px] tracking-wide uppercase">Play</span>
+                                  </motion.button>
+                                )}
+                                <span
+                                  className="font-body text-[9px] uppercase tracking-widest"
+                                  style={{ color: 'var(--text-tertiary)', opacity: 0.5 }}
+                                >
+                                  {translationCode}
+                                </span>
+                              </div>
                             </div>
                           )}
 
@@ -250,6 +305,8 @@ export const TranslationPanel = memo(function TranslationPanel({
                           verseRef={wordVerseRef}
                           onClose={onClose}
                           onNavigateToVerse={onNavigateToCrossRef}
+                          onPlayFromWord={onPlayFromWord}
+                          isAudioAvailable={isAudioAvailable}
                         />
                       )}
                     </AnimatePresence>
