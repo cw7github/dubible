@@ -39,6 +39,7 @@ interface SettingsState extends Settings {
   setCharacterSet: (characterSet: CharacterSet) => void;
   setShowHskIndicators: (show: boolean) => void;
   setAudioSpeed: (speed: AudioSpeed) => void;
+  setAmbientMusicEnabled: (enabled: boolean) => void;
   setChineseVersion: (version: string) => void;
   setEnglishVersion: (version: string) => void;
   updateLastReadingPosition: (position: Settings['lastReadingPosition']) => void;
@@ -88,6 +89,8 @@ export const useSettingsStore = create<SettingsState>()(
       },
 
       setAudioSpeed: (audioSpeed) => set({ audioSpeed }),
+
+      setAmbientMusicEnabled: (ambientMusicEnabled) => set({ ambientMusicEnabled }),
 
       setChineseVersion: (chineseVersion) => set({ chineseVersion }),
 
