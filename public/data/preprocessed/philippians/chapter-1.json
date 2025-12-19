@@ -5,25 +5,8 @@
   "verses": [
     {
       "number": 1,
-      "text": "問安基督耶穌的僕人保羅和提摩太，寫信給所有住在腓立比，在基督耶穌裡的聖徒、監督和執事。",
+      "text": "基督耶穌的僕人保羅和提摩太，寫信給所有住在腓立比，在基督耶穌裡的聖徒、監督和執事。",
       "words": [
-        {
-          "chinese": "問安",
-          "pinyin": "wèn'ān",
-          "definition": "greet, greetings",
-          "pos": "v",
-          "breakdown": [
-            {
-              "c": "問",
-              "m": "ask"
-            },
-            {
-              "c": "安",
-              "m": "peace, well-being"
-            }
-          ],
-          "freq": "common"
-        },
         {
           "chinese": "基督耶穌",
           "pinyin": "Jīdū Yēsū",
@@ -86,14 +69,6 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "寫信",
@@ -165,14 +140,6 @@
           "isName": true,
           "nameType": "place",
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "在",
@@ -274,7 +241,8 @@
           ],
           "freq": "biblical"
         }
-      ]
+      ],
+      "heading": "Salutation"
     },
     {
       "number": 2,
@@ -422,53 +390,8 @@
     },
     {
       "number": 3,
-      "text": "為信徒祈禱我每逢想到你們，就感謝我的 神；",
+      "text": "我每逢想到你們，就感謝我的 神；",
       "words": [
-        {
-          "chinese": "為",
-          "pinyin": "wèi",
-          "definition": "for, on behalf of",
-          "pos": "prep",
-          "freq": "common",
-          "hskLevel": 2,
-          "tocflLevel": 4
-        },
-        {
-          "chinese": "信徒",
-          "pinyin": "xìntú",
-          "definition": "believers",
-          "pos": "n",
-          "breakdown": [
-            {
-              "c": "信",
-              "m": "believe, faith"
-            },
-            {
-              "c": "徒",
-              "m": "follower, disciple"
-            }
-          ],
-          "freq": "biblical",
-          "tocflLevel": 5
-        },
-        {
-          "chinese": "祈禱",
-          "pinyin": "qídǎo",
-          "definition": "pray, prayer",
-          "pos": "v",
-          "breakdown": [
-            {
-              "c": "祈",
-              "m": "pray, plead"
-            },
-            {
-              "c": "禱",
-              "m": "pray"
-            }
-          ],
-          "freq": "biblical",
-          "tocflLevel": 6
-        },
         {
           "chinese": "我",
           "pinyin": "wǒ",
@@ -519,14 +442,6 @@
           "pos": "pron",
           "freq": "common",
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "就",
@@ -583,7 +498,8 @@
           "nameType": "person",
           "freq": "biblical"
         }
-      ]
+      ],
+      "heading": "Prayer for the Church"
     },
     {
       "number": 4,
@@ -678,14 +594,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "總是",
@@ -932,14 +840,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "",
-          "isName": false,
-          "freq": "common"
-        },
-        {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I",
@@ -1165,11 +1065,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "到",
           "pinyin": "dào",
           "definition": "until, arrive",
@@ -1221,11 +1116,6 @@
           ],
           "freq": "common",
           "tocflLevel": 3
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "必",
@@ -1423,11 +1313,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "因為",
           "pinyin": "yīnwèi",
           "definition": "because",
@@ -1517,11 +1402,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "無論",
           "pinyin": "wúlùn",
           "definition": "no matter what/how",
@@ -1602,11 +1482,6 @@
           ],
           "freq": "uncommon",
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "或是",
@@ -1728,11 +1603,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "你們",
@@ -1929,11 +1799,6 @@
           "tocflLevel": 6
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "切切",
           "pinyin": "qièqiè",
           "definition": "earnestly, eagerly",
@@ -1994,11 +1859,6 @@
           "pos": "n",
           "freq": "uncommon",
           "tocflLevel": 5
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "這",
@@ -2145,11 +2005,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, am, are",
@@ -2202,11 +2057,6 @@
           "freq": "biblical",
           "hskLevel": 5,
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "在",
@@ -2328,11 +2178,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "多而又多",
           "pinyin": "duō ér yòu duō",
           "definition": "abound more and more",
@@ -2357,11 +2202,6 @@
           ],
           "freq": "biblical",
           "note": "Idiomatic phrase meaning 'increasingly abundant'."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         }
       ]
     },
@@ -2431,11 +2271,6 @@
           "freq": "rare",
           "hskLevel": 6,
           "tocflLevel": 5
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "成為",
@@ -2519,11 +2354,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "直到",
           "pinyin": "zhídào",
           "definition": "until, up to",
@@ -2566,11 +2396,6 @@
           "pos": "n",
           "freq": "common",
           "tocflLevel": 3
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         }
       ]
     },
@@ -2670,11 +2495,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "cause, make",
@@ -2760,51 +2580,8 @@
     },
     {
       "number": 12,
-      "text": "活著就是基督弟兄們，我願意你們知道，我所遭遇的反而使福音更加興旺了，",
+      "text": "弟兄們，我願意你們知道，我所遭遇的反而使福音更加興旺了，",
       "words": [
-        {
-          "chinese": "活著",
-          "pinyin": "huózhe",
-          "definition": "to live, living",
-          "pos": "v",
-          "breakdown": [
-            {
-              "c": "活",
-              "m": "live"
-            },
-            {
-              "c": "著",
-              "m": "aspect particle"
-            }
-          ],
-          "freq": "common"
-        },
-        {
-          "chinese": "就是",
-          "pinyin": "jiùshì",
-          "definition": "is, simply is",
-          "pos": "adv",
-          "breakdown": [
-            {
-              "c": "就",
-              "m": "then, exactly"
-            },
-            {
-              "c": "是",
-              "m": "is"
-            }
-          ],
-          "freq": "common"
-        },
-        {
-          "chinese": "基督",
-          "pinyin": "Jīdū",
-          "definition": "Christ",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "person",
-          "freq": "biblical"
-        },
         {
           "chinese": "弟兄們",
           "pinyin": "dìxiongmen",
@@ -2824,11 +2601,6 @@
           ],
           "freq": "biblical",
           "note": "A respectful term for fellow Christians."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "我",
@@ -2884,11 +2656,6 @@
           "freq": "common",
           "hskLevel": 2,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "我",
@@ -3029,13 +2796,9 @@
           "pos": "part",
           "freq": "common",
           "hskLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         }
-      ]
+      ],
+      "heading": "Ministry as a Prisoner"
     },
     {
       "number": 13,
@@ -3185,11 +2948,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "都",
@@ -3398,11 +3156,6 @@
           "tocflLevel": 6
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "因",
           "pinyin": "yīn",
           "definition": "because of, due to",
@@ -3462,11 +3215,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, consequently",
@@ -3500,11 +3248,6 @@
           ],
           "freq": "biblical",
           "note": "An idiom emphasizing strong faith."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "毫無",
@@ -3542,11 +3285,6 @@
           "freq": "rare",
           "hskLevel": 6,
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "更",
@@ -3762,11 +3500,6 @@
           "tocflLevel": 6
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "但",
           "pinyin": "dàn",
           "definition": "but, however",
@@ -3932,13 +3665,6 @@
           "note": "Lit. 'love heart'.",
           "hskLevel": 5,
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "知道",
@@ -4163,13 +3889,6 @@
           "tocflLevel": 5
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "動機",
           "pinyin": "dòngjī",
           "definition": "motive, intention",
@@ -4222,13 +3941,6 @@
           ],
           "freq": "rare",
           "tocflLevel": 7
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "只想",
@@ -4398,13 +4110,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "？",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "真心",
           "pinyin": "zhēnxīn",
           "definition": "sincerity, true heart",
@@ -4441,13 +4146,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "假意",
           "pinyin": "jiǎyì",
           "definition": "insincerity, false intention",
@@ -4482,13 +4180,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "無論",
@@ -4531,13 +4222,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "基督",
@@ -4589,13 +4273,6 @@
           "pos": "part",
           "freq": "common",
           "hskLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "為此",
@@ -4713,13 +4390,6 @@
           ],
           "freq": "uncommon",
           "tocflLevel": 5
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         }
       ]
     },
@@ -4773,13 +4443,6 @@
           "freq": "common",
           "hskLevel": 2,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "藉著",
@@ -4906,13 +4569,6 @@
           "freq": "common",
           "hskLevel": 2,
           "tocflLevel": 2
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "我",
@@ -5088,13 +4744,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, exactly",
@@ -5203,13 +4852,6 @@
           "tocflLevel": 6
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "只要",
           "pinyin": "zhǐyào",
           "definition": "as long as",
@@ -5264,13 +4906,6 @@
           "tocflLevel": 6
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "不論",
           "pinyin": "bùlùn",
           "definition": "no matter, regardless of",
@@ -5305,13 +4940,6 @@
           ],
           "freq": "rare",
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "總",
@@ -5513,13 +5141,6 @@
           "note": "A transliteration of 'Christos' (Anointed One)."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I, me",
@@ -5676,13 +5297,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "能夠",
           "pinyin": "nénggòu",
           "definition": "to be able to, capable of",
@@ -5773,13 +5387,6 @@
           "note": "In biblical context, 'fruit' often refers to spiritual results or produce.",
           "hskLevel": 5,
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         },
         {
           "chinese": "我",
@@ -5889,13 +5496,6 @@
           "pos": "part",
           "freq": "common",
           "hskLevel": 1
-        },
-        {
-          "chinese": "！",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         }
       ]
     },
@@ -5965,13 +5565,6 @@
           ],
           "freq": "uncommon",
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         },
         {
           "chinese": "情願",
@@ -6044,13 +5637,6 @@
           ],
           "freq": "biblical",
           "note": "Common phrase in religious contexts for divine presence or fellowship."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         },
         {
           "chinese": "因為",
@@ -6198,13 +5784,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I, me",
@@ -6346,13 +5925,6 @@
           "tocflLevel": 6
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, consequently",
@@ -6412,13 +5984,6 @@
               "m": "go down, continue"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
           "freq": "common"
         },
         {
@@ -6537,13 +6102,6 @@
           "note": "Common fixed phrase meaning 'together' or 'with one another'."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "to cause, to make",
@@ -6638,13 +6196,6 @@
           "tocflLevel": 7
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
-        },
-        {
           "chinese": "有",
           "pinyin": "yǒu",
           "definition": "to have",
@@ -6671,13 +6222,6 @@
           "freq": "biblical",
           "note": "Often used in the Bible to describe spiritual joy from God.",
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punc",
-          "freq": "common"
         }
       ]
     },
@@ -6833,13 +6377,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, precisely",
@@ -6964,13 +6501,6 @@
           "freq": "common",
           "hskLevel": 4,
           "tocflLevel": 2
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
         },
         {
           "chinese": "你們",
@@ -7124,13 +6654,6 @@
           "tocflLevel": 3
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "無論",
           "pinyin": "wúlùn",
           "definition": "no matter what/who/when",
@@ -7278,13 +6801,6 @@
           "tocflLevel": 2
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "都",
           "pinyin": "dōu",
           "definition": "all, entirely",
@@ -7383,13 +6899,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "就是",
           "pinyin": "jiùshì",
           "definition": "that is, namely",
@@ -7485,13 +6994,6 @@
           "tocflLevel": 7
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "站立得穩",
           "pinyin": "zhànlì de wěn",
           "definition": "stand firm",
@@ -7517,13 +7019,6 @@
           ],
           "freq": "biblical",
           "note": "Emphasizes stability, often in faith or conviction."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
         },
         {
           "chinese": "為了",
@@ -7633,13 +7128,6 @@
           "freq": "common",
           "hskLevel": 3,
           "tocflLevel": 2
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
         }
       ]
     },
@@ -7764,13 +7252,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "這",
           "pinyin": "zhè",
           "definition": "this",
@@ -7860,13 +7341,6 @@
           "tocflLevel": 5
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
@@ -7912,13 +7386,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
         },
         {
           "chinese": "這",
@@ -8122,13 +7589,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "make, cause, enable",
@@ -8197,13 +7657,6 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
         },
         {
           "chinese": "也",
@@ -8348,13 +7801,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
-        },
-        {
           "chinese": "和",
           "pinyin": "hé",
           "definition": "and, with",
@@ -8450,13 +7896,6 @@
             }
           ],
           "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false
         },
         {
           "chinese": "現在",

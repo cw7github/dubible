@@ -5,26 +5,8 @@
   "verses": [
     {
       "number": 1,
-      "text": "哀歌以色列家啊！要聽這話，就是我為你們唱的輓歌：",
+      "text": "以色列家啊！要聽這話，就是我為你們唱的輓歌：",
       "words": [
-        {
-          "chinese": "哀歌",
-          "pinyin": "āigē",
-          "definition": "lament, dirge",
-          "pos": "n",
-          "breakdown": [
-            {
-              "c": "哀",
-              "m": "sorrow"
-            },
-            {
-              "c": "歌",
-              "m": "song"
-            }
-          ],
-          "freq": "biblical",
-          "note": "A sorrowful song, often for the dead."
-        },
         {
           "chinese": "以色列家",
           "pinyin": "Yǐsèlièjiā",
@@ -42,13 +24,6 @@
           "freq": "common",
           "hskLevel": 3,
           "tocflLevel": 2
-        },
-        {
-          "chinese": "！",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "要",
@@ -84,13 +59,6 @@
           "pos": "n",
           "freq": "common",
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "就是",
@@ -187,13 +155,6 @@
       "text": "「童貞女以色列，跌倒了，不能再起來；她被拋棄在自己的地上，沒有人扶她起來。」",
       "words": [
         {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "童貞女",
           "pinyin": "tóngzhēnnǚ",
           "definition": "virgin",
@@ -225,13 +186,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "跌倒",
           "pinyin": "diēdǎo",
           "definition": "fall down, stumble",
@@ -256,13 +210,6 @@
           "pos": "part",
           "freq": "common",
           "hskLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "不能",
@@ -401,13 +348,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "沒有人",
           "pinyin": "méiyǒurén",
           "definition": "no one, nobody",
@@ -464,13 +404,6 @@
           "freq": "common",
           "hskLevel": 4,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         }
       ]
     },
@@ -549,13 +482,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "這",
           "pinyin": "zhè",
           "definition": "this",
@@ -605,13 +531,6 @@
               "m": "thousand"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
           "freq": "common"
         },
         {
@@ -711,13 +630,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "只剩下",
           "pinyin": "zhǐshèngxià",
           "definition": "only remain",
@@ -754,81 +666,13 @@
             }
           ],
           "freq": "common"
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         }
       ]
     },
     {
       "number": 4,
-      "text": "尋求主得以存活耶和華對以色列家這樣說：「尋求我，就必存活；",
+      "text": "耶和華對以色列家這樣說：「尋求我，就必存活；",
       "words": [
-        {
-          "chinese": "尋求",
-          "pinyin": "xúnqiú",
-          "definition": "seek, pursue",
-          "pos": "v",
-          "breakdown": [
-            {
-              "c": "尋",
-              "m": "seek"
-            },
-            {
-              "c": "求",
-              "m": "request, seek"
-            }
-          ],
-          "freq": "uncommon",
-          "tocflLevel": 5
-        },
-        {
-          "chinese": "主",
-          "pinyin": "Zhǔ",
-          "definition": "Lord, master",
-          "pos": "n",
-          "freq": "biblical"
-        },
-        {
-          "chinese": "得以",
-          "pinyin": "déyǐ",
-          "definition": "so as to be able to",
-          "pos": "conj",
-          "breakdown": [
-            {
-              "c": "得",
-              "m": "obtain"
-            },
-            {
-              "c": "以",
-              "m": "so as to"
-            }
-          ],
-          "freq": "rare",
-          "tocflLevel": 6
-        },
-        {
-          "chinese": "存活",
-          "pinyin": "cúnhuó",
-          "definition": "survive, live",
-          "pos": "v",
-          "breakdown": [
-            {
-              "c": "存",
-              "m": "exist, preserve"
-            },
-            {
-              "c": "活",
-              "m": "live"
-            }
-          ],
-          "freq": "rare",
-          "tocflLevel": 6
-        },
         {
           "chinese": "耶和華",
           "pinyin": "Yēhéhuá",
@@ -883,13 +727,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "尋求",
           "pinyin": "xúnqiú",
           "definition": "seek, pursue",
@@ -915,13 +752,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "就",
@@ -1026,13 +856,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "不要",
           "pinyin": "bùyào",
           "definition": "do not, must not",
@@ -1066,13 +889,6 @@
           "isName": true,
           "nameType": "place",
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "也",
@@ -1190,13 +1006,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "伯特利",
           "pinyin": "Bótèlì",
           "definition": "Bethel",
@@ -1246,13 +1055,6 @@
           ],
           "freq": "uncommon",
           "note": "Lit. 'black nothing'; implies complete destruction or non-existence."
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "freq": "common"
         }
       ]
     },
@@ -1288,11 +1090,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, precisely",
@@ -1325,11 +1122,6 @@
           ],
           "freq": "rare",
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "免得",
@@ -1442,11 +1234,6 @@
           "freq": "rare",
           "hskLevel": 6,
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "吞滅",
@@ -1636,11 +1423,6 @@
           "note": "A bitter plant often used metaphorically in the Bible."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "把",
           "pinyin": "bǎ",
           "definition": "direct object marker",
@@ -1765,11 +1547,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "把",
           "pinyin": "bǎ",
           "definition": "direct object marker",
@@ -1832,11 +1609,6 @@
           "freq": "rare",
           "hskLevel": 6,
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "把",
@@ -1944,11 +1716,6 @@
             }
           ],
           "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "把",
@@ -2191,11 +1958,6 @@
           "tocflLevel": 7
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "make, cause",
@@ -2408,11 +2170,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "恨惡",
           "pinyin": "hèn'è",
           "definition": "hate, detest",
@@ -2523,11 +2280,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "強徵",
           "pinyin": "qiángzhēng",
           "definition": "exact by force, levy",
@@ -2597,11 +2349,6 @@
           "freq": "uncommon",
           "hskLevel": 4,
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "你們",
@@ -2711,11 +2458,6 @@
           ],
           "freq": "common",
           "tocflLevel": 3
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "卻",
@@ -2849,11 +2591,6 @@
             }
           ],
           "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "卻",
@@ -3030,11 +2767,6 @@
           "tocflLevel": 5
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "罪大惡極",
           "pinyin": "zuìdà èjí",
           "definition": "heinously wicked, extremely evil",
@@ -3105,11 +2837,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "收受",
           "pinyin": "shōushòu",
           "definition": "accept, receive",
@@ -3144,11 +2871,6 @@
           "freq": "rare",
           "hskLevel": 6,
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "在",
@@ -3243,11 +2965,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "聰明人",
           "pinyin": "cōngmíngrén",
           "definition": "wise person",
@@ -3326,11 +3043,6 @@
           ],
           "freq": "uncommon",
           "note": "An idiom emphasizing complete silence."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "因",
@@ -3445,11 +3157,6 @@
           "tocflLevel": 7
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "不要",
           "pinyin": "búyào",
           "definition": "do not",
@@ -3501,11 +3208,6 @@
           ],
           "freq": "rare",
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "這樣",
@@ -3669,11 +3371,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "正如",
           "pinyin": "zhèngrú",
           "definition": "just as, precisely as",
@@ -3785,11 +3482,6 @@
           "tocflLevel": 7
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "恨惡",
           "pinyin": "hèn'è",
           "definition": "hate, detest",
@@ -3823,11 +3515,6 @@
           ],
           "freq": "rare",
           "tocflLevel": 6
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "在",
@@ -3913,11 +3600,6 @@
           ],
           "freq": "common",
           "tocflLevel": 3
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "耶和華",
@@ -4059,11 +3741,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "主",
           "pinyin": "zhǔ",
           "definition": "Lord",
@@ -4141,11 +3818,6 @@
           "pos": "v",
           "freq": "common",
           "tocflLevel": 1
-        },
-        {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "opening quotation mark"
         },
         {
           "chinese": "各",
@@ -4240,11 +3912,6 @@
           "tocflLevel": 2
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "街上",
           "pinyin": "jiēshang",
           "definition": "on the streets",
@@ -4289,11 +3956,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "『",
-          "pinyin": "",
-          "definition": "opening single quotation mark"
-        },
-        {
           "chinese": "苦啊",
           "pinyin": "kǔ a",
           "definition": "alas! how bitter!",
@@ -4312,11 +3974,6 @@
           "note": "An exclamation of sorrow or pain."
         },
         {
-          "chinese": "！",
-          "pinyin": "",
-          "definition": "exclamation mark"
-        },
-        {
           "chinese": "苦啊",
           "pinyin": "kǔ a",
           "definition": "alas! how bitter!",
@@ -4333,16 +3990,6 @@
           ],
           "freq": "uncommon",
           "note": "An exclamation of sorrow or pain."
-        },
-        {
-          "chinese": "！",
-          "pinyin": "",
-          "definition": "exclamation mark"
-        },
-        {
-          "chinese": "』",
-          "pinyin": "",
-          "definition": "closing single quotation mark"
         },
         {
           "chinese": "的",
@@ -4439,11 +4086,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "召",
@@ -4639,11 +4281,6 @@
           "freq": "common",
           "hskLevel": 3,
           "tocflLevel": 2
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "因為",
@@ -4879,11 +4516,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
@@ -4922,11 +4554,6 @@
           ],
           "freq": "biblical",
           "note": "A common biblical idiom expressing lament or curse."
-        },
-        {
-          "chinese": "！",
-          "pinyin": "",
-          "definition": "exclamation mark"
         },
         {
           "chinese": "耶和華",
@@ -5047,11 +4674,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "？",
-          "pinyin": "",
-          "definition": "question mark"
-        },
-        {
           "chinese": "那日",
           "pinyin": "nàrì",
           "definition": "that day",
@@ -5094,11 +4716,6 @@
           ],
           "freq": "uncommon",
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "沒有",
@@ -5164,7 +4781,8 @@
           "freq": "common",
           "tocflLevel": 3
         }
-      ]
+      ],
+      "heading": "The Lord Demands Justice"
     },
     {
       "number": 19,
@@ -5276,11 +4894,6 @@
           "tocflLevel": 5
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "卻",
           "pinyin": "què",
           "definition": "yet, however",
@@ -5358,11 +4971,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "手",
           "pinyin": "shǒu",
           "definition": "hand",
@@ -5403,11 +5011,6 @@
             }
           ],
           "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "卻",
@@ -5523,11 +5126,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "沒有",
           "pinyin": "méiyǒu",
           "definition": "without, have no",
@@ -5565,11 +5163,6 @@
           "tocflLevel": 5
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "只有",
           "pinyin": "zhǐyǒu",
           "definition": "only, merely have",
@@ -5603,11 +5196,6 @@
           ],
           "freq": "rare",
           "tocflLevel": 7
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "全無",
@@ -5653,103 +5241,13 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "？",
-          "pinyin": "",
-          "definition": "question mark"
         }
       ]
     },
     {
       "number": 21,
-      "text": "神不喜歡外表的敬虔我憎恨、厭惡你們的節期，也不喜愛你們的節日。",
+      "text": "我憎恨、厭惡你們的節期，也不喜愛你們的節日。",
       "words": [
-        {
-          "chinese": "神",
-          "pinyin": "Shén",
-          "definition": "God",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "person",
-          "freq": "biblical",
-          "note": "Refers to the God of the Bible",
-          "tocflLevel": 4
-        },
-        {
-          "chinese": "不",
-          "pinyin": "bù",
-          "definition": "not, no",
-          "pos": "adv",
-          "freq": "common",
-          "hskLevel": 1,
-          "tocflLevel": 1
-        },
-        {
-          "chinese": "喜歡",
-          "pinyin": "xǐhuān",
-          "definition": "like, prefer",
-          "pos": "v",
-          "breakdown": [
-            {
-              "c": "喜",
-              "m": "happy, like"
-            },
-            {
-              "c": "歡",
-              "m": "joyful"
-            }
-          ],
-          "freq": "common",
-          "hskLevel": 1,
-          "tocflLevel": 1
-        },
-        {
-          "chinese": "外表",
-          "pinyin": "wàibiǎo",
-          "definition": "outward appearance",
-          "pos": "n",
-          "breakdown": [
-            {
-              "c": "外",
-              "m": "outside"
-            },
-            {
-              "c": "表",
-              "m": "surface"
-            }
-          ],
-          "freq": "rare",
-          "hskLevel": 6,
-          "tocflLevel": 4
-        },
-        {
-          "chinese": "的",
-          "pinyin": "de",
-          "definition": "possessive/modifying particle",
-          "pos": "part",
-          "freq": "common",
-          "hskLevel": 1,
-          "tocflLevel": 1
-        },
-        {
-          "chinese": "敬虔",
-          "pinyin": "jìngqián",
-          "definition": "piety, devoutness",
-          "pos": "n",
-          "breakdown": [
-            {
-              "c": "敬",
-              "m": "respect, revere"
-            },
-            {
-              "c": "虔",
-              "m": "devout, pious"
-            }
-          ],
-          "freq": "biblical",
-          "note": "Often used in religious contexts for reverence towards God."
-        },
         {
           "chinese": "我",
           "pinyin": "wǒ",
@@ -5840,11 +5338,6 @@
           ],
           "freq": "biblical",
           "note": "Refers to religious festivals or appointed times."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "也",
@@ -6051,11 +5544,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I, me",
@@ -6207,11 +5695,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "我",
           "pinyin": "wǒ",
           "definition": "I, me",
@@ -6360,11 +5843,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "我",
@@ -6553,11 +6031,6 @@
           "freq": "uncommon"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
-        },
-        {
           "chinese": "公義",
           "pinyin": "gōngyì",
           "definition": "righteousness, justice",
@@ -6656,11 +6129,6 @@
           "tocflLevel": 2
         },
         {
-          "chinese": "！",
-          "pinyin": "",
-          "definition": "exclamation mark"
-        },
-        {
           "chinese": "你們",
           "pinyin": "nǐmen",
           "definition": "you (plural)",
@@ -6730,11 +6198,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma"
         },
         {
           "chinese": "有",
@@ -6822,11 +6285,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "？",
-          "pinyin": "",
-          "definition": "question mark"
         }
       ]
     },
@@ -6885,11 +6343,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "撒固王",
           "pinyin": "Sāgùwáng",
           "definition": "Sakkuth King (deity)",
@@ -6898,16 +6351,6 @@
           "nameType": "person",
           "freq": "biblical",
           "note": "A pagan deity, also known as Moloch or Rephan."
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "和",
@@ -6953,11 +6396,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "迦溫",
           "pinyin": "Jiāwēn",
           "definition": "Kaiwan (deity)",
@@ -6966,11 +6404,6 @@
           "nameType": "person",
           "freq": "biblical",
           "note": "A pagan star deity, also known as Chiun or Rephan."
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "的",
@@ -6998,11 +6431,6 @@
           ],
           "freq": "biblical",
           "tocflLevel": 7
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "就是",
@@ -7142,11 +6570,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "流亡",
           "pinyin": "liúwáng",
           "definition": "be exiled, wander",
@@ -7244,11 +6667,6 @@
           "note": "Forms a nominal phrase: 'that which was said by'.",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "萬軍",

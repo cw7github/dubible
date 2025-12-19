@@ -5,31 +5,8 @@
   "verses": [
     {
       "number": 1,
-      "text": "金燈臺耶和華對摩西說：",
+      "text": "耶和華對摩西說：",
       "words": [
-        {
-          "chinese": "金燈臺",
-          "pinyin": "Jīndēngtái",
-          "definition": "golden lampstand",
-          "pos": "n",
-          "isName": false,
-          "breakdown": [
-            {
-              "c": "金",
-              "m": "gold"
-            },
-            {
-              "c": "燈",
-              "m": "lamp"
-            },
-            {
-              "c": "臺",
-              "m": "stand"
-            }
-          ],
-          "freq": "biblical",
-          "note": "A specific type of lampstand described in the Bible."
-        },
         {
           "chinese": "耶和華",
           "pinyin": "Yēhéhuá",
@@ -74,14 +51,6 @@
       "number": 2,
       "text": "「你要告訴亞倫：『你點燈的時候，七盞燈都要照向燈臺的前面。』」",
       "words": [
-        {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
-        },
         {
           "chinese": "你",
           "pinyin": "nǐ",
@@ -130,14 +99,6 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical"
-        },
-        {
-          "chinese": "『",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "你",
@@ -198,14 +159,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "七",
@@ -321,22 +274,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "』",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
         }
       ]
     },
@@ -505,14 +442,6 @@
           "note": "'著' (zháo) indicates successful completion of the action '點'."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
-        },
-        {
           "chinese": "使",
           "pinyin": "shǐ",
           "definition": "make, cause",
@@ -597,14 +526,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
         },
         {
           "chinese": "正如",
@@ -833,14 +754,6 @@
           "note": "Describes a specific method of crafting, often seen in biblical texts."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
-        },
-        {
           "chinese": "從",
           "pinyin": "cóng",
           "definition": "from",
@@ -976,14 +889,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "",
-          "pos": "punct",
-          "isName": false,
-          "freq": "common"
-        },
-        {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, be",
@@ -1096,87 +1001,8 @@
     },
     {
       "number": 5,
-      "text": "利未人的潔淨與奉獻耶和華對摩西說：",
+      "text": "耶和華對摩西說：",
       "words": [
-        {
-          "chinese": "利未人",
-          "pinyin": "Lìwèirén",
-          "definition": "Levites",
-          "pos": "prop",
-          "isName": true,
-          "nameType": "group",
-          "breakdown": [
-            {
-              "c": "利未",
-              "m": "Levi"
-            },
-            {
-              "c": "人",
-              "m": "people"
-            }
-          ],
-          "freq": "biblical",
-          "note": "Descendants of Levi, designated for priestly service."
-        },
-        {
-          "chinese": "的",
-          "pinyin": "de",
-          "definition": "possessive particle",
-          "pos": "part",
-          "isName": false,
-          "freq": "common",
-          "hskLevel": 1,
-          "tocflLevel": 1
-        },
-        {
-          "chinese": "潔淨",
-          "pinyin": "jiéjìng",
-          "definition": "cleansing, purification",
-          "pos": "n",
-          "isName": false,
-          "breakdown": [
-            {
-              "c": "潔",
-              "m": "clean"
-            },
-            {
-              "c": "淨",
-              "m": "pure, clean"
-            }
-          ],
-          "freq": "biblical"
-        },
-        {
-          "chinese": "與",
-          "pinyin": "yǔ",
-          "definition": "and",
-          "pos": "conj",
-          "isName": false,
-          "freq": "uncommon",
-          "note": "More formal than '和'.",
-          "hskLevel": 4,
-          "tocflLevel": 4
-        },
-        {
-          "chinese": "奉獻",
-          "pinyin": "fèngxiàn",
-          "definition": "dedication, offering",
-          "pos": "n",
-          "isName": false,
-          "breakdown": [
-            {
-              "c": "奉",
-              "m": "offer"
-            },
-            {
-              "c": "獻",
-              "m": "present, offer"
-            }
-          ],
-          "freq": "biblical",
-          "hskLevel": 6,
-          "tocflLevel": 6
-        },
         {
           "chinese": "耶和華",
           "pinyin": "Yēhéhuá",
@@ -1214,19 +1040,13 @@
           "freq": "common",
           "tocflLevel": 1
         }
-      ]
+      ],
+      "heading": "The Separation of the Levites"
     },
     {
       "number": 6,
       "text": "「你要從以色列人中間選出利未人，潔淨他們。",
       "words": [
-        {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "opening quotation mark",
-          "pos": "punct",
-          "freq": "common"
-        },
         {
           "chinese": "你",
           "pinyin": "nǐ",
@@ -1307,13 +1127,6 @@
           "isName": true,
           "nameType": "group",
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "潔淨",
@@ -1500,13 +1313,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "又",
           "pinyin": "yòu",
           "definition": "and, moreover",
@@ -1630,13 +1436,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "潔淨",
           "pinyin": "jiéjìng",
           "definition": "cleanse, purify",
@@ -1696,13 +1495,6 @@
           "freq": "common",
           "hskLevel": 3,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "叫",
@@ -1821,13 +1613,6 @@
           ],
           "freq": "biblical",
           "note": "An offering of flour, often with oil and frankincense, not involving blood."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "就是",
@@ -1983,13 +1768,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "作",
           "pinyin": "zuò",
           "definition": "serve as, be",
@@ -2113,13 +1891,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "又",
@@ -2298,13 +2069,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "以色列人",
           "pinyin": "Yǐsèlièrén",
           "definition": "Israelites",
@@ -2471,11 +2235,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "作",
           "pinyin": "zuò",
           "definition": "act as, be",
@@ -2534,11 +2293,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "使",
@@ -2808,11 +2562,6 @@
           "note": "Lit. 'redeem sin sacrifice'."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "一隻",
           "pinyin": "yīzhī",
           "definition": "one (animal)",
@@ -2855,11 +2604,6 @@
           "note": "Lit. 'burnt sacrifice'."
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "獻",
           "pinyin": "xiàn",
           "definition": "offer, present",
@@ -2884,11 +2628,6 @@
           "isName": true,
           "nameType": "person",
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "為",
@@ -3092,11 +2831,6 @@
           "tocflLevel": 4
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "把",
           "pinyin": "bǎ",
           "definition": "preposition (marks object)",
@@ -3170,11 +2904,6 @@
       "text": "「這樣，你要把利未人從以色列人中分別出來，利未人就要歸我。",
       "words": [
         {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "這樣",
           "pinyin": "zhèyàng",
           "definition": "thus, in this way",
@@ -3191,11 +2920,6 @@
           ],
           "freq": "common",
           "tocflLevel": 3
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "你",
@@ -3316,11 +3040,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "利未人",
           "pinyin": "Lìwèirén",
           "definition": "Levites",
@@ -3398,11 +3117,6 @@
           "freq": "common",
           "hskLevel": 3,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "利未人",
@@ -3556,11 +3270,6 @@
           "pos": "pron",
           "freq": "common",
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "把",
@@ -3813,11 +3522,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "是",
           "pinyin": "shì",
           "definition": "is, are",
@@ -3993,11 +3697,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "連",
@@ -4176,11 +3875,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, thereupon",
@@ -4317,11 +4011,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "代替",
           "pinyin": "dàitì",
           "definition": "instead of, substitute",
@@ -4444,11 +4133,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "把",
           "pinyin": "bǎ",
           "definition": "object marker particle",
@@ -4535,11 +4219,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "在",
@@ -4634,11 +4313,6 @@
           "tocflLevel": 5
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "又",
           "pinyin": "yòu",
           "definition": "also, and",
@@ -4683,11 +4357,6 @@
           "freq": "biblical",
           "note": "Lit. 'redeem sin', a key concept in biblical theology.",
           "tocflLevel": 7
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "免得",
@@ -4779,11 +4448,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then",
@@ -4843,11 +4507,6 @@
           "pos": "pron",
           "freq": "common",
           "tocflLevel": 1
-        },
-        {
-          "chinese": "」",
-          "pinyin": "",
-          "definition": ""
         }
       ]
     },
@@ -4934,11 +4593,6 @@
             }
           ],
           "freq": "biblical"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "就",
@@ -5073,11 +4727,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "以色列人",
@@ -5228,13 +4877,6 @@
           "freq": "common",
           "hskLevel": 3,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "把",
@@ -5452,13 +5094,6 @@
           "tocflLevel": 7
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "潔淨",
           "pinyin": "jiéjìng",
           "definition": "cleanse, purify",
@@ -5520,13 +5155,6 @@
           "tocflLevel": 1
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "利未人",
           "pinyin": "Lìwèirén",
           "definition": "Levites",
@@ -5559,13 +5187,6 @@
               "m": "go, leave"
             }
           ],
-          "freq": "common"
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
           "freq": "common"
         },
         {
@@ -5648,13 +5269,6 @@
           ],
           "freq": "uncommon",
           "tocflLevel": 4
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "在",
@@ -5839,13 +5453,6 @@
           "freq": "biblical"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "以色列人",
           "pinyin": "Yǐsèlièrén",
           "definition": "Israelites",
@@ -5966,19 +5573,13 @@
           "freq": "common",
           "tocflLevel": 1
         }
-      ]
+      ],
+      "heading": "The Work of the Levites"
     },
     {
       "number": 24,
       "text": "「關於利未人的職責是這樣：從二十五歲以上的，要進來辦理會幕裡的事務；",
       "words": [
-        {
-          "chinese": "「",
-          "pinyin": "",
-          "definition": "opening quotation mark",
-          "pos": "punct",
-          "freq": "common"
-        },
         {
           "chinese": "關於",
           "pinyin": "guānyú",
@@ -6121,13 +5722,6 @@
           "freq": "common",
           "hskLevel": 1,
           "tocflLevel": 1
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "要",
@@ -6274,13 +5868,6 @@
           "freq": "common"
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
-        },
-        {
           "chinese": "就",
           "pinyin": "jiù",
           "definition": "then, thereupon",
@@ -6354,13 +5941,6 @@
           "freq": "rare",
           "hskLevel": 6,
           "tocflLevel": 5
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": "comma",
-          "pos": "punct",
-          "freq": "common"
         },
         {
           "chinese": "不再",
@@ -6524,11 +6104,6 @@
           "tocflLevel": 3
         },
         {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
-        },
-        {
           "chinese": "盡忠職守",
           "pinyin": "jìnzhōngzhíshǒu",
           "definition": "faithfully perform duties",
@@ -6553,11 +6128,6 @@
           ],
           "freq": "biblical",
           "note": "A four-character idiom (成語) meaning to be devoted to one's duties."
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "事務",
@@ -6688,11 +6258,6 @@
           "freq": "rare",
           "note": "Can refer to the specific responsibilities of a position.",
           "tocflLevel": 7
-        },
-        {
-          "chinese": "，",
-          "pinyin": "",
-          "definition": ""
         },
         {
           "chinese": "你",
