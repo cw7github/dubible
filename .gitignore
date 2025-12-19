@@ -37,9 +37,11 @@ dist-ssr
 /verification-screenshot.png
 /fix_comparison.png
 /*.cjs
+!scripts/*.cjs
 /test-*.js
 
 # Temp files
 *.tmp
 *.temp
 .archive/
+public/audio/
