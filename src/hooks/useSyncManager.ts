@@ -832,6 +832,7 @@ export function useSyncManager() {
         chineseVersion: state.chineseVersion,
         englishVersion: state.englishVersion,
         audioSpeed: state.audioSpeed,
+        ambientMusicEnabled: state.ambientMusicEnabled,
         lastReadingPosition: state.lastReadingPosition,
       }),
       (settings) => {
