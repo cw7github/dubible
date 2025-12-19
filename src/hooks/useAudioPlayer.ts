@@ -1,12 +1,50 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { useReadingStore } from '../stores';
-import { loadChapterAudio, getPositionAtTime, getAudioUrl } from '../data/audio';
+import { useReadingStore, useSettingsStore } from '../stores';
+import { loadChapterAudio, getPositionAtTime, getWordAtPosition, getAudioUrl } from '../data/audio';
+import { getBookById } from '../data/bible';
+import { getMusicUrl as getConfigMusicUrl } from '../config/audio';
 import type { ChapterAudio } from '../types';
+
+// Helper function to get music track for a book/chapter
+function getMusicTrack(bookId: string, chapter: number): string | null {
+  // Only Revelation has ambient music for now
+  if (bookId !== 'revelation') return null;
+
+  // Map chapters to music sections based on thematic content
+  if (chapter === 1) {
+    return 'vision-intro';           // Ch 1: mysterious, reverent
+  } else if (chapter >= 2 && chapter <= 3) {
+    return 'letters-to-churches';    // Ch 2-3: authoritative, solemn
+  } else if (chapter >= 4 && chapter <= 5) {
+    return 'heavenly-throne';        // Ch 4-5: majestic, worship
+  } else if (chapter >= 6 && chapter <= 8) {
+    return 'seals-judgments';        // Ch 6-8: dramatic, intense
+  } else if (chapter >= 9 && chapter <= 11) {
+    return 'trumpets';               // Ch 9-11: epic, catastrophic
+  } else if (chapter >= 12 && chapter <= 14) {
+    return 'cosmic-war';             // Ch 12-14: battle, spiritual warfare
+  } else if (chapter >= 15 && chapter <= 16) {
+    return 'bowls-wrath';            // Ch 15-16: judgment, finality
+  } else if (chapter >= 17 && chapter <= 18) {
+    return 'babylon-fall';           // Ch 17-18: dark, mournful
+  } else if (chapter === 19) {
+    return 'victory-wedding';        // Ch 19: triumphant, celebration
+  } else if (chapter >= 20 && chapter <= 22) {
+    return 'new-creation';           // Ch 20-22: peaceful, eternal hope
+  }
+
+  return null;
+}
+
+function getMusicUrl(bookId: string, trackName: string): string {
+  return getConfigMusicUrl(bookId, `${trackName}.mp3`);
+}
 
 interface UseAudioPlayerOptions {
   bookId: string;
   chapter: number;
   onVerseChange?: (verseNumber: number) => void;
+  onChapterEnd?: () => void;
 }
 
 interface UseAudioPlayerReturn {
@@ -18,6 +56,11 @@ interface UseAudioPlayerReturn {
   playbackRate: number;
   currentVerseNumber: number | null;
   currentWordIndex: number | null;
+  currentWord: string | null;
+  currentPinyin: string | null;
+  currentDefinition: string | null;
+  hasEnded: boolean;
+  isMusicPlaying: boolean;
   play: () => void;
   pause: () => void;
   toggle: () => void;
@@ -25,34 +68,153 @@ interface UseAudioPlayerReturn {
   seekToVerse: (verseNumber: number) => void;
   seekToWord: (verseNumber: number, wordIndex: number) => void;
   setPlaybackRate: (rate: number) => void;
+  resetEnded: () => void;
 }
 
 export function useAudioPlayer({
   bookId,
   chapter,
   onVerseChange,
+  onChapterEnd,
 }: UseAudioPlayerOptions): UseAudioPlayerReturn {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAvailable, setIsAvailable] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [playbackRate, setPlaybackRateState] = useState(0.85);
+  const [playbackRate, setPlaybackRateState] = useState(1.0);
   const [currentVerseNumber, setCurrentVerseNumber] = useState<number | null>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState<number | null>(null);
+  const [currentWord, setCurrentWord] = useState<string | null>(null);
+  const [currentPinyin, setCurrentPinyin] = useState<string | null>(null);
+  const [currentDefinition, setCurrentDefinition] = useState<string | null>(null);
+  const [hasEnded, setHasEnded] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   const { setAudioPlaying, setAudioCurrentWord } = useReadingStore();
+  const ambientMusicEnabled = useSettingsStore(state => state.ambientMusicEnabled);
 
   const audioDataRef = useRef<ChapterAudio | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const musicElementRef = useRef<HTMLAudioElement | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const lastVerseRef = useRef<number | null>(null);
   const playbackRateRef = useRef(playbackRate);
+
+  // Refs to persist last valid word data during silences
+  const lastValidWordRef = useRef<string | null>(null);
+  const lastValidPinyinRef = useRef<string | null>(null);
+  const lastValidDefinitionRef = useRef<string | null>(null);
+
+  // Chinese punctuation marks to filter out from display
+  const PUNCTUATION = ['。', '，', '；', '：', '！', '？', '、', '「', '」', '『', '』', '（', '）', '…', '──'];
 
   // Keep playback rate ref in sync
   useEffect(() => {
     playbackRateRef.current = playbackRate;
   }, [playbackRate]);
+
+  // Refs for Media Session callbacks to avoid stale closures
+  const playRef = useRef<(() => Promise<void>) | null>(null);
+  const pauseRef = useRef<(() => void) | null>(null);
+
+  // Setup Media Session API for background playback control
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) {
+      console.log('[AudioPlayer] Media Session API not supported');
+      return;
+    }
+
+    const book = getBookById(bookId);
+    if (!book) return;
+
+    // Set metadata for lock screen / notification
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: `${book.name.english} ${chapter}`,
+      artist: 'DuBible',
+      album: 'Bible Audio',
+      artwork: [
+        { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+      ],
+    });
+
+    console.log('[AudioPlayer] Media Session metadata set:', {
+      title: `${book.name.english} ${chapter}`,
+      bookId,
+      chapter,
+    });
+
+    // Set up action handlers using refs to avoid stale closures
+    navigator.mediaSession.setActionHandler('play', () => {
+      console.log('[AudioPlayer] Media Session play action triggered');
+      playRef.current?.();
+    });
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+      console.log('[AudioPlayer] Media Session pause action triggered');
+      pauseRef.current?.();
+    });
+
+    // Note: We don't set up nexttrack/previoustrack here because those
+    // need to be handled at the ReadingScreen level (chapter navigation)
+    // The onChapterEnd callback will handle auto-advance
+
+    return () => {
+      // Clean up on unmount
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = null;
+        navigator.mediaSession.setActionHandler('play', null);
+        navigator.mediaSession.setActionHandler('pause', null);
+      }
+    };
+  }, [bookId, chapter]);
+
+  // Setup ambient music when enabled
+  useEffect(() => {
+    if (!ambientMusicEnabled) {
+      // Clean up music if it exists
+      if (musicElementRef.current) {
+        musicElementRef.current.pause();
+        musicElementRef.current.src = '';
+        musicElementRef.current = null;
+      }
+      setIsMusicPlaying(false);
+      return;
+    }
+
+    // Check if music is available for this book/chapter
+    const trackName = getMusicTrack(bookId, chapter);
+    if (!trackName) {
+      setIsMusicPlaying(false);
+      return;
+    }
+
+    // Create music element
+    const musicUrl = getMusicUrl(bookId, trackName);
+    const music = new Audio(musicUrl);
+    music.loop = true;
+    music.volume = 0.18; // 18% volume for subtle ambient music
+
+    music.onloadeddata = () => {
+      console.log(`[AudioPlayer] Ambient music loaded: ${trackName}`);
+    };
+
+    music.onerror = (error) => {
+      console.error(`[AudioPlayer] Music load error for ${musicUrl}:`, error);
+      setIsMusicPlaying(false);
+    };
+
+    musicElementRef.current = music;
+
+    return () => {
+      if (musicElementRef.current) {
+        musicElementRef.current.pause();
+        musicElementRef.current.src = '';
+        musicElementRef.current = null;
+      }
+    };
+  }, [bookId, chapter, ambientMusicEnabled]);
 
   // Load audio data and create audio element
   useEffect(() => {
@@ -68,14 +230,32 @@ export function useAudioPlayer({
       setCurrentTime(0);
       setCurrentVerseNumber(null);
       setCurrentWordIndex(null);
+      setCurrentWord(null);
+      setCurrentPinyin(null);
+      setCurrentDefinition(null);
       setAudioPlaying(false);
       setAudioCurrentWord(null);
+      setHasEnded(false);
+
+      // Clear persisted word data refs
+      lastValidWordRef.current = null;
+      lastValidPinyinRef.current = null;
+      lastValidDefinitionRef.current = null;
 
       // Clean up previous audio element
       if (audioElementRef.current) {
         audioElementRef.current.pause();
         audioElementRef.current.src = '';
         audioElementRef.current = null;
+      }
+
+      // Check if the book is in the New Testament (audio only available for NT)
+      const book = getBookById(bookId);
+      if (!book || book.testament !== 'new') {
+        console.log(`[AudioPlayer] Audio not available for ${bookId} (Old Testament)`);
+        setIsLoading(false);
+        setIsAvailable(false);
+        return;
       }
 
       // Load timing data
@@ -133,16 +313,35 @@ export function useAudioPlayer({
         }
       };
 
-      audio.onended = () => {
+      // Enhanced onended handler for reliable background playback
+      // Use both 'ended' event listener AND onended property for maximum reliability
+      const handleEnded = () => {
         if (!cancelled) {
+          console.log('[AudioPlayer] Audio ended, triggering chapter end callback');
           setIsPlaying(false);
           setAudioPlaying(false);
           setCurrentTime(0);
           setCurrentVerseNumber(null);
           setCurrentWordIndex(null);
+          setCurrentDefinition(null);
           setAudioCurrentWord(null);
+          setHasEnded(true);
+
+          // Clear persisted word data when audio ends
+          lastValidWordRef.current = null;
+          lastValidPinyinRef.current = null;
+          lastValidDefinitionRef.current = null;
+
+          // Call the chapter end callback
+          // Use setTimeout to ensure this runs even if the page is throttled
+          setTimeout(() => {
+            onChapterEnd?.();
+          }, 0);
         }
       };
+
+      audio.onended = handleEnded;
+      audio.addEventListener('ended', handleEnded);
 
       // Start loading the audio
       audio.load();
@@ -164,7 +363,7 @@ export function useAudioPlayer({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [bookId, chapter, setAudioPlaying, setAudioCurrentWord]);
+  }, [bookId, chapter, setAudioPlaying, setAudioCurrentWord, onChapterEnd]);
 
   // Update position based on current time (in ms)
   const updatePosition = useCallback((timeMs: number) => {
@@ -177,13 +376,50 @@ export function useAudioPlayer({
     setCurrentWordIndex(position.wordIndex);
     setAudioCurrentWord(position.wordIndex);
 
+    // Get word text, pinyin, and definition for display
+    if (position.verseNumber !== null && position.wordIndex !== null) {
+      const wordData = getWordAtPosition(bookId, chapter, position.verseNumber, position.wordIndex);
+      if (wordData) {
+        // Skip punctuation - keep showing last valid word instead
+        if (PUNCTUATION.includes(wordData.word)) {
+          setCurrentWord(lastValidWordRef.current);
+          setCurrentPinyin(lastValidPinyinRef.current);
+          setCurrentDefinition(lastValidDefinitionRef.current);
+        } else {
+          // We have valid word data - update state and persist it
+          const newWord = wordData.word;
+          const newPinyin = wordData.pinyin;
+          const newDefinition = wordData.definition || null;
+
+          setCurrentWord(newWord);
+          setCurrentPinyin(newPinyin);
+          setCurrentDefinition(newDefinition);
+
+          // Persist for use during silences and punctuation
+          lastValidWordRef.current = newWord;
+          lastValidPinyinRef.current = newPinyin;
+          lastValidDefinitionRef.current = newDefinition;
+        }
+      } else {
+        // No word data at this position - keep showing last valid word (during silences)
+        setCurrentWord(lastValidWordRef.current);
+        setCurrentPinyin(lastValidPinyinRef.current);
+        setCurrentDefinition(lastValidDefinitionRef.current);
+      }
+    } else {
+      // No position at all - keep showing last valid word (during silences)
+      setCurrentWord(lastValidWordRef.current);
+      setCurrentPinyin(lastValidPinyinRef.current);
+      setCurrentDefinition(lastValidDefinitionRef.current);
+    }
+
     // Log position updates periodically (every verse change)
     if (position.verseNumber !== null && position.verseNumber !== lastVerseRef.current) {
       lastVerseRef.current = position.verseNumber;
       console.log(`[AudioPlayer] Position update: verse ${position.verseNumber}, word ${position.wordIndex}, time ${timeMs.toFixed(0)}ms`);
       onVerseChange?.(position.verseNumber);
     }
-  }, [setAudioCurrentWord, onVerseChange]);
+  }, [bookId, chapter, setAudioCurrentWord, onVerseChange]);
 
   // Real audio playback time tracking loop
   const tick = useCallback(() => {
@@ -226,10 +462,27 @@ export function useAudioPlayer({
       setIsPlaying(true);
       setAudioPlaying(true);
       console.log('[AudioPlayer] Playback started successfully');
+
+      // Update Media Session playback state
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'playing';
+      }
+
+      // Start ambient music if available and enabled
+      const music = musicElementRef.current;
+      if (music && ambientMusicEnabled) {
+        try {
+          await music.play();
+          setIsMusicPlaying(true);
+          console.log('[AudioPlayer] Ambient music started');
+        } catch (error) {
+          console.error('[AudioPlayer] Failed to play ambient music:', error);
+        }
+      }
     } catch (error) {
       console.error('[AudioPlayer] Failed to play audio:', error);
     }
-  }, [isAvailable, setAudioPlaying]);
+  }, [isAvailable, setAudioPlaying, ambientMusicEnabled]);
 
   const pause = useCallback(() => {
     const audio = audioElementRef.current;
@@ -239,7 +492,26 @@ export function useAudioPlayer({
     }
     setIsPlaying(false);
     setAudioPlaying(false);
+
+    // Update Media Session playback state
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = 'paused';
+    }
+
+    // Pause ambient music
+    const music = musicElementRef.current;
+    if (music) {
+      music.pause();
+      setIsMusicPlaying(false);
+      console.log('[AudioPlayer] Ambient music paused');
+    }
   }, [setAudioPlaying]);
+
+  // Keep play/pause refs in sync for Media Session API
+  useEffect(() => {
+    playRef.current = play;
+    pauseRef.current = pause;
+  }, [play, pause]);
 
   const toggle = useCallback(async () => {
     if (isPlaying) {
@@ -261,30 +533,58 @@ export function useAudioPlayer({
 
   const seekToVerse = useCallback((verseNumber: number) => {
     const audioData = audioDataRef.current;
-    if (!audioData) return;
+    const audio = audioElementRef.current;
+    if (!audioData || !audio) return;
 
     const verse = audioData.verses.find(v => v.verseNumber === verseNumber);
-    if (verse) {
-      seek(verse.startTime);
+    if (!verse) return;
+
+    // Check actual audio element state to avoid stale closure issues
+    const wasPlaying = !audio.paused;
+
+    // Pause first if playing to ensure clean seek (stops the tick loop)
+    if (wasPlaying) {
+      pause();
     }
-  }, [seek]);
+
+    // Seek to the verse's position
+    seek(verse.startTime);
+
+    // Always resume playback from new position (user explicitly requested "play from here")
+    // Small delay ensures seek completes before resuming, avoiding race conditions
+    setTimeout(() => {
+      play();
+    }, 50);
+  }, [seek, play, pause]);
 
   const seekToWord = useCallback((verseNumber: number, wordIndex: number) => {
     const audioData = audioDataRef.current;
-    if (!audioData) return;
+    const audio = audioElementRef.current;
+    if (!audioData || !audio) return;
 
     const verse = audioData.verses.find(v => v.verseNumber === verseNumber);
     if (!verse) return;
 
     const word = verse.words.find(w => w.wordIndex === wordIndex);
-    if (word) {
-      seek(word.startTime);
-      // Auto-play when seeking to word
-      if (!isPlaying) {
-        play();
-      }
+    if (!word) return;
+
+    // Check actual audio element state to avoid stale closure issues
+    const wasPlaying = !audio.paused;
+
+    // Pause first if playing to ensure clean seek (stops the tick loop)
+    if (wasPlaying) {
+      pause();
     }
-  }, [seek, isPlaying, play]);
+
+    // Seek to the word's position
+    seek(word.startTime);
+
+    // Always resume playback from new position (user explicitly requested "play from here")
+    // Small delay ensures seek completes before resuming, avoiding race conditions
+    setTimeout(() => {
+      play();
+    }, 50);
+  }, [seek, play, pause]);
 
   const setPlaybackRate = useCallback((rate: number) => {
     setPlaybackRateState(rate);
@@ -292,6 +592,10 @@ export function useAudioPlayer({
     if (audio) {
       audio.playbackRate = rate;
     }
+  }, []);
+
+  const resetEnded = useCallback(() => {
+    setHasEnded(false);
   }, []);
 
   return {
@@ -303,6 +607,11 @@ export function useAudioPlayer({
     playbackRate,
     currentVerseNumber,
     currentWordIndex,
+    currentWord,
+    currentPinyin,
+    currentDefinition,
+    hasEnded,
+    isMusicPlaying,
     play,
     pause,
     toggle,
@@ -310,5 +619,6 @@ export function useAudioPlayer({
     seekToVerse,
     seekToWord,
     setPlaybackRate,
+    resetEnded,
   };
 }

@@ -1,15 +1,99 @@
-import type { ChapterAudio } from '../../types';
+import type { ChapterAudio, VerseTiming, WordTiming } from '../../types';
+import { getAudioUrl as getConfigAudioUrl, getAudioTimingUrl } from '../../config/audio';
 
 // Cache for loaded audio timing data
 const audioCache = new Map<string, ChapterAudio | null>();
 const loadingPromises = new Map<string, Promise<ChapterAudio | null>>();
+
+// Cache for raw word data (to get word text/pinyin/definition for display)
+const rawWordCache = new Map<string, Map<string, { word: string; pinyin: string; definition?: string }>>();
 
 function getCacheKey(bookId: string, chapter: number): string {
   return `${bookId}-${chapter}`;
 }
 
 /**
+ * Raw format from generated JSON files (from ElevenLabs with timestamps)
+ */
+interface RawWordTiming {
+  word: string;
+  pinyin: string;
+  definition?: string;
+  start: number;  // seconds
+  end: number;    // seconds
+}
+
+interface RawVerseTiming {
+  verse: number;
+  words: RawWordTiming[];
+}
+
+interface RawChapterAudio {
+  chapter: number;
+  voice: string;
+  voiceId: string;
+  duration: number;  // seconds
+  characterCount: number;
+  verses: RawVerseTiming[];
+}
+
+/**
+ * Transform raw generated timing data to the app's expected ChapterAudio format
+ * Also caches raw word text/pinyin/definition for display in the audio bar
+ */
+function transformTimingData(
+  bookId: string,
+  chapter: number,
+  raw: RawChapterAudio
+): ChapterAudio {
+  const cacheKey = getCacheKey(bookId, chapter);
+  const wordDataMap = new Map<string, { word: string; pinyin: string; definition?: string }>();
+
+  const verses: VerseTiming[] = raw.verses.map((rawVerse) => {
+    // Calculate verse start/end from word timings
+    const words: WordTiming[] = rawVerse.words.map((rawWord, index) => {
+      // Cache word text, pinyin, and definition for display lookup
+      const wordKey = `${rawVerse.verse}-${index}`;
+      wordDataMap.set(wordKey, {
+        word: rawWord.word,
+        pinyin: rawWord.pinyin,
+        definition: rawWord.definition
+      });
+
+      return {
+        wordIndex: index,
+        startTime: rawWord.start * 1000,  // Convert to ms
+        endTime: rawWord.end * 1000,
+      };
+    });
+
+    // Verse timing spans from first word start to last word end
+    const verseStart = words.length > 0 ? words[0].startTime : 0;
+    const verseEnd = words.length > 0 ? words[words.length - 1].endTime : 0;
+
+    return {
+      verseNumber: rawVerse.verse,
+      startTime: verseStart,
+      endTime: verseEnd,
+      words,
+    };
+  });
+
+  // Store raw word data for later lookup
+  rawWordCache.set(cacheKey, wordDataMap);
+
+  return {
+    bookId,
+    chapter,
+    audioUrl: getConfigAudioUrl(bookId, chapter, 2),
+    duration: raw.duration * 1000,  // Convert to ms
+    verses,
+  };
+}
+
+/**
  * Load audio timing data from the generated JSON files
+ * Also loads preprocessed data to enrich with definitions
  * Returns null if audio not available for this chapter
  */
 export async function loadChapterAudio(
@@ -31,7 +115,8 @@ export async function loadChapterAudio(
   // Load from JSON file
   const loadPromise = (async () => {
     try {
-      const timingUrl = `/audio/${bookId}/chapter-${chapter}-timing.json`;
+      // Timing data is stored alongside the mp3 file
+      const timingUrl = getAudioTimingUrl(bookId, chapter, 3);
       console.log(`[AudioTiming] Loading timing data from: ${timingUrl}`);
       const response = await fetch(timingUrl);
 
@@ -41,30 +126,43 @@ export async function loadChapterAudio(
         return null;
       }
 
-      const data: ChapterAudio = await response.json();
+      const rawData: RawChapterAudio = await response.json();
       console.log(`[AudioTiming] Successfully loaded timing data for ${bookId} chapter ${chapter}:`, {
-        duration: data.duration,
-        verses: data.verses.length,
-        totalWords: data.verses.reduce((sum, v) => sum + v.words.length, 0),
+        duration: rawData.duration,
+        verses: rawData.verses.length,
+        totalWords: rawData.verses.reduce((sum, v) => sum + v.words.length, 0),
+        voice: rawData.voice,
       });
 
-      // Convert seconds to milliseconds for timing data
-      const convertedData: ChapterAudio = {
-        ...data,
-        duration: data.duration * 1000,
-        verses: data.verses.map((verse) => ({
-          ...verse,
-          startTime: verse.startTime * 1000,
-          endTime: verse.endTime * 1000,
-          words: verse.words.map((word) => ({
-            ...word,
-            startTime: word.startTime * 1000,
-            endTime: word.endTime * 1000,
-          })),
-        })),
-      };
+      // Load preprocessed data to get definitions
+      try {
+        const preprocessedUrl = `/data/preprocessed/${bookId}/chapter-${chapter}.json`;
+        const preprocessedResponse = await fetch(preprocessedUrl);
+        if (preprocessedResponse.ok) {
+          const preprocessedData = await preprocessedResponse.json();
 
-      console.log(`[AudioTiming] Converted timing data to milliseconds (duration: ${convertedData.duration}ms)`);
+          // Enrich audio data with definitions from preprocessed data
+          rawData.verses.forEach((verse) => {
+            const preprocessedVerse = preprocessedData.verses.find((v: any) => v.number === verse.verse);
+            if (preprocessedVerse?.words) {
+              verse.words.forEach((word, wIdx) => {
+                const preprocessedWord = preprocessedVerse.words[wIdx];
+                if (preprocessedWord?.definition) {
+                  word.definition = preprocessedWord.definition;
+                }
+              });
+            }
+          });
+          console.log(`[AudioTiming] Enriched audio data with definitions from preprocessed data`);
+        }
+      } catch (err) {
+        console.warn(`[AudioTiming] Could not load preprocessed data for definitions:`, err);
+      }
+
+      // Transform to app's expected format
+      const convertedData = transformTimingData(bookId, chapter, rawData);
+
+      console.log(`[AudioTiming] Converted timing data (duration: ${convertedData.duration}ms)`);
       audioCache.set(cacheKey, convertedData);
       return convertedData;
     } catch (error) {
@@ -139,8 +237,28 @@ export function getPositionAtTime(
 }
 
 /**
+ * Get the word text, pinyin, and definition for display in the audio bar
+ */
+export function getWordAtPosition(
+  bookId: string,
+  chapter: number,
+  verseNumber: number,
+  wordIndex: number
+): { word: string; pinyin: string; definition?: string } | null {
+  const cacheKey = getCacheKey(bookId, chapter);
+  const wordDataMap = rawWordCache.get(cacheKey);
+  if (!wordDataMap) return null;
+
+  const wordKey = `${verseNumber}-${wordIndex}`;
+  return wordDataMap.get(wordKey) || null;
+}
+
+/**
  * Get the audio file URL for a chapter
+ * Includes cache-busting version parameter
+ * Supports external audio hosting via VITE_AUDIO_BASE_URL
  */
 export function getAudioUrl(bookId: string, chapter: number): string {
-  return `/audio/${bookId}/chapter-${chapter}.mp3`;
+  const version = 3; // Increment when audio files are regenerated
+  return getConfigAudioUrl(bookId, chapter, version);
 }
