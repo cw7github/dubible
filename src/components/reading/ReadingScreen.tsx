@@ -686,11 +686,16 @@ export function ReadingScreen() {
         onClose={handleClosePanel}
         onNavigateToCrossRef={handleNavigateToCrossRef}
         onPlayFromVerse={(verseRef) => {
+          console.log('[ReadingScreen] Play from verse requested:', verseRef);
           // CRITICAL: Always honor "play from here" by switching chapter if needed
           // User intent is clear: they want to hear THIS verse, not continue current playback
 
           // Check if we need to switch chapters
           if (verseRef.bookId !== currentBookId || verseRef.chapter !== audioChapter) {
+            console.log('[ReadingScreen] Switching to different chapter:', {
+              from: { bookId: currentBookId, chapter: audioChapter },
+              to: { bookId: verseRef.bookId, chapter: verseRef.chapter },
+            });
             // Switch to the verse's chapter first
             setCurrentPosition(verseRef.bookId, verseRef.chapter);
             setDisplayChapter(verseRef.chapter);
@@ -702,9 +707,11 @@ export function ReadingScreen() {
             // Wait for new audio to load, then seek and play
             // This delay ensures the audio player has loaded the new chapter's audio
             setTimeout(() => {
+              console.log('[ReadingScreen] Seeking to verse after chapter switch:', verseRef.verse);
               audioPlayer.seekToVerse(verseRef.verse);
             }, 500);
           } else {
+            console.log('[ReadingScreen] Same chapter, seeking immediately to verse:', verseRef.verse);
             // Same chapter - seek immediately and start playing
             setShowAudioBar(true);
             handleCancelAutoAdvance();

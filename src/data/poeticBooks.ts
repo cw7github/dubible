@@ -35,8 +35,6 @@ export const POETIC_CHAPTERS: Record<string, number[]> = {
   '2samuel': [22, 23],
   // Isaiah, Jeremiah, Ezekiel - mostly poetry but mixed
   // For now, treating prophets as prose since they have narrative sections
-  // Luke - Magnificat, Benedictus, Nunc Dimittis
-  'luke': [1, 2],
   // Revelation - Songs and hymns throughout
   'revelation': [4, 5, 7, 11, 12, 14, 15, 18, 19],
 };

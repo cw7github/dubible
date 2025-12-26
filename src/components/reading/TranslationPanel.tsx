@@ -171,7 +171,10 @@ export const TranslationPanel = memo(function TranslationPanel({
                                 {/* Play from here button */}
                                 {isAudioAvailable && onPlayFromVerse && (
                                   <motion.button
-                                    onClick={() => onPlayFromVerse(verseRef)}
+                                    onClick={() => {
+                                      console.log('[TranslationPanel] Play button clicked for verse:', verseRef);
+                                      onPlayFromVerse(verseRef);
+                                    }}
                                     className="touch-feedback flex items-center gap-1 px-2 py-1 rounded-md"
                                     style={{
                                       backgroundColor: 'var(--accent-subtle)',

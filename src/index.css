@@ -665,6 +665,15 @@ body {
               opacity 50ms ease-out;
 }
 
+/* During audio playback, remove transition latency so very short words (e.g. 60–100ms)
+   still visibly highlight and update in time. */
+[data-audio-playing="true"] .chinese-word .chinese-char,
+[data-audio-playing="true"] .chinese-word .pinyin-text,
+[data-audio-playing="true"] .word-highlight .chinese-char,
+[data-audio-playing="true"] .word-highlight .pinyin-text {
+  transition-duration: 0ms !important;
+}
+
 /* Word Selected - Persistent Highlight While Definition Card Is Showing */
 .word-selected .chinese-char {
   color: var(--accent);

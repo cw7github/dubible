@@ -6,8 +6,9 @@ import type { CharacterSet } from '../types';
 let t2sConverter: ReturnType<typeof OpenCC.Converter> | null = null;
 let s2tConverter: ReturnType<typeof OpenCC.Converter> | null = null;
 
-// Global conversion cache - shared across all components
-// Uses Map for O(1) lookup, limited size to prevent memory bloat
+// Global conversion cache - shared across all components.
+// Keyed by `${targetSet}:${text}` so the same input can be cached for both directions.
+// Uses Map for O(1) lookup, limited size to prevent memory bloat.
 const conversionCache = new Map<string, string>();
 const MAX_CACHE_SIZE = 5000; // Limit cache entries
 
@@ -36,21 +37,17 @@ function getS2TConverter() {
 export function convertCharacters(text: string, targetSet: CharacterSet): string {
   if (!text) return text;
 
-  // Data is stored in Traditional Chinese
-  if (targetSet === 'traditional') {
-    // No conversion needed
-    return text;
-  }
+  const cacheKey = `${targetSet}:${text}`;
 
   // Check cache first (O(1) lookup)
-  const cached = conversionCache.get(text);
+  const cached = conversionCache.get(cacheKey);
   if (cached !== undefined) {
     return cached;
   }
 
-  // Convert to Simplified Chinese
   try {
-    const converted = getT2SConverter()(text);
+    const converter = targetSet === 'simplified' ? getT2SConverter() : getS2TConverter();
+    const converted = converter(text);
 
     // Cache the result (with size limit)
     if (conversionCache.size >= MAX_CACHE_SIZE) {
@@ -58,7 +55,7 @@ export function convertCharacters(text: string, targetSet: CharacterSet): string
       const keysToDelete = Array.from(conversionCache.keys()).slice(0, 1000);
       keysToDelete.forEach(key => conversionCache.delete(key));
     }
-    conversionCache.set(text, converted);
+    conversionCache.set(cacheKey, converted);
 
     return converted;
   } catch (error) {
@@ -74,11 +71,6 @@ export function convertCharacters(text: string, targetSet: CharacterSet): string
  * @returns Array of converted texts
  */
 export function convertCharactersBatch(texts: string[], targetSet: CharacterSet): string[] {
-  if (targetSet === 'traditional') {
-    return texts; // No conversion needed
-  }
-
-  // For efficiency, join all uncached texts, convert once, then split
   const uncachedIndices: number[] = [];
   const results: string[] = new Array(texts.length);
 
@@ -88,7 +80,8 @@ export function convertCharactersBatch(texts: string[], targetSet: CharacterSet)
       results[i] = text;
       return;
     }
-    const cached = conversionCache.get(text);
+    const cacheKey = `${targetSet}:${text}`;
+    const cached = conversionCache.get(cacheKey);
     if (cached !== undefined) {
       results[i] = cached;
     } else {
@@ -98,12 +91,14 @@ export function convertCharactersBatch(texts: string[], targetSet: CharacterSet)
 
   // Convert uncached texts
   if (uncachedIndices.length > 0) {
-    const converter = getT2SConverter();
+    const converter = targetSet === 'simplified' ? getT2SConverter() : getS2TConverter();
     uncachedIndices.forEach(i => {
       try {
-        const converted = converter(texts[i]);
+        const original = texts[i];
+        const cacheKey = `${targetSet}:${original}`;
+        const converted = converter(original);
         results[i] = converted;
-        conversionCache.set(texts[i], converted);
+        conversionCache.set(cacheKey, converted);
       } catch {
         results[i] = texts[i];
       }

@@ -4,7 +4,7 @@ import Dexie, { type EntityTable } from 'dexie';
 import type { Chapter, Verse, CharacterSet } from '../types';
 import { fetchChapter } from './bibleApi';
 import { convertApiVersesToChapter } from './chineseProcessor';
-import { toSimplified } from '../utils';
+import { toSimplified, toTraditional } from '../utils';
 import { loadPreprocessedChapter } from './preprocessedLoader';
 
 // Cached chapter with both Traditional and Simplified versions
@@ -38,6 +38,42 @@ function convertVersesToSimplified(verses: Verse[]): Verse[] {
       // Keep pinyin and definition unchanged
     })),
   }));
+}
+
+/**
+ * Convert verses from Simplified to Traditional Chinese (Taiwan variant)
+ * Creates a deep copy with all Chinese text converted
+ */
+function convertVersesToTraditional(verses: Verse[]): Verse[] {
+  return verses.map(verse => ({
+    ...verse,
+    text: toTraditional(verse.text),
+    words: verse.words?.map(word => ({
+      ...word,
+      chinese: toTraditional(word.chinese),
+      breakdown: word.breakdown?.map(char => ({
+        ...char,
+        c: toTraditional(char.c),
+      })),
+    })),
+  }));
+}
+
+// Heuristic: detect obvious Simplified characters in what should be Traditional text.
+// Used to self-heal older/incorrect caches where versesTraditional was accidentally stored as Simplified.
+const SIMPLIFIED_MARKERS = /耶稣|这|们|说|国|门|书|马|圣|东|亚/u;
+
+function looksLikeSimplified(verses: Verse[]): boolean {
+  // Scan a small prefix (fast) across both verse text and tokenized words.
+  const SAMPLE_VERSES = 3;
+  for (let i = 0; i < Math.min(SAMPLE_VERSES, verses.length); i++) {
+    const verse = verses[i];
+    if (verse?.text && SIMPLIFIED_MARKERS.test(verse.text)) return true;
+    for (const word of verse?.words ?? []) {
+      if (word?.chinese && SIMPLIFIED_MARKERS.test(word.chinese)) return true;
+    }
+  }
+  return false;
 }
 
 // Create the database
@@ -86,6 +122,34 @@ export async function getChapter(
         const hasBothVersions = cached.versesTraditional && cached.versesSimplified;
 
         if (!isExpired && hasBothVersions) {
+          // Self-heal: if the stored "traditional" text is actually Simplified, repair it once.
+          // This can happen if a user cached chapters under an older buggy build.
+          if (looksLikeSimplified(cached.versesTraditional)) {
+            const repairedTraditional = convertVersesToTraditional(cached.versesTraditional);
+            const repairedSimplified = convertVersesToSimplified(repairedTraditional);
+            try {
+              await db.chapters.put({
+                ...cached,
+                versesTraditional: repairedTraditional,
+                versesSimplified: repairedSimplified,
+                cachedAt: Date.now(),
+              });
+              return {
+                number: cached.chapter,
+                verses: characterSet === 'simplified' ? repairedSimplified : repairedTraditional,
+              };
+            } catch (error) {
+              console.warn('Cache repair write error:', error);
+              // Fall back to returning the best available without writing.
+              return {
+                number: cached.chapter,
+                verses: characterSet === 'simplified'
+                  ? convertVersesToSimplified(convertVersesToTraditional(cached.versesTraditional))
+                  : convertVersesToTraditional(cached.versesTraditional),
+              };
+            }
+          }
+
           return {
             number: cached.chapter,
             verses: selectVerses(cached),

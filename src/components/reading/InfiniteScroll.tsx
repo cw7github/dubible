@@ -294,6 +294,8 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
   const scrollRafRef = useRef<number | null>(null);
   const maintainChapterBufferRef = useRef<(reason: 'passage' | 'idle') => void>(() => {});
   const scrollPositionSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const initLoadTokenRef = useRef(0);
+  const initialLoadCompletedRef = useRef(false);
 
   // Callback ref to handle both external and internal refs
   const setContainerRef = useCallback((node: HTMLDivElement | null) => {
@@ -424,7 +426,7 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
   useEffect(() => {
     const passageKey = `${bookId}-${initialChapter}`;
     const navigationKey = `${passageKey}-${reloadNonce}`;
-    if (lastNavigationTargetKeyRef.current === navigationKey) return;
+    if (lastNavigationTargetKeyRef.current === navigationKey && initialLoadCompletedRef.current) return;
     lastNavigationTargetKeyRef.current = navigationKey;
 
     // If this prop update came from our own scroll-driven callback, do not reset/reload.
@@ -433,7 +435,11 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
       return;
     }
 
+    let cancelled = false;
+    const loadToken = ++initLoadTokenRef.current;
+
     const init = async () => {
+      initialLoadCompletedRef.current = false;
       setError(null);
       setIsLoadingBottom(true);
       pendingScrollAdjustRef.current = null;
@@ -441,7 +447,9 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
       setLoadedChapters([]);
 
       const chapter = await loadChapter(bookId, initialChapter);
+      if (cancelled || loadToken !== initLoadTokenRef.current) return;
       if (chapter) {
+        initialLoadCompletedRef.current = true;
         visiblePassageRef.current = { bookId, chapter: initialChapter };
         setVisiblePassageKey(passageKey);
         lastReportedPassageKeyRef.current = passageKey;
@@ -474,7 +482,10 @@ export const InfiniteScroll = forwardRef<HTMLDivElement, InfiniteScrollProps>(fu
     };
 
     init();
-  }, [bookId, initialChapter, loadChapter, reloadNonce, totalChapters]);
+    return () => {
+      cancelled = true;
+    };
+  }, [bookId, initialChapter, loadChapter, reloadNonce, totalChapters, characterSet]);
 
   // Restore scroll position after initial load
   const scrollRestoredRef = useRef(false);

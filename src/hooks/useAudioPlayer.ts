@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect, startTransition } from 'react';
 import { useReadingStore, useSettingsStore } from '../stores';
 import { loadChapterAudio, getPositionAtTime, getWordAtPosition, getAudioUrl } from '../data/audio';
 import { getBookById } from '../data/bible';
@@ -71,6 +71,10 @@ interface UseAudioPlayerReturn {
   resetEnded: () => void;
 }
 
+type PendingSeek =
+  | { type: 'verse'; bookId: string; chapter: number; verseNumber: number; autoPlay: boolean }
+  | { type: 'word'; bookId: string; chapter: number; verseNumber: number; wordIndex: number; autoPlay: boolean };
+
 export function useAudioPlayer({
   bookId,
   chapter,
@@ -100,6 +104,12 @@ export function useAudioPlayer({
   const animationFrameRef = useRef<number | null>(null);
   const lastVerseRef = useRef<number | null>(null);
   const playbackRateRef = useRef(playbackRate);
+  const lastPositionRef = useRef<{ verseNumber: number | null; wordIndex: number | null }>({
+    verseNumber: null,
+    wordIndex: null,
+  });
+  const lastCurrentTimeUpdateRef = useRef<number>(0);
+  const pendingSeekRef = useRef<PendingSeek | null>(null);
 
   // Refs to persist last valid word data during silences
   const lastValidWordRef = useRef<string | null>(null);
@@ -222,6 +232,11 @@ export function useAudioPlayer({
     let loadTimeout: ReturnType<typeof setTimeout> | null = null;
 
     const setupAudio = async () => {
+      const pending = pendingSeekRef.current;
+      if (pending && (pending.bookId !== bookId || pending.chapter !== chapter)) {
+        pendingSeekRef.current = null;
+      }
+
       setIsLoading(true);
       setIsAvailable(false);
 
@@ -301,6 +316,32 @@ export function useAudioPlayer({
           if (loadTimeout) clearTimeout(loadTimeout);
           setIsLoading(false);
           setIsAvailable(true);
+
+          // If the user requested "play from verse/word" while the audio was still loading,
+          // apply it now (after metadata is available so currentTime seeking is reliable).
+          const pendingSeek = pendingSeekRef.current;
+          if (
+            pendingSeek &&
+            pendingSeek.bookId === bookId &&
+            pendingSeek.chapter === chapter
+          ) {
+            const audioData = audioDataRef.current;
+            if (audioData) {
+              const verse = audioData.verses.find(v => v.verseNumber === pendingSeek.verseNumber);
+              if (verse) {
+                const targetTime =
+                  pendingSeek.type === 'verse'
+                    ? verse.startTime
+                    : (verse.words.find(w => w.wordIndex === pendingSeek.wordIndex)?.startTime ?? verse.startTime);
+
+                pendingSeekRef.current = null;
+                seek(targetTime);
+                if (pendingSeek.autoPlay) {
+                  void play();
+                }
+              }
+            }
+          }
         }
       };
 
@@ -326,6 +367,9 @@ export function useAudioPlayer({
           setCurrentDefinition(null);
           setAudioCurrentWord(null);
           setHasEnded(true);
+          lastVerseRef.current = null;
+          lastPositionRef.current = { verseNumber: null, wordIndex: null };
+          lastCurrentTimeUpdateRef.current = 0;
 
           // Clear persisted word data when audio ends
           lastValidWordRef.current = null;
@@ -371,6 +415,14 @@ export function useAudioPlayer({
     if (!audioData) return;
 
     const position = getPositionAtTime(audioData, timeMs);
+
+    // Avoid re-rendering the entire reading screen on every animation frame.
+    // Only commit React state updates when the verse/word actually changes.
+    const last = lastPositionRef.current;
+    if (position.verseNumber === last.verseNumber && position.wordIndex === last.wordIndex) {
+      return;
+    }
+    lastPositionRef.current = position;
 
     setCurrentVerseNumber(position.verseNumber);
     setCurrentWordIndex(position.wordIndex);
@@ -427,7 +479,18 @@ export function useAudioPlayer({
     if (!audio || !isPlaying) return;
 
     const timeMs = audio.currentTime * 1000;
-    setCurrentTime(timeMs);
+    // Throttle time updates (progress bar) to reduce re-render pressure.
+    // Keeping this lightweight helps prevent skipped word highlights on long chapters.
+    const TIME_UPDATE_INTERVAL_MS = 120;
+    if (
+      timeMs < lastCurrentTimeUpdateRef.current ||
+      timeMs - lastCurrentTimeUpdateRef.current >= TIME_UPDATE_INTERVAL_MS
+    ) {
+      lastCurrentTimeUpdateRef.current = timeMs;
+      startTransition(() => {
+        setCurrentTime(timeMs);
+      });
+    }
     updatePosition(timeMs);
 
     animationFrameRef.current = requestAnimationFrame(tick);
@@ -451,14 +514,15 @@ export function useAudioPlayer({
 
   const play = useCallback(async () => {
     const audio = audioElementRef.current;
-    if (!audio || !isAvailable) {
+    const canPlay = Boolean(audio && (isAvailable || audio.readyState >= 1));
+    if (!canPlay) {
       console.warn('[AudioPlayer] Cannot play: audio element not ready or not available');
       return;
     }
 
     try {
       console.log('[AudioPlayer] Starting playback...');
-      await audio.play();
+      await audio!.play();
       setIsPlaying(true);
       setAudioPlaying(true);
       console.log('[AudioPlayer] Playback started successfully');
@@ -525,19 +589,40 @@ export function useAudioPlayer({
     const audio = audioElementRef.current;
     if (!audio) return;
 
-    const clampedTime = Math.max(0, Math.min(timeMs, duration));
+    const maxDuration = audioDataRef.current?.duration ?? duration;
+    const clampedTime = Math.max(
+      0,
+      Number.isFinite(maxDuration) && maxDuration > 0 ? Math.min(timeMs, maxDuration) : timeMs
+    );
     audio.currentTime = clampedTime / 1000;
     setCurrentTime(clampedTime);
     updatePosition(clampedTime);
   }, [duration, updatePosition]);
 
   const seekToVerse = useCallback((verseNumber: number) => {
+    console.log('[AudioPlayer] seekToVerse called with verse:', verseNumber);
     const audioData = audioDataRef.current;
     const audio = audioElementRef.current;
-    if (!audioData || !audio) return;
+
+    // If the audio isn't ready yet, queue the seek and apply it on `loadedmetadata`.
+    if (!audioData || !audio || audio.readyState < 1) {
+      pendingSeekRef.current = { type: 'verse', bookId, chapter, verseNumber, autoPlay: true };
+      console.warn('[AudioPlayer] seekToVerse queued until audio is ready:', {
+        verseNumber,
+        hasAudioData: Boolean(audioData),
+        readyState: audio?.readyState,
+      });
+      return;
+    }
 
     const verse = audioData.verses.find(v => v.verseNumber === verseNumber);
-    if (!verse) return;
+    if (!verse) {
+      console.warn('[AudioPlayer] seekToVerse: Verse not found:', verseNumber);
+      return;
+    }
+
+    pendingSeekRef.current = null;
+    console.log('[AudioPlayer] Found verse:', { verseNumber, startTime: verse.startTime, wordCount: verse.words.length });
 
     // Check actual audio element state to avoid stale closure issues
     const wasPlaying = !audio.paused;
@@ -548,19 +633,32 @@ export function useAudioPlayer({
     }
 
     // Seek to the verse's position
+    console.log('[AudioPlayer] Seeking to time:', verse.startTime);
     seek(verse.startTime);
 
     // Always resume playback from new position (user explicitly requested "play from here")
-    // Small delay ensures seek completes before resuming, avoiding race conditions
+    // Defer one tick so the browser applies `currentTime` before playback resumes.
     setTimeout(() => {
-      play();
-    }, 50);
-  }, [seek, play, pause]);
+      console.log('[AudioPlayer] Starting playback after seek');
+      void play();
+    }, 0);
+  }, [bookId, chapter, seek, play, pause]);
 
   const seekToWord = useCallback((verseNumber: number, wordIndex: number) => {
     const audioData = audioDataRef.current;
     const audio = audioElementRef.current;
-    if (!audioData || !audio) return;
+
+    // If the audio isn't ready yet, queue the seek and apply it on `loadedmetadata`.
+    if (!audioData || !audio || audio.readyState < 1) {
+      pendingSeekRef.current = { type: 'word', bookId, chapter, verseNumber, wordIndex, autoPlay: true };
+      console.warn('[AudioPlayer] seekToWord queued until audio is ready:', {
+        verseNumber,
+        wordIndex,
+        hasAudioData: Boolean(audioData),
+        readyState: audio?.readyState,
+      });
+      return;
+    }
 
     const verse = audioData.verses.find(v => v.verseNumber === verseNumber);
     if (!verse) return;
@@ -568,6 +666,7 @@ export function useAudioPlayer({
     const word = verse.words.find(w => w.wordIndex === wordIndex);
     if (!word) return;
 
+    pendingSeekRef.current = null;
     // Check actual audio element state to avoid stale closure issues
     const wasPlaying = !audio.paused;
 
@@ -580,11 +679,11 @@ export function useAudioPlayer({
     seek(word.startTime);
 
     // Always resume playback from new position (user explicitly requested "play from here")
-    // Small delay ensures seek completes before resuming, avoiding race conditions
+    // Defer one tick so the browser applies `currentTime` before playback resumes.
     setTimeout(() => {
-      play();
-    }, 50);
-  }, [seek, play, pause]);
+      void play();
+    }, 0);
+  }, [bookId, chapter, seek, play, pause]);
 
   const setPlaybackRate = useCallback((rate: number) => {
     setPlaybackRateState(rate);

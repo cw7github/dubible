@@ -2,98 +2,7 @@ import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { BookGraphic } from './BookGraphic';
 import { useConvertedBookName } from '../../hooks';
-
-// Helper to split pinyin string into individual syllables
-// e.g., "Mǎtài Fúyīn" -> ["Mǎ", "tài", "Fú", "yīn"]
-function splitPinyinToSyllables(pinyin: string, targetCount: number): string[] {
-  // Remove spaces and split by capital letters or tone marks
-  const cleaned = pinyin.replace(/\s+/g, '');
-
-  // Pinyin vowels with tone marks
-  const vowels = /[aeiouüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/i;
-
-  const syllables: string[] = [];
-  let current = '';
-
-  for (let i = 0; i < cleaned.length; i++) {
-    const char = cleaned[i];
-    const nextChar = cleaned[i + 1];
-
-    current += char;
-
-    // Check if this might be end of syllable
-    const hasVowel = vowels.test(current);
-    const nextIsCapital = nextChar && nextChar === nextChar.toUpperCase() && /[A-Z]/.test(nextChar);
-    const nextStartsNew = nextChar && /[bpmfdtnlgkhjqxzhchshrzcsyw]/i.test(nextChar) &&
-                          !['g', 'n', 'r'].includes(char.toLowerCase());
-
-    // End syllable conditions
-    if (hasVowel && (nextIsCapital || (nextStartsNew && !vowels.test(nextChar)) || i === cleaned.length - 1)) {
-      // Handle 'ng' and 'n' endings
-      if (nextChar && ['n', 'g'].includes(nextChar.toLowerCase())) {
-        const afterNext = cleaned[i + 2];
-        if (nextChar.toLowerCase() === 'n') {
-          if (afterNext === 'g') {
-            current += nextChar + afterNext;
-            i += 2;
-          } else if (!afterNext || !vowels.test(afterNext)) {
-            current += nextChar;
-            i += 1;
-          }
-        } else if (nextChar.toLowerCase() === 'g' && current.endsWith('n')) {
-          // Already handled
-        }
-      }
-
-      if (current) {
-        syllables.push(current);
-        current = '';
-      }
-    }
-  }
-
-  if (current) {
-    syllables.push(current);
-  }
-
-  // If we don't have enough syllables, try simpler split
-  if (syllables.length !== targetCount) {
-    // Fallback: split by spaces first, then by capitals
-    const words = pinyin.split(/\s+/);
-    const result: string[] = [];
-
-    for (const word of words) {
-      // Split each word by capital letters (except first)
-      let temp = '';
-      for (let i = 0; i < word.length; i++) {
-        if (i > 0 && word[i] === word[i].toUpperCase() && /[A-Z]/.test(word[i])) {
-          if (temp) result.push(temp);
-          temp = word[i];
-        } else {
-          temp += word[i];
-        }
-      }
-      if (temp) result.push(temp);
-    }
-
-    if (result.length === targetCount) {
-      return result;
-    }
-  }
-
-  // Final fallback: distribute evenly
-  if (syllables.length !== targetCount && targetCount > 0) {
-    const words = pinyin.split(/\s+/);
-    if (words.length === targetCount) {
-      return words;
-    }
-    // Just return what we have, padded or truncated
-    while (syllables.length < targetCount) syllables.push('');
-    return syllables.slice(0, targetCount);
-  }
-
-  return syllables;
-}
+import { splitChineseCharacters, splitPinyinSyllables } from '../../utils/pinyin';
 
 interface ChapterTransitionProps {
   bookId: string;
@@ -219,8 +128,8 @@ export const ChapterTransition = memo(function ChapterTransition({
       >
         {(() => {
           // Split pinyin into syllables and match with characters
-          const chars = convertedBookName.chinese.split('');
-          const pinyinSyllables = splitPinyinToSyllables(convertedBookName.pinyin, chars.length);
+          const chars = splitChineseCharacters(convertedBookName.chinese);
+          const pinyinSyllables = splitPinyinSyllables(convertedBookName.pinyin, chars.length);
 
           return chars.map((char, i) => (
             <span key={i} className="flex flex-col items-center">

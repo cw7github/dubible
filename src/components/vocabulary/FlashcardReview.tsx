@@ -4,6 +4,7 @@ import { useVocabularyStore } from '../../stores';
 import { getBookById } from '../../data/bible';
 import { ttsService, type VoiceGender } from '../../services';
 import type { SavedWord, ReviewResult } from '../../types';
+import { useConvertedChinese } from '../../hooks';
 
 interface FlashcardReviewProps {
   words: SavedWord[];
@@ -50,6 +51,7 @@ export const FlashcardReview = memo(function FlashcardReview({
   }, []);
 
   const currentWord = words[currentIndex];
+  const convertedChinese = useConvertedChinese(currentWord?.chinese ?? '');
 
   // Reset voice to male when word changes
   useEffect(() => {
@@ -291,7 +293,7 @@ export const FlashcardReview = memo(function FlashcardReview({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  {currentWord.chinese}
+                  {convertedChinese}
                 </motion.h2>
 
                 {/* Audio playback button */}

@@ -56,8 +56,15 @@ function stripEmbeddedHeader(text: string, hasHeading: boolean): string {
   return text;
 }
 
-const GEMINI_API_KEY = 'REDACTED_KEY';
-const ELEVENLABS_API_KEY = 'REDACTED_KEY';
+// Load API keys from environment variables (never hardcode!)
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+
+if (!GEMINI_API_KEY || !ELEVENLABS_API_KEY) {
+  console.error('Error: Missing required environment variables.');
+  console.error('Set GEMINI_API_KEY and ELEVENLABS_API_KEY in your .env.local file');
+  process.exit(1);
+}
 
 // Voice mapping configuration
 interface VoiceMapping {
@@ -69,139 +76,230 @@ interface VoiceMapping {
   };
 }
 
-// Voice ID constants for 10 Taiwan Mandarin voices
+// ============================================================================
+// 8 APPROVED VOICES FOR BILINGUAL BIBLE AUDIO
+// ============================================================================
+// Taiwan Mandarin voices (3):
+//   - Kevin Tu: Calm, steady male - theological teaching
+//   - Anna Su Video: Clear, trustworthy female - narrative, instruction
+//   - Chihiro Yoko: Soothing, sweet female - storytelling, intimate
+//
+// Multilingual voices (5):
+//   - George: Warm, authoritative male - teaching, dramatic, pronouncements
+//   - Liam: Young, articulate male - dynamic action, energetic
+//   - Charlie: Natural, conversational male - dialogue, pastoral, epistles
+//   - Relaxed Renee: Refreshing, relaxing female - psalms, poetry, meditative
+//   - Angela: Warm female - tender moments, comfort passages
+// ============================================================================
+
 const VOICES = {
-  KEVIN_TU: { voiceId: 'BrbEfHMQu0fyclQR7lfh', voiceName: 'Kevin Tu' },      // Teaching, measured, clear
-  EVAN: { voiceId: 'kbrsaic1zriFXx1pgRYN', voiceName: 'Evan' },              // Warm, pastoral, comfort
-  NEIL_CHUANG: { voiceId: 'auoHciLZJwKTwYUoRTYz', voiceName: 'Neil Chuang' }, // Deep, authoritative
-  YU: { voiceId: 'fQj4gJSexpu8RDE2Ii5m', voiceName: 'Yu' },                  // Energetic, dramatic
-  LIANG: { voiceId: 'FjfxJryh105iTLL4ktHB', voiceName: 'Liang' },            // Calm, natural
-  STACY: { voiceId: 'hkfHEbBvdQFNX4uWHqRF', voiceName: 'Stacy' },            // Sweet, tender
-  YUI: { voiceId: 'kGjJqO6wdwRN9iJsoeIC', voiceName: 'Yui' },                // Peaceful, hope
-  YAO_YUAN_WU: { voiceId: 'R55vTH9XmVSyAcM6YvtV', voiceName: 'Yao Yuan Wu' }, // Friendly, warm
-  ANNA_SU: { voiceId: '9lHjugDhwqoxA5MhX0az', voiceName: 'Anna Su' },        // Expressive, bright
-  JIN: { voiceId: 'vZZLclMx4wouUtKBRfZn', voiceName: 'Jin' },                // Philosophical, clear
+  // Taiwan Mandarin voices
+  KEVIN_TU: { voiceId: 'BrbEfHMQu0fyclQR7lfh', voiceName: 'Kevin Tu' },       // Calm, steady male
+  ANNA_SU: { voiceId: 'r6qgCCGI7RWKXCagm158', voiceName: 'Anna Su Video' },   // Clear, trustworthy female
+  CHIHIRO: { voiceId: 'NIqnuIdrAT3LLSSxN05L', voiceName: 'Chihiro Yoko' },    // Soothing, sweet female
+  // Multilingual voices
+  GEORGE: { voiceId: 'JBFqnCBsd6RMkjVDRZzb', voiceName: 'George' },           // Warm, authoritative male
+  LIAM: { voiceId: 'TX3LPaxmHKxFdv7VOQHJ', voiceName: 'Liam' },               // Young, articulate male
+  CHARLIE: { voiceId: 'IKne3meq5aSn9XLyUdCD', voiceName: 'Charlie' },         // Natural, conversational male
+  RENEE: { voiceId: 'mgpcWiEXIWuENJCy8ADX', voiceName: 'Relaxed Renee' },     // Refreshing, relaxing female
+  ANGELA: { voiceId: 'lqydY2xVUkg9cEIFmFMU', voiceName: 'Angela' },           // Warm female
 };
 
+// ============================================================================
+// VOICE ROTATION PLAN FOR ALL 27 NEW TESTAMENT BOOKS
+// ============================================================================
+// Design principles:
+// 1. Rotate voices every 3-7 chapters to prevent monotony
+// 2. Match voice characteristics to content type
+// 3. Balance usage across all 6 Taiwan Mandarin voices (~43 chapters each)
+// 4. Neil Chuang for dramatic/authoritative, Kevin Tu for teaching,
+//    Evan for pastoral, Yui for tender, Anna Su for narrative, Chihiro for intimate
+// ============================================================================
+
 const VOICE_MAPPINGS: VoiceMapping = {
-  // ============ GOSPELS ============
+  // ============================================================================
+  // GOSPELS (89 chapters) - Narrative/storytelling focus, female-heavy
+  // ============================================================================
+
+  // MATTHEW (28 chapters) - Teaching-heavy Gospel with Sermon on Mount
   matthew: {
-    '1-7': VOICES.KEVIN_TU,      // Sermon on Mount - teaching
-    '8-15': VOICES.EVAN,         // Ministry & miracles - warm
-    '16-20': VOICES.JIN,         // Theological teachings
-    '21-28': VOICES.NEIL_CHUANG, // Passion week - deep, weighty
+    '1-4': VOICES.ANNA_SU,       // Genealogy, birth, temptation - clear narrative
+    '5-7': VOICES.KEVIN_TU,      // Sermon on Mount - calm theological teaching
+    '8-10': VOICES.ANNA_SU,      // Miracles & sending disciples - clear narrative
+    '11-13': VOICES.RENEE,       // Parables & teachings - meditative
+    '14-17': VOICES.CHIHIRO,     // Peter's confession, Transfiguration - intimate
+    '18-20': VOICES.ANGELA,      // Community teachings - warm instruction
+    '21-24': VOICES.GEORGE,      // Temple confrontation, Olivet - authoritative
+    '25-28': VOICES.KEVIN_TU,    // Final teachings, Passion - steady teaching
   },
+
+  // MARK (16 chapters) - Fast-paced action Gospel
   mark: {
-    '1-8': VOICES.YU,            // Galilean ministry - urgent, action
-    '9-13': VOICES.EVAN,         // Journey teachings
-    '14-16': VOICES.NEIL_CHUANG, // Passion & resurrection
+    '1-4': VOICES.CHIHIRO,       // Rapid ministry beginnings - storytelling
+    '5-8': VOICES.ANNA_SU,       // Miracles & mission - clear storytelling
+    '9-12': VOICES.CHARLIE,      // Transfiguration to Temple - warm
+    '13-16': VOICES.GEORGE,      // Olivet discourse, Passion - dramatic
   },
+
+  // LUKE (24 chapters) - Tender, compassionate Gospel
   luke: {
-    '1-4': VOICES.LIANG,         // Birth narratives - calm, reverent
-    '5-12': VOICES.EVAN,         // Ministry - warm
-    '13-18': VOICES.ANNA_SU,     // Parables - expressive
-    '19-24': VOICES.LIANG,       // Passion & resurrection
+    '1-2': VOICES.ANGELA,        // Birth narratives - warm tender
+    '3-6': VOICES.CHARLIE,       // Ministry beginnings - warm soothing
+    '7-10': VOICES.CHIHIRO,      // Parables of mercy - sweet storytelling
+    '11-14': VOICES.ANNA_SU,     // Teaching journeys - clear instruction
+    '15-18': VOICES.RENEE,       // Lost parables, Rich man - meditative
+    '19-21': VOICES.KEVIN_TU,    // Jerusalem entry, Temple - measured
+    '22-24': VOICES.GEORGE,      // Passion & resurrection - climactic
   },
+
+  // JOHN (21 chapters) - Theological, intimate Gospel
   john: {
-    '1-6': VOICES.KEVIN_TU,      // Signs & discourses - theological
-    '7-12': VOICES.JIN,          // Conflict & revelation - philosophical
-    '13-17': VOICES.EVAN,        // Upper Room - intimate, warm
-    '18-21': VOICES.NEIL_CHUANG, // Passion & resurrection
+    '1-3': VOICES.ANNA_SU,       // Prologue, Nicodemus - clear trustworthy
+    '4-6': VOICES.ANGELA,        // Woman at well, Bread of Life - warm gentle
+    '7-9': VOICES.GEORGE,        // Feast conflicts - authoritative
+    '10-12': VOICES.CHIHIRO,     // Good Shepherd, Lazarus - intimate
+    '13-17': VOICES.CHIHIRO,     // Upper Room, High Priestly Prayer - intimate
+    '18-21': VOICES.GEORGE,      // Passion & resurrection - dramatic
   },
 
-  // ============ ACTS ============
+  // ============================================================================
+  // ACTS (28 chapters) - Historical narrative, adventure
+  // ============================================================================
   acts: {
-    '1-7': VOICES.EVAN,          // Jerusalem church - community
-    '8-12': VOICES.YU,           // Expansion - adventure
-    '13-20': VOICES.LIANG,       // Paul's journeys - narrative
-    '21-28': VOICES.KEVIN_TU,    // Paul's trials - defense speeches
+    '1-4': VOICES.GEORGE,        // Ascension, Pentecost - authority
+    '5-7': VOICES.KEVIN_TU,      // Persecution, Stephen - measured
+    '8-10': VOICES.ANNA_SU,      // Philip, Paul's conversion - clear narrative
+    '11-14': VOICES.ANGELA,      // Church expansion - warm
+    '15-18': VOICES.CHIHIRO,     // Jerusalem council, journeys - storytelling
+    '19-22': VOICES.ANNA_SU,     // Ephesus riot, Paul's defense - clear
+    '23-25': VOICES.GEORGE,      // Trials before governors - authoritative
+    '26-28': VOICES.KEVIN_TU,    // Defense to Agrippa, Rome - measured
   },
 
-  // ============ PAULINE EPISTLES ============
+  // ============================================================================
+  // PAULINE EPISTLES - One male voice per book
+  // ============================================================================
+
+  // ROMANS (16 chapters) - Kevin Tu: systematic theology, calm teaching
   romans: {
-    '1-4': VOICES.KEVIN_TU,      // Justification - theological
-    '5-8': VOICES.JIN,           // Sanctification - deep reflection
-    '9-11': VOICES.NEIL_CHUANG,  // Israel's destiny - climactic
-    '12-16': VOICES.EVAN,        // Practical living - warm
+    '1-16': VOICES.KEVIN_TU,
   },
+
+  // 1 CORINTHIANS (16 chapters) - George: authoritative correction
   '1corinthians': {
-    '1-6': VOICES.KEVIN_TU,      // Church problems - direct
-    '7-11': VOICES.JIN,          // Marriage, worship - reflective
-    '12-14': VOICES.ANNA_SU,     // Spiritual gifts - expressive
-    '15-16': VOICES.EVAN,        // Resurrection hope - warm
+    '1-16': VOICES.GEORGE,
   },
+
+  // 2 CORINTHIANS (13 chapters) - Charlie: personal, emotional
   '2corinthians': {
-    '1-7': VOICES.EVAN,          // Comfort & reconciliation
-    '8-9': VOICES.YAO_YUAN_WU,   // Giving - friendly appeal
-    '10-13': VOICES.NEIL_CHUANG, // Paul's defense - passionate
+    '1-13': VOICES.CHARLIE,
   },
+
+  // GALATIANS (6 chapters) - George: passionate defense
   galatians: {
-    '1-6': VOICES.NEIL_CHUANG,   // All - passionate defense
+    '1-6': VOICES.GEORGE,
   },
+
+  // EPHESIANS (6 chapters) - Kevin Tu: theological depth
   ephesians: {
-    '1-3': VOICES.KEVIN_TU,      // Cosmic vision - theological
-    '4-6': VOICES.JIN,           // Practical unity - reflective
+    '1-6': VOICES.KEVIN_TU,
   },
+
+  // PHILIPPIANS (4 chapters) - Charlie: warm, joyful
   philippians: {
-    '1-4': VOICES.EVAN,          // All - joyful warmth
+    '1-4': VOICES.CHARLIE,
   },
+
+  // COLOSSIANS (4 chapters) - Liam: dynamic Christ hymn
   colossians: {
-    '1-4': VOICES.KEVIN_TU,      // All - Christ-focused
+    '1-4': VOICES.LIAM,
   },
+
+  // 1 THESSALONIANS (5 chapters) - Charlie: encouraging
   '1thessalonians': {
-    '1-5': VOICES.EVAN,          // All - friendly encouragement
+    '1-5': VOICES.CHARLIE,
   },
+
+  // 2 THESSALONIANS (3 chapters) - Kevin Tu: corrective teaching
   '2thessalonians': {
-    '1-3': VOICES.KEVIN_TU,      // All - clarifying teaching
+    '1-3': VOICES.KEVIN_TU,
   },
+
+  // 1 TIMOTHY (6 chapters) - Liam: instructions to young Timothy
   '1timothy': {
-    '1-6': VOICES.KEVIN_TU,      // All - pastoral maturity
+    '1-6': VOICES.LIAM,
   },
+
+  // 2 TIMOTHY (4 chapters) - Charlie: tender farewell
   '2timothy': {
-    '1-4': VOICES.EVAN,          // All - tender farewell
+    '1-4': VOICES.CHARLIE,
   },
+
+  // TITUS (3 chapters) - Kevin Tu: practical instruction
   titus: {
-    '1-3': VOICES.KEVIN_TU,      // All - clear instructions
+    '1-3': VOICES.KEVIN_TU,
   },
+
+  // PHILEMON (1 chapter) - Charlie: personal appeal
   philemon: {
-    '1-1': VOICES.YAO_YUAN_WU,   // All - friendly personal appeal
+    '1-1': VOICES.CHARLIE,
   },
 
-  // ============ GENERAL EPISTLES ============
+  // ============================================================================
+  // GENERAL EPISTLES - One male voice per book
+  // ============================================================================
+
+  // HEBREWS (13 chapters) - George: sophisticated, authoritative
   hebrews: {
-    '1-4': VOICES.KEVIN_TU,      // Christ's supremacy
-    '5-7': VOICES.JIN,           // Melchizedek - philosophical
-    '8-10': VOICES.NEIL_CHUANG,  // New covenant - authoritative
-    '11-13': VOICES.EVAN,        // Faith heroes - warm encouragement
-  },
-  james: {
-    '1-5': VOICES.NEIL_CHUANG,   // All - direct commands
-  },
-  '1peter': {
-    '1-5': VOICES.EVAN,          // All - warm in suffering
-  },
-  '2peter': {
-    '1-3': VOICES.NEIL_CHUANG,   // All - warning, firm
-  },
-  '1john': {
-    '1-5': VOICES.STACY,         // All - gentle pastoral love
-  },
-  '2john': {
-    '1-1': VOICES.STACY,         // All - same author
-  },
-  '3john': {
-    '1-1': VOICES.YAO_YUAN_WU,   // All - personal note
-  },
-  jude: {
-    '1-1': VOICES.NEIL_CHUANG,   // All - contending for faith
+    '1-13': VOICES.GEORGE,
   },
 
-  // ============ REVELATION ============
+  // JAMES (5 chapters) - Kevin Tu: practical wisdom
+  james: {
+    '1-5': VOICES.KEVIN_TU,
+  },
+
+  // 1 PETER (5 chapters) - Charlie: comfort in suffering
+  '1peter': {
+    '1-5': VOICES.CHARLIE,
+  },
+
+  // 2 PETER (3 chapters) - George: warning
+  '2peter': {
+    '1-3': VOICES.GEORGE,
+  },
+
+  // 1 JOHN (5 chapters) - Liam: dynamic love letter
+  '1john': {
+    '1-5': VOICES.LIAM,
+  },
+
+  // 2 JOHN (1 chapter) - Liam: brief, personal
+  '2john': {
+    '1-1': VOICES.LIAM,
+  },
+
+  // 3 JOHN (1 chapter) - Liam: personal
+  '3john': {
+    '1-1': VOICES.LIAM,
+  },
+
+  // JUDE (1 chapter) - George: urgent warning
+  jude: {
+    '1-1': VOICES.GEORGE,
+  },
+
+  // ============================================================================
+  // REVELATION (22 chapters) - All male, apocalyptic drama
+  // ============================================================================
   revelation: {
-    '1-3': VOICES.NEIL_CHUANG,   // Letters to churches
-    '4-11': VOICES.YU,           // Seals & trumpets - dramatic
-    '12-18': VOICES.KEVIN_TU,    // Beasts & Babylon - intense
-    '19-22': VOICES.YUI,         // Victory & new creation - peaceful hope
+    '1-3': VOICES.GEORGE,        // Vision of Christ, letters - authoritative
+    '4-7': VOICES.GEORGE,        // Throne, seals - dramatic majesty
+    '8-11': VOICES.KEVIN_TU,     // Trumpets - measured intensity
+    '12-14': VOICES.LIAM,        // Dragon, beasts, harvest - energetic
+    '15-18': VOICES.GEORGE,      // Bowls, Babylon - judgment
+    '19-20': VOICES.CHARLIE,     // Christ returns, millennium - triumphant
+    '21-22': VOICES.KEVIN_TU,    // New creation, finale - peaceful
   },
 };
 
@@ -209,11 +307,8 @@ function getVoiceForChapter(bookName: string, chapterNum: number): { voiceId: st
   const bookMapping = VOICE_MAPPINGS[bookName.toLowerCase()];
 
   if (!bookMapping) {
-    // Default voice if book not in mapping
-    return {
-      voiceId: 'auoHciLZJwKTwYUoRTYz',
-      voiceName: 'Neil Chuang',
-    };
+    // Default voice if book not in mapping (Neil Chuang - deep, authoritative)
+    return VOICES.GEORGE;
   }
 
   // Find the appropriate range for this chapter
@@ -224,11 +319,8 @@ function getVoiceForChapter(bookName: string, chapterNum: number): { voiceId: st
     }
   }
 
-  // Default if no range matches
-  return {
-    voiceId: 'auoHciLZJwKTwYUoRTYz',
-    voiceName: 'Neil Chuang',
-  };
+  // Default if no range matches (Neil Chuang - deep, authoritative)
+  return VOICES.GEORGE;
 }
 
 interface EmotionSection {

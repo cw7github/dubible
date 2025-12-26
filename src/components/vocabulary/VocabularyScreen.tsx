@@ -1,9 +1,11 @@
 import { memo, useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useVocabularyStore, useReadingStore } from '../../stores';
+import { useVocabularyStore, useReadingStore, useSettingsStore } from '../../stores';
 import { getBookById } from '../../data/bible';
 import type { SavedWord } from '../../types';
 import { FlashcardReview } from './FlashcardReview';
+import { useConvertedChinese } from '../../hooks';
+import { convertCharacters } from '../../utils/characterConversion';
 
 interface VocabularyScreenProps {
   isOpen: boolean;
@@ -20,6 +22,7 @@ export const VocabularyScreen = memo(function VocabularyScreen({
 
   const { words, getWordsDueForReview, getStats, removeWord } = useVocabularyStore();
   const { setCurrentPosition } = useReadingStore();
+  const characterSet = useSettingsStore((state) => state.characterSet);
 
   // Prevent body scroll when open (but not when flashcards are showing, they handle their own lock)
   useEffect(() => {
@@ -43,15 +46,17 @@ export const VocabularyScreen = memo(function VocabularyScreen({
 
   // Filter words by search query
   const filteredWords = useMemo(() => {
-    if (!searchQuery.trim()) return words;
-    const query = searchQuery.toLowerCase();
+    const rawQuery = searchQuery.trim();
+    if (!rawQuery) return words;
+    const queryLower = rawQuery.toLowerCase();
     return words.filter(
       (word) =>
-        word.chinese.includes(query) ||
-        word.pinyin.toLowerCase().includes(query) ||
-        word.definition.toLowerCase().includes(query)
+        word.chinese.includes(rawQuery) ||
+        convertCharacters(word.chinese, characterSet).includes(rawQuery) ||
+        word.pinyin.toLowerCase().includes(queryLower) ||
+        word.definition.toLowerCase().includes(queryLower)
     );
-  }, [words, searchQuery]);
+  }, [words, searchQuery, characterSet]);
 
   // Group words by date
   const groupedWords = useMemo(() => {
@@ -409,6 +414,7 @@ interface WordItemProps {
 
 const WordItem = memo(function WordItem({ word, onClick, onDelete }: WordItemProps) {
   const book = getBookById(word.sourceVerse.bookId);
+  const convertedChinese = useConvertedChinese(word.chinese);
 
   return (
     <motion.div
@@ -426,7 +432,7 @@ const WordItem = memo(function WordItem({ word, onClick, onDelete }: WordItemPro
             className="font-chinese-serif text-lg leading-none"
             style={{ color: 'var(--text-primary)', letterSpacing: '0.05em' }}
           >
-            {word.chinese}
+            {convertedChinese}
           </span>
           <span
             className="font-body text-xs italic leading-none truncate"

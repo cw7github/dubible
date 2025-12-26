@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useConvertedBookName } from '../../hooks';
+import { splitChineseCharacters, splitPinyinSyllables } from '../../utils/pinyin';
 
 // Chinese numerals with pinyin
 const CHINESE_DIGITS: Record<number, { char: string; pinyin: string }> = {
@@ -48,73 +49,6 @@ function numberToChinese(num: number): Array<{ char: string; pinyin: string }> {
   }
 
   return result;
-}
-
-// Helper to split pinyin string into individual syllables
-function splitPinyinToSyllables(pinyin: string, targetCount: number): string[] {
-  const cleaned = pinyin.replace(/\s+/g, '');
-  const vowels = /[aeiouüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/i;
-
-  const syllables: string[] = [];
-  let current = '';
-
-  for (let i = 0; i < cleaned.length; i++) {
-    const char = cleaned[i];
-    const nextChar = cleaned[i + 1];
-    current += char;
-
-    const hasVowel = vowels.test(current);
-    const nextIsCapital = nextChar && nextChar === nextChar.toUpperCase() && /[A-Z]/.test(nextChar);
-    const nextStartsNew = nextChar && /[bpmfdtnlgkhjqxzhchshrzcsyw]/i.test(nextChar) &&
-                          !['g', 'n', 'r'].includes(char.toLowerCase());
-
-    if (hasVowel && (nextIsCapital || (nextStartsNew && !vowels.test(nextChar)) || i === cleaned.length - 1)) {
-      if (nextChar && ['n', 'g'].includes(nextChar.toLowerCase())) {
-        const afterNext = cleaned[i + 2];
-        if (nextChar.toLowerCase() === 'n') {
-          if (afterNext === 'g') {
-            current += nextChar + afterNext;
-            i += 2;
-          } else if (!afterNext || !vowels.test(afterNext)) {
-            current += nextChar;
-            i += 1;
-          }
-        }
-      }
-      if (current) {
-        syllables.push(current);
-        current = '';
-      }
-    }
-  }
-  if (current) syllables.push(current);
-
-  if (syllables.length !== targetCount) {
-    const words = pinyin.split(/\s+/);
-    const result: string[] = [];
-    for (const word of words) {
-      let temp = '';
-      for (let i = 0; i < word.length; i++) {
-        if (i > 0 && word[i] === word[i].toUpperCase() && /[A-Z]/.test(word[i])) {
-          if (temp) result.push(temp);
-          temp = word[i];
-        } else {
-          temp += word[i];
-        }
-      }
-      if (temp) result.push(temp);
-    }
-    if (result.length === targetCount) return result;
-  }
-
-  if (syllables.length !== targetCount && targetCount > 0) {
-    const words = pinyin.split(/\s+/);
-    if (words.length === targetCount) return words;
-    while (syllables.length < targetCount) syllables.push('');
-    return syllables.slice(0, targetCount);
-  }
-
-  return syllables;
 }
 
 interface HeaderProps {
@@ -200,8 +134,8 @@ export const Header = memo(function Header({
           {/* Book Name and Chapter with Pinyin - cohesive inline display */}
           <div className="flex items-end gap-0.5">
             {(() => {
-              const chars = convertedBookName.chinese.split('');
-              const pinyinSyllables = splitPinyinToSyllables(convertedBookName.pinyin, chars.length);
+              const chars = splitChineseCharacters(convertedBookName.chinese);
+              const pinyinSyllables = splitPinyinSyllables(convertedBookName.pinyin, chars.length);
               const chapterChars = numberToChinese(chapter);
 
               return (

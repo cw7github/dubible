@@ -8,8 +8,42 @@ const loadingPromises = new Map<string, Promise<ChapterAudio | null>>();
 // Cache for raw word data (to get word text/pinyin/definition for display)
 const rawWordCache = new Map<string, Map<string, { word: string; pinyin: string; definition?: string }>>();
 
+const MIN_WORD_WINDOW_MS = 60;
+
 function getCacheKey(bookId: string, chapter: number): string {
   return `${bookId}-${chapter}`;
+}
+
+function normalizeVerseWordTimings(words: WordTiming[], verseEndTime: number): WordTiming[] {
+  if (words.length === 0) return words;
+
+  const verseStartTime = words[0].startTime;
+  const totalDuration = verseEndTime - verseStartTime;
+  if (!Number.isFinite(totalDuration) || totalDuration <= 0) return words;
+
+  const effectiveMinWindow = Math.min(MIN_WORD_WINDOW_MS, totalDuration / words.length);
+
+  const adjustedStarts = new Array<number>(words.length);
+  adjustedStarts[0] = verseStartTime;
+
+  for (let i = 1; i < words.length; i++) {
+    adjustedStarts[i] = Math.max(words[i].startTime, adjustedStarts[i - 1] + effectiveMinWindow);
+  }
+
+  adjustedStarts[words.length - 1] = Math.min(
+    adjustedStarts[words.length - 1],
+    verseEndTime - effectiveMinWindow
+  );
+
+  for (let i = words.length - 2; i >= 0; i--) {
+    adjustedStarts[i] = Math.min(adjustedStarts[i], adjustedStarts[i + 1] - effectiveMinWindow);
+  }
+
+  return words.map((word, i) => ({
+    ...word,
+    startTime: adjustedStarts[i],
+    endTime: i < words.length - 1 ? adjustedStarts[i + 1] : verseEndTime,
+  }));
 }
 
 /**
@@ -49,6 +83,10 @@ function transformTimingData(
   const cacheKey = getCacheKey(bookId, chapter);
   const wordDataMap = new Map<string, { word: string; pinyin: string; definition?: string }>();
 
+  const rawDurationMs = raw.duration * 1000;
+  const firstVerseNumber =
+    raw.verses.length > 0 ? Math.min(...raw.verses.map((v) => v.verse)) : 1;
+
   const verses: VerseTiming[] = raw.verses.map((rawVerse) => {
     // Calculate verse start/end from word timings
     const words: WordTiming[] = rawVerse.words.map((rawWord, index) => {
@@ -67,15 +105,21 @@ function transformTimingData(
       };
     });
 
-    // Verse timing spans from first word start to last word end
-    const verseStart = words.length > 0 ? words[0].startTime : 0;
+    // Verse timing spans from first word start to last word end (before normalization)
+    // IMPORTANT: For the first verse, startTime should be 0 so "Play from v1" always
+    // includes the very beginning of the chapter audio. Some chapters have an initial
+    // silence/lead-in (or browser seek granularity) that can cause the first word to be
+    // skipped if we seek to the first word's timestamp (e.g., ~0.2s).
+    const verseStart = rawVerse.verse === firstVerseNumber ? 0 : (words.length > 0 ? words[0].startTime : 0);
     const verseEnd = words.length > 0 ? words[words.length - 1].endTime : 0;
+
+    const normalizedWords = normalizeVerseWordTimings(words, verseEnd);
 
     return {
       verseNumber: rawVerse.verse,
       startTime: verseStart,
       endTime: verseEnd,
-      words,
+      words: normalizedWords,
     };
   });
 
@@ -86,7 +130,7 @@ function transformTimingData(
     bookId,
     chapter,
     audioUrl: getConfigAudioUrl(bookId, chapter, 2),
-    duration: raw.duration * 1000,  // Convert to ms
+    duration: rawDurationMs,  // Convert to ms
     verses,
   };
 }
@@ -116,7 +160,7 @@ export async function loadChapterAudio(
   const loadPromise = (async () => {
     try {
       // Timing data is stored alongside the mp3 file
-      const timingUrl = getAudioTimingUrl(bookId, chapter, 3);
+      const timingUrl = getAudioTimingUrl(bookId, chapter);
       console.log(`[AudioTiming] Loading timing data from: ${timingUrl}`);
       const response = await fetch(timingUrl);
 
@@ -209,31 +253,51 @@ export function isAudioAvailable(bookId: string, chapter: number): boolean {
 
 /**
  * Find the current verse and word based on playback time (in ms)
+ * When between words, returns the PREVIOUS word to maintain highlighting during pauses
  */
 export function getPositionAtTime(
   audioData: ChapterAudio,
   currentTime: number
 ): { verseNumber: number | null; wordIndex: number | null } {
+  let lastSpokenWord: { verseNumber: number; wordIndex: number } | null = null;
+
   for (const verse of audioData.verses) {
     if (currentTime >= verse.startTime && currentTime <= verse.endTime) {
       // Find current word within verse
       for (const word of verse.words) {
         if (currentTime >= word.startTime && currentTime <= word.endTime) {
+          // Currently speaking this word
           return {
             verseNumber: verse.verseNumber,
             wordIndex: word.wordIndex,
           };
         }
+        if (currentTime > word.endTime) {
+          // This word has finished, track it as last spoken
+          lastSpokenWord = {
+            verseNumber: verse.verseNumber,
+            wordIndex: word.wordIndex,
+          };
+        }
       }
-      // Between words in this verse
-      return {
+      // Between words in this verse - return last spoken word
+      return lastSpokenWord || {
         verseNumber: verse.verseNumber,
         wordIndex: null,
       };
     }
+    // Track the last word of this verse if we've passed it
+    if (currentTime > verse.endTime && verse.words.length > 0) {
+      const lastWord = verse.words[verse.words.length - 1];
+      lastSpokenWord = {
+        verseNumber: verse.verseNumber,
+        wordIndex: lastWord.wordIndex,
+      };
+    }
   }
 
-  return { verseNumber: null, wordIndex: null };
+  // Between verses or after all verses - return last spoken word
+  return lastSpokenWord || { verseNumber: null, wordIndex: null };
 }
 
 /**
@@ -259,6 +323,6 @@ export function getWordAtPosition(
  * Supports external audio hosting via VITE_AUDIO_BASE_URL
  */
 export function getAudioUrl(bookId: string, chapter: number): string {
-  const version = 3; // Increment when audio files are regenerated
+  const version = 5; // Increment when audio files are regenerated
   return getConfigAudioUrl(bookId, chapter, version);
 }

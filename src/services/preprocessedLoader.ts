@@ -198,7 +198,7 @@ function convertToVerses(chapter: PreprocessedChapter): Verse[] {
   return chapter.verses.map((verse) => ({
     number: verse.number,
     text: verse.text,
-    words: verse.words.map((word): SegmentedWord => ({
+    words: verse.words.map((word, wordIndex): SegmentedWord => ({
       chinese: word.chinese,
       pinyin: word.pinyin || '',
       definition: word.definition || undefined,
@@ -208,9 +208,9 @@ function convertToVerses(chapter: PreprocessedChapter): Verse[] {
       breakdown: word.breakdown,
       freq: word.freq,
       note: word.note,
-      // Calculate indices (approximate - for compatibility)
-      startIndex: 0,
-      endIndex: word.chinese.length,
+      // Use word index for audio seeking - this matches the audio timing wordIndex
+      startIndex: wordIndex,
+      endIndex: wordIndex,
     })),
     crossReferences: verse.crossReferences,
     heading: verse.heading,

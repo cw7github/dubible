@@ -25,7 +25,7 @@ export function getAudioBaseUrl(): string {
 /**
  * Get the full URL for an audio file
  */
-export function getAudioUrl(bookId: string, chapter: number, version: number = 3): string {
+export function getAudioUrl(bookId: string, chapter: number, version: number = 5): string {
   const base = getAudioBaseUrl();
   const path = `/audio/${bookId}/chapter-${chapter}.mp3`;
   return `${base}${path}?v=${version}`;
@@ -34,7 +34,7 @@ export function getAudioUrl(bookId: string, chapter: number, version: number = 3
 /**
  * Get the full URL for audio timing JSON
  */
-export function getAudioTimingUrl(bookId: string, chapter: number, version: number = 4): string {
+export function getAudioTimingUrl(bookId: string, chapter: number, version: number = 5): string {
   const base = getAudioBaseUrl();
   const path = `/audio/${bookId}/chapter-${chapter}.json`;
   return `${base}${path}?v=${version}`;

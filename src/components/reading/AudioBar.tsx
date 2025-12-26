@@ -1,6 +1,7 @@
 import { memo, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SpeedSelector } from './SpeedSelector';
+import { splitChineseCharacters, splitPinyinSyllables } from '../../utils/pinyin';
 
 interface AudioBarProps {
   isPlaying: boolean;
@@ -41,99 +42,13 @@ interface AudioBarProps {
 const PUNCTUATION = ['。', '，', '；', '：', '！', '？', '、', '「', '」', '『', '』', '（', '）', '…', '──'];
 
 /**
- * Split pinyin into syllables based on vowel patterns and consonant starts
- * Handles both space-separated and continuous pinyin strings
- * Also handles apostrophes (') which separate syllables in pinyin (e.g., "cí'ài" -> ["cí", "ài"])
- */
-function splitPinyinToSyllables(pinyin: string, targetCount: number): string[] {
-  // First, check if apostrophes are present - they explicitly mark syllable boundaries
-  if (pinyin.includes("'")) {
-    const apostropheSplit = pinyin.split("'");
-    if (apostropheSplit.length === targetCount) {
-      return apostropheSplit;
-    }
-  }
-
-  // Next, try splitting by spaces
-  const spaceSplit = pinyin.split(/\s+/);
-  if (spaceSplit.length === targetCount) {
-    return spaceSplit;
-  }
-
-  // Remove spaces and apostrophes for complex parsing
-  const cleaned = pinyin.replace(/[\s']+/g, '');
-  const vowels = /[aeiouüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/i;
-
-  const syllables: string[] = [];
-  let current = '';
-
-  for (let i = 0; i < cleaned.length; i++) {
-    const char = cleaned[i];
-    const nextChar = cleaned[i + 1];
-    current += char;
-
-    const hasVowel = vowels.test(current);
-    const nextIsCapital = nextChar && nextChar === nextChar.toUpperCase() && /[A-Z]/.test(nextChar);
-    const nextStartsNew = nextChar && /[bpmfdtnlgkhjqxzhchshrzcsyw]/i.test(nextChar) &&
-                          !['g', 'n', 'r'].includes(char.toLowerCase());
-
-    if (hasVowel && (nextIsCapital || (nextStartsNew && !vowels.test(nextChar)) || i === cleaned.length - 1)) {
-      if (nextChar && ['n', 'g'].includes(nextChar.toLowerCase())) {
-        const afterNext = cleaned[i + 2];
-        if (nextChar.toLowerCase() === 'n') {
-          if (afterNext === 'g') {
-            current += nextChar + afterNext;
-            i += 2;
-          } else if (!afterNext || !vowels.test(afterNext)) {
-            current += nextChar;
-            i += 1;
-          }
-        }
-      }
-      if (current) {
-        syllables.push(current);
-        current = '';
-      }
-    }
-  }
-  if (current) syllables.push(current);
-
-  if (syllables.length !== targetCount) {
-    const words = pinyin.split(/\s+/);
-    const result: string[] = [];
-    for (const word of words) {
-      let temp = '';
-      for (let i = 0; i < word.length; i++) {
-        if (i > 0 && word[i] === word[i].toUpperCase() && /[A-Z]/.test(word[i])) {
-          if (temp) result.push(temp);
-          temp = word[i];
-        } else {
-          temp += word[i];
-        }
-      }
-      if (temp) result.push(temp);
-    }
-    if (result.length === targetCount) return result;
-  }
-
-  if (syllables.length !== targetCount && targetCount > 0) {
-    const words = pinyin.split(/\s+/);
-    if (words.length === targetCount) return words;
-    while (syllables.length < targetCount) syllables.push('');
-    return syllables.slice(0, targetCount);
-  }
-
-  return syllables;
-}
-
-/**
  * Split pinyin into syllables and pair with characters
  * Example: "shén de" + "神的" -> [{ char: '神', pinyin: 'shén' }, { char: '的', pinyin: 'de' }]
  * Example: "shǐzhě" + "使者" -> [{ char: '使', pinyin: 'shǐ' }, { char: '者', pinyin: 'zhě' }]
  */
 function pairPinyinWithCharacters(word: string, pinyin: string): Array<{ char: string; pinyin: string }> {
-  const chars = word.split('');
-  const syllables = splitPinyinToSyllables(pinyin, chars.length);
+  const chars = splitChineseCharacters(word);
+  const syllables = splitPinyinSyllables(pinyin, chars.length);
 
   // Pair each character with its corresponding pinyin syllable
   return chars.map((char, i) => ({ char, pinyin: syllables[i] || '' }));
@@ -819,77 +734,69 @@ export const AudioBar = memo(function AudioBar({
               minHeight: '100px', // Fixed height to prevent collapse: ~16px pinyin + 30px char + 40px def + spacing
             }}
           >
-            <AnimatePresence mode="popLayout">
-              {characterPinyinPairs && (
-                <motion.div
-                  key={currentWord}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.1, ease: 'easeOut' }}
-                  className="flex flex-col items-center gap-2"
-                >
-                  {/* Top row: Chinese characters with pinyin precisely centered above each */}
-                  <div className="flex items-end gap-1.5">
-                    {characterPinyinPairs.map((pair, i) => (
-                      <div
-                        key={i}
-                        className="flex flex-col items-center"
+            {characterPinyinPairs && (
+              <div className="flex flex-col items-center gap-2">
+                {/* Top row: Chinese characters with pinyin precisely centered above each */}
+                <div className="flex items-end gap-1.5">
+                  {characterPinyinPairs.map((pair, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center"
+                      style={{
+                        minWidth: '1.75rem', // Ensure enough space for centering
+                      }}
+                    >
+                      {/* Pinyin syllable - precisely centered above character */}
+                      <span
+                        className="font-body text-xs leading-none mb-1 whitespace-nowrap"
                         style={{
-                          minWidth: '1.75rem', // Ensure enough space for centering
+                          color: 'var(--text-tertiary)',
+                          fontStyle: 'italic',
+                          fontSize: '0.7rem',
+                          opacity: 0.75,
+                          letterSpacing: '0.01em',
+                          textAlign: 'center',
+                          width: '100%',
                         }}
                       >
-                        {/* Pinyin syllable - precisely centered above character */}
-                        <span
-                          className="font-body text-xs leading-none mb-1 whitespace-nowrap"
-                          style={{
-                            color: 'var(--text-tertiary)',
-                            fontStyle: 'italic',
-                            fontSize: '0.7rem',
-                            opacity: 0.75,
-                            letterSpacing: '0.01em',
-                            textAlign: 'center',
-                            width: '100%',
-                          }}
-                        >
-                          {pair.pinyin}
-                        </span>
-                        {/* Chinese character */}
-                        <span
-                          className="font-chinese-serif leading-none"
-                          style={{
-                            fontSize: '1.875rem',
-                            color: 'var(--accent)',
-                            fontWeight: 500,
-                            textShadow: isPlaying ? '0 0 20px var(--accent-light)' : 'none',
-                            filter: isPlaying ? 'brightness(1.15)' : 'none',
-                            textAlign: 'center',
-                            width: '100%',
-                          }}
-                        >
-                          {pair.char}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                        {pair.pinyin}
+                      </span>
+                      {/* Chinese character */}
+                      <span
+                        className="font-chinese-serif leading-none"
+                        style={{
+                          fontSize: '1.875rem',
+                          color: 'var(--accent)',
+                          fontWeight: 500,
+                          textShadow: isPlaying ? '0 0 20px var(--accent-light)' : 'none',
+                          filter: isPlaying ? 'brightness(1.15)' : 'none',
+                          textAlign: 'center',
+                          width: '100%',
+                        }}
+                      >
+                        {pair.char}
+                      </span>
+                    </div>
+                  ))}
+                </div>
 
-                  {/* Bottom row: English definition with multiple lines - always reserve space */}
-                  <div
-                    className="font-body text-sm leading-relaxed text-center max-w-full px-2"
-                    style={{
-                      color: 'var(--text-secondary)',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                      lineHeight: '1.4',
-                      minHeight: '2.8em', // Reserve space for 2 lines
-                    }}
-                  >
-                    {currentDefinition || '\u00A0'}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                {/* Bottom row: English definition with multiple lines - always reserve space */}
+                <div
+                  className="font-body text-sm leading-relaxed text-center max-w-full px-2"
+                  style={{
+                    color: 'var(--text-secondary)',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    lineHeight: '1.4',
+                    minHeight: '2.8em', // Reserve space for 2 lines
+                  }}
+                >
+                  {currentDefinition || '\u00A0'}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Speed selector - vertical stepper with arrows */}
